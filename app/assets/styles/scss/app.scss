@@ -10,12 +10,13 @@
 @import './base/typography';          // base styles of h1-h6, p, span
 
 //components...
-@import './component/topbar';                 // components/topbar/*
-@import './component/form';                 // components/form/*
-@import './component/check-box';              // components/form/Checkbox.js and other components with checkboxes
-@import './component/date-picker';            // components/form/*Date*Picker.js ('react-datepicker')
-@import './component/grid';                   // useless. using for grid presentation
-@import './component/time-picker';            // components/form/TimePicker.js ('react-times')
+@import './component/topbar';             // components/topbar/*
+@import './component/form';               // components/form/*
+@import './component/check-box';          // components/form/Checkbox.js and other components with checkboxes
+@import './component/date-picker';       // components/form/*Date*Picker.js ('react-datepicker')
+@import './component/grid';             // useless. using for grid presentation
+@import './component/time-picker';     // TimePicker.js ('react-times')
+@import './component/btn';            // button components
 
 //pages...
 @import 'containers/landing';
