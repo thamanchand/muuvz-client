@@ -4,7 +4,7 @@ import { Col, Row, Container } from 'reactstrap';
 import Search from './Search';
 
 import bgImage from '../../../assets/images/landing/header_bg.png';
-import move from '../images/move.svg';
+import move from '../../../assets/images/landing/move.svg';
 
 const Header = () => (
   <div
