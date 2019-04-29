@@ -17,9 +17,11 @@
 @import './component/grid';             // useless. using for grid presentation
 @import './component/time-picker';     // TimePicker.js ('react-times')
 @import './component/btn';            // button components
+@import './component/van-gallery';    // van-gallery
 
 //pages...
 @import 'containers/landing';
+@import './containers/vanlist-card';
 
 //objects...
 @import 'objects/layout.scss';
