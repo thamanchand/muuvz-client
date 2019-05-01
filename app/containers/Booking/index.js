@@ -7,7 +7,7 @@ import Favourite from './components/Favourite';
 import Layout from '../Layout/index';
 // import TimelineCalendar from './components/TimelineCalendar';
 import BigCalendar from './components/BigCalendar';
-import EventLabels from './components/EventLabels';
+import EventLabels from './components/VanLabels';
 
 const BookingDashboard = () => (
   <div>
