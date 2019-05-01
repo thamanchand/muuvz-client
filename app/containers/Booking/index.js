@@ -1,11 +1,8 @@
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import Rating from './components/Rating';
-import TotalCustomers from './components/TotalCustomers';
-import TotalBookings from './components/TotalBookings';
-import Favourite from './components/Favourite';
+
 import Layout from '../Layout/index';
-// import TimelineCalendar from './components/TimelineCalendar';
+import Statistics from './components/Statistics';
 import BigCalendar from './components/BigCalendar';
 import EventLabels from './components/VanLabels';
 
@@ -20,10 +17,7 @@ const BookingDashboard = () => (
           </Col>
         </Row>
         <Row>
-          <Rating />
-          <TotalBookings />
-          <TotalCustomers />
-          <Favourite />
+          <Statistics />
         </Row>
         <Row>
           <div className="container dashboard">
