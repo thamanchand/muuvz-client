@@ -1,0 +1,151 @@
+.scrollUp {
+  left: 150px;
+  top: 60px;
+  right: 0px;
+}
+
+.scrollDown {
+  left: 150px;
+  bottom: 0;
+  right: 0px;
+}
+
+.group_renderer {
+  cursor: pointer;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  height: 100%;
+}
+
+.group_renderer__selected {
+  background: #eeeeee;
+  font-weight: bold;
+}
+
+.group_renderer_action_btns {
+  flex: 1;
+  height: 30px;
+  line-height: 30px;
+  justify-content: flex-end;
+}
+
+.group_renderer_name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-right: 8px;
+  line-height: 1.15;
+}
+
+.loader {
+  position: absolute;
+  z-index: 101;
+  padding: 8px;
+  left: 8px;
+  top: 8px;
+}
+
+:global {
+  .react-calendar-timeline .rct-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .react-calendar-timeline .rct-outer {
+    overflow-x: auto;
+    white-space: nowrap;
+    //overflow-y: auto;
+  }
+  .timeline_calendar {
+    .react-calendar-timeline .rct-header-root {
+      background: #247ba0;
+      border-bottom: 1px solid #bbb;
+    }
+    .react-calendar-timeline .rct-sidebar-header {
+      background: none;
+      color: black;
+      font-size: 16px;
+      padding: 8px;
+      font-weight: bold;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+
+    .react-calendar-timeline .rct-header .rct-label-group {
+      background: none;
+      color: black;
+      font-weight: bold;
+      border-bottom: none;
+      border-left: none;
+    }
+
+    .react-calendar-timeline .rct-header .rct-label {
+      background: none;
+      border-left: none;
+      border-bottom: 1px solid black;
+
+      &:before {
+        position: absolute;
+        content: "";
+        left: 50%;
+        background: #4d4d4d;
+        width: 1px;
+        height: 13px;
+        bottom: 0;
+      }
+
+      &:after {
+        position: absolute;
+        content: "";
+        right: 0;
+        width: 0;
+        border-left: 1px dotted gray;
+        height: 6px;
+        bottom: 0;
+      }
+    }
+
+    .react-calendar-timeline .rct-sidebar .rct-sidebar-row {
+      border-bottom: 1px dotted gray;
+      padding: 0;
+    }
+
+    .react-calendar-timeline .rct-sidebar .rct-sidebar-row.rct-sidebar-row-odd {
+      background: none;
+    }
+
+    .react-calendar-timeline .rct-sidebar {
+      border-right: 1px solid black;
+    }
+
+    .react-calendar-timeline .rct-header-container {
+      background: white;
+    }
+
+    .react-calendar-timeline .rct-horizontal-lines {
+      .rct-hl-even,
+      .rct-hl-odd {
+        border-bottom: 1px dotted gray;
+      }
+    }
+    .react-calendar-timeline .rct-header-container {
+      background: #eeeeee;
+      align-items: flex-end;
+    }
+    .react-calendar-timeline .rct-vertical-lines .rct-vl {
+      border-left: none;
+    }
+
+    .react-calendar-timeline .rct-vertical-lines .rct-vl.rct-day-6,
+    .react-calendar-timeline .rct-vertical-lines .rct-vl.rct-day-0 {
+      background: none;
+    }
+  }
+}
+
+.sidebar__left-header {
+  color: #FFF;
+  font-size: 600;
+  padding: 12px 8px;
+  font-weight: 600;
+}
