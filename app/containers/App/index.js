@@ -11,8 +11,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage';
+import Booking from 'containers/Booking';
 import VanListing from '../Listing';
-import Layout from '../Layout';
 
 import MainWrapper from '../../components/Wrapper';
 
@@ -23,7 +23,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/listing" component={VanListing} />
-          <Route exact path="/dashboard/booking" component={Layout} />
+          <Route exact path="/dashboard/booking" component={Booking} />
           <Route component={NotFoundPage} />
         </Switch>
       </main>
