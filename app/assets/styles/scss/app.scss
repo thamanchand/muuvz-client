@@ -19,8 +19,9 @@
 @import './component/btn';            // button components
 @import './component/van-gallery';    // van-gallery
 @import './component/sidebar';        // sidebar
-@import './component/table';
-
+@import './component/table';          // table -> dashboard -> profile
+@import './component/card';
+@import './component/timeline-calendar';
 //pages...
 @import 'containers/landing';
 @import './containers/vanlist-card';
