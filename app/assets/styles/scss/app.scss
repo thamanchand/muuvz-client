@@ -18,10 +18,13 @@
 @import './component/time-picker';     // TimePicker.js ('react-times')
 @import './component/btn';            // button components
 @import './component/van-gallery';    // van-gallery
+@import './component/sidebar';        // sidebar
+@import './component/table';
 
 //pages...
 @import 'containers/landing';
 @import './containers/vanlist-card';
+@import './containers/dashboard';
 
 //objects...
-@import 'objects/layout.scss';
+@import './objects/layout';
