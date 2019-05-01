@@ -5,7 +5,9 @@ import TotalCustomers from './components/TotalCustomers';
 import TotalBookings from './components/TotalBookings';
 import Favourite from './components/Favourite';
 import Layout from '../Layout/index';
-import TimelineCalendar from './components/TimelineCalendar';
+// import TimelineCalendar from './components/TimelineCalendar';
+import BigCalendar from './components/BigCalendar';
+import EventLabels from './components/EventLabels';
 
 const BookingDashboard = () => (
   <div>
@@ -24,14 +26,11 @@ const BookingDashboard = () => (
           <Favourite />
         </Row>
         <Row>
-          <div className="container">
-            <Container className="dashboard">
-              <Row>
-                <Col md={12}>
-                  <TimelineCalendar />
-                </Col>
-              </Row>
-            </Container>
+          <div className="container dashboard">
+            <Row>
+              <BigCalendar />
+              <EventLabels />
+            </Row>
           </div>
         </Row>
       </Container>
