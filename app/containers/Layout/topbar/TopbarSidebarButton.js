@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
-const icon = `${process.env.PUBLIC_URL}/img/burger.svg`;
+import burgerIcon from '../../../assets/images/topbar/burger.svg';
 
 class TopbarSidebarButton extends PureComponent {
   static propTypes = {
@@ -22,14 +21,14 @@ class TopbarSidebarButton extends PureComponent {
           className="topbar__button topbar__button--desktop"
           onClick={changeSidebarVisibility}
         >
-          <img src={icon} alt="" className="topbar__button-icon" />
+          <img src={burgerIcon} alt="" className="topbar__button-icon" />
         </button>
         <button
           type="button"
           className="topbar__button topbar__button--mobile"
           onClick={changeMobileSidebarVisibility}
         >
-          <img src={icon} alt="" className="topbar__button-icon" />
+          <img src={burgerIcon} alt="" className="topbar__button-icon" />
         </button>
       </div>
     );
