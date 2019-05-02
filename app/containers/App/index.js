@@ -14,8 +14,9 @@ import NotFoundPage from 'containers/NotFoundPage';
 import Booking from 'containers/Booking';
 import Resources from 'containers/Resources';
 import ProfilePage from 'containers/Profile';
-import VanListing from '../Listing';
+import AccountPage from 'containers/AccountPage';
 
+import VanListing from '../Listing';
 import MainWrapper from '../../components/Wrapper';
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
           <Route exact path="/dashboard/booking" component={Booking} />
           <Route exact path="/dashboard/resources" component={Resources} />
           <Route exact path="/dashboard/profile" component={ProfilePage} />
+          <Route exact path="/dashboard/account" component={AccountPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </main>
