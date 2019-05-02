@@ -20,22 +20,43 @@ const HomePage = () => (
       <Container>
         <Row>
           <Col md={12}>
-            <div className="landing__menu-wrap">
-              <p className="landing__menu-logo">
-                <img src={logo} alt="" />
-              </p>
-              <nav className="landing__menu-nav">
-                <Link to="/login">
-                  <span
-                    className="btn btn-primary btn-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Register
-                  </span>
-                </Link>
-              </nav>
-            </div>
+            <nav className="navbar navbar-expand-md landing__menu-nav">
+              <div className="landing__menu-wrap">
+                <p className="landing__menu-logo">
+                  <img src={logo} alt="" />
+                </p>
+
+                <button
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
+                  aria-controls="navbarCollapse"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                  className="navbar-toggler"
+                >
+                  <span className="navbar-toggler-icon" />
+                </button>
+                <div id="navbarCollapse" className="collapse navbar-collapse">
+                  <ul className="navbar-nav ml-auto">
+                    <li className="nav-item landing__navbar-item">
+                      <Link className="nav-link" to="/login">
+                        Login
+                      </Link>
+                    </li>
+                    <li className="nav-item landing__navbar-item">
+                      <Link className="btn btn-danger btn-sm" to="/register">
+                        Register
+                      </Link>
+                    </li>
+
+                    <li className="nav-item landing__navbar-item">
+                      <span className="nav-link">EN</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
           </Col>
         </Row>
       </Container>
