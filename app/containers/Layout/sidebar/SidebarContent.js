@@ -35,6 +35,18 @@ class SidebarContent extends Component {
             route="/dashboard/profile"
             onClick={this.hideSidebar}
           />
+          <SidebarLink
+            title="Account"
+            icon="cog"
+            route="/dashboard/account"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Logout"
+            icon="exit"
+            route="/dashboard/account"
+            onClick={this.hideSidebar}
+          />
         </ul>
       </div>
     );
