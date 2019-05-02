@@ -1,193 +1,89 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Card, CardBody, Col, Button, ButtonToolbar } from 'reactstrap';
-import { Field } from 'react-final-form';
-import EyeIcon from 'mdi-react/EyeIcon';
-import EmailIcon from 'mdi-react/EmailIcon';
-import AccountSearchIcon from 'mdi-react/AccountSearchIcon';
-import PropTypes from 'prop-types';
-import renderFileInputField from '../../../shared/FileField';
-import renderSelectField from '../../../shared/SelectField';
-import renderMultiSelectField from '../../../shared/MultiSelectField';
+import { Form, Field } from 'react-final-form';
 
-class ProfileForm extends PureComponent {
-  static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-    reset: PropTypes.func.isRequired,
-  };
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  constructor() {
-    super();
-    this.state = {
-      showPassword: false,
-    };
-  }
+const onSubmit = async values => {
+  await sleep(300);
+  window.alert(JSON.stringify(values, 0, 2));
+};
 
-  showPassword = e => {
-    e.preventDefault();
-    this.setState(prevState => ({ showPassword: !prevState.showPassword }));
-  };
-
-  render() {
-    const { handleSubmit, reset } = this.props;
-    const { showPassword } = this.state;
-
-    return (
-      <Col md={12} lg={12}>
-        <Card>
-          <CardBody>
-            <div className="card__title">
-              <h5 className="subhead">Labels are left from fields</h5>
-            </div>
-            <form className="form form--horizontal" onSubmit={handleSubmit}>
-              <div className="form__form-group">
-                <span className="form__form-group-label">Default Label</span>
-                <div className="form__form-group-field">
-                  <Field
-                    name="defaultInput"
-                    component="input"
-                    type="text"
-                    placeholder="Default Input"
-                  />
-                </div>
-              </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">Disabled Field</span>
-                <div className="form__form-group-field">
-                  <Field
-                    name="disableInput"
-                    component="input"
-                    type="text"
-                    placeholder="Disabled Input"
-                    disabled
-                  />
-                </div>
-              </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">E-mail</span>
-                <div className="form__form-group-field">
-                  <Field
-                    name="email"
-                    component="input"
-                    type="email"
-                    placeholder="example@mail.com"
-                  />
-                </div>
-              </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">Password</span>
-                <div className="form__form-group-field">
-                  <Field
-                    name="password"
-                    component="input"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                  />
-                  <button
-                    type="button"
-                    className={`form__form-group-button${
-                      showPassword ? ' active' : ''
-                    }`}
-                    onClick={e => this.showPassword(e)}
-                  >
-                    <EyeIcon />
-                  </button>
-                </div>
-              </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">Icon Left</span>
-                <div className="form__form-group-field">
-                  <div className="form__form-group-icon">
-                    <EmailIcon />
+const ProfileForm = () => (
+  <Col md={12} lg={12}>
+    <Card>
+      <CardBody>
+        <div className="card__title">
+          <h5 className="bold-text">Business</h5>
+          <h5 className="subhead">Fill all fields</h5>
+        </div>
+        <Form
+          onSubmit={onSubmit}
+          initialValues={{ bname: 'xyz oy', bId: '1334565-8' }}
+          render={({ handleSubmit }) => (
+            <form className="form form--vertical" onSubmit={handleSubmit}>
+              <div className="form__half">
+                <div className="form__form-group">
+                  <span className="form__form-group-label">Business name</span>
+                  <div className="form__form-group-field">
+                    <Field
+                      name="bname"
+                      component="input"
+                      type="text"
+                      placeholder="Pakketiauto oy"
+                    />
                   </div>
-                  <Field
-                    name="leftIcon"
-                    component="input"
-                    type="email"
-                    placeholder="Icon Left Input"
-                  />
                 </div>
-              </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">Icon Right</span>
-                <div className="form__form-group-field">
-                  <Field
-                    name="rightIcon"
-                    component="input"
-                    type="text"
-                    placeholder="Icon Right Input"
-                  />
-                  <div className="form__form-group-icon">
-                    <AccountSearchIcon />
+                <div className="form__form-group">
+                  <span className="form__form-group-label">Address</span>
+                  <div className="form__form-group-field">
+                    <Field
+                      name="address"
+                      component="input"
+                      type="text"
+                      placeholder="Kussitie 8B "
+                    />
                   </div>
                 </div>
               </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">
-                  Field with description
-                </span>
-                <div className="form__form-group-field">
-                  <Field
-                    name="descriptionInput"
-                    component="input"
-                    type="text"
-                  />
+
+              <div className="form__half">
+                <div className="form__form-group">
+                  <span className="form__form-group-label">Business ID</span>
+                  <div className="form__form-group-field">
+                    <Field
+                      name="bId"
+                      component="input"
+                      type="text"
+                      placeholder="1334565-8"
+                    />
+                  </div>
                 </div>
-                <span className="form__form-group-description">
-                  Zealously now pronounce existence add you instantly say
-                  offending.
-                </span>
-              </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">Dropdown</span>
-                <div className="form__form-group-field">
-                  <Field
-                    name="select"
-                    component={renderSelectField}
-                    options={[
-                      { value: 'one', label: 'One' },
-                      { value: 'two', label: 'Two' },
-                    ]}
-                  />
+
+                <div className="form__form-group">
+                  <span className="form__form-group-label">Phone number</span>
+                  <div className="form__form-group-field">
+                    <Field
+                      name="phonenum"
+                      component="input"
+                      type="text"
+                      placeholder="0442103390"
+                    />
+                  </div>
                 </div>
+
+                <ButtonToolbar className="form__button-toolbar">
+                  <Button className="square btn btn-primary" type="submit">
+                    Submit
+                  </Button>
+                </ButtonToolbar>
               </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">Multiselect</span>
-                <div className="form__form-group-field">
-                  <Field
-                    name="multiSelect"
-                    component={renderMultiSelectField}
-                    options={[
-                      { value: 'one', label: 'One' },
-                      { value: 'two', label: 'Two' },
-                    ]}
-                  />
-                </div>
-              </div>
-              <div className="form__form-group">
-                <div className="form__form-group-field">
-                  <Field name="textarea" component="textarea" type="text" />
-                </div>
-              </div>
-              <div className="form__form-group">
-                <span className="form__form-group-label">Add file</span>
-                <div className="form__form-group-field">
-                  <Field name="file" component={renderFileInputField} />
-                </div>
-              </div>
-              <ButtonToolbar className="form__button-toolbar">
-                <Button color="primary" type="submit">
-                  Submit
-                </Button>
-                <Button type="button" onClick={reset}>
-                  Cancel
-                </Button>
-              </ButtonToolbar>
             </form>
-          </CardBody>
-        </Card>
-      </Col>
-    );
-  }
-}
+          )}
+        />
+      </CardBody>
+    </Card>
+  </Col>
+);
 
 export default ProfileForm;
