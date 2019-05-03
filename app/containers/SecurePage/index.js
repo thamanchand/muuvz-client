@@ -1,0 +1,50 @@
+/**
+ *
+ * SecurePage
+ * Container that is accessible only if the user is logged in
+ */
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import { Link } from 'react-router-dom';
+
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+import makeSelectSecurePage from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+
+export class SecurePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  render() {
+    return (
+      <div style={{ paddingTop: '30px', textAlign: 'center' }}>
+        <h1>Now that you are logged in you have access to this page</h1>
+        <p>This is secured page</p>
+        <p><Link to="/">Back to HomePage</Link></p>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = createStructuredSelector({
+  securepage: makeSelectSecurePage(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withReducer = injectReducer({ key: 'securePage', reducer });
+const withSaga = injectSaga({ key: 'securePage', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(SecurePage);
