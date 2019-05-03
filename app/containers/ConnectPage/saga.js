@@ -5,17 +5,15 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
 
 
 // Utils
 import auth from 'utils/auth';
 import request from 'utils/request';
+import history from '../../utils/history';
 
 // Constants
 import { LOG_USER } from './constants';
-
-const history = createHistory();
 
 export function* login(action) {
   try {
