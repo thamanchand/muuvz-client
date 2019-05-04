@@ -16,6 +16,11 @@ import Resources from 'containers/Resources';
 import ProfilePage from 'containers/Profile';
 import AccountPage from 'containers/AccountPage';
 
+import ConnectPage from 'containers/ConnectPage';
+import SecurePage from 'containers/SecurePage';
+import ProtectedRoute from 'containers/ProtectedRoute';
+import LoginPage from 'containers/LoginPage';
+import RegisterPage from 'containers/RegisterPage';
 import VanListing from '../Listing';
 import MainWrapper from '../../components/Wrapper';
 
@@ -30,6 +35,10 @@ export default function App() {
           <Route exact path="/dashboard/resources" component={Resources} />
           <Route exact path="/dashboard/profile" component={ProfilePage} />
           <Route exact path="/dashboard/account" component={AccountPage} />
+          <Route exact path="/connect/:provider" component={ConnectPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <ProtectedRoute exact path="/:foo" component={SecurePage} />
           <Route component={NotFoundPage} />
         </Switch>
       </main>
