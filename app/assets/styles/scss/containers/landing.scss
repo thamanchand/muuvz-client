@@ -163,6 +163,26 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   margin: auto;
   color: $landing-accent-color;
   margin-bottom: 20px;
+
+  @media screen and (min-width: 480px) {
+    font-size: 20px;
+  }
+  @media screen and (min-width: 576px) {
+    font-size: 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 25px;
+  }
+
+  @media screen and (min-width: 992px) {
+    font-size: 30px;
+  }
+}
+
+.landing__header-dot {
+  padding-right: 12px;
+  color: #28a745;
 }
 
 .landing__header-img {
