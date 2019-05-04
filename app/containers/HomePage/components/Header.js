@@ -15,9 +15,13 @@ const Header = () => (
       <Row>
         <Col md={6}>
           <div className="landing__intro">
-            <h2 className="landing__header-title">
-              <b> Search. Compare. Book </b>
-            </h2>
+            <h1 className="landing__header-title">
+              <b>
+                SEARCH<span className="landing__header-dot">.</span>
+                COMPARE<span className="landing__header-dot">.</span>
+                BOOK<span className="landing__header-dot">.</span>
+              </b>
+            </h1>
             <p className="landing__header-subhead">Delivery van with ease</p>
           </div>
         </Col>
