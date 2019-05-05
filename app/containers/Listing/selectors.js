@@ -4,10 +4,10 @@ import { createSelector } from 'reselect';
  */
 
 // VanListPage domain
-export const selectVanListDomain = () => state => state.vanList;
+export const selectVans = () => state => state.vanList;
 
-export const vanListSelector = () =>
+export const makeSelectVans = () =>
   createSelector(
-    selectVanListDomain,
+    selectVans,
     vanList => vanList.vanList,
   );
