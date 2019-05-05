@@ -3,6 +3,14 @@
 ## 28 April 2019
 - Project kickstarted
 
+## 29 April - 4th May 2019
+- Design system and styles layout
+- Landing page layout
+- Vanlist page layout
+- Dashboard layout
+- Book layout
+- Resources layout
+- Profile page layout
 
 ## 5th May 2019
 - Local login and register features completed
