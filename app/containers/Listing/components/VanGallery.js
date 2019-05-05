@@ -72,8 +72,8 @@ export default class VanGallery extends PureComponent {
           <img src={images[currentImagePreview].src} alt="product-img" />
         </a>
         <div className="van_gallery__gallery">
-          {images.map((img, i) => (
-            <button type="button" key={i} onClick={e => this.changeImg(i, e)} className="van-gallery__img-preview">
+          {images.map((img) => (
+            <button type="button" key={img.id} onClick={e => this.changeImg(img.id, e)} className="van-gallery__img-preview">
               <img src={img.src} alt="product-img" />
             </button>
           ))}
