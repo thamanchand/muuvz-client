@@ -1,13 +1,15 @@
 import { createSelector } from 'reselect';
+import { initialState } from './reducers';
+
 /**
  * VanListPage selector
  */
 
 // VanListPage domain
-export const selectVans = () => state => state.vanList;
+export const selectVans = state => state.listingPage || initialState;
 
 export const makeSelectVans = () =>
   createSelector(
     selectVans,
-    vanList => vanList.vanList,
+    subState => subState.get('vanList')
   );
