@@ -1,8 +1,6 @@
-import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   call,
   takeLatest,
-  take,
   put,
 } from 'redux-saga/effects';
 
@@ -31,5 +29,4 @@ export function* vanLoadWatcher() {
 
 export default function* defaultSaga() {
   yield takeLatest(ON_VANLIST_LOAD, vanLoadWatcher);
-  yield take(LOCATION_CHANGE);
 }
