@@ -16,6 +16,8 @@ import VanListing from './components/VanListing';
 import saga from './saga';
 import reducer from './reducers';
 
+const key = 'listingPage';
+
 class VanListPage extends PureComponent {
 
   componentDidMount() {
@@ -47,6 +49,7 @@ class VanListPage extends PureComponent {
 VanListPage.propTypes = {
   onVanListLoad: PropTypes.func,
 }
+
 const mapStateToProps = createStructuredSelector({
   vanList: makeSelectVans(),
 });
@@ -55,10 +58,13 @@ const mapDispatchToProps = (dispatch) => ({
   onVanListLoad: bindActionCreators(onVanListLoad, dispatch)
 });
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
-const withReducer = injectReducer({ key: 'vanListingPage', reducer });
-const withSaga = injectSaga({ key: 'vanListingPage', saga });
+const withReducer = injectReducer({ key, reducer });
+const withSaga = injectSaga({ key, saga });
 
 export default compose(
   withReducer,
