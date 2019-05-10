@@ -22,7 +22,7 @@ const Header = () => (
                 BOOK<span className="landing__header-dot">.</span>
               </b>
             </h1>
-            <p className="landing__header-subhead">Delivery van with ease</p>
+            <p className="landing__header-subhead">Moving van with ease</p>
           </div>
         </Col>
         <Col md={6}>
