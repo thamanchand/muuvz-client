@@ -13,7 +13,7 @@ import {
 } from './contants';
 
 
-const initialState = fromJS({
+export const initialState = fromJS({
   vanList: [],
   loading: false,
 });
