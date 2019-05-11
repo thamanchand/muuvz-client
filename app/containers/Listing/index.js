@@ -25,6 +25,7 @@ class VanListPage extends PureComponent {
   }
 
   render() {
+    const { vanList } = this.props;
     return (
       <div className="Listing__page">
         <Container>
@@ -36,7 +37,7 @@ class VanListPage extends PureComponent {
             </Col>
             <Col md={9}>
               <div className="van__list">
-                <VanListing />
+                <VanListing vanList={vanList} />
               </div>
             </Col>
           </Row>
@@ -48,6 +49,7 @@ class VanListPage extends PureComponent {
 
 VanListPage.propTypes = {
   onVanListLoad: PropTypes.func,
+  vanList: PropTypes.object,
 }
 
 const mapStateToProps = createStructuredSelector({
