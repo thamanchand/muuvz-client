@@ -2,11 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row } from 'reactstrap';
 import Icon from 'react-icons-kit';
-import {car} from 'react-icons-kit/fa/car';
 import {heartO} from 'react-icons-kit/fa/heartO'
 import {ic_euro_symbol as euroSymbol} from 'react-icons-kit/md/ic_euro_symbol'
 
+import { formatNumber } from '../../utils';
+
+
 // import VanGallery from './VanGallery';
+const iconStyles = {
+  fontFamily: 'flaticon',
+  fontStyle: 'normal',
+  color: '#70C1B3'
+};
 
 const VanListing = ({ vanList }) => (
   <div className="listing__wrapper">
@@ -31,13 +38,23 @@ const VanListing = ({ vanList }) => (
                   <button type="button" className="square btn btn-danger">Book</button>
                 </div>
                 {item.vanmedias.map(img => (
-                  <img className="d-flex align-self-start" src={img.filename[0.].name} alt="" />
+                  <img className="d-flex align-self-start" src={img.filename[0.].name} alt={item.brand} />
                 ))}
                 <div className="media-body pl-3">
                   <div className="price">{item.brand}<small>{item.model}</small></div>
                   <div className="stats">
-                    <i className="flaticon-airplane49"></i>
-                    <span><Icon icon={car} size={15} /> {item.transmission}</span>
+                    <span>
+                      <i className="flaticon-049-gasoline" style={iconStyles}></i>
+                      {item.fueltype}
+                    </span>
+                    <span>
+                      <i className="flaticon-015-gear" style={iconStyles}></i>
+                      {item.transmission}
+                    </span>
+                    <span>
+                      <i className="flaticon-037-wristwatch" style={iconStyles}></i>
+                      {formatNumber(item.mileage)}
+                    </span>
                   </div>
                   <div className="address">{item.features}</div>
                 </div>
