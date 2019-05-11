@@ -1,6 +1,6 @@
 /*
  *
- * AddTask reducer
+ * VanListpage reducer
  *
  */
 
