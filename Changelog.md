@@ -25,4 +25,5 @@
 - VanListing page reducer, selector, data mapped
 
 ## 11th May 2019
-- Fonts, Car features svg assetes added
+- Fonts, Car features svg assets added
+- ResourcePage actions, reducer, saga, selector, map vanlist data
