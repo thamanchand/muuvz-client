@@ -4,6 +4,8 @@ import { Card, CardBody, Col, Badge, Table } from 'reactstrap';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 
+import Modal from '../../../shared/Modal';
+
 const iconStyles = {
   marginRight: '10px',
 };
@@ -11,7 +13,22 @@ const iconStyles = {
 const ResourceList = () => (
   <Col md={12} lg={12} xl={12}>
     <Card>
+
       <CardBody>
+        <div className="header__section container">
+          <div className="col-md-2 header__button">
+            <Modal
+              color="primary"
+              title="Add new van"
+              header
+              btn="Add new van"
+              message="Hello "
+            />
+          </div>
+          <div className="col-md-2 header__filter">
+            <span>Filter</span>
+          </div>
+        </div>
         <Table striped responsive>
           <thead>
             <tr>
@@ -107,6 +124,7 @@ const ResourceList = () => (
         </Table>
       </CardBody>
     </Card>
+
   </Col>
 );
 
