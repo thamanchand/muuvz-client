@@ -165,3 +165,30 @@
   top:4px;
   color:#E74C3C;
 }
+
+.pricing__content {
+  background: #ffffff;
+  padding: 4px;
+  text-align: center;
+  right: 0;
+  position: absolute;
+}
+.price__icon {
+  color: #FF1654;
+  font-size: 48px;
+  margin: -4px 0px 0px -25px;
+  position: absolute;
+}
+.pricing__content span.price-large{
+  color: #FF1654;
+  font-size: 45px
+}
+.hr-small{
+  font-size: 24px;
+  color: #70C1B3;
+}
+
+img .feature__icon {
+  width: 20px;
+  height: 20px;
+}
