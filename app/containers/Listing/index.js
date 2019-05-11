@@ -49,7 +49,23 @@ class VanListPage extends PureComponent {
 
 VanListPage.propTypes = {
   onVanListLoad: PropTypes.func,
-  vanList: PropTypes.object,
+  vanList: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string,
+    createdAt: PropTypes.string,
+    brand: PropTypes.string,
+    cruisecontrol: PropTypes.bool,
+    exteriordimensions: PropTypes.string,
+    features: PropTypes.bool,
+    fueltype: PropTypes.string,
+    interiordimensions: PropTypes.string,
+    licensetype: PropTypes.string,
+    located: PropTypes.string,
+    mileage: PropTypes.number,
+    model: PropTypes.string,
+    passengernum: PropTypes.string,
+    transmission: PropTypes.string,
+    year: PropTypes.string,
+  })).isRequired,
 }
 
 const mapStateToProps = createStructuredSelector({
