@@ -1,0 +1,135 @@
+@font-face {
+  font-family: "Flaticon";
+  src: url("./fonts/Flaticon.eot");
+  src: url("./fonts/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./fonts/Flaticon.woff2") format("woff2"),
+       url("./fonts/Flaticon.woff") format("woff"),
+       url("./fonts/Flaticon.ttf") format("truetype"),
+       url("./fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./fonts/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+.fimanager:before {
+    display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.flaticon-001-gear:before { content: "\f100"; }
+.flaticon-002-smartphone:before { content: "\f101"; }
+.flaticon-003-navigation:before { content: "\f102"; }
+.flaticon-004-circuit:before { content: "\f103"; }
+.flaticon-005-tires:before { content: "\f104"; }
+.flaticon-006-placeholder:before { content: "\f105"; }
+.flaticon-007-light:before { content: "\f106"; }
+.flaticon-008-steering-wheel:before { content: "\f107"; }
+.flaticon-009-cone:before { content: "\f108"; }
+.flaticon-010-setting:before { content: "\f109"; }
+.flaticon-011-wheel:before { content: "\f10a"; }
+.flaticon-012-sun:before { content: "\f10b"; }
+.flaticon-013-finish-flag:before { content: "\f10c"; }
+.flaticon-014-car-key:before { content: "\f10d"; }
+.flaticon-015-gear:before { content: "\f10e"; }
+.flaticon-016-traffic-light:before { content: "\f10f"; }
+.flaticon-017-axletree:before { content: "\f110"; }
+.flaticon-018-rain:before { content: "\f111"; }
+.flaticon-019-podium:before { content: "\f112"; }
+.flaticon-020-finish-flag:before { content: "\f113"; }
+.flaticon-021-route:before { content: "\f114"; }
+.flaticon-022-cross-wrench:before { content: "\f115"; }
+.flaticon-023-gas-station:before { content: "\f116"; }
+.flaticon-024-car-light:before { content: "\f117"; }
+.flaticon-025-wheel-alignment:before { content: "\f118"; }
+.flaticon-026-car:before { content: "\f119"; }
+.flaticon-027-battery:before { content: "\f11a"; }
+.flaticon-028-gold-medal:before { content: "\f11b"; }
+.flaticon-029-silver-medal:before { content: "\f11c"; }
+.flaticon-030-bronze-medal:before { content: "\f11d"; }
+.flaticon-031-thermometer:before { content: "\f11e"; }
+.flaticon-032-award:before { content: "\f11f"; }
+.flaticon-033-helmet:before { content: "\f120"; }
+.flaticon-034-garage:before { content: "\f121"; }
+.flaticon-035-traffic-sign:before { content: "\f122"; }
+.flaticon-036-car:before { content: "\f123"; }
+.flaticon-037-wristwatch:before { content: "\f124"; }
+.flaticon-038-finish:before { content: "\f125"; }
+.flaticon-039-tools:before { content: "\f126"; }
+.flaticon-040-check:before { content: "\f127"; }
+.flaticon-041-steering-wheel:before { content: "\f128"; }
+.flaticon-042-piston:before { content: "\f129"; }
+.flaticon-043-aerosol:before { content: "\f12a"; }
+.flaticon-044-manometer:before { content: "\f12b"; }
+.flaticon-045-wrench:before { content: "\f12c"; }
+.flaticon-046-location:before { content: "\f12d"; }
+.flaticon-047-location:before { content: "\f12e"; }
+.flaticon-048-mirror:before { content: "\f12f"; }
+.flaticon-049-gasoline:before { content: "\f130"; }
+.flaticon-050-air-pump:before { content: "\f131"; }
+
+$font-Flaticon-001-gear: "\f100";
+$font-Flaticon-002-smartphone: "\f101";
+$font-Flaticon-003-navigation: "\f102";
+$font-Flaticon-004-circuit: "\f103";
+$font-Flaticon-005-tires: "\f104";
+$font-Flaticon-006-placeholder: "\f105";
+$font-Flaticon-007-light: "\f106";
+$font-Flaticon-008-steering-wheel: "\f107";
+$font-Flaticon-009-cone: "\f108";
+$font-Flaticon-010-setting: "\f109";
+$font-Flaticon-011-wheel: "\f10a";
+$font-Flaticon-012-sun: "\f10b";
+$font-Flaticon-013-finish-flag: "\f10c";
+$font-Flaticon-014-car-key: "\f10d";
+$font-Flaticon-015-gear: "\f10e";
+$font-Flaticon-016-traffic-light: "\f10f";
+$font-Flaticon-017-axletree: "\f110";
+$font-Flaticon-018-rain: "\f111";
+$font-Flaticon-019-podium: "\f112";
+$font-Flaticon-020-finish-flag: "\f113";
+$font-Flaticon-021-route: "\f114";
+$font-Flaticon-022-cross-wrench: "\f115";
+$font-Flaticon-023-gas-station: "\f116";
+$font-Flaticon-024-car-light: "\f117";
+$font-Flaticon-025-wheel-alignment: "\f118";
+$font-Flaticon-026-car: "\f119";
+$font-Flaticon-027-battery: "\f11a";
+$font-Flaticon-028-gold-medal: "\f11b";
+$font-Flaticon-029-silver-medal: "\f11c";
+$font-Flaticon-030-bronze-medal: "\f11d";
+$font-Flaticon-031-thermometer: "\f11e";
+$font-Flaticon-032-award: "\f11f";
+$font-Flaticon-033-helmet: "\f120";
+$font-Flaticon-034-garage: "\f121";
+$font-Flaticon-035-traffic-sign: "\f122";
+$font-Flaticon-036-car: "\f123";
+$font-Flaticon-037-wristwatch: "\f124";
+$font-Flaticon-038-finish: "\f125";
+$font-Flaticon-039-tools: "\f126";
+$font-Flaticon-040-check: "\f127";
+$font-Flaticon-041-steering-wheel: "\f128";
+$font-Flaticon-042-piston: "\f129";
+$font-Flaticon-043-aerosol: "\f12a";
+$font-Flaticon-044-manometer: "\f12b";
+$font-Flaticon-045-wrench: "\f12c";
+$font-Flaticon-046-location: "\f12d";
+$font-Flaticon-047-location: "\f12e";
+$font-Flaticon-048-mirror: "\f12f";
+$font-Flaticon-049-gasoline: "\f130";
+$font-Flaticon-050-air-pump: "\f131";
