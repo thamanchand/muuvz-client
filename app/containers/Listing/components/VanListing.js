@@ -1,86 +1,44 @@
 import React from 'react';
-import {
-  Card, CardBody, ButtonToolbar,
-} from 'reactstrap';
-import HeartIcon from 'mdi-react/HeartIcon';
-import StarIcon from 'mdi-react/StarIcon';
-import StarOutlineIcon from 'mdi-react/StarOutlineIcon';
-import { Link } from 'react-router-dom';
-import VanGallery from './VanGallery';
-import images from './imgs';
+import PropTypes from 'prop-types';
+import { Container, Row } from 'reactstrap';
+import Icon from 'react-icons-kit';
+import {car} from 'react-icons-kit/fa/car';
+import {heartO} from 'react-icons-kit/fa/heartO'
 
-const VanListing = () => (
+// import VanGallery from './VanGallery';
+
+import vanImage from '../../../assets/images/dummy-list/1.png';
+import './vanlist.scss';
+
+const VanListing = ({ vanList }) => (
   <div className="listing__wrapper">
-    <Card>
-      <CardBody>
-        <div className="van-card">
-          <VanGallery images={images} />
-          <div className="van-card__info">
-            <h3 className="van-card__title">French bulldog pillow</h3>
-            <div className="van-card__rate">
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarOutlineIcon />
-              <a className="van-card__link" href="/easydev/e-commerce/van_page">See all reviews</a>
-            </div>
-            <h3 className="van-card__price">€17.19/hr </h3>
-            <form className="form van-card__form">
-              <ButtonToolbar className="van-card__btn-toolbar">
-                <Link className="btn btn-primary" to="/e-commerce/cart">Add to cart</Link>
-                <button className="van-card__wish-btn" type="button"><HeartIcon />Add to favourite</button>
-              </ButtonToolbar>
-            </form>
+    <Container>
+      <Row>
+        <section className="vanlist">
+          <div className="vanlist__block">
+            {vanList && vanList.map(item => (
+              <div className="media">
+                <div className="fav-box"><Icon icon={heartO} size={15} /></div>
+                <img className="d-flex align-self-start" src={vanImage} alt="van1"/>
+                <div className="media-body pl-3">
+                  <div className="price">{item.brand}<small>{item.model}</small></div>
+                  <div className="stats">
+                    <span><Icon icon={car} size={15} />{item.licensetype}</span>
+                    <span><Icon icon={car} size={15} /> {item.transmission}</span>
+                  </div>
+                  <div className="address">{item.features}</div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-
-        <div className="van-card">
-          <VanGallery images={images} />
-          <div className="van-card__info">
-            <h3 className="van-card__title">French bulldog pillow</h3>
-            <div className="van-card__rate">
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarOutlineIcon />
-              <a className="van-card__link" href="/easydev/e-commerce/van_page">See all reviews</a>
-            </div>
-            <h3 className="van-card__price">€17.19/hr </h3>
-            <form className="form van-card__form">
-              <ButtonToolbar className="van-card__btn-toolbar">
-                <Link className="btn btn-primary" to="/e-commerce/cart">Add to cart</Link>
-                <button className="van-card__wish-btn" type="button"><HeartIcon />Add to favourite</button>
-              </ButtonToolbar>
-            </form>
-          </div>
-        </div>
-
-        <div className="van-card">
-          <VanGallery images={images} />
-          <div className="van-card__info">
-            <h3 className="van-card__title">French bulldog pillow</h3>
-            <div className="van-card__rate">
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarOutlineIcon />
-              <a className="van-card__link" href="/easydev/e-commerce/van_page">See all reviews</a>
-            </div>
-            <h3 className="van-card__price">€17.19/hr </h3>
-            <form className="form van-card__form">
-              <ButtonToolbar className="van-card__btn-toolbar">
-                <Link className="btn btn-primary" to="/e-commerce/cart">Add to cart</Link>
-                <button className="van-card__wish-btn" type="button"><HeartIcon />Add to favourite</button>
-              </ButtonToolbar>
-            </form>
-          </div>
-        </div>
-      </CardBody>
-    </Card>
+        </section>
+      </Row>
+    </Container>
   </div>
 );
+
+VanListing.propTypes = {
+  vanList: PropTypes.object,
+};
 
 export default VanListing;
