@@ -99,3 +99,69 @@
 .van-card__form-label {
   font-weight: 500;
 }
+
+.vanlist {
+  width:100%;
+}
+.van__content {
+  background: #fff;
+  padding: 20px;
+  overflow-y: scroll;
+}
+.media {
+  background:#fff;
+  position:relative;
+  margin-bottom:15px;
+  border: 1px solid #dedede;
+}
+.media img{
+  width:200px;
+  margin:0;
+  height:136px;
+}
+.media-body {
+  border-left:0;
+  height: 150px;
+  padding: 10px;
+}
+.media .price {
+  font-size: 24px;
+  line-height: 32px;
+  float:left;
+  width:100%;
+  font-weight:600;
+  color:#646777;
+}
+.media .price small {
+  display:block;
+  font-size:17px;
+  color:#232323;
+}
+.media .stats {
+  float:left;
+  width:100%;
+  margin-top:10px;
+}
+.media .stats span {
+  float:left;
+  margin-right:10px;
+  font-size:15px;
+}
+.media .stats span i{
+  margin-right:7px;
+  color:#4765AB;
+}
+.media .address {
+  float:left;
+  width:100%;
+  font-size:14px;
+  margin-top:5px;
+  color:#888;
+}
+.media .fav-box {
+  position:absolute;
+  right:10px;
+  font-size:20px;
+  top:4px;
+  color:#E74C3C;
+}
