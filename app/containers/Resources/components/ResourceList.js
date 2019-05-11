@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Card, CardBody, Col, Badge, Table } from 'reactstrap';
 
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
@@ -10,7 +12,7 @@ const iconStyles = {
   marginRight: '10px',
 };
 
-const ResourceList = () => (
+const ResourceList = ({ vanList }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
 
@@ -40,86 +42,24 @@ const ResourceList = () => (
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Toyota</td>
-              <td>V3</td>
-              <td>2013</td>
-              <td>
-                <Badge color="success">Available</Badge>
-              </td>
-              <td>
-                <span style={iconStyles}>
-                  <DeleteForeverIcon size="20" color="#ff4861" />
-                </span>
-                <span>
-                  <SquareEditOutlineIcon size="20" color="#555555" />
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Renault</td>
-              <td>Horiz</td>
-              <td>2015</td>
-              <td>
-                <Badge color="success">Available</Badge>
-              </td>
-              <td>
-                <span style={iconStyles}>
-                  <DeleteForeverIcon size="20" color="#ff4861" />
-                </span>
-                <span>
-                  <SquareEditOutlineIcon size="20" color="#555555" />
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Mercedez</td>
-              <td>M2</td>
-              <td>2018</td>
-              <td>
-                <Badge color="warning">Booked</Badge>
-              </td>
-              <td>
-                <span style={iconStyles}>
-                  <DeleteForeverIcon size="20" color="#ff4861" />
-                </span>
-                <span>
-                  <SquareEditOutlineIcon size="20" color="#555555" />
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Ford</td>
-              <td>Light</td>
-              <td>2017</td>
-              <td>
-                <Badge color="warning">Booked</Badge>
-              </td>
-              <td>
-                <span style={iconStyles}>
-                  <DeleteForeverIcon size="20" color="#ff4861" />
-                </span>
-                <span>
-                  <SquareEditOutlineIcon size="20" color="#555555" />
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Ford</td>
-              <td>Highland</td>
-              <td>2017</td>
-              <td>
-                <Badge color="success">Available</Badge>
-              </td>
-              <td>
-                <span style={iconStyles}>
-                  <DeleteForeverIcon size="20" color="#ff4861" />
-                </span>
-                <span>
-                  <SquareEditOutlineIcon size="20" color="#555555" />
-                </span>
-              </td>
-            </tr>
+            {vanList && vanList.map(item => (
+              <tr>
+                <td>{item.brand}</td>
+                <td>{item.model}</td>
+                <td>{item.year}</td>
+                <td>
+                  <Badge color="success">Available</Badge>
+                </td>
+                <td>
+                  <span style={iconStyles}>
+                    <DeleteForeverIcon size="20" color="#ff4861" />
+                  </span>
+                  <span>
+                    <SquareEditOutlineIcon size="20" color="#555555" />
+                  </span>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </CardBody>
@@ -127,5 +67,25 @@ const ResourceList = () => (
 
   </Col>
 );
+
+ResourceList.propTypes = {
+  vanList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    createdAt: PropTypes.string,
+    brand: PropTypes.string,
+    cruisecontrol: PropTypes.bool,
+    exteriordimensions: PropTypes.string,
+    features: PropTypes.bool,
+    fueltype: PropTypes.string,
+    interiordimensions: PropTypes.string,
+    licensetype: PropTypes.string,
+    located: PropTypes.string,
+    mileage: PropTypes.number,
+    model: PropTypes.string,
+    passengernum: PropTypes.string,
+    transmission: PropTypes.string,
+    year: PropTypes.string,
+  })).isRequired,
+};
 
 export default ResourceList;
