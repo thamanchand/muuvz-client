@@ -7,6 +7,7 @@ import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 
 import Modal from '../../../shared/Modal';
+import { formatDate } from '../../utils';
 
 const iconStyles = {
   marginRight: '10px',
@@ -46,7 +47,7 @@ const ResourceList = ({ vanList }) => (
               <tr>
                 <td>{item.brand}</td>
                 <td>{item.model}</td>
-                <td>{item.year}</td>
+                <td>{formatDate(item.year)}</td>
                 <td>
                   <Badge color="success">Available</Badge>
                 </td>
