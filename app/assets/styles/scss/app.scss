@@ -8,7 +8,7 @@
 @import 'generic/box-sizing.scss';
 @import './base/scaffolding';         // styles of base elements
 @import './base/typography';          // base styles of h1-h6, p, span
-// @import './base/flaticon.scss';      // car icons
+ @import './base/flaticon.scss';      // car icons
 
 //components...
 @import './component/topbar';             // components/topbar/*
