@@ -6,16 +6,15 @@ import classNames from 'classnames';
 export default class ModalComponent extends PureComponent {
   static propTypes = {
     title: PropTypes.string,
-    message: PropTypes.string,
     color: PropTypes.string.isRequired,
     colored: PropTypes.bool,
     header: PropTypes.bool,
     btn: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired
   };
 
   static defaultProps = {
     title: '',
-    message: '',
     colored: false,
     header: false,
   };
@@ -35,7 +34,7 @@ export default class ModalComponent extends PureComponent {
 
   render() {
     const {
-      color, btn, title, message, colored, header,
+      color, btn, title, colored, header, children
     } = this.props;
     const { modal } = this.state;
     let Icon;
@@ -75,7 +74,7 @@ export default class ModalComponent extends PureComponent {
             <h4 className="bold-text  modal__title">{title}</h4>
           </div>
           <div className="modal__body">
-            {message}
+            {children}
           </div>
           <ButtonToolbar className="modal__footer">
             <Button onClick={this.toggle}>Cancel</Button>{' '}
