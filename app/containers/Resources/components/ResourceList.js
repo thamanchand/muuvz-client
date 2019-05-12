@@ -14,7 +14,7 @@ const iconStyles = {
   marginRight: '10px',
 };
 
-const ResourceList = ({ vanList }) => (
+const ResourceList = ({ vanList, onSaveVan }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
       <CardBody>
@@ -25,9 +25,8 @@ const ResourceList = ({ vanList }) => (
               title="Add new van"
               header
               btn="Add new van"
-              message="Hello "
             >
-              <AddVan />
+              <AddVan onSaveVan={onSaveVan} />
             </Modal>
           </div>
           <div className="col-md-2 header__filter">
@@ -72,6 +71,7 @@ const ResourceList = ({ vanList }) => (
 );
 
 ResourceList.propTypes = {
+  onSaveVan: PropTypes.func,
   vanList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     createdAt: PropTypes.string,
