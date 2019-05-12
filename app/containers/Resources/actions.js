@@ -2,6 +2,9 @@ import {
   ON_VANLIST_LOAD,
   ON_VANLIST_LOAD_SUCCESS,
   ON_VANLIST_LOAD_FAILURE,
+  ON_VAN_SAVE,
+  ON_VAN_SAVE_SUCCESS,
+  ON_VAN_SAVE_FAILED,
 } from './constants';
 /**
  * Sends the request to the API
@@ -19,5 +22,19 @@ export const onVanListLoadSuccess = (vanList) => ({
 
 export const onVanListLoadFailure = (error) => ({
   type: ON_VANLIST_LOAD_FAILURE,
+  error
+});
+
+export const onVanInfoSave = (payload) => ({
+  type: ON_VAN_SAVE,
+  payload,
+});
+
+export const onVanInfoSaveSuccess = () => ({
+  type: ON_VAN_SAVE_SUCCESS
+});
+
+export const onVanInfoSaveFailed = (error) => ({
+  type: ON_VAN_SAVE_FAILED,
   error
 });
