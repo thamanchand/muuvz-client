@@ -15,6 +15,6 @@ export const makeSelectVans = () =>
 
 export const isVanInfoSavedSelector = () =>
   createSelector(
-    selectVans(),
-    subState => subState.get('isVanInfoSaved'),
+    selectVans,
+    subState => subState.get('isVanInfoSaved')
   );
