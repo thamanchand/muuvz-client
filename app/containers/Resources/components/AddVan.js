@@ -1,20 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardBody, Col, ButtonToolbar } from 'reactstrap';
+import { Row, Card, CardBody, Col, ButtonToolbar } from 'reactstrap';
 import { Form } from 'react-final-form';
 import { Field } from 'react-final-form-html5-validation'
 
 import toggleField from '../../../shared/ToggleField';
 import renderDropZoneMultipleField from '../../../shared/DropzoneMultipleFiles';
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+const onSubmit = async values => {
+  await sleep(300)
+  console.log("submitted", values)
+}
+
 const ProfileForm = ({ onSaveVan }) => (
   <Col md={12} lg={12}>
     <Card>
       <CardBody>
         <Form
-          onSubmit={values => onSaveVan(values)}
-          initialValues={{}}
-          render={({ handleSubmit, pristine }) => (
+          onSubmit={onSubmit}
+          render={({ handleSubmit, pristine, values, submitting }) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
               <div className="container">
                 <h5 className="bold-text header_label">Business</h5>
@@ -281,20 +286,20 @@ const ProfileForm = ({ onSaveVan }) => (
                   </div>
                 </div>
               </Col>
-
-
-              <div>
-                <ButtonToolbar className="form__button-toolbar">
-                  <button
-                    className="square btn btn-primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                    disabled={pristine}
-                  >
-                    Save
-                  </button>
-                </ButtonToolbar>
-              </div>
+              <Row>
+                <div className="addEditModal__footer">
+                  <ButtonToolbar className="form__button-toolbar">
+                    <button
+                      className="square btn btn-primary"
+                      type="submit"
+                      onClick={() => onSaveVan(values)}
+                      disabled={submitting || pristine}
+                    >
+                      Save
+                    </button>
+                  </ButtonToolbar>
+                </div>
+              </Row>
             </form>
           )}
         />
