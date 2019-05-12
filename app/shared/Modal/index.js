@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonToolbar, Modal } from 'reactstrap';
+import { Button, Modal } from 'reactstrap';
 import classNames from 'classnames';
 
 export default class ModalComponent extends PureComponent {
@@ -76,10 +76,14 @@ export default class ModalComponent extends PureComponent {
           <div className="modal__body">
             {children}
           </div>
-          <ButtonToolbar className="modal__footer">
-            <Button onClick={this.toggle}>Cancel</Button>{' '}
-            <Button outline={colored} color={color} onClick={this.toggle}>Ok</Button>
-          </ButtonToolbar>
+
+          <span
+            role="button"
+            tabIndex={0}
+            onKeyPress={this.toggle}
+            className="form__form-group-label addEditModal__footer-cancel"
+            onClick={this.toggle}
+          >Cancel</span>
         </Modal>
       </div>
     );
