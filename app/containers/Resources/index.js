@@ -14,7 +14,7 @@ import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
 
 
-import { onVanListLoad } from './actions';
+import { onVanListLoad, onVanInfoSave } from './actions';
 import { makeSelectVans } from './selectors';
 import saga from './saga';
 import reducer from './reducers';
@@ -25,6 +25,11 @@ const key = 'resourcePage';
 class ResourcesPage extends React.PureComponent {
   componentDidMount() {
     this.props.onVanListLoad();
+  }
+
+  vanInfoSaveHandler = (e) => {
+    const payload = e;
+    this.props.onVanInfoSave(payload);
   }
 
   render() {
@@ -43,7 +48,10 @@ class ResourcesPage extends React.PureComponent {
               <Statistics />
             </Row>
             <Row>
-              <ResourceList vanList={vanList} />
+              <ResourceList
+                vanList={vanList}
+                onSaveVan={this.vanInfoSaveHandler}
+              />
             </Row>
           </Container>
         </div>
@@ -73,6 +81,7 @@ ResourcesPage.propTypes = {
     transmission: PropTypes.string,
     year: PropTypes.string,
   })).isRequired,
+  onVanInfoSave: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -80,7 +89,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onVanListLoad: bindActionCreators(onVanListLoad, dispatch)
+  onVanListLoad: bindActionCreators(onVanListLoad, dispatch),
+  onVanInfoSave: bindActionCreators(onVanInfoSave, dispatch),
 });
 
 const withConnect = connect(
