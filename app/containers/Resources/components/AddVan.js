@@ -1,26 +1,20 @@
 import React from 'react';
-import { Card, CardBody, Col, Button, ButtonToolbar } from 'reactstrap';
+import PropTypes from 'prop-types';
+import { Card, CardBody, Col, ButtonToolbar } from 'reactstrap';
 import { Form } from 'react-final-form';
 import { Field } from 'react-final-form-html5-validation'
 
 import toggleField from '../../../shared/ToggleField';
 import renderDropZoneMultipleField from '../../../shared/DropzoneMultipleFiles';
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-const onSubmit = async values => {
-  await sleep(300);
-  window.alert(JSON.stringify(values, 0, 2));
-};
-
-const ProfileForm = () => (
+const ProfileForm = ({ onSaveVan }) => (
   <Col md={12} lg={12}>
     <Card>
       <CardBody>
         <Form
-          onSubmit={onSubmit}
+          onSubmit={values => onSaveVan(values)}
           initialValues={{}}
-          render={({ handleSubmit }) => (
+          render={({ handleSubmit, pristine }) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
               <div className="container">
                 <h5 className="bold-text header_label">Business</h5>
@@ -109,7 +103,7 @@ const ProfileForm = () => (
                   <span className="form__form-group-label">Engine size</span>
                   <div className="form__form-group-field">
                     <Field
-                      name="engine"
+                      name="enginesize"
                       component="input"
                       type="text"
                       placeholder="1.8"
@@ -168,7 +162,7 @@ const ProfileForm = () => (
                   <span className="form__form-group-label">Gear</span>
                   <div className="form__form-group-field">
                     <Field
-                      name="engine"
+                      name="transmission"
                       component="input"
                       type="text"
                       placeholder="E.g: Automatic/Manual"
@@ -198,7 +192,7 @@ const ProfileForm = () => (
                   <span className="form__form-group-label">Width x Height x Length (cm)</span>
                   <div className="form__form-group-field">
                     <Field
-                      name="power"
+                      name="interiordimensions"
                       component="input"
                       type="text"
                       placeholder="200 x 290 x 610"
@@ -239,7 +233,7 @@ const ProfileForm = () => (
                   <span className="form__form-group-label">Air conditioning</span>
                   <div className="form__form-group-field">
                     <Field
-                      name="aircon"
+                      name="airconditioning"
                       component={toggleField}
                     />
                   </div>
@@ -291,9 +285,14 @@ const ProfileForm = () => (
 
               <div>
                 <ButtonToolbar className="form__button-toolbar">
-                  <Button className="square btn btn-primary" type="submit">
-                    Submit
-                  </Button>
+                  <button
+                    className="square btn btn-primary"
+                    type="submit"
+                    onClick={handleSubmit}
+                    disabled={pristine}
+                  >
+                    Save
+                  </button>
                 </ButtonToolbar>
               </div>
             </form>
@@ -304,4 +303,7 @@ const ProfileForm = () => (
   </Col>
 );
 
+ProfileForm.propTypes = {
+  onSaveVan: PropTypes.func,
+}
 export default ProfileForm;
