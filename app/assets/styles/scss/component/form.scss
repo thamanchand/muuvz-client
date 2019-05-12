@@ -8,13 +8,12 @@
   .header_label {
     width: 100%;
     color: #646777;
-    border-bottom: 2px solid #f1f1f1;
-    font-size: 14px;
+    border-bottom: 2px solid #f2f2f2;
+    font-size: 18px;
     font-weight: bold;
     padding-bottom: 3px;
-    margin-bottom: 20px;
+    margin: 15px 0px 15px 0px;
     position: relative;
-    clear: both;
   }
 
   .form__form-group-label {
@@ -28,7 +27,7 @@
     font-size: 12px;
     height: 32px;
     transition: border 0.3s;
-    background: transparent;
+    background: $field-bg-color;
 
     &::-webkit-input-placeholder {
       color: $color-additional;
