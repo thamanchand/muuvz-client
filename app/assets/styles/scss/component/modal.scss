@@ -1,5 +1,5 @@
 .modal {
-
+  
 }
 
 .modal-dialog {
@@ -7,6 +7,7 @@
 }
 
 .modal-content {
+
   border-radius: 0;
   border: none;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
@@ -14,10 +15,36 @@
   padding: 50px 40px 60px 40px;
   text-align: center;
 
+  .form {
+    width: 100%;
+    input, textarea {
+      border: 1px solid #f2f4f7;
+      color: #646777;
+
+      &:focus, &:active {
+        outline: none;
+        border-color: $color-accent;
+      }
+
+      &:hover {
+
+        @include themify($themes) {
+          background: themed('colorFieldsBorder');
+        }
+      }
+    }
+    .radio-btn {
+      display: inline-block;
+      cursor: pointer;
+      padding-right: 20px;
+    }
+  }
+
   @include themify($themes) {
     background-color: themed('colorBackground');
     color: themed('colorText');
   }
+
 }
 
 .modal__close-btn {
