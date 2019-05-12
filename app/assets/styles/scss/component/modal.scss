@@ -1,5 +1,5 @@
 .modal {
-  
+
 }
 
 .modal-dialog {
@@ -167,8 +167,11 @@
 }
 
 .modal-dialog--header {
-  max-width: 520px;
   max-width: 80%;
+    @media screen and (max-width: 575px) {
+      max-width: 90%
+    }
+
 
   .modal-content {
     padding: 0;
