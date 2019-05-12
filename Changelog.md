@@ -27,3 +27,6 @@
 ## 11th May 2019
 - Fonts, Car features svg assets added
 - ResourcePage actions, reducer, saga, selector, map vanlist data
+
+## 12th May 2019
+- Add van modal
