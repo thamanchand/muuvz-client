@@ -452,8 +452,8 @@
 			transition: .4s ease;
 
 			&:before {
-				width: 2rem;
-				height: 2rem;
+				width: 1.5rem;
+				height: 1.5rem;
 				position: absolute;
 				background: #fff;
 				content: '';
@@ -471,7 +471,7 @@
 				background: #f2f4f7;
 
 				&:before {
-					left: calc(100% - 0rem - 2rem);
+					left: calc(100% - 0rem - 1.5rem);
 					background: #0099ff;
 				}
 			}
