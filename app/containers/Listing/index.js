@@ -30,12 +30,12 @@ class VanListPage extends PureComponent {
       <div className="Listing__page">
         <Container>
           <Row>
-            <Col md={3}>
+            <Col md={3} className="van__search">
               <div className="van__list-nav">
                 <Search />
               </div>
             </Col>
-            <Col md={9}>
+            <Col md={9} className="van__content">
               <div className="van__list">
                 <VanListing vanList={vanList} />
               </div>
