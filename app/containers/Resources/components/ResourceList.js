@@ -8,6 +8,7 @@ import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 
 import Modal from '../../../shared/Modal';
 import { formatDate } from '../../utils';
+import AddVan from './AddVan';
 
 const iconStyles = {
   marginRight: '10px',
@@ -16,7 +17,6 @@ const iconStyles = {
 const ResourceList = ({ vanList }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
-
       <CardBody>
         <div className="header__section container">
           <div className="col-md-2 header__button">
@@ -26,7 +26,9 @@ const ResourceList = ({ vanList }) => (
               header
               btn="Add new van"
               message="Hello "
-            />
+            >
+              <AddVan />
+            </Modal>
           </div>
           <div className="col-md-2 header__filter">
             <span>Filter</span>
