@@ -286,6 +286,14 @@ const ProfileForm = ({ onSaveVan }) => (
                   </div>
                 </div>
               </Col>
+
+              <div className="container">
+                <h5 className="bold-text header_label pricing">Pricing</h5>
+                <span className="add__pricing-btn">Add new price</span>
+              </div>
+              <div className="container">
+                <h5 className="page-subhead subhead">No data </h5>
+              </div>
               <Row>
                 <div className="addEditModal__footer">
                   <ButtonToolbar className="form__button-toolbar">
