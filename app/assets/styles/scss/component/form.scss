@@ -14,6 +14,10 @@
     padding-bottom: 3px;
     margin: 15px 0px 15px 0px;
     position: relative;
+
+    &.pricing {
+      padding: 10px 0;
+    }
   }
 
   .form__form-group-label {
