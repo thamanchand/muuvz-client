@@ -32,3 +32,9 @@
 - Add van modal
 - Add van POST
 - Add van modal UI polished
+
+## 19 May 2019
+- Add price Modal
+- Install validator
+- ErrorField component
+- utils/Validator.js
