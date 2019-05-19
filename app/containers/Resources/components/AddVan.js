@@ -4,6 +4,7 @@ import { Button, Row, Card, CardBody, Col, ButtonToolbar } from 'reactstrap';
 import { Form } from 'react-final-form';
 import { Field } from 'react-final-form-html5-validation'
 
+import Error from '../../../shared/ErrorField';
 import toggleField from '../../../shared/ToggleField';
 import renderDropZoneMultipleField from '../../../shared/DropzoneMultipleFiles';
 import AddPrice from './AddPrice';
@@ -26,8 +27,24 @@ const ProfileForm = ({
     <Card>
       <CardBody>
         <Form
+          validate={values => { // validate both passowrds are same
+            const errors = {};
+            if (!values.brand) {
+              errors.unit = 'Required';
+            }
+            if (!values.mode) {
+              errors.model = 'Required';
+            }
+            if (!values.platenum) {
+              errors.platenum = 'Required';
+            }
+            if (!values.passengernum) {
+              errors.passengernum = 'Required';
+            }
+            return errors
+          }}
           onSubmit={onSubmit}
-          render={({ handleSubmit, pristine, values, submitting }) => (
+          render={({ handleSubmit, pristine, values, submitting, invalid }) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
               <div className="container">
                 <h5 className="bold-text header_label">Business</h5>
@@ -44,6 +61,7 @@ const ProfileForm = ({
                       required
                     />
                   </div>
+                  <Error name="brand" />
                 </div>
               </Col>
 
@@ -59,6 +77,7 @@ const ProfileForm = ({
                       required
                     />
                   </div>
+                  <Error name="model" />
                 </div>
               </Col>
 
@@ -298,7 +317,7 @@ const ProfileForm = ({
               <div className="container">
                 <h5 className="bold-text header_label pricing">Pricing</h5>
                 <Button
-                  color='primary'
+                  color='success'
                   onClick={openPriceModalHandler}
                   className="btn square add__pricing-btn"
                 >
@@ -328,7 +347,7 @@ const ProfileForm = ({
                       className="square btn btn-primary"
                       type="submit"
                       onClick={() => onSaveVan(values)}
-                      disabled={submitting || pristine}
+                      disabled={submitting || pristine || invalid}
                     >
                       Save
                     </button>
