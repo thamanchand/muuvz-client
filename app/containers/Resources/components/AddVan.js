@@ -310,7 +310,6 @@ const ProfileForm = ({
                   header
                   sm
                   openModel={showPriceModal}
-                  showPriceModal={showPriceModal}
                   closePriceModal={closePriceModal}
                 >
                   <AddPrice
@@ -348,7 +347,7 @@ ProfileForm.propTypes = {
   onSaveVan: PropTypes.func,
   onPriceInfoSave: PropTypes.func,
   openPriceModalHandler: PropTypes.func,
-  showPriceModal: PropTypes.func,
+  showPriceModal: PropTypes.bool,
   closePriceModal: PropTypes.func,
 }
 export default ProfileForm;
