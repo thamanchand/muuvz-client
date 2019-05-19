@@ -62,7 +62,7 @@ class ModalComponent extends PureComponent {
             <button
               className="lnr lnr-cross modal__close-btn"
               type="button"
-              onClick={this.props.modelToggle || this.props.showPriceModal} />
+              onClick={this.props.modelToggle}  />
             {header ? '' : Icon}
             <h4 className="bold-text  modal__title">{title}</h4>
           </div>
@@ -93,7 +93,6 @@ ModalComponent.propTypes = {
   closePriceModal: PropTypes.func,
   modelToggle: PropTypes.func,
   openModel: PropTypes.bool,
-  showPriceModal: PropTypes.func,
 };
 
 export default ModalComponent;
