@@ -10,7 +10,7 @@ export const selectVans = state => state.resourcePage || initialState;
 export const makeSelectVans = () =>
   createSelector(
     selectVans,
-    subState => subState.get('vanList')
+    subState => subState.get('vanList').toJS()
   );
 
 export const isVanInfoSavedSelector = () =>
