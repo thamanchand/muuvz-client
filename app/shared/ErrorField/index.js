@@ -19,7 +19,7 @@ const ErrorField = ({ name }) => (
 );
 
 ErrorField.propTypes = {
-  name: PropTypes.element.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default ErrorField;
