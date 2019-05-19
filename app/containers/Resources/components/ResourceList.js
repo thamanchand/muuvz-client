@@ -25,7 +25,7 @@ const ResourceList = ({
   priceModalHandler,
   closePriceModal,
   showPriceModal,
-  openModelHandler,
+  showVanModelHandler,
 }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
@@ -34,7 +34,7 @@ const ResourceList = ({
           <div className="col-md-2 header__button">
             <Button
               color='primary'
-              onClick={openModelHandler}
+              onClick={showVanModelHandler}
               className="square btn-primary btn-sm add__van-btn"
             >
               Add new van {AddIcon}
@@ -99,7 +99,7 @@ const ResourceList = ({
 
 
 ResourceList.propTypes = {
-  openModelHandler: PropTypes.func,
+  showVanModelHandler: PropTypes.func,
   openModel: PropTypes.bool,
   modelToggle: PropTypes.func,
   priceInfoSaveHandler: PropTypes.func,
