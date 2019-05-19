@@ -220,3 +220,59 @@
     background-color: $color-red;
   }
 }
+
+
+.modal-dialog--header-confirm {
+  max-width: 70%;
+    @media screen and (max-width: 575px) {
+      max-width: 90%
+    }
+
+
+  .modal-content {
+    padding: 0;
+    text-align: left;
+  }
+
+  .modal__header {
+    color: white;
+    padding: 15px 20px;
+    position: relative;
+  }
+
+  .modal__title {
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .modal__close-btn {
+    color: white;
+    top: calc(50% - 8px);
+  }
+
+  .modal__body {
+    padding: 25px 40px 20px 20px;
+  }
+
+  .modal__footer {
+    margin-bottom: 40px;
+    justify-content: flex-end;
+    padding-right: 20px;
+  }
+
+  &.modal-dialog--primary .modal__header {
+    background-color: $color-blue;
+  }
+
+  &.modal-dialog--success .modal__header {
+    background-color: $color-accent;
+  }
+
+  &.modal-dialog--warning .modal__header {
+    background-color: $color-yellow;
+  }
+
+  &.modal-dialog--danger .modal__header {
+    background-color: $color-red;
+  }
+}
