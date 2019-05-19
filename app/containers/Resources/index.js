@@ -119,7 +119,7 @@ ResourcesPage.propTypes = {
     brand: PropTypes.string,
     cruisecontrol: PropTypes.bool,
     exteriordimensions: PropTypes.string,
-    features: PropTypes.bool,
+    features: PropTypes.string,
     fueltype: PropTypes.string,
     interiordimensions: PropTypes.string,
     licensetype: PropTypes.string,
