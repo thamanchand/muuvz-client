@@ -31,7 +31,7 @@ function vanListReducer(state = initialState, action) {
 
     case ON_VANLIST_LOAD_SUCCESS:
       return state
-        .set('vanList', action.vanList)
+        .set('vanList', fromJS(action.vanList))
         .set('isLoading', false);
 
     case ON_VANLIST_LOAD_FAILURE:
