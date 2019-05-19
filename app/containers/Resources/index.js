@@ -15,7 +15,7 @@ import Layout from '../Layout/index';
 
 
 import { onVanListLoad, onVanInfoSave } from './actions';
-import { makeSelectVans } from './selectors';
+import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
 import saga from './saga';
 import reducer from './reducers';
 
@@ -23,14 +23,56 @@ const key = 'resourcePage';
 
 
 class ResourcesPage extends React.PureComponent {
+  constructor(props){
+  	super(props);
+  	this.state = {
+      openModel: false,
+      showPriceModal: false,
+    };
+  }
+
   componentDidMount() {
     this.props.onVanListLoad();
   }
 
-  vanInfoSaveHandler = (e) => {
-    const payload = e;
+  vanInfoSaveHandler = (vanInfo) => {
+    const payload = vanInfo;
     this.props.onVanInfoSave(payload);
   }
+
+  showVanModelHandler = () => {
+    this.setState((prevState) => ({
+      openModel: !prevState.openModel
+    }))
+  }
+
+  modelToggle = () => {
+    this.setState((prevState) => ({
+      openModel: !prevState.openModel
+    }))
+  }
+
+  priceModalHandler = () => {
+    this.setState((prevState) => ({
+      showPriceModal: !prevState.showPriceModal
+    }))
+  }
+
+  closePriceModal = () => {
+    this.setState((prevState) => ({
+      showPriceModal: !prevState.showPriceModal
+    }))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { vanInfoSavedCompleted } = this.props;
+    if (vanInfoSavedCompleted !== nextProps.vanInfoSavedCompleted) {
+      this.setState({
+        openModel: false
+      })
+    }
+  }
+
 
   render() {
     const { vanList } = this.props;
@@ -48,9 +90,16 @@ class ResourcesPage extends React.PureComponent {
               <Statistics />
             </Row>
             <Row>
+              {this.props.vanInfoSavedCompleted ? 'Saved' : null}
               <ResourceList
                 vanList={vanList}
                 onSaveVan={this.vanInfoSaveHandler}
+                openModel={this.state.openModel}
+                showVanModelHandler={this.showVanModelHandler}
+                modelToggle={this.modelToggle}
+                priceModalHandler={this.priceModalHandler}
+                showPriceModal={this.state.showPriceModal}
+                closePriceModal={this.closePriceModal}
               />
             </Row>
           </Container>
@@ -82,10 +131,12 @@ ResourcesPage.propTypes = {
     year: PropTypes.string,
   })).isRequired,
   onVanInfoSave: PropTypes.func,
+  vanInfoSavedCompleted: PropTypes.bool,
 }
 
 const mapStateToProps = createStructuredSelector({
   vanList: makeSelectVans(),
+  vanInfoSavedCompleted: isVanInfoSavedSelector(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
