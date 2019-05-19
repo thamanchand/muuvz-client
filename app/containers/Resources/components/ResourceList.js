@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Card, CardBody, Col, Badge, Table } from 'reactstrap';
-
+import { Card, Button, CardBody, Col, Badge, Table } from 'reactstrap';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
+import PlusCircleIcon from 'mdi-react/PlusCircleIcon';
 
 import Modal from '../../../shared/Modal';
 import { formatDate } from '../../utils';
@@ -14,19 +14,46 @@ const iconStyles = {
   marginRight: '10px',
 };
 
-const ResourceList = ({ vanList, onSaveVan }) => (
+const AddIcon = <PlusCircleIcon className="addIcon" size="20" color="#555555"/>;
+
+const ResourceList = ({
+  vanList,
+  onSaveVan,
+  openModel,
+  modelToggle,
+  priceInfoSaveHandler,
+  priceModalHandler,
+  closePriceModal,
+  showPriceModal,
+  openModelHandler,
+}) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
       <CardBody>
         <div className="header__section container">
           <div className="col-md-2 header__button">
+            <Button
+              color='primary'
+              onClick={openModelHandler}
+              className="square btn-primary btn-sm add__van-btn"
+            >
+              Add new van {AddIcon}
+            </Button>
             <Modal
               color="primary"
               title="Add new van"
               header
-              btn="Add new van"
+              md
+              openModel={openModel}
+              modelToggle={() => modelToggle()}
             >
-              <AddVan onSaveVan={onSaveVan} />
+              <AddVan
+                onSaveVan={onSaveVan}
+                onPriceInfoSave={priceInfoSaveHandler}
+                openPriceModalHandler={priceModalHandler}
+                showPriceModal={showPriceModal}
+                closePriceModal={() => closePriceModal()}
+              />
             </Modal>
           </div>
           <div className="col-md-2 header__filter">
@@ -45,7 +72,7 @@ const ResourceList = ({ vanList, onSaveVan }) => (
           </thead>
           <tbody>
             {vanList && vanList.map(item => (
-              <tr>
+              <tr key={item.id}>
                 <td>{item.brand}</td>
                 <td>{item.model}</td>
                 <td>{formatDate(item.year)}</td>
@@ -70,7 +97,15 @@ const ResourceList = ({ vanList, onSaveVan }) => (
   </Col>
 );
 
+
 ResourceList.propTypes = {
+  openModelHandler: PropTypes.func,
+  openModel: PropTypes.bool,
+  modelToggle: PropTypes.func,
+  priceInfoSaveHandler: PropTypes.func,
+  priceModalHandler: PropTypes.func,
+  closePriceModal: PropTypes.func,
+  showPriceModal: PropTypes.bool,
   onSaveVan: PropTypes.func,
   vanList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
