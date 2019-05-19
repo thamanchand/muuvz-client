@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Card, CardBody, Col, ButtonToolbar } from 'reactstrap';
+import { Button, Row, Card, CardBody, Col, ButtonToolbar } from 'reactstrap';
 import { Form } from 'react-final-form';
 import { Field } from 'react-final-form-html5-validation'
 
 import toggleField from '../../../shared/ToggleField';
 import renderDropZoneMultipleField from '../../../shared/DropzoneMultipleFiles';
+import AddPrice from './AddPrice';
+import Modal from '../../../shared/Modal';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
@@ -13,7 +15,13 @@ const onSubmit = async values => {
   console.log("submitted", values)
 }
 
-const ProfileForm = ({ onSaveVan }) => (
+const ProfileForm = ({
+  onSaveVan,
+  onPriceInfoSave,
+  openPriceModalHandler,
+  showPriceModal,
+  closePriceModal
+}) => (
   <Col md={12} lg={12}>
     <Card>
       <CardBody>
@@ -289,7 +297,27 @@ const ProfileForm = ({ onSaveVan }) => (
 
               <div className="container">
                 <h5 className="bold-text header_label pricing">Pricing</h5>
-                <span className="add__pricing-btn">Add new price</span>
+                <Button
+                  color='primary'
+                  onClick={openPriceModalHandler}
+                  className="btn square add__pricing-btn"
+                >
+                  Add price
+                </Button>
+                <Modal
+                  color="primary"
+                  title="Add new price"
+                  header
+                  sm
+                  openModel={showPriceModal}
+                  showPriceModal={showPriceModal}
+                  closePriceModal={closePriceModal}
+                >
+                  <AddPrice
+                    onPriceInfoSave={onPriceInfoSave}
+                    closePriceModal={() => closePriceModal()}
+                  />
+                </Modal>
               </div>
               <div className="container">
                 <h5 className="page-subhead subhead">No data </h5>
@@ -318,5 +346,9 @@ const ProfileForm = ({ onSaveVan }) => (
 
 ProfileForm.propTypes = {
   onSaveVan: PropTypes.func,
+  onPriceInfoSave: PropTypes.func,
+  openPriceModalHandler: PropTypes.func,
+  showPriceModal: PropTypes.func,
+  closePriceModal: PropTypes.func,
 }
 export default ProfileForm;
