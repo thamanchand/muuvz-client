@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Card, CardBody, Col, ButtonToolbar } from 'reactstrap';
 import { Form } from 'react-final-form';
-import { Field } from 'react-final-form-html5-validation'
+import { Field } from 'react-final-form-html5-validation';
+
+import Error from '../../../shared/ErrorField';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
@@ -10,13 +12,25 @@ const onSubmit = async values => {
   console.log("submitted", values)
 }
 
+const isNumber = value => Number.isNaN(Number(value));
+
 const AddPrice = ({ onPriceInfoSave }) => (
   <Col md={12} lg={12}>
     <Card>
       <CardBody>
         <Form
+          validate={values => { // validate both passowrds are same
+            const errors = {};
+            if (isNumber(values.unit)) {
+              errors.unit = 'Must be a number';
+            }
+            if (isNumber(values.price)) {
+              errors.price = 'Must be a number';
+            }
+            return errors
+          }}
           onSubmit={onSubmit}
-          render={({ handleSubmit, pristine, values, submitting }) => (
+          render={({ handleSubmit, pristine, values, submitting, invalid}) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
               <Col md={6} sm={6}>
                 <div className="form__form-group">
@@ -27,9 +41,9 @@ const AddPrice = ({ onPriceInfoSave }) => (
                       component="input"
                       type="text"
                       placeholder="2"
-                      required
                     />
                   </div>
+                  <Error name="unit" />
                 </div>
               </Col>
 
@@ -42,9 +56,9 @@ const AddPrice = ({ onPriceInfoSave }) => (
                       component="input"
                       type="text"
                       placeholder="v3"
-                      required
                     />
                   </div>
+                  <Error name="price" />
                 </div>
               </Col>
 
@@ -55,7 +69,7 @@ const AddPrice = ({ onPriceInfoSave }) => (
                     <button
                       className="square btn btn-primary"
                       type="submit"
-                      disabled={submitting || pristine}
+                      disabled={submitting || pristine || invalid}
                       onClick={() => onPriceInfoSave(values)}
                     >
                       Save
