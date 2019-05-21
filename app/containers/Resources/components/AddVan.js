@@ -21,7 +21,7 @@ const ProfileForm = ({
   onPriceInfoSave,
   openPriceModalHandler,
   showPriceModal,
-  closePriceModal
+  closePriceModal,
 }) => (
   <Col md={12} lg={12}>
     <Card>
