@@ -30,6 +30,7 @@ class ResourcesPage extends React.PureComponent {
       showPriceModal: false,
       priceList: [],
       confirmModal: false,
+      showPriceWarning: false,
     };
   }
 
@@ -39,7 +40,14 @@ class ResourcesPage extends React.PureComponent {
 
   vanInfoSaveHandler = (vanInfo) => {
     const payload = vanInfo;
-    this.props.onVanInfoSave(payload);
+    if (!this.state.priceList.length > 0 ) {
+      this.setState({
+        showPriceWarning: true,
+      })
+
+    } else {
+      this.props.onVanInfoSave(payload);
+    }
   }
 
   showVanModelHandler = () => {
@@ -90,6 +98,10 @@ class ResourcesPage extends React.PureComponent {
     })
   }
 
+  onCloseNotificationWarning = () => {
+    this.setState({showPriceWarning: false});
+  }
+
   componentWillReceiveProps(nextProps) {
     const { vanInfoSavedCompleted } = this.props;
     if (vanInfoSavedCompleted !== nextProps.vanInfoSavedCompleted) {
@@ -103,7 +115,6 @@ class ResourcesPage extends React.PureComponent {
   render() {
     const { vanList } = this.props;
     const Icon = <span className="lnr lnr-cross-circle modal__title-icon" />;
-
     return (
       <div>
         <Layout />
@@ -130,6 +141,8 @@ class ResourcesPage extends React.PureComponent {
                 closePriceModal={this.closePriceModal}
                 priceInfoSaveHandler={this.priceInfoSaveHandler}
                 priceList={this.state.priceList}
+                showPriceWarning={this.state.showPriceWarning}
+                closeNotificationWarning={this.onCloseNotificationWarning}
               />
             </Row>
           </Container>

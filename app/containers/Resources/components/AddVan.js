@@ -20,7 +20,7 @@ const iconStyles = {
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
   await sleep(300)
-  console.log("submitted", values)
+  console.log("van info submitted", values)
 }
 
 const ProfileForm = ({
@@ -30,6 +30,8 @@ const ProfileForm = ({
   showPriceModal,
   closePriceModal,
   priceList,
+  showPriceWarning,
+  closeNotificationWarning,
 }) => (
   <Col md={12} lg={12}>
     <Card>
@@ -40,7 +42,7 @@ const ProfileForm = ({
             if (!values.brand) {
               errors.unit = 'Required';
             }
-            if (!values.mode) {
+            if (!values.model) {
               errors.model = 'Required';
             }
             if (!values.platenum) {
@@ -347,10 +349,25 @@ const ProfileForm = ({
                 </Modal>
               </div>
               <div className="container">
+                {showPriceWarning &&
+                  <div className="alert--bordered alert alert-warning fade show" role="alert">
+                    <button className="close" type="button" onClick={() => closeNotificationWarning()}>
+                      <span className="lnr lnr-cross"></span>
+                    </button>
+                    <div className="alert__content">
+                      <p>
+                        <span className="bold-text">Attention! </span>
+                          Atleast one price schema needs to be define
+                      </p>
+                      <p className="page-subhead subhead">E.g: 1hr van booking will cost €20 </p>
+                    </div>
+                  </div>
+                }
                 {priceList && !priceList.length > 0
                   ?
                   (
                     <h5 className="page-subhead subhead">No data </h5>
+
                   )
                   : (
                     <div className="table-responsive">
@@ -415,5 +432,7 @@ ProfileForm.propTypes = {
     unit: PropTypes.string,
     price: PropTypes.string,
   }),
+  showPriceWarning: PropTypes.bool,
+  closeNotificationWarning: PropTypes.func,
 }
 export default ProfileForm;

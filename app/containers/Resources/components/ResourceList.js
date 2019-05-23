@@ -26,7 +26,9 @@ const ResourceList = ({
   closePriceModal,
   showPriceModal,
   showVanModelHandler,
+  showPriceWarning,
   priceList,
+  closeNotificationWarning,
 }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
@@ -55,6 +57,8 @@ const ResourceList = ({
                 showPriceModal={showPriceModal}
                 closePriceModal={() => closePriceModal()}
                 priceList={priceList}
+                showPriceWarning={showPriceWarning}
+                closeNotificationWarning={closeNotificationWarning}
               />
             </Modal>
           </div>
@@ -132,6 +136,8 @@ ResourceList.propTypes = {
     unit: PropTypes.string,
     price: PropTypes.string,
   }),
+  closeNotificationWarning: PropTypes.func,
+  showPriceWarning: PropTypes.bool,
 };
 
 export default ResourceList;
