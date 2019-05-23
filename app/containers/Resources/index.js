@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row, ButtonToolbar } from 'reactstrap';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
@@ -12,7 +12,7 @@ import injectReducer from 'utils/injectReducer';
 import ResourceList from './components/ResourceList';
 import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
-
+import Modal from '../../shared/Modal'
 
 import { onVanListLoad, onVanInfoSave } from './actions';
 import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
@@ -28,6 +28,8 @@ class ResourcesPage extends React.PureComponent {
   	this.state = {
       openModel: false,
       showPriceModal: false,
+      priceList: [],
+      confirmModal: false,
     };
   }
 
@@ -47,9 +49,13 @@ class ResourcesPage extends React.PureComponent {
   }
 
   modelToggle = () => {
-    this.setState((prevState) => ({
-      openModel: !prevState.openModel
-    }))
+    if (this.state.priceList && this.state.priceList.length > 0 ) {
+      this.setState({confirmModal: true})
+    } else {
+      this.setState((prevState) => ({
+        openModel: !prevState.openModel
+      }))
+    }
   }
 
   priceModalHandler = () => {
@@ -62,6 +68,26 @@ class ResourcesPage extends React.PureComponent {
     this.setState((prevState) => ({
       showPriceModal: !prevState.showPriceModal
     }))
+  };
+
+  priceInfoSaveHandler = (e) => {
+    // create a new item
+    const newItem = {
+      id: 1 + Math.random(),
+      unit: e.unit,
+      price: e.price,
+    };
+
+    this.setState((prevState) => ({
+      priceList: [...prevState.priceList, newItem],
+      showPriceModal: !prevState.showPriceModal
+    }))
+  };
+
+  toggleConfirm = () => {
+    this.setState({
+      confirmModal: false
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -76,6 +102,8 @@ class ResourcesPage extends React.PureComponent {
 
   render() {
     const { vanList } = this.props;
+    const Icon = <span className="lnr lnr-cross-circle modal__title-icon" />;
+
     return (
       <div>
         <Layout />
@@ -100,9 +128,41 @@ class ResourcesPage extends React.PureComponent {
                 priceModalHandler={this.priceModalHandler}
                 showPriceModal={this.state.showPriceModal}
                 closePriceModal={this.closePriceModal}
+                priceInfoSaveHandler={this.priceInfoSaveHandler}
+                priceList={this.state.priceList}
               />
             </Row>
           </Container>
+          <Modal
+            openModel={this.state.confirmModal}
+            modelToggle={() => this.toggleConfirm()}
+            className="modal-dialog--danger"
+          >
+            <div className="modal__header">
+              <button
+                className="lnr lnr-cross modal__close-btn"
+                type="button"
+                onClick={() => this.setState({confirmModal: false })} />
+              {Icon}
+              <h4 className="bold-text  modal__title">Do you want to close?</h4>
+            </div>
+            <div className="modal__body">
+              <p>Unsaved data</p>
+            </div>
+            <Row>
+              <div className="addEditModal__footer">
+                <ButtonToolbar className="form__button-toolbar">
+                  <button
+                    className="square btn btn-primary"
+                    type="submit"
+                    onClick={() => this.setState({confirmModal: false,  openModel: false, priceList: []})}
+                  >
+                    Confirm
+                  </button>
+                </ButtonToolbar>
+              </div>
+            </Row>
+          </Modal>
         </div>
       </div>
     );
