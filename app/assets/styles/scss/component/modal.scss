@@ -20,12 +20,13 @@
     input, textarea {
       border: 1px solid #f2f4f7;
       color: #646777;
-
+      .error {
+        border: 1px solid red;
+      }
       &:focus, &:active {
         outline: none;
-        border-color: $color-accent;
+        border-color: $input-field-hover-border-color;
       }
-
       &:hover {
 
         @include themify($themes) {
