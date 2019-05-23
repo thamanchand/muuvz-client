@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Row, Card, CardBody, Col, ButtonToolbar } from 'reactstrap';
+import { Button, Row, Card, CardBody, Col, ButtonToolbar, Table } from 'reactstrap';
 import { Form } from 'react-final-form';
 import { Field } from 'react-final-form-html5-validation'
+
+import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
+import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 
 import Error from '../../../shared/ErrorField';
 import toggleField from '../../../shared/ToggleField';
 import renderDropZoneMultipleField from '../../../shared/DropzoneMultipleFiles';
 import AddPrice from './AddPrice';
 import Modal from '../../../shared/Modal';
+
+const iconStyles = {
+  marginRight: '10px',
+};
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
@@ -22,6 +29,7 @@ const ProfileForm = ({
   openPriceModalHandler,
   showPriceModal,
   closePriceModal,
+  priceList,
 }) => (
   <Col md={12} lg={12}>
     <Card>
@@ -52,7 +60,7 @@ const ProfileForm = ({
               <Col md={3} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Brand</span>
-                  <div className="form__form-group-field">
+                  <div className="form__form-group-field error">
                     <Field
                       name="brand"
                       component="input"
@@ -330,6 +338,7 @@ const ProfileForm = ({
                   sm
                   openModel={showPriceModal}
                   closePriceModal={closePriceModal}
+                  showConfirm={priceList && priceList.length > 0 && true }
                 >
                   <AddPrice
                     onPriceInfoSave={onPriceInfoSave}
@@ -338,7 +347,41 @@ const ProfileForm = ({
                 </Modal>
               </div>
               <div className="container">
-                <h5 className="page-subhead subhead">No data </h5>
+                {priceList && !priceList.length > 0
+                  ?
+                  (
+                    <h5 className="page-subhead subhead">No data </h5>
+                  )
+                  : (
+                    <div className="table-responsive">
+                      <Table striped responsive>
+                        <thead>
+                          <tr>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {priceList && priceList.map(item => (
+                            <tr key={item.id}>
+                              <td>{item.unit}</td>
+                              <td>{item.price}</td>
+                              <td>
+                                <span style={iconStyles}>
+                                  <DeleteForeverIcon size="20" color="#ff4861" />
+                                </span>
+                                <span>
+                                  <SquareEditOutlineIcon size="20" color="#555555" />
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </div>
+                  )
+                }
               </div>
               <Row>
                 <div className="addEditModal__footer">
@@ -368,5 +411,11 @@ ProfileForm.propTypes = {
   openPriceModalHandler: PropTypes.func,
   showPriceModal: PropTypes.bool,
   closePriceModal: PropTypes.func,
+  priceList: PropTypes.arrayOf(PropTypes.shapeOf(
+    {
+      unit: PropTypes.string,
+      price: PropTypes.string,
+    }
+  )),
 }
 export default ProfileForm;
