@@ -38,3 +38,7 @@
 - Install validator
 - ErrorField component
 - utils/Validator.js
+
+
+## 23 May 2019
+- PriceList state management and Table UI
