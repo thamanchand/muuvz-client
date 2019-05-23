@@ -128,12 +128,10 @@ ResourceList.propTypes = {
     transmission: PropTypes.string,
     year: PropTypes.string,
   })).isRequired,
-  priceList: PropTypes.arrayOf(PropTypes.shapeOf(
-    {
-      unit: PropTypes.string,
-      price: PropTypes.string,
-    }
-  ))
+  priceList: PropTypes.shape({
+    unit: PropTypes.string,
+    price: PropTypes.string,
+  }),
 };
 
 export default ResourceList;

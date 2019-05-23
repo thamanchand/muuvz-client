@@ -411,11 +411,9 @@ ProfileForm.propTypes = {
   openPriceModalHandler: PropTypes.func,
   showPriceModal: PropTypes.bool,
   closePriceModal: PropTypes.func,
-  priceList: PropTypes.arrayOf(PropTypes.shapeOf(
-    {
-      unit: PropTypes.string,
-      price: PropTypes.string,
-    }
-  )),
+  priceList: PropTypes.shape({
+    unit: PropTypes.string,
+    price: PropTypes.string,
+  }),
 }
 export default ProfileForm;
