@@ -435,13 +435,15 @@ button:focus, button:active {
 
 .add__pricing-btn {
   float: right;
+  right: 30px;
   margin-top: -50px;
-  padding: 5px;
+  padding: 3px;
   background: #70C1B3;
   width: 112px;
   text-align: center;
   color: #FFF;
   cursor: pointer;
+  position: absolute;
 }
 
 .add__van-btn {
