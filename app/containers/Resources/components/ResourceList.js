@@ -26,6 +26,7 @@ const ResourceList = ({
   closePriceModal,
   showPriceModal,
   showVanModelHandler,
+  priceList,
 }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
@@ -53,6 +54,7 @@ const ResourceList = ({
                 openPriceModalHandler={priceModalHandler}
                 showPriceModal={showPriceModal}
                 closePriceModal={() => closePriceModal()}
+                priceList={priceList}
               />
             </Modal>
           </div>
@@ -60,37 +62,39 @@ const ResourceList = ({
             <span>Filter</span>
           </div>
         </div>
-        <Table striped responsive>
-          <thead>
-            <tr>
-              <th>Brand</th>
-              <th>Model</th>
-              <th>Year</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {vanList && vanList.map(item => (
-              <tr key={item.id}>
-                <td>{item.brand}</td>
-                <td>{item.model}</td>
-                <td>{formatDate(item.year)}</td>
-                <td>
-                  <Badge color="success">Available</Badge>
-                </td>
-                <td>
-                  <span style={iconStyles}>
-                    <DeleteForeverIcon size="20" color="#ff4861" />
-                  </span>
-                  <span>
-                    <SquareEditOutlineIcon size="20" color="#555555" />
-                  </span>
-                </td>
+        <div className="table-responsive">
+          <Table striped responsive>
+            <thead>
+              <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {vanList && vanList.map(item => (
+                <tr key={item.id}>
+                  <td>{item.brand}</td>
+                  <td>{item.model}</td>
+                  <td>{formatDate(item.year)}</td>
+                  <td>
+                    <Badge color="success">Available</Badge>
+                  </td>
+                  <td>
+                    <span style={iconStyles}>
+                      <DeleteForeverIcon size="20" color="#ff4861" />
+                    </span>
+                    <span>
+                      <SquareEditOutlineIcon size="20" color="#555555" />
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       </CardBody>
     </Card>
 
@@ -124,6 +128,12 @@ ResourceList.propTypes = {
     transmission: PropTypes.string,
     year: PropTypes.string,
   })).isRequired,
+  priceList: PropTypes.arrayOf(PropTypes.shapeOf(
+    {
+      unit: PropTypes.string,
+      price: PropTypes.string,
+    }
+  ))
 };
 
 export default ResourceList;
