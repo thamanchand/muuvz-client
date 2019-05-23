@@ -2,8 +2,6 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 import { Button } from 'reactstrap';
 import EyeIcon from 'mdi-react/EyeIcon';
-import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
-import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import renderCheckBoxField from '../../../shared/Checkbox/index';
@@ -21,9 +19,6 @@ const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) =>
         <div className="form__form-group">
           <span className="form__form-group-label">Username</span>
           <div className="form__form-group-field">
-            <div className="form__form-group-icon">
-              <AccountOutlineIcon />
-            </div>
             <Field
               name="identifier"
               component="input"
@@ -35,9 +30,6 @@ const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) =>
         <div className="form__form-group">
           <span className="form__form-group-label">Password</span>
           <div className="form__form-group-field">
-            <div className="form__form-group-icon">
-              <KeyVariantIcon />
-            </div>
             <Field
               name="password"
               component="input"
