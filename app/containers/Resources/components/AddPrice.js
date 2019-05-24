@@ -39,7 +39,7 @@ const AddPrice = ({ onPriceInfoSave }) => (
                     <Field
                       name="unit"
                       component="input"
-                      type="text"
+                      type="number"
                       placeholder="2"
                     />
                   </div>
@@ -54,7 +54,7 @@ const AddPrice = ({ onPriceInfoSave }) => (
                     <Field
                       name="price"
                       component="input"
-                      type="text"
+                      type="number"
                       placeholder="v3"
                     />
                   </div>
