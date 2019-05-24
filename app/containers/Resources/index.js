@@ -39,14 +39,15 @@ class ResourcesPage extends React.PureComponent {
   }
 
   vanInfoSaveHandler = (vanInfo) => {
-    const payload = vanInfo;
     if (!this.state.priceList.length > 0 ) {
       this.setState({
         showPriceWarning: true,
       })
 
     } else {
-      this.props.onVanInfoSave(payload);
+      const { priceList } = this.state;
+      // Dispatch action
+      this.props.onVanInfoSave(vanInfo, priceList);
     }
   }
 
@@ -150,6 +151,7 @@ class ResourcesPage extends React.PureComponent {
             openModel={this.state.confirmModal}
             modelToggle={() => this.toggleConfirm()}
             className="modal-dialog--danger"
+            color="danger"
           >
             <div className="modal__header">
               <button
