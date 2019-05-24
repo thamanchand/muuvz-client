@@ -25,9 +25,10 @@ export const onVanListLoadFailure = (error) => ({
   error
 });
 
-export const onVanInfoSave = (payload) => ({
+export const onVanInfoSave = (vanInfo, pricePayload) => ({
   type: ON_VAN_SAVE,
-  payload,
+  vanInfo,
+  pricePayload,
 });
 
 export const onVanInfoSaveSuccess = () => ({
