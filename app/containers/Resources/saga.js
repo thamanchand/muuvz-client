@@ -16,6 +16,7 @@ import {
 } from './actions';
 
 import { ON_VANLIST_LOAD, ON_VAN_SAVE } from './constants';
+import { filterInt } from '../utils';
 
 export function* vanLoadWatcher() {
   try {
@@ -30,14 +31,26 @@ export function* vanLoadWatcher() {
 }
 
 export function* vanInfoSaveWatcher(action) {
-  console.log("vaninfosave", action);
+  const { vanInfo, pricePayload } = action;
   try {
     const requestURL = 'http://localhost:1337/vans';
-    const body = action.payload;
+    let body = vanInfo;
     const response = yield call(request, requestURL, { method: 'POST', body });
 
     if (response) {
-      yield put(onVanInfoSaveSuccess());
+      const { id } = response;
+      const pricingRequestURL = 'http://localhost:1337/pricings';
+
+      // prepare price payload
+      body = pricePayload.map((item) => ({
+        price: filterInt(item.price),
+        unit: filterInt(item.unit),
+        van: id,
+      }));
+      const priceReponse = yield call(request, pricingRequestURL, { method: 'POST', body });
+      if (priceReponse) {
+        yield put(onVanInfoSaveSuccess());
+      }
     }
   } catch(error) {
     yield put(onVanInfoSaveFailed(error));
