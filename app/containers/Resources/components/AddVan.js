@@ -23,7 +23,7 @@ const onSubmit = async values => {
   console.log("van info submitted", values)
 }
 
-const ProfileForm = ({
+const AddVanForm = ({
   onSaveVan,
   onPriceInfoSave,
   openPriceModalHandler,
@@ -422,17 +422,17 @@ const ProfileForm = ({
   </Col>
 );
 
-ProfileForm.propTypes = {
+AddVanForm.propTypes = {
   onSaveVan: PropTypes.func,
   onPriceInfoSave: PropTypes.func,
   openPriceModalHandler: PropTypes.func,
   showPriceModal: PropTypes.bool,
   closePriceModal: PropTypes.func,
-  priceList: PropTypes.shape({
+  priceList: PropTypes.arrayOf(PropTypes.shape({
     unit: PropTypes.string,
     price: PropTypes.string,
-  }),
+  })),
   showPriceWarning: PropTypes.bool,
   closeNotificationWarning: PropTypes.func,
 }
-export default ProfileForm;
+export default AddVanForm;
