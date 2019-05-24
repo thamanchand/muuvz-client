@@ -8,3 +8,10 @@ export function formatNumber(num) {
 export function formatDate(date) {
   return moment(date).format('YYYY-MM-DD')
 }
+
+// parse string to int
+export const filterInt = (value) => {
+  if (/^(-|\+)?(\d+|Infinity)$/.test(value))
+    return Number(value);
+  return NaN;
+}
