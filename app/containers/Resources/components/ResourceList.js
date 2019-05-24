@@ -132,10 +132,10 @@ ResourceList.propTypes = {
     transmission: PropTypes.string,
     year: PropTypes.string,
   })).isRequired,
-  priceList: PropTypes.shape({
+  priceList: PropTypes.arrayOf(PropTypes.shape({
     unit: PropTypes.string,
     price: PropTypes.string,
-  }),
+  })),
   closeNotificationWarning: PropTypes.func,
   showPriceWarning: PropTypes.bool,
 };
