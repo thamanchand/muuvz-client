@@ -42,3 +42,7 @@
 
 ## 23 May 2019
 - PriceList state management and Table UI
+
+
+## 24 May 2019
+- Price post action, saga
