@@ -10,6 +10,7 @@ import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 import Error from '../../../shared/ErrorField';
 import toggleField from '../../../shared/ToggleField';
 import renderDropZoneMultipleField from '../../../shared/DropzoneMultipleFiles';
+
 import AddPrice from './AddPrice';
 import Modal from '../../../shared/Modal';
 
@@ -319,6 +320,7 @@ const AddVanForm = ({
                     <Field
                       name='files'
                       component={renderDropZoneMultipleField}
+                      customHeight
                     />
                   </div>
                 </div>
@@ -429,8 +431,8 @@ AddVanForm.propTypes = {
   showPriceModal: PropTypes.bool,
   closePriceModal: PropTypes.func,
   priceList: PropTypes.arrayOf(PropTypes.shape({
-    unit: PropTypes.string,
-    price: PropTypes.string,
+    unit: PropTypes.number,
+    price: PropTypes.number,
   })),
   showPriceWarning: PropTypes.bool,
   closeNotificationWarning: PropTypes.func,
