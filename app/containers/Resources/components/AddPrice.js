@@ -14,6 +14,9 @@ const onSubmit = async values => {
 
 const isNumber = value => Number.isNaN(Number(value));
 
+const parse = value => (Number.isNaN(parseFloat(value)) ? "" : parseFloat(value));
+
+
 const AddPrice = ({ onPriceInfoSave }) => (
   <Col md={12} lg={12}>
     <Card>
@@ -39,8 +42,9 @@ const AddPrice = ({ onPriceInfoSave }) => (
                     <Field
                       name="unit"
                       component="input"
-                      type="number"
+                      type="text"
                       placeholder="2"
+                      parse={parse}
                     />
                   </div>
                   <Error name="unit" />
@@ -54,8 +58,9 @@ const AddPrice = ({ onPriceInfoSave }) => (
                     <Field
                       name="price"
                       component="input"
-                      type="number"
+                      type="text"
                       placeholder="v3"
+                      parse={parse}
                     />
                   </div>
                   <Error name="price" />
