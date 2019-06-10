@@ -5,6 +5,9 @@ import {
   ON_VAN_SAVE,
   ON_VAN_SAVE_SUCCESS,
   ON_VAN_SAVE_FAILED,
+  ON_PRICE_SAVE,
+  ON_PRICE_SAVE_SUCCESS,
+  ON_PRICE_SAVE_FAILED,
 } from './constants';
 /**
  * Sends the request to the API
@@ -37,5 +40,19 @@ export const onVanInfoSaveSuccess = () => ({
 
 export const onVanInfoSaveFailed = (error) => ({
   type: ON_VAN_SAVE_FAILED,
+  error
+});
+
+
+export const onPriceInfoSave = () => ({
+  type: ON_PRICE_SAVE,
+});
+
+export const onPriceInfoSaveSuccess = () => ({
+  type: ON_PRICE_SAVE_SUCCESS
+});
+
+export const onPriceInfoSaveFailed = (error) => ({
+  type: ON_PRICE_SAVE_FAILED,
   error
 });
