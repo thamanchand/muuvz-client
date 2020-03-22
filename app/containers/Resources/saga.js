@@ -13,9 +13,16 @@ import {
   onVanListLoadFailure,
   onVanInfoSaveSuccess,
   onVanInfoSaveFailed,
+  onResourceDeleteSuccess,
+  onResourceDeleteFailed,
 } from './actions';
 
-import { ON_VANLIST_LOAD, ON_VAN_SAVE } from './constants';
+import {
+  ON_VANLIST_LOAD,
+  ON_VAN_SAVE,
+  ON_RESOURCE_DELETE,
+} from './constants';
+
 import { filterInt } from '../utils';
 
 export function* vanLoadWatcher() {
@@ -55,9 +62,27 @@ export function* vanInfoSaveWatcher(action) {
   } catch(error) {
     yield put(onVanInfoSaveFailed(error));
   }
-}
+};
+
+export function* vanResourceDeleteWatcher(action) {
+  const { resourceId } = action;
+  console.log("resourceId", resourceId);
+  const requestURL = 'http://localhost:1337/vans';
+  const deleteURL = `${requestURL}${'/'}${resourceId}`
+  try {
+    const deleteResponse = yield call(request, deleteURL, { method: 'DELETE' });
+    const { _id : deletedResourceId} = deleteResponse;
+    if (deletedResourceId) {
+      yield put(onResourceDeleteSuccess(deletedResourceId));
+    }
+  } catch(error) {
+    yield put(onResourceDeleteFailed(error));
+  }
+};
+
 
 export default function* defaultSaga() {
   yield takeLatest(ON_VANLIST_LOAD, vanLoadWatcher);
   yield takeLatest(ON_VAN_SAVE, vanInfoSaveWatcher);
+  yield takeLatest(ON_RESOURCE_DELETE, vanResourceDeleteWatcher);
 }
