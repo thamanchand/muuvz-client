@@ -15,7 +15,7 @@ import Layout from '../Layout/index';
 import Modal from '../../shared/Modal'
 import DeleteResourceModal from './components/DeleteResourceModal';
 
-import { onVanListLoad, onVanInfoSave } from './actions';
+import { onVanListLoad, onVanInfoSave, onResourceDelete } from './actions';
 import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
 import saga from './saga';
 import reducer from './reducers';
@@ -33,6 +33,7 @@ class ResourcesPage extends React.PureComponent {
       confirmModal: false,
       showPriceWarning: false,
       isDeleteModalShow: false,
+      deleteResourceId: null,
     };
   }
 
@@ -114,20 +115,23 @@ class ResourcesPage extends React.PureComponent {
     }
   }
 
-  deleteResourceHandler = () => {
+  deleteResourceHandler = (resourceId) => {
     this.setState({
       isDeleteModalShow: true,
+      deleteResourceId: resourceId,
     });
   };
 
   deleteModalCloseHandler = () => {
     this.setState({
       isDeleteModalShow: false,
+      deleteResourceId: null,
     });
   };
 
   deleteResourceAction = () => {
     this.setState({ isDeleteModalShow: false });
+    this.props.onResourceDelete(this.state.deleteResourceId);
   };
 
   render() {
@@ -230,6 +234,7 @@ ResourcesPage.propTypes = {
   })).isRequired,
   onVanInfoSave: PropTypes.func,
   vanInfoSavedCompleted: PropTypes.bool,
+  onResourceDelete: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -240,6 +245,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   onVanListLoad: bindActionCreators(onVanListLoad, dispatch),
   onVanInfoSave: bindActionCreators(onVanInfoSave, dispatch),
+  onResourceDelete: bindActionCreators(onResourceDelete, dispatch),
 });
 
 const withConnect = connect(
