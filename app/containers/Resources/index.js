@@ -13,6 +13,7 @@ import ResourceList from './components/ResourceList';
 import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
 import Modal from '../../shared/Modal'
+import DeleteResourceModal from './components/DeleteResourceModal';
 
 import { onVanListLoad, onVanInfoSave } from './actions';
 import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
@@ -31,6 +32,7 @@ class ResourcesPage extends React.PureComponent {
       priceList: [],
       confirmModal: false,
       showPriceWarning: false,
+      isDeleteModalShow: false,
     };
   }
 
@@ -112,6 +114,21 @@ class ResourcesPage extends React.PureComponent {
     }
   }
 
+  deleteResourceHandler = () => {
+    this.setState({
+      isDeleteModalShow: true,
+    });
+  };
+
+  deleteModalCloseHandler = () => {
+    this.setState({
+      isDeleteModalShow: false,
+    });
+  };
+
+  deleteResourceAction = () => {
+    this.setState({ isDeleteModalShow: false });
+  };
 
   render() {
     const { vanList } = this.props;
@@ -119,6 +136,11 @@ class ResourcesPage extends React.PureComponent {
     return (
       <div>
         <Layout />
+        <DeleteResourceModal
+          show={this.state.isDeleteModalShow}
+          onClose={this.deleteModalCloseHandler}
+          deleteResourceAction={this.deleteResourceAction}
+        />
         <div className="container__wrap">
           <Container className="dashboard container">
             <Row>
@@ -144,6 +166,7 @@ class ResourcesPage extends React.PureComponent {
                 priceList={this.state.priceList}
                 showPriceWarning={this.state.showPriceWarning}
                 closeNotificationWarning={this.onCloseNotificationWarning}
+                deleteResourceHandler={this.deleteResourceHandler}
               />
             </Row>
           </Container>
