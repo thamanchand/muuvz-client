@@ -8,6 +8,9 @@ import {
   ON_PRICE_SAVE,
   ON_PRICE_SAVE_SUCCESS,
   ON_PRICE_SAVE_FAILED,
+  ON_RESOURCE_DELETE,
+  ON_RESOURCE_DELETE_SUCCESS,
+  ON_RESOURCE_DELETE_FAILED,
 } from './constants';
 /**
  * Sends the request to the API
@@ -54,5 +57,21 @@ export const onPriceInfoSaveSuccess = () => ({
 
 export const onPriceInfoSaveFailed = (error) => ({
   type: ON_PRICE_SAVE_FAILED,
+  error
+});
+
+
+export const onResourceDelete = (resourceId) => ({
+  type: ON_RESOURCE_DELETE,
+  resourceId
+});
+
+export const onResourceDeleteSuccess = (deletedResourceId) => ({
+  type: ON_RESOURCE_DELETE_SUCCESS,
+  deletedResourceId,
+});
+
+export const onResourceDeleteFailed = (error) => ({
+  type: ON_RESOURCE_DELETE_FAILED,
   error
 });
