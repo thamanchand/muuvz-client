@@ -13,6 +13,9 @@ import {
   ON_VAN_SAVE,
   ON_VAN_SAVE_SUCCESS,
   ON_VAN_SAVE_FAILED,
+  ON_RESOURCE_DELETE,
+  ON_RESOURCE_DELETE_SUCCESS,
+  ON_RESOURCE_DELETE_FAILED,
 } from './constants';
 
 
@@ -46,6 +49,25 @@ function vanListReducer(state = initialState, action) {
         .set('isVanInfoSaved', true);
 
     case ON_VAN_SAVE_FAILED:
+      return state
+        .set('error', fromJS(action.error))
+        .set('isVanInfoSaved', false);
+
+    case ON_RESOURCE_DELETE:
+      return state;
+
+    case ON_RESOURCE_DELETE_SUCCESS:
+      return state.deleteIn(
+        [
+          'vanList',
+          state
+            .get('vanList')
+            .findIndex(
+              van => van.get('_id') === fromJS(action.deletedResourceId)),
+        ],
+      );
+
+    case ON_RESOURCE_DELETE_FAILED:
       return state
         .set('error', fromJS(action.error))
         .set('isVanInfoSaved', false);
