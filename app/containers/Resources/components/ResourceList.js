@@ -29,6 +29,7 @@ const ResourceList = ({
   showPriceWarning,
   priceList,
   closeNotificationWarning,
+  deleteResourceHandler,
 }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
@@ -88,7 +89,10 @@ const ResourceList = ({
                   </td>
                   <td>
                     <span style={iconStyles}>
-                      <DeleteForeverIcon size="20" color="#ff4861" />
+                      <DeleteForeverIcon
+                        size="20" color="#ff4861"
+                        onClick={() => deleteResourceHandler(item.id)}
+                      />
                     </span>
                     <span>
                       <SquareEditOutlineIcon size="20" color="#555555" />
@@ -138,6 +142,7 @@ ResourceList.propTypes = {
   })),
   closeNotificationWarning: PropTypes.func,
   showPriceWarning: PropTypes.bool,
+  deleteResourceHandler: PropTypes.func,
 };
 
 export default ResourceList;
