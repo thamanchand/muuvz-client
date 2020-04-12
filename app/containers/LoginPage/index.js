@@ -6,6 +6,7 @@ import { bindActionCreators, compose } from 'redux';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 
 import FacebookIcon from 'mdi-react/FacebookIcon';
 import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
@@ -14,8 +15,11 @@ import Footer from '../HomePage/components/Footer';
 import logo from '../../assets/images/muverz.svg';
 
 import saga from './saga';
+import reducer from './reducer';
+
 import { onLoginSubmit } from './actions';
 
+const key = 'loginPage';
 
 class LoginPage extends React.PureComponent {
   constructor() {
@@ -85,9 +89,11 @@ const mapDispatchToProps = (dispatch) => ({
 
 const withConnect = connect(null, mapDispatchToProps);
 
+const withReducer = injectReducer({ key, reducer });
 const withSaga = injectSaga({ key: 'authPage', saga });
 
 export default compose(
   withSaga,
+  withReducer,
   withConnect,
 )(LoginPage);
