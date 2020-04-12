@@ -63,21 +63,22 @@ class HomePage extends React.Component {
                         {this.state.isLoggedIn ?
                           (<React.Fragment>
                             <li className="nav-item landing__navbar-item">
-                              <Link className="nav-link" to="/login">
-                                Login
-                              </Link>
-                            </li>
-                            <li className="nav-item landing__navbar-item">
-                              <Link className="btn btn-danger btn-sm" to="/register">
-                                Register
-                              </Link>
+                              <button className="btn btn-danger btn-sm" type="button" onClick={this.logout}>
+                              Logout
+                              </button>
+
                             </li>
                           </React.Fragment>
                           ) : (
                             <React.Fragment>
                               <li className="nav-item landing__navbar-item">
-                                <Link className="btn btn-danger btn-sm" to="/logout">
-                                  Logout
+                                <Link className="nav-link" to="/login">
+                                  Login
+                                </Link>
+                              </li>
+                              <li className="nav-item landing__navbar-item">
+                                <Link className="btn btn-danger btn-sm" to="/register">
+                                  Register
                                 </Link>
                               </li>
                             </React.Fragment>
