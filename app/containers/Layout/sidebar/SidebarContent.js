@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import SidebarLink from './SidebarLink';
+import auth from '../../../utils/auth';
 
 class SidebarContent extends Component {
   static propTypes = {
@@ -44,8 +45,7 @@ class SidebarContent extends Component {
           <SidebarLink
             title="Logout"
             icon="exit"
-            route="/dashboard/account"
-            onClick={this.hideSidebar}
+            onClick={auth.clearAppStorage()}
           />
         </ul>
       </div>
