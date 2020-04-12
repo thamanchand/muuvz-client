@@ -16,6 +16,7 @@ import Resources from 'containers/Resources';
 import ProfilePage from 'containers/Profile';
 import AccountPage from 'containers/AccountPage';
 
+import PrivateRoute from 'containers/PrivateRoute';
 import ConnectPage from 'containers/ConnectPage';
 import SecurePage from 'containers/SecurePage';
 import ProtectedRoute from 'containers/ProtectedRoute';
@@ -31,14 +32,14 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/listing" component={VanListing} />
-          <Route exact path="/dashboard/booking" component={Booking} />
-          <Route exact path="/dashboard/resources" component={Resources} />
-          <Route exact path="/dashboard/profile" component={ProfilePage} />
-          <Route exact path="/dashboard/account" component={AccountPage} />
+          <PrivateRoute exact path="/dashboard/booking" component={Booking} />
+          <PrivateRoute exact path="/dashboard/resources" component={Resources} />
+          <PrivateRoute exact path="/dashboard/profile" component={ProfilePage} />
+          <PrivateRoute exact path="/dashboard/account" component={AccountPage} />
           <Route exact path="/connect/:provider" component={ConnectPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
-          <ProtectedRoute exact path="/:foo" component={SecurePage} />
+          <ProtectedRoute exact path="/dashboard/:foo" component={SecurePage} />
           <Route component={NotFoundPage} />
         </Switch>
       </main>
