@@ -17,9 +17,10 @@ import { ON_VANLIST_LOAD } from './contants';
 
 export function* vanLoadWatcher() {
   try {
-    const requestURL = 'http://localhost:1337/vans';
+    const requestURL = 'http://localhost:1337/resources';
     const vanList = yield call(request, requestURL, { method: 'GET' });
     if (vanList) {
+      console.log("vanLIST", JSON.stringify(vanList, null, 2))
       yield put(onVanListLoadSuccess(vanList));
     }
   } catch(error) {
