@@ -27,7 +27,7 @@ import { filterInt } from '../utils';
 
 export function* vanLoadWatcher() {
   try {
-    const requestURL = 'http://localhost:1337/vans';
+    const requestURL = 'http://localhost:1337/resources';
     const vanList = yield call(request, requestURL, { method: 'GET' });
     if (vanList) {
       yield put(onVanListLoadSuccess(vanList));
@@ -39,22 +39,38 @@ export function* vanLoadWatcher() {
 
 export function* vanInfoSaveWatcher(action) {
   const { vanInfo, pricePayload } = action;
+  // const { path, preview } = action.vanInfo.files[0];
+
   try {
-    const requestURL = 'http://localhost:1337/vans';
+    const requestURL = 'http://localhost:1337/resources';
     let body = vanInfo;
     const response = yield call(request, requestURL, { method: 'POST', body });
 
     if (response) {
-      const { id } = response;
+      // const { id : vanId } = response;
       const pricingRequestURL = 'http://localhost:1337/pricings';
 
       // prepare price payload
       body = pricePayload.map((item) => ({
         price: filterInt(item.price),
         unit: filterInt(item.unit),
-        van: id,
       }));
-      const priceReponse = yield call(request, pricingRequestURL, { method: 'POST', body });
+      const priceReponse = yield call(request, pricingRequestURL, { method: 'POST', ...body });
+      // yield delay(1000);
+      // const imageUploadURL = `${baseURL}${'upload'}`;
+      //
+      // body = new FormData();
+      // body.append('files', action.vanInfo.files[0]);
+      // body.append('refId', '5e7716ee36628e3dfd2d9555');
+      // body.append('ref', 'van');
+      // body.append('field', 'cover');
+      //
+      // const uploadReponse = yield call(request, imageUploadURL, {
+      //   method: 'POST',
+      //   body,
+      // });
+      // console.log("uploadReponse", uploadReponse);
+
       if (priceReponse) {
         yield put(onVanInfoSaveSuccess());
       }
@@ -66,8 +82,7 @@ export function* vanInfoSaveWatcher(action) {
 
 export function* vanResourceDeleteWatcher(action) {
   const { resourceId } = action;
-  console.log("resourceId", resourceId);
-  const requestURL = 'http://localhost:1337/vans';
+  const requestURL = 'http://localhost:1337/resources';
   const deleteURL = `${requestURL}${'/'}${resourceId}`
   try {
     const deleteResponse = yield call(request, deleteURL, { method: 'DELETE' });
