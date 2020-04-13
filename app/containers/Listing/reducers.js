@@ -1,36 +1,36 @@
 /*
  *
- * VanListpage reducer
+ * ResroucePage reducer
  *
  */
 
 import { fromJS } from 'immutable';
 
 import {
-  ON_VANLIST_LOAD,
-  ON_VANLIST_LOAD_SUCCESS,
-  ON_VANLIST_LOAD_FAILURE,
-} from './contants';
+  ON_SEARCH,
+  ON_SEARCH_SUCCESS,
+  ON_SEARCH_FAILED,
+} from './constants';
 
 
 export const initialState = fromJS({
-  vanList: [],
+  searchResult: [],
   loading: false,
 });
 
-function vanListReducer(state = initialState, action) {
+function searchItemReducer(state = initialState, action) {
   switch (action.type) {
-    case ON_VANLIST_LOAD:
+    case ON_SEARCH:
       return state
-        .set('vanList', fromJS([]))
+        .set('searchResult', fromJS([]))
         .set('loading', true);
 
-    case ON_VANLIST_LOAD_SUCCESS:
+    case ON_SEARCH_SUCCESS:
       return state
-        .set('vanList', action.vanList)
+        .set('searchResult', fromJS(action.searchResult))
         .set('isLoading', false);
 
-    case ON_VANLIST_LOAD_FAILURE:
+    case ON_SEARCH_FAILED:
       return state.set('error', fromJS(action.error))
 
     default:
@@ -38,4 +38,4 @@ function vanListReducer(state = initialState, action) {
   }
 }
 
-export default vanListReducer;
+export default searchItemReducer;
