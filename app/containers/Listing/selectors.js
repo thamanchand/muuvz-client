@@ -6,10 +6,10 @@ import { initialState } from './reducers';
  */
 
 // VanListPage domain
-export const selectVans = state => state.listingPage || initialState;
+export const selectResourceDomain = state => state.listingPage || initialState;
 
-export const makeSelectVans = () =>
+export const selectResourcesSelector = () =>
   createSelector(
-    selectVans,
-    subState => subState.get('vanList')
+    selectResourceDomain,
+    subState => subState.get('searchResult').toJS()
   );
