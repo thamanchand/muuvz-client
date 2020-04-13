@@ -1,23 +1,24 @@
 import {
-  ON_VANLIST_LOAD,
-  ON_VANLIST_LOAD_SUCCESS,
-  ON_VANLIST_LOAD_FAILURE,
-} from './contants';
+  ON_SEARCH,
+  ON_SEARCH_SUCCESS,
+  ON_SEARCH_FAILED,
+} from './constants';
 /**
  * Sends the request to the API
  * @return {string}
  */
 
-export const onVanListLoad = () => ({
-  type: ON_VANLIST_LOAD,
+export const onSearch = (searchQuery) => ({
+  type: ON_SEARCH,
+  searchQuery,
 });
 
-export const onVanListLoadSuccess = (vanList) => ({
-  type: ON_VANLIST_LOAD_SUCCESS,
-  vanList,
+export const onSearchSuccess = (searchResult) => ({
+  type: ON_SEARCH_SUCCESS,
+  searchResult,
 });
 
-export const onVanListLoadFailure = (error) => ({
-  type: ON_VANLIST_LOAD_FAILURE,
+export const onSearchFailed = (error) => ({
+  type: ON_SEARCH_FAILED,
   error
 });
