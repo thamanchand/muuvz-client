@@ -4,17 +4,11 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
 
 // Utils
 import auth from 'utils/auth';
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
 
 import Header from './components/Header';
 import Features from './components/Features';
@@ -22,14 +16,6 @@ import Features from './components/Features';
 import Footer from './components/Footer';
 import Testimonials from './components/Testimonials';
 import logo from '../../assets/images/muverz.svg';
-
-import { searchResultSelector } from './selectors';
-import { onSearch } from '../Listing/actions';
-
-import saga from './saga';
-import reducer from './reducer';
-
-const key = 'searchQuery';
 
 class HomePage extends React.Component {
   state = { isLoggedIn: false }
@@ -47,7 +33,7 @@ class HomePage extends React.Component {
   }
 
   onSearch = (seachParams) => {
-    this.props.onSearch(seachParams);
+    window.localStorage.setItem('searchQuery', JSON.stringify(seachParams));
   }
 
   render() {
@@ -123,28 +109,4 @@ class HomePage extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  resourceList: searchResultSelector(),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSearch: bindActionCreators(onSearch, dispatch)
-});
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-const withReducer = injectReducer({ key, reducer });
-const withSaga = injectSaga({ key, saga });
-
-HomePage.propTypes = {
-  onSearch: PropTypes.func,
-}
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(HomePage);
+export default HomePage;
