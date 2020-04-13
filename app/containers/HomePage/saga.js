@@ -12,12 +12,11 @@ import  history from '../../utils/history';
 import {
   onSearchSuccess,
   onSearchFailed,
-} from './actions';
+} from '../Listing/actions';
 
 import {
   ON_SEARCH,
-
-} from './constants';
+} from '../Listing/constants';
 
 const baseURL = "http://localhost:1337/";
 
