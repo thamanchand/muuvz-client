@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Row, Container } from 'reactstrap';
 
-import Search from './Search';
+import Search from '../../../shared/SearchForm';
 
 import bgImage from '../../../assets/images/landing/header_bg.png';
 import move from '../../../assets/images/landing/move.svg';
 
-const Header = () => (
+const Header = ({ onSearch }) => (
   <div
     className="landing__header"
     style={{ backgroundImage: `url(${bgImage})` }}
@@ -29,7 +30,10 @@ const Header = () => (
           <div className="search-wrapper">
             <div className="card">
               <div className="card-body">
-                <Search />
+                <Search
+                  onSearch={onSearch}
+                  disabled
+                />
               </div>
             </div>
           </div>
@@ -42,4 +46,7 @@ const Header = () => (
   </div>
 );
 
+Header.propTypes = {
+  onSearch: PropTypes.func,
+}
 export default Header;
