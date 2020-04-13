@@ -3,9 +3,6 @@ import DatePicker from 'react-datepicker';
 import PropTypes from 'prop-types';
 
 class DateTimePickerField extends PureComponent {
-  static propTypes = {
-    onChange: PropTypes.func.isRequired,
-  };
 
   constructor(props) {
     super(props);
@@ -15,15 +12,16 @@ class DateTimePickerField extends PureComponent {
   }
 
   handleChange = date => {
-    const { onChange } = this.props;
+    const { input } = this.props;
     this.setState({
       startDate: date,
     });
-    onChange(date);
+    input.onChange(date);
   };
 
   render() {
     const { startDate } = this.state;
+    const { disabled } = this.props;
 
     return (
       <div className="date-picker">
@@ -36,15 +34,24 @@ class DateTimePickerField extends PureComponent {
           dateFormat="MMMM d, yyyy h:mm aa"
           dropDownMode="select"
           defaultValue="2019"
+          disabled={disabled}
         />
       </div>
     );
   }
 }
 
+DateTimePickerField.propTypes = {
+  input: PropTypes.shape({
+    onChange: PropTypes.func,
+    name: PropTypes.string,
+  }).isRequired,
+  disabled: PropTypes.bool
+}
+
 const renderDateTimePickerField = props => {
-  const { input } = props;
-  return <DateTimePickerField {...input} />;
+  const { input, disabled, meta } = props;
+  return <DateTimePickerField input={input} disabled={disabled} meta={meta} />;
 };
 
 renderDateTimePickerField.propTypes = {
@@ -52,6 +59,8 @@ renderDateTimePickerField.propTypes = {
     onChange: PropTypes.func,
     name: PropTypes.string,
   }).isRequired,
+  disabled: PropTypes.bool.isRequired,
+  meta: PropTypes.object,
 };
 
 export default renderDateTimePickerField;
