@@ -5,6 +5,8 @@ import {
   put,
   takeLatest,
   take,
+  cancel,
+  fork
 } from 'redux-saga/effects';
 
 // Utils
@@ -29,8 +31,11 @@ export function* submitForm(action) {
         call(auth.setToken, response.jwt, body.rememberMe),
         call(auth.setUserInfo, response.user, body.rememberMe),
       ]);
+      yield call(forwardTo, '/');
+      const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
+      yield cancel(submitWatcher);
       yield put(onLoginSubmitSuccess());
-      yield call(forwardTo, '/')
+
     }
   } catch(error) {
     yield put(onLoginSubmitFailed());
