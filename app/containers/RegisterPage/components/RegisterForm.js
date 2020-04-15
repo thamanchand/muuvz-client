@@ -1,9 +1,6 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
-import { Button } from 'reactstrap';
-import EyeIcon from 'mdi-react/EyeIcon';
-import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
-import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
+
 import PropTypes from 'prop-types';
 
 const onSubmit = () => new Promise(resolve => {
@@ -31,7 +28,7 @@ Error.propTypes = {
 };
 
 
-const RegisterForm = ({showPasswordHandler, onRegisterHandler, showPassword}) => (
+const RegisterForm = ({ onRegisterHandler }) => (
   <Form
     onSubmit={onSubmit}
     validate={values => { // validate both passowrds are same
@@ -58,9 +55,6 @@ const RegisterForm = ({showPasswordHandler, onRegisterHandler, showPassword}) =>
         <div className="form__form-group">
           <span className="form__form-group-label">Username</span>
           <div className="form__form-group-field">
-            <div className="form__form-group-icon">
-              <AccountOutlineIcon />
-            </div>
             <Field
               name="username"
               component="input"
@@ -68,26 +62,18 @@ const RegisterForm = ({showPasswordHandler, onRegisterHandler, showPassword}) =>
               placeholder="hikenen"
             />
           </div>
-          <Error name="username" />
+          <Error name="identifier" />
         </div>
+
         <div className="form__form-group">
           <span className="form__form-group-label">Password</span>
           <div className="form__form-group-field">
-            <div className="form__form-group-icon">
-              <KeyVariantIcon />
-            </div>
             <Field
               name="password"
               component="input"
-              type={showPassword ? 'text' : 'password'}
+              type='password'
               placeholder="Password"
             />
-            <button
-              type="button"
-              className={`form__form-group-button${showPasswordHandler ? ' active' : ''}`}
-              onClick={showPasswordHandler}
-            ><EyeIcon />
-            </button>
           </div>
           <Error name="password" />
         </div>
@@ -95,21 +81,12 @@ const RegisterForm = ({showPasswordHandler, onRegisterHandler, showPassword}) =>
         <div className="form__form-group">
           <span className="form__form-group-label">Re-Password</span>
           <div className="form__form-group-field">
-            <div className="form__form-group-icon">
-              <KeyVariantIcon />
-            </div>
             <Field
               name="confirmPassword"
               component="input"
-              type={showPassword ? 'text' : 'password'}
+              type='password'
               placeholder="Password"
             />
-            <button
-              type="button"
-              className={`form__form-group-button${showPasswordHandler ? ' active' : ''}`}
-              onClick={showPasswordHandler}
-            ><EyeIcon />
-            </button>
 
           </div>
           <Error name="confirmPassword" />
@@ -118,9 +95,6 @@ const RegisterForm = ({showPasswordHandler, onRegisterHandler, showPassword}) =>
         <div className="form__form-group">
           <span className="form__form-group-label">Email</span>
           <div className="form__form-group-field">
-            <div className="form__form-group-icon">
-              <AccountOutlineIcon />
-            </div>
             <Field
               name="email"
               component="input"
@@ -132,7 +106,7 @@ const RegisterForm = ({showPasswordHandler, onRegisterHandler, showPassword}) =>
         </div>
 
         <div className="account__btns">
-          <Button className="btn btn-primary" type="submit" onClick={() => onRegisterHandler(values)}>Register</Button>
+          <button className="square btn btn-success" type="submit" onClick={() => onRegisterHandler(values)}>Register</button>
         </div>
 
       </form>
@@ -141,8 +115,6 @@ const RegisterForm = ({showPasswordHandler, onRegisterHandler, showPassword}) =>
 );
 
 RegisterForm.propTypes = {
-  showPassword: PropTypes.bool.isRequired,
-  showPasswordHandler: PropTypes.func,
   onRegisterHandler: PropTypes.func,
 };
 
