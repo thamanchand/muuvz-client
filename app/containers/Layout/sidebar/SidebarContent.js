@@ -45,7 +45,7 @@ class SidebarContent extends Component {
           <SidebarLink
             title="Logout"
             icon="exit"
-            onClick={auth.clearAppStorage()}
+            onClick={() => auth.clearAppStorage()}
           />
         </ul>
       </div>
