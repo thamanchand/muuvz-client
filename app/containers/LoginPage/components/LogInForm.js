@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
-import { Button } from 'reactstrap';
 import EyeIcon from 'mdi-react/EyeIcon';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -44,7 +43,7 @@ const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) =>
             </button>
           </div>
           <div className="account__forgot-password">
-            <a href="/">Forgot a password?</a>
+            <a href="/auth/forgot-password">Forgot a password?</a>
           </div>
         </div>
         <div className="form__form-group">
@@ -57,8 +56,8 @@ const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) =>
           </div>
         </div>
         <div className="account__btns">
-          <Button className="btn btn-primary" type="submit" onClick={() => onLoginSubmitHandler(values)}>Sign In</Button>
-          <Link className="btn btn-outline-primary account__btn" to="/register">Create
+          <button className="square btn btn-success" type="submit" onClick={() => onLoginSubmitHandler(values)}>Sign In</button>
+          <Link className="square btn btn-primary" to="/register">Create
             Account
           </Link>
         </div>
