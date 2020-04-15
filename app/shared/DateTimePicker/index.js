@@ -21,14 +21,14 @@ class DateTimePickerField extends PureComponent {
 
   render() {
     const { startDate } = this.state;
-    const { disabled } = this.props;
-
+    const { disabled, input } = this.props;
+    const initialDate = input.value ? Date.parse(input.value) : startDate;
     return (
       <div className="date-picker">
         <DatePicker
           timeFormat="HH:mm"
           className="form__form-group-datepicker"
-          selected={startDate}
+          selected={initialDate}
           onChange={this.handleChange}
           showTimeSelect
           dateFormat="MMMM d, yyyy h:mm aa"
