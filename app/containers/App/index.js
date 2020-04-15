@@ -18,8 +18,8 @@ import AccountPage from 'containers/AccountPage';
 
 import PrivateRoute from 'containers/PrivateRoute';
 import ConnectPage from 'containers/ConnectPage';
-import SecurePage from 'containers/SecurePage';
-import ProtectedRoute from 'containers/ProtectedRoute';
+// import SecurePage from 'containers/SecurePage';
+// import ProtectedRoute from 'containers/ProtectedRoute';
 import LoginPage from 'containers/LoginPage';
 import RegisterPage from 'containers/RegisterPage';
 import VanListing from '../Listing';
@@ -37,9 +37,8 @@ export default function App() {
           <PrivateRoute exact path="/dashboard/profile" component={ProfilePage} />
           <PrivateRoute exact path="/dashboard/account" component={AccountPage} />
           <Route exact path="/connect/:provider" component={ConnectPage} />
-          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/auth/:authType/:id?" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
-          <ProtectedRoute exact path="/dashboard/:foo" component={SecurePage} />
           <Route component={NotFoundPage} />
         </Switch>
       </main>
