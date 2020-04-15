@@ -19,7 +19,6 @@
     }
 
     .form__form-group-icon, .form__form-group-button {
-      background: transparent;
     }
 
     .form__form-group-icon, input:not(:last-child) {
@@ -33,7 +32,6 @@
       border-color: #eff1f5;
 
       svg {
-        fill: $color-accent;
       }
     }
 
@@ -84,11 +82,10 @@
 
 .account__btns {
   display: flex;
-  width: calc(100% + 10px);
-  margin: -10px 0 -20px -10px;
+  width: 100%;
+  margin: 4px 0 -20px 0px;
 
   a {
-    margin: 10px 0 20px 10px;
     white-space: nowrap;
   }
 }
