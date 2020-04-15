@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
-
 import TimetableIcon from 'mdi-react/TimetableIcon';
 import Error from '../ErrorField';
 
 import renderDateTimePickerField from '../DateTimePicker/index';
 import renderCheckBoxField from '../Checkbox/index';
 
-const Search = ({ onSearch, disabled }) => (
+const Search = ({ onSearch, disabled, storedValues }) => (
   <Form
     validate={values => { // validate both passowrds are same
       const errors = {};
@@ -24,6 +23,7 @@ const Search = ({ onSearch, disabled }) => (
       return errors
     }}
     onSubmit={(values) => onSearch(values)}
+    initialValues={storedValues}
     render={({ handleSubmit, values }) => (
       <form className="form" onSubmit={handleSubmit}>
         <div className="form__form-group">
@@ -87,6 +87,7 @@ const Search = ({ onSearch, disabled }) => (
               type="button"
               onClick={() => handleSubmit(values)}
               disabled={!disabled}
+              storedValues={storedValues}
             >
               Search
             </button>
@@ -100,6 +101,7 @@ const Search = ({ onSearch, disabled }) => (
 Search.propTypes = {
   onSearch: PropTypes.func,
   disabled: PropTypes.bool.isRequired,
+  storedValues: PropTypes.object,
 };
 
 
