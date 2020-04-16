@@ -5,14 +5,25 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import renderCheckBoxField from '../../../shared/Checkbox/index';
 
+import Error from '../../../shared/ErrorField';
+
 const onSubmit = async values => {
   console.log("submitted value", values)
 };
 
-
 const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) => (
   <Form
     onSubmit={onSubmit}
+    validate={values => { // validate both passowrds are same
+      const errors = {};
+      if (!values.identifier) {
+        errors.identifier = 'Username can not be empty';
+      }
+      if (!values.password) {
+        errors.password = 'Password can not be empty';
+      }
+      return errors
+    }}
     render={({ handleSubmit, values }) => (
       <form className="form" onSubmit={handleSubmit}>
         <div className="form__form-group">
@@ -25,6 +36,7 @@ const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) =>
               placeholder="abc@moverz.fi"
             />
           </div>
+          <Error name="identifier" />
         </div>
         <div className="form__form-group">
           <span className="form__form-group-label">Password</span>
@@ -45,6 +57,7 @@ const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) =>
           <div className="account__forgot-password">
             <a href="/auth/forgot-password">Forgot a password?</a>
           </div>
+          <Error name="password" />
         </div>
         <div className="form__form-group">
           <div className="form__form-group-field">
