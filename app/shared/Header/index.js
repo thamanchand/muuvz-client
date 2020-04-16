@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +7,7 @@ import auth from 'utils/auth';
 
 import logo from '../../assets/images/muverz.svg';
 
-const HeaderNav = () => {
+const HeaderNav = ({ source }) => {
   const [isLoggedIn, setisLoggedIn] = React.useState(auth.getToken());
 
   const logout = () => {
@@ -14,14 +15,16 @@ const HeaderNav = () => {
     setisLoggedIn(false);
   }
   return (
-    <div className="landing__menu__listing">
+    <div className={source === 'home' ? "landing__menu" : "landing__menu__listing"} >
       <Container>
         <Row>
           <Col md={12}>
             <nav className="navbar navbar-expand-md landing__menu-nav">
               <div className="landing__menu-wrap">
                 <p className="landing__menu-logo">
-                  <img src={logo} alt="" />
+                  <Link to="/">
+                    <img src={logo} alt="" />
+                  </Link>
                 </p>
 
                 <button
@@ -40,7 +43,7 @@ const HeaderNav = () => {
                     {isLoggedIn ?
                       (<React.Fragment>
                         <li className="nav-item landing__navbar-item">
-                          <button className="btn btn-danger btn-sm" type="button" onClick={() => logout()}>
+                          <button className="btn btn-outline-primary btn-sm" type="button" onClick={() => logout()}>
                           Logout
                           </button>
 
@@ -75,5 +78,9 @@ const HeaderNav = () => {
     </div>
   )
 };
+
+HeaderNav.propTypes = {
+  source: PropTypes.string,
+}
 
 export default HeaderNav;
