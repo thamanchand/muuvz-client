@@ -95,6 +95,12 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
 
 .landing__menu__listing {
   width: 100%;
+  position: fixed;
+  top: 0;
+  height: 80px;
+  z-index: 101;
+  box-shadow: 0 2px 15px 0 rgba(0,0,0,.05);
+  background: #FFF;
 }
 
 .landing__menu-wrap {
