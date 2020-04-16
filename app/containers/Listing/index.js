@@ -42,7 +42,7 @@ class VanListPage extends PureComponent {
 
     return (
       <>
-        <HeaderNav />
+        <HeaderNav source="listing" />
         <div className="Listing__page">
           <Container>
             <Row>

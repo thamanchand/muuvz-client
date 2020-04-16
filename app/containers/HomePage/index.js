@@ -27,7 +27,7 @@ class HomePage extends React.Component {
     return (
       <div className="landing">
         <div className="landing__menu">
-          <HeaderNav />
+          <HeaderNav source="home" />
         </div>
         <Header
           onSearch={this.onSearch}
