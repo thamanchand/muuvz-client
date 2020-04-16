@@ -31,15 +31,14 @@ export function* submitForm(action) {
         call(auth.setToken, response.jwt, body.rememberMe),
         call(auth.setUserInfo, response.user, body.rememberMe),
       ]);
+      yield put(onLoginSubmitSuccess());
       yield call(forwardTo, '/');
       const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
       yield cancel(submitWatcher);
-      yield put(onLoginSubmitSuccess());
-
     }
   } catch(error) {
-    yield put(onLoginSubmitFailed());
-    console.log(error.response.payload.message);
+    yield put(onLoginSubmitFailed(error));
+    console.log("error", error.response.payload.message);
   }
 }
 
