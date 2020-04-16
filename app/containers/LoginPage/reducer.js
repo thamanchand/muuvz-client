@@ -12,7 +12,10 @@ import {
 } from './constants';
 
 
-const initialState = fromJS({});
+export const initialState = fromJS({
+  isLoginLoading: false,
+  error: null,
+});
 
 function connectLoginPageReducer(state = initialState, action) {
   switch (action.type) {
@@ -23,7 +26,9 @@ function connectLoginPageReducer(state = initialState, action) {
       return state.set('isLoginLoading', true);
 
     case ON_LOGIN_SUBMIT_FAILED:
-      return state.set('error', fromJS(action.error)).set('isLoginLoading', false);
+      return state
+        .set('error', action.error)
+        .set('isLoginLoading', false);
 
     default:
       return state;
