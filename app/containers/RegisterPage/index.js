@@ -38,8 +38,9 @@ class RegisterPage extends React.PureComponent {
     this.setState(prevState => ({ showPassword: !prevState.showPassword }));
   }
 
-  onRegisterHandler = (e) => {
-    this.props.onRegisterSubmit(e);
+  onRegisterHandler = (payload) => {
+    const registerPayload = { ...payload, username: payload.email}
+    this.props.onRegisterSubmit(registerPayload);
   }
 
   render() {
@@ -52,7 +53,7 @@ class RegisterPage extends React.PureComponent {
             {registerError
               && registerError.response
               && registerError.response.payload
-              && registerError.response.payload.message[0]
+              && registerError.response.payload.message
               && registerError.response.payload.message[0].messages[0]
               && registerError.response.payload.message[0].messages[0].message && (
               <div className="error">{registerError.response.payload.message[0].messages[0].message}</div>
@@ -61,7 +62,9 @@ class RegisterPage extends React.PureComponent {
               <img src={logo} alt="muverz" className="account__register-logo" />
             </Link>
             {isEmailRegistered ? (
-              <p>Please confirm your email</p>
+              <div className="confirmation__container">
+                <p>Please confirm your email</p>
+              </div>
             ) : (
               <div>
                 <div className="account__head">
