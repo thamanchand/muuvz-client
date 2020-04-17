@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 
-import PropTypes from 'prop-types';
+import renderCheckBoxField from '../../../shared/Checkbox/index';
 
 const onSubmit = () => new Promise(resolve => {
   setTimeout(resolve, 200);
@@ -36,9 +37,6 @@ const RegisterForm = ({ onRegisterHandler }) => (
       if (values.password !== values.confirmPassword) {
         errors.confirmPassword = 'Password didnt matched';
       }
-      if (!values.username) {
-        errors.username = 'username cant be blank';
-      }
       if (!values.email) {
         errors.email = 'email cant be blank';
       }
@@ -53,18 +51,17 @@ const RegisterForm = ({ onRegisterHandler }) => (
     render={({ handleSubmit, form, values }) => (
       <form className="form" onSubmit={handleSubmit}>
         <div className="form__form-group">
-          <span className="form__form-group-label">Username</span>
+          <span className="form__form-group-label">Email</span>
           <div className="form__form-group-field">
             <Field
-              name="username"
+              name="email"
               component="input"
-              type="text"
-              placeholder="hikenen"
+              type="email"
+              placeholder="abc@muverz.fi"
             />
           </div>
-          <Error name="identifier" />
+          <Error name="email" />
         </div>
-
         <div className="form__form-group">
           <span className="form__form-group-label">Password</span>
           <div className="form__form-group-field">
@@ -91,20 +88,16 @@ const RegisterForm = ({ onRegisterHandler }) => (
           </div>
           <Error name="confirmPassword" />
         </div>
-
         <div className="form__form-group">
-          <span className="form__form-group-label">Email</span>
           <div className="form__form-group-field">
             <Field
-              name="email"
-              component="input"
-              type="email"
-              placeholder="abc@muverz.fi"
+              name="isbusiness"
+              component={renderCheckBoxField}
+              label="I am business"
+              color="red"
             />
           </div>
-          <Error name="email" />
         </div>
-
         <div className="account__btns">
           <button className="square btn btn-success" type="submit" onClick={() => onRegisterHandler(values)}>Register</button>
         </div>
