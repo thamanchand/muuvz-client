@@ -8,6 +8,7 @@ import {
   ON_LOGIN_SUBMIT,
   ON_LOGIN_SUBMIT_SUCCESS,
   ON_LOGIN_SUBMIT_FAILED,
+  ON_LOGINPAGE_LOAD,
 } from './constants';
 
 /**
@@ -26,4 +27,8 @@ export const onLoginSubmitSuccess = () => ({
 export const onLoginSubmitFailed = (error) => ({
   type: ON_LOGIN_SUBMIT_FAILED,
   error,
+});
+
+export const onLoginPageLoad = () => ({
+  type: ON_LOGINPAGE_LOAD,
 });
