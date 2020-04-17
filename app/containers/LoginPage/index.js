@@ -20,7 +20,7 @@ import { loginErrorSelector, loginStateSelector } from './selectors';
 import saga from './saga';
 import reducer from './reducer';
 
-import { onLoginSubmit } from './actions';
+import { onLoginSubmit, onLoginPageLoad } from './actions';
 
 const key = 'loginPage';
 
@@ -32,16 +32,23 @@ class LoginPage extends React.PureComponent {
     };
   }
 
+  componentDidMount() {
+    this.props.onLoginPageLoad();
+  }
+
   showPasswordHandler = () => {
     this.setState(prevState => ({ showPassword: !prevState.showPassword }));
   }
 
-  onLoginSubmitHandler = (e) => {
-    this.props.onLoginSubmit(e);
+  onLoginSubmitHandler = (loginPayload) => {
+    if (loginPayload.identifier && loginPayload.password) {
+      this.props.onLoginSubmit(loginPayload);
+    }
   }
 
   render() {
     const { isLoginSuccess, loginError } = this.props;
+
     return (
       <div>
         <div className="account account--photo">
@@ -50,7 +57,7 @@ class LoginPage extends React.PureComponent {
               {loginError
                 && loginError.response
                 && loginError.response.payload
-                && loginError.response.payload.message[0]
+                && loginError.response.payload.message
                 && loginError.response.payload.message[0].messages[0]
                 && loginError.response.payload.message[0].messages[0].message && (
                 <div className="error">{loginError.response.payload.message[0].messages[0].message}</div>
@@ -69,6 +76,9 @@ class LoginPage extends React.PureComponent {
                 isLoginSuccess={isLoginSuccess}
                 loginError={loginError}
               />
+              <div className="create__account_label">
+                <p>Need a Muverz account? <Link to="/register">Create an account </Link></p>
+              </div>
               <div className="account__or">
                 <p>Or Easily Using</p>
               </div>
@@ -99,10 +109,12 @@ LoginPage.propTypes = {
   onLoginSubmit: PropTypes.func,
   isLoginSuccess: PropTypes.bool,
   loginError: PropTypes.object,
+  onLoginPageLoad: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoginSubmit: bindActionCreators(onLoginSubmit, dispatch)
+  onLoginSubmit: bindActionCreators(onLoginSubmit, dispatch),
+  onLoginPageLoad: bindActionCreators(onLoginPageLoad, dispatch),
 });
 
 const mapStateToProps = createStructuredSelector({
