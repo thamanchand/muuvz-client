@@ -9,6 +9,7 @@ import {
   ON_LOGIN_SUBMIT,
   ON_LOGIN_SUBMIT_SUCCESS,
   ON_LOGIN_SUBMIT_FAILED,
+  ON_LOGINPAGE_LOAD,
 } from './constants';
 
 
@@ -29,6 +30,10 @@ function connectLoginPageReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('isLoginLoading', false);
+
+    case ON_LOGINPAGE_LOAD:
+      return state
+        .set('error', null)
 
     default:
       return state;
