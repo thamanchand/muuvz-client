@@ -9,6 +9,7 @@ import logo from '../../assets/images/muverz.svg';
 
 const HeaderNav = ({ source }) => {
   const [isLoggedIn, setisLoggedIn] = React.useState(auth.getToken());
+  const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
 
   const logout = () => {
     auth.clearAppStorage();
@@ -42,6 +43,12 @@ const HeaderNav = ({ source }) => {
                   <ul className="navbar-nav ml-auto">
                     {isLoggedIn ?
                       (<React.Fragment>
+                        <li className="nav-item landing__navbar-item">
+                          <Link className="nav-link" to={isBusiness && isBusiness !== null ? "/dashboard/booking" : "/user/dashboard"}>
+                            Dashboard
+                          </Link>
+
+                        </li>
                         <li className="nav-item landing__navbar-item">
                           <button className="btn btn-outline-primary btn-sm" type="button" onClick={() => logout()}>
                           Logout
