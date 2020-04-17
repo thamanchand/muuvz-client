@@ -4,10 +4,13 @@ import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
 import ProfileForm from './components/ProfileForm';
 
+import auth from '../../utils/auth';
+
 class Profile extends React.PureComponent {
   componentDidMount() {}
 
   render() {
+    const isProfileCompleted = auth.get('userInfo').profileCompleted;
     return (
       <div>
         <Layout />
@@ -18,10 +21,13 @@ class Profile extends React.PureComponent {
                 <h3 className="page-title">Profile</h3>
               </Col>
             </Row>
+            {isProfileCompleted && (
+              <Row>
+                <Statistics />
+              </Row>
+            )}
             <Row>
-              <Statistics />
-            </Row>
-            <Row>
+
               <ProfileForm />
             </Row>
           </Container>
