@@ -34,7 +34,9 @@ function registerPageReducer(state = initialState, action) {
         .set('isEmailRegistered', false);
 
     case ON_REGISTERPAGE_LOAD:
-      return state.set('isEmailRegistered', false);
+      return state
+        .set('isEmailRegistered', false)
+        .set('error', null);
 
     default:
       return state;
