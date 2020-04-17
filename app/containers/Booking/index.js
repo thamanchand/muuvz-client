@@ -6,6 +6,10 @@ import Statistics from './components/Statistics';
 import BigCalendar from './components/BigCalendar';
 import EventLabels from './components/VanLabels';
 
+import auth from '../../utils/auth';
+
+const isProfileCompleted = auth.get('userInfo').profileCompleted;
+
 const BookingDashboard = () => (
   <div>
     <Layout />
@@ -16,9 +20,11 @@ const BookingDashboard = () => (
             <h3 className="page-title">Booking</h3>
           </Col>
         </Row>
-        <Row>
-          <Statistics />
-        </Row>
+        {isProfileCompleted && (
+          <Row>
+            <Statistics />
+          </Row>
+        )}
         <Row>
           <div className="container dashboard">
             <Row>

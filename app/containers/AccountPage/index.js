@@ -4,6 +4,10 @@ import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
 import AccountForm from './components/AccountForm';
 
+import auth from '../../utils/auth';
+
+const isProfileCompleted = auth.get('userInfo').profileCompleted;
+
 class AccountPage extends React.PureComponent {
   componentDidMount() {}
 
@@ -18,9 +22,11 @@ class AccountPage extends React.PureComponent {
                 <h3 className="page-title">Account</h3>
               </Col>
             </Row>
-            <Row>
-              <Statistics />
-            </Row>
+            {isProfileCompleted && (
+              <Row>
+                <Statistics />
+              </Row>
+            )}
             <Row>
               <AccountForm />
             </Row>

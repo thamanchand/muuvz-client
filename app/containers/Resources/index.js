@@ -20,6 +20,8 @@ import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
 import saga from './saga';
 import reducer from './reducers';
 
+import auth from '../../utils/auth';
+
 const key = 'resourcePage';
 
 
@@ -135,6 +137,8 @@ class ResourcesPage extends React.PureComponent {
   };
 
   render() {
+    const isProfileCompleted = auth.get('userInfo').profileCompleted;
+
     const { vanList } = this.props;
     const Icon = <span className="lnr lnr-cross-circle modal__title-icon" />;
     return (
@@ -152,9 +156,11 @@ class ResourcesPage extends React.PureComponent {
                 <h3 className="page-title">Resources</h3>
               </Col>
             </Row>
-            <Row>
-              <Statistics />
-            </Row>
+            {isProfileCompleted && (
+              <Row>
+                <Statistics />
+              </Row>
+            )}
             <Row>
               {this.props.vanInfoSavedCompleted ? 'Saved' : null}
               <ResourceList

@@ -2,6 +2,9 @@ import React from 'react';
 import { Card, CardBody, Col, Button, ButtonToolbar } from 'reactstrap';
 import { Form, Field } from 'react-final-form';
 
+import auth from '../../../utils/auth';
+
+const isProfileCompleted = auth.get('userInfo').profileCompleted
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const onSubmit = async values => {
@@ -13,6 +16,9 @@ const ProfileForm = () => (
   <Col md={12} lg={12}>
     <Card>
       <CardBody>
+        <div>
+          {!isProfileCompleted && (<h4 className="bold-text">Complete your profile to start using Muverz</h4>) }
+        </div>
         <div className="card__title">
           <h5 className="bold-text">Business</h5>
           <h5 className="subhead">Fill all fields</h5>
