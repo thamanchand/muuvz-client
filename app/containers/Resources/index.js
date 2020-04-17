@@ -137,7 +137,7 @@ class ResourcesPage extends React.PureComponent {
   };
 
   render() {
-    const isProfileCompleted = auth.get('userInfo').profileCompleted;
+    const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
     const { vanList } = this.props;
     const Icon = <span className="lnr lnr-cross-circle modal__title-icon" />;

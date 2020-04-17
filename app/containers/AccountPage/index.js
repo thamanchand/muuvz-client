@@ -6,7 +6,7 @@ import AccountForm from './components/AccountForm';
 
 import auth from '../../utils/auth';
 
-const isProfileCompleted = auth.get('userInfo').profileCompleted;
+const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
 class AccountPage extends React.PureComponent {
   componentDidMount() {}

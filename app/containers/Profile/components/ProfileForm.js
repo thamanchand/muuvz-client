@@ -4,7 +4,8 @@ import { Form, Field } from 'react-final-form';
 
 import auth from '../../../utils/auth';
 
-const isProfileCompleted = auth.get('userInfo').profileCompleted
+const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const onSubmit = async values => {

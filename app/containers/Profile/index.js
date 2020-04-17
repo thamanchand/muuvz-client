@@ -10,7 +10,7 @@ class Profile extends React.PureComponent {
   componentDidMount() {}
 
   render() {
-    const isProfileCompleted = auth.get('userInfo').profileCompleted;
+    const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
     return (
       <div>
         <Layout />

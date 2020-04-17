@@ -8,7 +8,7 @@ import EventLabels from './components/VanLabels';
 
 import auth from '../../utils/auth';
 
-const isProfileCompleted = auth.get('userInfo').profileCompleted;
+const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
 const BookingDashboard = () => (
   <div>
