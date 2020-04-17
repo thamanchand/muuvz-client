@@ -31,10 +31,25 @@ export function* submitForm(action) {
         call(auth.setToken, response.jwt, body.rememberMe),
         call(auth.setUserInfo, response.user, body.rememberMe),
       ]);
-      yield put(onLoginSubmitSuccess());
-      yield call(forwardTo, '/');
-      const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
-      yield cancel(submitWatcher);
+      const isBusiness = auth.get('userInfo').isbusiness;
+      const isProfileCompleted = auth.get('userInfo').profileCompleted;
+      if (isBusiness && isProfileCompleted) {
+        yield put(onLoginSubmitSuccess());
+        yield call(forwardTo, '/dashboard/booking');
+        const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
+        yield cancel(submitWatcher);
+      } else if (isBusiness && !isProfileCompleted) {
+        yield put(onLoginSubmitSuccess());
+        yield call(forwardTo, '/dashboard/profile');
+        const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
+        yield cancel(submitWatcher);
+      } else {
+        yield put(onLoginSubmitSuccess());
+        yield call(forwardTo, '/');
+        const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
+        yield cancel(submitWatcher);
+      }
+
     }
   } catch(error) {
     yield put(onLoginSubmitFailed(error));
