@@ -5,6 +5,10 @@
   display: flex;
   flex-wrap: wrap;
 
+  &.form-small {
+    width: 375px;
+  }
+
   .header_label {
     width: 100%;
     color: #646777;
@@ -23,6 +27,10 @@
   .form__form-group-label {
     color: #646777;
     font-weight: bold;
+  }
+  .form__form-group-label_right {
+    color: #999999;
+    float: right;
   }
 
   input, textarea {
