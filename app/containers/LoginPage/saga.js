@@ -26,10 +26,12 @@ export function* submitForm(action) {
     const response = yield call(request, requestURL, { method: 'POST', body });
 
     if (response.jwt) {
+      const { email, confirmed, profileCompleted, isbusiness, id } = response.user;
+      const userFieldsLocallyStored = { email, confirmed, profileCompleted, isbusiness, id}
       // Set the user's credentials
       yield all([
         call(auth.setToken, response.jwt, body.rememberMe),
-        call(auth.setUserInfo, response.user, body.rememberMe),
+        call(auth.setUserInfo, userFieldsLocallyStored, body.rememberMe),
       ]);
       const isBusiness = auth.get('userInfo').isbusiness;
       const isProfileCompleted = auth.get('userInfo').profileCompleted;
