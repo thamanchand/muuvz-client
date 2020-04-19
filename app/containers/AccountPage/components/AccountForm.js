@@ -84,10 +84,10 @@ const AccountForm = ({ changePassword }) => (
               </div>
               <div className="profile__btns">
                 <button
-                  className="square btn btn-primary"
+                  className="square btn-sm btn-primary"
                   type="submit"
 
-                >Chanege password</button>
+                >Change password</button>
               </div>
             </form>
           )}
