@@ -5,6 +5,7 @@ import { Form, Field } from 'react-final-form';
 
 import auth from '../../../utils/auth';
 import Error from '../../../shared/ErrorField';
+import renderCropFileInput from '../../../shared/CropImage';
 
 const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
@@ -47,7 +48,7 @@ const ProfileForm = ({ onProfileFormSave, reset, initialValues, onProfileFormEdi
             }
             return errors
           }}
-          render={({ handleSubmit, values }) => (
+          render={({ handleSubmit, values,  submitting, pristine,}) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
               <div className="form__half">
                 <div className="form__form-group">
@@ -139,6 +140,17 @@ const ProfileForm = ({ onProfileFormSave, reset, initialValues, onProfileFormEdi
                     />
                   </div>
                 </div>
+                <Col md={12} sm={12}>
+                  <h5 className="subhead">You can upload multiple files</h5>
+                  <div className="form__form-group">
+                    <div className="form__form-group-field">
+                      <Field
+                        name='files'
+                        component={renderCropFileInput}
+                      />
+                    </div>
+                  </div>
+                </Col>
               </div>
               <div className="profile__btns">
                 <button className="square btn btn-success" type="button" onClick={reset}>
@@ -149,6 +161,7 @@ const ProfileForm = ({ onProfileFormSave, reset, initialValues, onProfileFormEdi
                     className="square btn btn-primary"
                     type="submit"
                     onClick={() => onProfileFormEdit(values)}
+                    disabled={submitting || pristine}
                   >Submit</button>
                 ) : (
                   <button
