@@ -10,6 +10,7 @@ import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 import Error from '../../../shared/ErrorField';
 import toggleField from '../../../shared/ToggleField';
 import renderDropZoneMultipleField from '../../../shared/DropzoneMultipleFiles';
+import renderSelectField from '../../../shared/SelectField';
 
 import AddPrice from './AddPrice';
 import Modal from '../../../shared/Modal';
@@ -63,7 +64,7 @@ const AddVanForm = ({
               <Col md={3} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Brand</span>
-                  <div className="form__form-group-field error">
+                  <div className="form__form-group-field">
                     <Field
                       name="brand"
                       component="input"
@@ -161,11 +162,14 @@ const AddVanForm = ({
                   <span className="form__form-group-label">Fuel Type</span>
                   <div className="form__form-group-field">
                     <Field
-                      name="fueltype"
-                      component="input"
-                      type="text"
-                      placeholder="Diesel"
-                      required
+                      name='fueltype'
+                      component={renderSelectField}
+                      options={[
+                        {value: 'Diesel', label: 'Diesel'},
+                        {value: 'Petrol', label: 'Petrol'},
+                        {value: 'Hybrid', label: 'Hybrid'},
+                        {value: 'Electric', label: 'Electric'},
+                      ]}
                     />
                   </div>
                 </div>
