@@ -7,6 +7,8 @@ import {
 // Utils
 import request from 'utils/request';
 
+import axios from 'axios';
+
 import auth from '../../utils/auth';
 
 // constants
@@ -104,7 +106,7 @@ export function* profileLoadWatcher(action) {
 }
 
 export function* profileEditWatcher(action) {
-  console.log("edit action", action);
+  console.log("edit watcher", action);
   const body = {...action.profilePayload};
   try {
     const requestURL = `${baseURL}${'profiles'}/${action.profileId}`;
@@ -123,8 +125,45 @@ export function* profileEditWatcher(action) {
         linkedinLink: response.linkedinLink,
         address: response.address,
       }
-      // update userInfo cookie
-      yield put(onProfileEditSuccess(userProfile));
+      const isFileUploaded = action.profilePayload.files[0];
+      if (isFileUploaded instanceof File && !!response.avatar.id) {
+        const deleteResponse = yield axios({
+          method: 'DELETE',
+          url: `${baseURL}${'upload/files'}/${response.avatar.id}`
+        });
+        if (deleteResponse) {
+          console.log("deleteResponse", deleteResponse)
+          const imageUploadURL = `${baseURL}${'upload'}`;
+          const data = new FormData();
+          data.append('files', action.profilePayload.files[0]);
+          data.append('refId', action.profileId);
+          data.append('ref', 'profile');
+          data.append('field', 'avatar');
+          const avatarUploadResponse = yield axios({
+            method: 'POST',
+            url: imageUploadURL,
+            data
+          })
+          console.log("avatarUploadResponse", avatarUploadResponse);
+          yield put(onProfileEditSuccess(userProfile));
+        }
+      } else {
+        const imageUploadURL = `${baseURL}${'upload'}`;
+        const data = new FormData();
+        data.append('files', action.profilePayload.files[0]);
+        data.append('refId', action.profileId);
+        data.append('ref', 'profile');
+        data.append('field', 'avatar');
+        const avatarUploadResponse = yield axios({
+          method: 'POST',
+          url: imageUploadURL,
+          data
+        })
+
+        console.log("avatarUploadResponse", avatarUploadResponse);
+        yield put(onProfileEditSuccess(userProfile));
+      }
+
     }
   } catch(error) {
     yield put(onProfileEditFailed(error));
