@@ -46,7 +46,8 @@ function vanListReducer(state = initialState, action) {
 
     case ON_VAN_SAVE_SUCCESS:
       return state
-        .set('isVanInfoSaved', true);
+        .set('isVanInfoSaved', true)
+        .update('vanList', (vanList) => vanList.push(fromJS(action.vanList)));
 
     case ON_VAN_SAVE_FAILED:
       return state
