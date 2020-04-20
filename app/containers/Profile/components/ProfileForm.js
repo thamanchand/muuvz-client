@@ -5,7 +5,7 @@ import { Form, Field } from 'react-final-form';
 
 import auth from '../../../utils/auth';
 import Error from '../../../shared/ErrorField';
-import renderCropFileInput from '../../../shared/CropImage';
+import renderFileInputField from '../../../shared/FileDropZone';
 
 const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
@@ -146,7 +146,7 @@ const ProfileForm = ({ onProfileFormSave, reset, initialValues, onProfileFormEdi
                     <div className="form__form-group-field">
                       <Field
                         name='files'
-                        component={renderCropFileInput}
+                        component={renderFileInputField}
                       />
                     </div>
                   </div>
