@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Card, Button, CardBody, Col, Badge, Table } from 'reactstrap';
+import { Card, CardBody, Col, Badge, Table } from 'reactstrap';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 import PlusCircleIcon from 'mdi-react/PlusCircleIcon';
@@ -14,7 +14,7 @@ const iconStyles = {
   marginRight: '10px',
 };
 
-const AddIcon = <PlusCircleIcon className="addIcon" size="20" color="#555555"/>;
+const AddIcon = <PlusCircleIcon className="addIcon" size="30" color="#555555"/>;
 
 const ResourceList = ({
   vanList,
@@ -36,13 +36,8 @@ const ResourceList = ({
       <CardBody>
         <div className="header__section container">
           <div className="col-md-2 header__button">
-            <Button
-              color='primary'
-              onClick={showVanModelHandler}
-              className="square btn-primary btn-sm add__van-btn"
-            >
-              Add new van {AddIcon}
-            </Button>
+
+
             <Modal
               color="primary"
               title="Add new van"
@@ -64,7 +59,14 @@ const ResourceList = ({
             </Modal>
           </div>
           <div className="col-md-2 header__filter">
-            <span>Filter</span>
+            <span className="filter__wrapper">Filter</span>
+            <span
+              className="add__resource"
+              role="presentation"
+              onKeyPress={showVanModelHandler}
+              onClick={showVanModelHandler}>
+              {AddIcon}
+            </span>
           </div>
         </div>
         <div className="table-responsive">
