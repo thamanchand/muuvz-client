@@ -2,10 +2,11 @@ import {
   call,
   takeLatest,
   put,
+  all,
 } from 'redux-saga/effects';
 
-// Utils
-import request from 'utils/request';
+import auth from '../../utils/auth';
+import request from '../../utils/request';
 
 // constants
 import {
@@ -23,12 +24,13 @@ import {
   ON_RESOURCE_DELETE,
 } from './constants';
 
-import { filterInt } from '../utils';
+// import { filterInt } from '../utils';
+
+import * as api from './api';
 
 export function* vanLoadWatcher() {
   try {
-    const requestURL = 'http://localhost:1337/resources';
-    const vanList = yield call(request, requestURL, { method: 'GET' });
+    const vanList = yield call(api.getResources);
     if (vanList) {
       yield put(onVanListLoadSuccess(vanList));
     }
@@ -38,41 +40,43 @@ export function* vanLoadWatcher() {
 }
 
 export function* vanInfoSaveWatcher(action) {
+  console.log("vanSave action", action);
   const { vanInfo, pricePayload } = action;
-  // const { path, preview } = action.vanInfo.files[0];
+  const loggedUserId = auth.get('userInfo').id;
 
   try {
-    const requestURL = 'http://localhost:1337/resources';
-    let body = vanInfo;
-    const response = yield call(request, requestURL, { method: 'POST', body });
+    // Prepare resource post payload
+    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, user: loggedUserId };
 
-    if (response) {
-      // const { id : vanId } = response;
-      const pricingRequestURL = 'http://localhost:1337/pricings';
+    const vanList = yield call(api.postResources,  resourcePayload);
+    if (vanList) {
+      const { id } = vanList;
+      // insert price to pricing table
+      const priceReponse = yield all(pricePayload.map(priceItem => call(
+        api.postPricing,
+        {
+          price: priceItem.price,
+          unit: priceItem.unit,
+          resource: id
+        }
+      )));
 
-      // prepare price payload
-      body = pricePayload.map((item) => ({
-        price: filterInt(item.price),
-        unit: filterInt(item.unit),
+      // upload resource images
+      const coverUploadResponse = yield all(vanInfo.files.map(avatarItem => {
+        const data = new FormData();
+        data.append('files', avatarItem);
+        data.append('refId', id);
+        data.append('ref', 'resource');
+        data.append('field', 'cover');
+
+        return call(
+          api.uploadResourceImages,
+          data
+        );
       }));
-      const priceReponse = yield call(request, pricingRequestURL, { method: 'POST', ...body });
-      // yield delay(1000);
-      // const imageUploadURL = `${baseURL}${'upload'}`;
-      //
-      // body = new FormData();
-      // body.append('files', action.vanInfo.files[0]);
-      // body.append('refId', '5e7716ee36628e3dfd2d9555');
-      // body.append('ref', 'van');
-      // body.append('field', 'cover');
-      //
-      // const uploadReponse = yield call(request, imageUploadURL, {
-      //   method: 'POST',
-      //   body,
-      // });
-      // console.log("uploadReponse", uploadReponse);
 
-      if (priceReponse) {
-        yield put(onVanInfoSaveSuccess());
+      if (priceReponse && coverUploadResponse) {
+        yield put(onVanInfoSaveSuccess(vanList));
       }
     }
   } catch(error) {
@@ -86,7 +90,7 @@ export function* vanResourceDeleteWatcher(action) {
   const deleteURL = `${requestURL}${'/'}${resourceId}`
   try {
     const deleteResponse = yield call(request, deleteURL, { method: 'DELETE' });
-    const { _id : deletedResourceId} = deleteResponse;
+    const { id : deletedResourceId} = deleteResponse;
     if (deletedResourceId) {
       yield put(onResourceDeleteSuccess(deletedResourceId));
     }
