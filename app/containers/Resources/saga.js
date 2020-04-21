@@ -48,7 +48,7 @@ export function* vanInfoSaveWatcher(action) {
     // Prepare resource post payload
     const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, user: loggedUserId };
 
-    const vanList = yield call(api.postResources,  resourcePayload);
+    const vanList = yield call(api.postResource,  resourcePayload);
     if (vanList) {
       const { id } = vanList;
       // insert price to pricing table
