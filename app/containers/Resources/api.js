@@ -4,10 +4,12 @@ import auth from '../../utils/auth';
 
 const token = auth.getToken();
 
+const BASE_URL = 'http://localhost:1337/';
+
 // post resource
 export const postResources = body => axios
   .post(
-    'http://localhost:1337/resources',
+    `${BASE_URL}${'resources'}`,
     { ...body },
     {headers: {
       'Authorization': `Bearer ${token}`
@@ -20,7 +22,7 @@ export const postResources = body => axios
 // post pricing
 export const postPricing = payload => axios
   .post(
-    'http://localhost:1337/pricings',
+    `${BASE_URL}${'pricings'}`,
     { ...payload },
     {
       headers: {
@@ -33,11 +35,37 @@ export const postPricing = payload => axios
   });
 
 // data api calls
-export const getResources = () => axios.get('http://localhost:1337/resources', {
-  headers: {
-    'Accept': 'application/json',
-    'Authorization': `Bearer ${token}`,
-  }
-}).then(response => response.data).catch(err => {
-  throw err;
-});
+export const getResources = () => axios
+  .get(`${BASE_URL}${'resources'}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  }).then(response => response.data).catch(err => {
+    throw err;
+  });
+
+// upload resource cover image
+export const uploadResourceImages = data => axios
+  .post(
+    `${BASE_URL}${'upload'}`,
+    data,
+    {headers: {
+      'Authorization': `Bearer ${token}`
+    }},
+  ).then(response => response.data)
+  .catch(error => {
+    throw error;
+  });
+
+// delete resource
+export const deleteResource = (resourceId) => axios
+  .delete(
+    `${BASE_URL}${resourceId}`,
+    {headers: {
+      'Authorization': `Bearer ${token}`
+    }},
+  ).then(response => response.data)
+  .catch(error => {
+    throw error;
+  });
