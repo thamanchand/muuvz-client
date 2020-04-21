@@ -7,7 +7,7 @@ const token = auth.getToken();
 const BASE_URL = 'http://localhost:1337/';
 
 // post resource
-export const postResources = body => axios
+export const postResource = body => axios
   .post(
     `${BASE_URL}${'resources'}`,
     { ...body },
