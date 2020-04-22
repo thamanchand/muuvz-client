@@ -36,13 +36,13 @@ class Profile extends React.PureComponent {
     this.props.onProfileSave(profilePayload);
   }
 
-  profileEditHandler = (profilePayload) => {
-    const { id } = this.props.userProfile;
-    this.props.onProfileEdit(id, profilePayload);
+  profileEditHandler = (profilePayload, profileId) => {
+    this.props.onProfileEdit(profileId, profilePayload);
   }
 
   render() {
     const { userProfile } = this.props;
+    console.log("Profile component", userProfile);
     const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
     return (
       <div>
