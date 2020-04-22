@@ -30,7 +30,6 @@
       &:hover {
 
         @include themify($themes) {
-          background: themed('colorFieldsBorder');
         }
       }
     }
