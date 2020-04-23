@@ -6,6 +6,7 @@ import { Form, Field } from 'react-final-form';
 import auth from '../../../utils/auth';
 import Error from '../../../shared/ErrorField';
 import renderFileInputField from '../../../shared/FileDropZone';
+import renderGoogleAddressField from '../../../shared/GooglePlaceAutocomplete';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -21,7 +22,6 @@ const ProfileForm = ({
   onProfileFormEdit
 }) => {
   const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
-  console.log("isProfileCompleted", isProfileCompleted);
 
   return (
     <Col md={12} lg={12}>
@@ -121,10 +121,11 @@ const ProfileForm = ({
                     <div className="form__form-group-field">
                       <Field
                         name="address"
-                        component="input"
+                        component={renderGoogleAddressField}
                         type="text"
                         placeholder="Kuusitie 5 Helsinki"
                       />
+
                     </div>
                     <Error name="address" />
                   </div>
