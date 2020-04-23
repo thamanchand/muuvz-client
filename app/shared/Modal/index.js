@@ -26,24 +26,6 @@ class ModalComponent extends PureComponent {
   render() {
     const { color, title, colored, header, children, md } = this.props;
 
-    let Icon;
-
-    switch (color) {
-      case 'primary':
-        Icon = <span className="lnr lnr-pushpin modal__title-icon" />;
-        break;
-      case 'success':
-        Icon = <span className="lnr lnr-thumbs-up modal__title-icon" />;
-        break;
-      case 'warning':
-        Icon = <span className="lnr lnr-flag modal__title-icon" />;
-        break;
-      case 'danger':
-        Icon = <span className="lnr lnr-cross-circle modal__title-icon" />;
-        break;
-      default:
-        break;
-    }
     const modalClass = md ? classNames({
       'modal-dialog--colored': colored,
       'modal-dialog--header': header,
@@ -63,20 +45,12 @@ class ModalComponent extends PureComponent {
               className="lnr lnr-cross modal__close-btn"
               type="button"
               onClick={this.props.modelToggle}  />
-            {header ? '' : Icon}
+
             <h4 className="bold-text  modal__title">{title}</h4>
           </div>
           <div className="modal__body">
             {children}
           </div>
-
-          <span
-            role="button"
-            tabIndex={0}
-            onKeyPress={this.props.modelToggle}
-            className="form__form-group-label addEditModal__footer-cancel"
-            onClick={this.props.closePriceModal || this.props.modelToggle}
-          >Cancel</span>
         </Modal>
       </div>
     );
