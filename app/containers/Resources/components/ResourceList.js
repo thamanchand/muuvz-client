@@ -12,6 +12,7 @@ import AddVan from './AddVan';
 
 const iconStyles = {
   marginRight: '10px',
+  cursor: 'pointer'
 };
 
 const AddIcon = <PlusCircleIcon className="addIcon" size="30" color="#555555"/>;
@@ -92,12 +93,12 @@ const ResourceList = ({
                   <td>
                     <span style={iconStyles}>
                       <DeleteForeverIcon
-                        size="20" color="#ff4861"
+                        size="25" color="#ff4861"
                         onClick={() => deleteResourceHandler(item.id)}
                       />
                     </span>
-                    <span>
-                      <SquareEditOutlineIcon size="20" color="#555555" />
+                    <span style={iconStyles}>
+                      <SquareEditOutlineIcon size="25" color="#555555" />
                     </span>
                   </td>
                 </tr>
