@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
 import { Form, Field } from 'react-final-form';
+import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 
 import auth from '../../../utils/auth';
 import Error from '../../../shared/ErrorField';
 import renderFileInputField from '../../../shared/FileDropZone';
-import renderGoogleAddressField from '../../../shared/GooglePlaceAutocomplete';
+import GooglePlaceAutocomplete from '../../../shared/GooglePlaceAutocomplete';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -21,6 +22,7 @@ const ProfileForm = ({
   initialValues,
   onProfileFormEdit
 }) => {
+  console.log("initialValues", initialValues)
   const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
   return (
@@ -38,11 +40,22 @@ const ProfileForm = ({
           <div className="card__title">
             <h5 className="bold-text">Business</h5>
             <h5 className="subhead">Fill all fields</h5>
-            <img
-              className="avatar"
-              alt="profileImage"
-              src={initialValues.avatar ? `${'http://localhost:1337'}${initialValues.avatar.url}` : null }
-            />
+            <div className="profile__information">
+              <div className="profile__avatar">
+                <img
+                  className="avatar"
+                  alt="profileImage"
+                  src={initialValues.avatar ? `${'http://localhost:1337'}${initialValues.avatar.url}` : null }
+                />
+                <span className="avatar__delete">
+                  <DeleteForeverIcon
+                    size="25" color="#ff4861"
+                    onClick={() => console.log("delete avatar")}
+                    className="avatar__delete__icon"
+                  />
+                </span>
+              </div>
+            </div>
           </div>
           <Form
             onSubmit={onSubmit}
@@ -57,6 +70,9 @@ const ProfileForm = ({
               }
               if (!values.address) {
                 errors.address = 'Address is required';
+              }
+              if (!values.files) {
+                errors.files = 'Upload company logo';
               }
               return errors
             }}
@@ -121,7 +137,7 @@ const ProfileForm = ({
                     <div className="form__form-group-field">
                       <Field
                         name="address"
-                        component={renderGoogleAddressField}
+                        component={GooglePlaceAutocomplete}
                         type="text"
                         placeholder="Kuusitie 5 Helsinki"
                       />
@@ -154,15 +170,21 @@ const ProfileForm = ({
                     </div>
                   </div>
                   <Col md={12} sm={12}>
-                    <h5 className="subhead">You can upload multiple files</h5>
-                    <div className="form__form-group">
-                      <div className="form__form-group-field">
-                        <Field
-                          name='files'
-                          component={renderFileInputField}
-                        />
+                    {initialValues && !initialValues.avatar && (
+                      <>
+                      <span className="form__form-group-label">Company logo</span>
+                      <span className="form__form-group-label_right">Required</span>
+                      <div className="form__form-group">
+                        <div className="form__form-group-field">
+                          <Field
+                            name='files'
+                            component={renderFileInputField}
+                          />
+                        </div>
                       </div>
-                    </div>
+                      <Error name="files" />
+                      </>
+                    )}
                   </Col>
                 </div>
                 <div className="profile__btns">

@@ -1,8 +1,276 @@
-.profile__btns {
-  display: flex;
+.profile {
+
 }
-.profile__header_label {
-  font-size: 18px;
-  font-weight: bold;
+
+.profile__card {
+  height: 100%;
+  padding: 0;
+
+  @include themify($themes) {
+    background-color: themed('colorBackground');
+  }
+
+  .nav-item {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .tab-content {
+    padding: 0 30px 40px 30px;
+  }
+
+  .timeline__content {
+
+    @include themify($themes) {
+      background: themed('colorBackgroundBody');
+    }
+
+    &:after {
+
+      @include themify($themes) {
+        border-left-color: themed('colorBackgroundBody');
+      }
+    }
+  }
+
+  .timeline .timeline__item:nth-child(even) {
+
+    .timeline__content {
+
+      &:after {
+
+        @include themify($themes) {
+          border-right-color: themed('colorBackgroundBody');
+        }
+      }
+    }
+  }
+
+  &--calendar {
+    .rbc-toolbar {
+      -webkit-flex-wrap: nowrap!important;
+      flex-wrap: nowrap!important;
+    }
+  }
+}
+
+.profile__information {
+  padding: 30px 40px;
+  display: flex;
+  @include themify($themes) {
+    border-bottom: 1px solid themed('colorBorder');
+  }
+
+  @media (max-width: 1345px) and (min-width: 1200px) {
+    padding: 30px 15px;
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile__data {
+    @media screen and (max-width: 360px) {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 0;
+    }
+  }
+}
+
+.avatar__delete {
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 50%;
+
+  .avatar__delete__icon {
+    fill: #646777;
+    cursor: pointer;
+  }
+  .avatar__delete__icon:hover {
+    fill: $color-red-hover;
+    cursor: pointer;
+  }
+}
+.profile__avatar {
+  height: 140px;
+  width: 140px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #f2f2f2;
+  border: 6px solid #f2f2f2;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+
+  img {
+    height: 100%;
+  }
+
+  @media (max-width: 1345px) and (min-width: 1200px) {
+    height: 130px;
+    width: 130px;
+  }
+}
+
+.profile__stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile__stat {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 15px;
+}
+
+.profile__stat-number {
+  color: $color-blue;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.profile__stat-title {
+  margin: 0;
+  color: $color-additional;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.profile__data {
+  width: calc(100% - 140px);
+}
+
+.profile__name {
+  font-weight: 900;
   text-transform: uppercase;
+  margin: 0;
+  line-height: 18px;
+}
+
+.profile__work {
+  font-weight: 500;
+  margin-bottom: 10px;
+  margin-top: 0;
+  opacity: 0.6;
+  line-height: 18px;
+}
+
+.profile__contact {
+  margin-top: 0;
+  margin-bottom: 5px;
+  line-height: 18px;
+}
+
+.profile__btn {
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding: 8px 15px;
+}
+
+.profile__activity {
+  display: flex;
+  border-bottom: solid 1px #e7e7e7;
+  padding: 20px 0;
+
+  &:last-child {
+    border: none;
+  }
+
+  img {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+    width: auto;
+
+    @media screen and (max-width: 576px) {
+      width: 100%;
+    }
+  }
+}
+
+.profile__activity-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  min-width: 64px;
+
+  img {
+    height: 64px;
+    width: 64px;
+    margin: 0;
+  }
+}
+
+.profile__activity-name {
+  font-weight: 700;
+  color: $color-blue;
+}
+
+.profile__activity-date {
+  font-weight: 400;
+  color: $color-additional;
+  font-size: 10px;
+}
+
+.profile__current-tasks-title {
+  padding: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0;
+
+  span {
+    color: $color-additional;
+    font-size: 13px;
+  }
+}
+
+.profile__current-tasks {
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.profile__current-task {
+  display: flex;
+  margin: 0 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  .badge {
+    text-transform: uppercase;
+    font-size: 9px;
+    padding: 6px 10px;
+    display: inline-table;
+    height: 20px;
+    color: #ffffff;
+
+    &.badge-info {
+      background-color: $color-accent;
+    }
+
+    &.badge-error {
+      background-color: $color-red;
+    }
+  }
+}
+
+.profile__current-task-checkbox {
+  position: absolute;
+}
+
+.profile__see-all-tasks {
+  position: absolute;
+  bottom: 20px;
 }
