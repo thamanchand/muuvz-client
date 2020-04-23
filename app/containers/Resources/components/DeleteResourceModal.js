@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, ButtonToolbar } from 'reactstrap';
+import { Row } from 'reactstrap';
 
 import Modal from '../../../shared/Modal'
 
@@ -10,24 +10,24 @@ const DeleteResourceModal = ({ show, onClose, deleteResourceAction }) => (
     modelToggle={onClose}
     className="modal-dialog--danger"
     color="danger"
+    title="Please confirm"
+    header
   >
-    <div className="modal__header">
-      <h4 className="bold-text  modal__title">Do you want to delete resource?</h4>
-    </div>
-    <div className="modal__body">
-      <p>Deleting resource is irresible</p>
-    </div>
     <Row>
+      <p className="delete__modal__label">Are you sure you want to delete this resource?</p>
       <div className="addEditModal__footer">
-        <ButtonToolbar className="form__button-toolbar">
-          <button
-            className="square btn btn-danger"
-            type="submit"
-            onClick={deleteResourceAction}
-          >
-              Delete resource
-          </button>
-        </ButtonToolbar>
+        <span
+          role="presentation"
+          className="cancel__button"
+          onClick={onClose}
+        > cancel</span>
+        <button
+          className="square btn btn-danger btn-sm rounded"
+          type="submit"
+          onClick={deleteResourceAction}
+        >
+          Delete resource
+        </button>
       </div>
     </Row>
   </Modal>
