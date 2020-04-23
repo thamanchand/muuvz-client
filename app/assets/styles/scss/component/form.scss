@@ -494,7 +494,8 @@
 .addEditModal__footer {
   position: absolute;
   bottom: 0px;
-  right: 29px;
+  right: 40px;
+  display: flex;
 }
 
 span.addEditModal__footer-cancel {

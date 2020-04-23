@@ -92,6 +92,12 @@
   }
 }
 
+.cancel__button {
+  padding: 8px 35px;
+  color: $color-blue;
+  font-size: 16px;
+  cursor: pointer;
+}
 .modal-dialog--primary {
 
   .modal__title-icon {
@@ -114,10 +120,19 @@
 }
 
 .modal-dialog--danger {
-
+  width: 350px;
+  display: flex;
   .modal__title-icon {
     color: $color-red;
   }
+}
+
+.delete__modal__label {
+  color: #646777;
+  font-weight: bold;
+}
+.addEditModal__footer {
+    display: flex;
 }
 
 .modal-dialog--colored {
@@ -196,6 +211,9 @@
 
   .modal__body {
     padding: 25px 40px 20px 20px;
+    &.delete__modal__label {
+    padding: 20px 8px 46px 10px;
+}
   }
 
   .modal__footer {
@@ -222,6 +240,9 @@
 }
 
 
+p.delete__modal__label {
+    padding: 13px 14px 49px 14px;
+}
 .modal-dialog--header-confirm {
   max-width: 70%;
     @media screen and (max-width: 575px) {
