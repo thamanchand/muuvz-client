@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 import { Col, Container, Row } from 'reactstrap';
 import Statistics from '../Booking/components/Statistics';
@@ -32,17 +33,20 @@ class Profile extends React.PureComponent {
     }
   }
 
-  profileSaveHandler = (profilePayload) => {
-    this.props.onProfileSave(profilePayload);
+  profileSaveHandler = async profilePayload => {
+    const results = await geocodeByAddress(profilePayload.address);
+    const latLong = await getLatLng(results[0]);
+    this.props.onProfileSave({...profilePayload, latLong });
   }
 
-  profileEditHandler = (profilePayload, profileId) => {
-    this.props.onProfileEdit(profileId, profilePayload);
+  profileEditHandler = async (profilePayload, profileId) => {
+    const results = await geocodeByAddress(profilePayload.address);
+    const latLong = await getLatLng(results[0]);
+    this.props.onProfileEdit(profileId, {...profilePayload, latLong });
   }
 
   render() {
     const { userProfile } = this.props;
-    console.log("Profile component", userProfile);
     const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
     return (
       <div>
