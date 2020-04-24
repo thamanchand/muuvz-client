@@ -8,6 +8,9 @@ import {
   ON_PROFILE_EDIT,
   ON_PROFILE_EDIT_SUCCESS,
   ON_PROFILE_EDIT_FAILED,
+  ON_USERPROFILE_DELETE,
+  ON_USERPROFILE_DELETE_SUCCESS,
+  ON_USERPROFILE_DELETE_FAILED,
 } from './constants';
 /**
  * Sends the request to the API
@@ -57,5 +60,21 @@ export const onProfileEditSuccess = (userProfile) => ({
 
 export const onProfileEditFailed = (error) => ({
   type: ON_PROFILE_EDIT_FAILED,
+  error
+});
+
+export const onUserProfileDelete = (avatarId, profileId) => ({
+  type: ON_USERPROFILE_DELETE,
+  avatarId,
+  profileId,
+});
+
+export const onUserProfileDeleteSuccess = (userProfile) => ({
+  type: ON_USERPROFILE_DELETE_SUCCESS,
+  userProfile,
+});
+
+export const onUserProfileDeleteFailed = (error) => ({
+  type: ON_USERPROFILE_DELETE_FAILED,
   error
 });
