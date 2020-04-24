@@ -88,7 +88,9 @@ const ResourceList = ({
                   <td>{item.model}</td>
                   <td>{formatDate(item.year)}</td>
                   <td>
-                    <Badge color="success">Available</Badge>
+                    {item.status ==='Available' && <Badge color="success">{item.status}</Badge>}
+                    {item.status ==='Booked' && <Badge color="badge badge-primary">{item.status}</Badge>}
+                    {item.status ==='Inuse' && <Badge color="badge badge-warning">In use</Badge>}
                   </td>
                   <td>
                     <span style={iconStyles}>
