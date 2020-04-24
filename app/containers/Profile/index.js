@@ -19,7 +19,13 @@ import injectReducer from '../../utils/injectReducer';
 import saga from './saga';
 import reducer from './reducer';
 
-import { onProfileSave, onProfileLoad, onProfileEdit } from './action';
+import {
+  onProfileSave,
+  onProfileLoad,
+  onProfileEdit,
+  onUserProfileDelete,
+} from './action';
+
 import { userProfileSelector } from './selector';
 
 const key = 'profilePage';
@@ -43,6 +49,10 @@ class Profile extends React.PureComponent {
     const results = await geocodeByAddress(profilePayload.address);
     const latLong = await getLatLng(results[0]);
     this.props.onProfileEdit(profileId, {...profilePayload, latLong });
+  }
+
+  onAvatarDelete = (avatarId, profileId) => {
+    this.props.onUserProfileDelete(avatarId, profileId);
   }
 
   render() {
@@ -69,6 +79,7 @@ class Profile extends React.PureComponent {
                 onProfileFormSave={this.profileSaveHandler}
                 onProfileFormEdit={this.profileEditHandler}
                 initialValues={userProfile || {}}
+                onAvatarDelete={this.onAvatarDelete}
               />
             </Row>
           </Container>
@@ -83,6 +94,7 @@ Profile.propTypes = {
   onProfileSave: PropTypes.func,
   onProfileEdit: PropTypes.func,
   userProfile: PropTypes.object,
+  onUserProfileDelete: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -92,7 +104,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   onProfileSave: bindActionCreators(onProfileSave, dispatch),
   onProfileLoad: bindActionCreators(onProfileLoad, dispatch),
-  onProfileEdit: bindActionCreators(onProfileEdit, dispatch)
+  onProfileEdit: bindActionCreators(onProfileEdit, dispatch),
+  onUserProfileDelete: bindActionCreators(onUserProfileDelete, dispatch)
 });
 
 const withConnect = connect(
