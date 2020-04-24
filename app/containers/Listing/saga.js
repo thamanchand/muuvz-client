@@ -12,10 +12,15 @@ import  history from '../../utils/history';
 import {
   onSearchSuccess,
   onSearchFailed,
+  onBookingSuccess,
+  onBookingFailed,
 } from './actions';
+
+import * as api from './api';
 
 import {
   ON_SEARCH,
+  ON_BOOKING,
 } from './constants';
 
 const baseURL = "http://localhost:1337/";
@@ -34,8 +39,23 @@ export function* searchResourceWatcher(action) {
   }
 }
 
+export function* onBookingWatcher(action) {
+  console.log("Booking action", action);
+
+  try {
+    const payload = action.bookingPayload;
+    const bookingResponse = yield call(api.postResourceBooking, payload);
+    if (bookingResponse) {
+      yield put(onBookingSuccess(bookingResponse));
+    }
+  } catch(error) {
+    yield put(onBookingFailed(error));
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(ON_SEARCH, searchResourceWatcher);
+  yield takeLatest(ON_BOOKING, onBookingWatcher);
 }
 
 function forwardTo(location) {
