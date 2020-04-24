@@ -49,28 +49,10 @@ export default class CalendarComponent extends PureComponent {
     });
   };
 
+
   eventStyleGetter = event => {
-    let color;
-
-    switch (event.priority) {
-      case 'high':
-        color = '#fa697d';
-        break;
-
-      case 'family':
-        color = '#4ce1b6';
-        break;
-
-      case 'non':
-        color = '#70bbfd';
-        break;
-      default:
-        color = '$color-additional';
-        break;
-    }
-
     const style = {
-      backgroundColor: color,
+      backgroundColor: event.color,
       border: 'none',
     };
 
@@ -93,7 +75,6 @@ export default class CalendarComponent extends PureComponent {
           timeslots={1}
           showMultiDayTimes
           onEventDrop={this.moveEvent}
-          defaultDate={new Date(2018, 3, 1)}
           eventPropGetter={this.eventStyleGetter}
           messages={{
             previous: <span className="lnr lnr-chevron-left" />,
