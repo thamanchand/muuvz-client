@@ -20,7 +20,8 @@ const ProfileForm = ({
   onProfileFormSave,
   reset,
   initialValues,
-  onProfileFormEdit
+  onProfileFormEdit,
+  onAvatarDelete,
 }) => {
   console.log("initialValues", initialValues)
   const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
@@ -40,22 +41,24 @@ const ProfileForm = ({
           <div className="card__title">
             <h5 className="bold-text">Business</h5>
             <h5 className="subhead">Fill all fields</h5>
-            <div className="profile__information">
-              <div className="profile__avatar">
-                <img
-                  className="avatar"
-                  alt="profileImage"
-                  src={initialValues.avatar ? `${'http://localhost:1337'}${initialValues.avatar.url}` : null }
-                />
-                <span className="avatar__delete">
-                  <DeleteForeverIcon
-                    size="25" color="#ff4861"
-                    onClick={() => console.log("delete avatar")}
-                    className="avatar__delete__icon"
+            {initialValues && initialValues.avatar && initialValues.avatar.id && (
+              <div className="profile__information">
+                <div className="profile__avatar">
+                  <img
+                    className="avatar"
+                    alt="profileImage"
+                    src={initialValues.avatar ? `${'http://localhost:1337'}${initialValues.avatar.url}` : null }
                   />
-                </span>
+                  <span className="avatar__delete">
+                    <DeleteForeverIcon
+                      size="25" color="#ff4861"
+                      onClick={() => onAvatarDelete(initialValues.avatar.id, initialValues.id)}
+                      className="avatar__delete__icon"
+                    />
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <Form
             onSubmit={onSubmit}
@@ -76,7 +79,7 @@ const ProfileForm = ({
               }
               return errors
             }}
-            render={({ handleSubmit, values,  submitting, pristine,}) => (
+            render={({ handleSubmit, values,  submitting }) => (
               <form className="form form--vertical" onSubmit={handleSubmit}>
                 <div className="form__half">
                   <div className="form__form-group">
@@ -170,7 +173,7 @@ const ProfileForm = ({
                     </div>
                   </div>
                   <Col md={12} sm={12}>
-                    {initialValues && !initialValues.avatar && (
+                    {initialValues && !(initialValues.avatar && initialValues.avatar.id)  && (
                       <>
                       <span className="form__form-group-label">Company logo</span>
                       <span className="form__form-group-label_right">Required</span>
@@ -191,18 +194,26 @@ const ProfileForm = ({
                   <button className="square btn btn-success" type="button" onClick={reset}>
                     Cancel
                   </button>
-                  {isProfileCompleted ? (
+                  {isProfileCompleted && (
                     <button
                       className="square btn btn-primary"
                       type="submit"
                       onClick={() => onProfileFormEdit(values, initialValues.id)}
-                      disabled={submitting || pristine}
+                      disabled={submitting }
                     >Submit</button>
-                  ) : (
+                  )}
+                  {!(isProfileCompleted && initialValues.id) && (
                     <button
                       className="square btn btn-primary"
                       type="submit"
                       onClick={() => onProfileFormSave(values)}
+                    >Submit</button>
+                  )}
+                  {!isProfileCompleted && initialValues.id && (
+                    <button
+                      className="square btn btn-primary"
+                      type="submit"
+                      onClick={() => onProfileFormEdit(values, initialValues.id)}
                     >Submit</button>
                   )}
                 </div>
@@ -219,7 +230,8 @@ ProfileForm.propTypes = {
   onProfileFormSave: PropTypes.func,
   reset: PropTypes.func,
   initialValues: PropTypes.object,
-  onProfileFormEdit: PropTypes.func
+  onProfileFormEdit: PropTypes.func,
+  onAvatarDelete: PropTypes.func,
 }
 
 export default ProfileForm;
