@@ -113,7 +113,7 @@ VanListPage.propTypes = {
   // })).isRequired,
 }
 
-VanListPage.Class.propTypes = {
+VanListPage.propTypes = {
   onBooking: PropTypes.func,
 }
 const mapStateToProps = createStructuredSelector({
