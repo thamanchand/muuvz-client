@@ -9,3 +9,7 @@ export const ON_PROFILEPAGE_SAVE_FAILED = 'app/ResourcePage/ON_PROFILEPAGE_SAVE_
 export const ON_PROFILE_EDIT = 'app/ResourcePage/ON_PROFILE_EDIT';
 export const ON_PROFILE_EDIT_SUCCESS = 'app/ResourcePage/ON_PROFILE_EDIT_SUCCESS';
 export const ON_PROFILE_EDIT_FAILED = 'app/ResourcePage/ON_PROFILE_EDIT_FAILED';
+
+export const ON_USERPROFILE_DELETE = 'app/ResourcePage/ON_USERPROFILE_DELETE';
+export const ON_USERPROFILE_DELETE_SUCCESS = 'app/ResourcePage/ON_USERPROFILE_DELETE_SUCCESS';
+export const ON_USERPROFILE_DELETE_FAILED = 'app/ResourcePage/ON_PROFILE_EDIT_FAILED';
