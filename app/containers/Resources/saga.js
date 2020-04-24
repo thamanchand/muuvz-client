@@ -46,7 +46,7 @@ export function* vanInfoSaveWatcher(action) {
 
   try {
     // Prepare resource post payload
-    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, user: loggedUserId };
+    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, user: loggedUserId, status: 'Available' };
 
     const vanList = yield call(api.postResource,  resourcePayload);
     if (vanList) {
