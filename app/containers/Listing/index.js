@@ -9,8 +9,9 @@ import { bindActionCreators, compose } from 'redux';
 // Utils
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import auth from '../../utils/auth';
 
-import { onSearch } from './actions';
+import { onSearch, onBooking } from './actions';
 import { selectResourcesSelector } from './selectors';
 import Search from '../../shared/SearchForm';
 import VanListing from './components/VanListing';
@@ -26,7 +27,6 @@ class VanListPage extends PureComponent {
 
   componentDidMount() {
     const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
-    console.log("searchQuer", searchQuery);
     this.props.onSearch(searchQuery);
   }
 
@@ -34,6 +34,19 @@ class VanListPage extends PureComponent {
     const { isEdit } = this.state;
     this.setState({ isEdit: !isEdit})
   }
+
+  bookingHandler = (resourceId) => {
+    const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
+
+    const payload = {
+      resource: resourceId,
+      user: auth.get('userInfo').id,
+      bookedStartDateTime: searchQuery.pickupDateTime,
+      bookedEndDateTime: searchQuery.dropOfftDateTime
+    }
+    this.props.onBooking(payload);
+  }
+
 
   render() {
     const { resourceList } = this.props;
@@ -65,6 +78,7 @@ class VanListPage extends PureComponent {
                 <div className="van__list">
                   <VanListing
                     vanList={resourceList}
+                    bookingHandler={this.bookingHandler}
                   />
                 </div>
               </Col>
@@ -99,12 +113,16 @@ VanListPage.propTypes = {
   // })).isRequired,
 }
 
+VanListPage.Class.propTypes = {
+  onBooking: PropTypes.func,
+}
 const mapStateToProps = createStructuredSelector({
   resourceList: selectResourcesSelector(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSearch: bindActionCreators(onSearch, dispatch)
+  onSearch: bindActionCreators(onSearch, dispatch),
+  onBooking: bindActionCreators(onBooking, dispatch),
 });
 
 

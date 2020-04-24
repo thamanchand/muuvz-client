@@ -15,7 +15,7 @@ const iconStyles = {
   color: '#70C1B3'
 };
 
-const VanListing = ({ vanList }) => (
+const VanListing = ({ vanList, bookingHandler }) => (
   <div className="listing__wrapper">
     <Container>
       <Row>
@@ -36,7 +36,11 @@ const VanListing = ({ vanList }) => (
                       </span>
                     ))}
                     <span className="hr-small">,hr</span>
-                    <button type="button" className="square btn btn-danger">Book</button>
+                    <button
+                      type="button"
+                      className="square btn btn-danger"
+                      onClick={() => bookingHandler(item.id)}
+                    >Book</button>
                   </div>
                   <div className="slideshow">
                     <GalleySlideshow input={item.cover} ratio="3:2" mode="manual" />
@@ -73,6 +77,7 @@ const VanListing = ({ vanList }) => (
 );
 
 VanListing.propTypes = {
+  bookingHandler: PropTypes.func,
   vanList: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,
