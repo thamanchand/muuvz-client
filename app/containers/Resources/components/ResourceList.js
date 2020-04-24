@@ -88,9 +88,11 @@ const ResourceList = ({
                   <td>{item.model}</td>
                   <td>{formatDate(item.year)}</td>
                   <td>
-                    {item.status ==='Available' && <Badge color="success">{item.status}</Badge>}
-                    {item.status ==='Booked' && <Badge color="badge badge-primary">{item.status}</Badge>}
-                    {item.status ==='Inuse' && <Badge color="badge badge-warning">In use</Badge>}
+                    {item.status ==='Available' && <Badge color="success">AVAILABLE</Badge>}
+                    {item.status ==='Booked' && <Badge color="badge badge-primary">BOOKED</Badge>}
+                    {item.status ==='Inuse' && <Badge color="badge badge-warning">IN USE</Badge>}
+                    {item.status ==='Waiting' && <Badge color="badge badge-danger">WAITING</Badge>}
+                    {item.status ==='Cancelled' && <Badge color="badge badge-info">CANCELLED</Badge>}
                   </td>
                   <td>
                     <span style={iconStyles}>
