@@ -40,7 +40,7 @@ const EmailConfirmationCard = (props) => (
 );
 
 EmailConfirmationCard.propTypes = {
-  location: PropTypes.shapeOf({
+  location: PropTypes.shape({
     search: PropTypes.string,
   })
 }

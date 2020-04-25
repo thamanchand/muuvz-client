@@ -62,7 +62,7 @@ export default function App() {
 }
 
 App.propTypes = {
-  location: PropTypes.shapeOf({
+  location: PropTypes.shape({
     search: PropTypes.string,
   })
 }
