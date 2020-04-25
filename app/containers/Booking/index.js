@@ -69,7 +69,7 @@ class BookingDashboard extends React.PureComponent {
 BookingDashboard.propTypes = {
   onBookingLoad: PropTypes.func,
   bookingList: PropTypes.array,
-  onResourceLoad: PropTypes.array,
+  onResourceLoad: PropTypes.func,
   resourceList: PropTypes.array,
 }
 
