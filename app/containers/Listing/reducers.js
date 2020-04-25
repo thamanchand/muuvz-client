@@ -15,7 +15,7 @@ import {
 
 export const initialState = fromJS({
   searchResult: [],
-  loading: false,
+  searchLoading: false,
 });
 
 function searchItemReducer(state = initialState, action) {
@@ -23,7 +23,7 @@ function searchItemReducer(state = initialState, action) {
     case ON_SEARCH:
       return state
         .set('searchResult', fromJS([]))
-        .set('loading', true);
+        .set('searchLoading', true);
 
     case ON_SEARCH_SUCCESS:
       return state
@@ -31,7 +31,9 @@ function searchItemReducer(state = initialState, action) {
         .set('isLoading', false);
 
     case ON_SEARCH_FAILED:
-      return state.set('error', fromJS(action.error))
+      return state
+        .set('error', fromJS(action.error))
+        .set('searchLoading', false)
 
     default:
       return state;

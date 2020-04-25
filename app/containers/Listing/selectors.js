@@ -13,3 +13,9 @@ export const selectResourcesSelector = () =>
     selectResourceDomain,
     subState => subState.get('searchResult').toJS()
   );
+
+export const isSearchLoadingSelector = () =>
+  createSelector(
+    selectResourceDomain,
+    subState => subState.get('searchLoading')
+  );
