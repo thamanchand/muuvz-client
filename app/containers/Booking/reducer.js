@@ -10,11 +10,15 @@ import {
   ON_BOOKING_LOAD,
   ON_BOOKING_LOAD_SUCCESS,
   ON_BOOKING_LOAD_FAILED,
+  ON_RESOURCE_LOAD,
+  ON_RESOURCE_LOAD_SUCCESS,
+  ON_RESOURCE_LOAD_FAILED,
 } from './constants';
 
 
 export const initialState = fromJS({
   bookingResult: [],
+  resourceList: [],
   loading: false,
 });
 
@@ -30,6 +34,18 @@ function resourceBookingReducer(state = initialState, action) {
         .set('isLoading', false);
 
     case ON_BOOKING_LOAD_FAILED:
+      return state.set('error', fromJS(action.error))
+
+    case ON_RESOURCE_LOAD:
+      return state
+        .set('loading', true);
+
+    case ON_RESOURCE_LOAD_SUCCESS:
+      return state
+        .set('resourceList', fromJS(action.resourceList))
+        .set('isLoading', false);
+
+    case ON_RESOURCE_LOAD_FAILED:
       return state.set('error', fromJS(action.error))
 
     default:
