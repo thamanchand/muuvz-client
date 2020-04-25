@@ -4,6 +4,8 @@ import { Container, Row } from 'reactstrap';
 import Icon from 'react-icons-kit';
 import {heartO} from 'react-icons-kit/fa/heartO'
 import {ic_euro_symbol as euroSymbol} from 'react-icons-kit/md/ic_euro_symbol'
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 // import { formatNumber } from '../../utils';
 import GalleySlideshow from '../../../shared/GalleySlideshow';
@@ -15,12 +17,19 @@ const iconStyles = {
   color: '#70C1B3'
 };
 
-const VanListing = ({ vanList, bookingHandler }) => (
+const VanListing = ({ vanList, bookingHandler, isSearchLoading }) => (
   <div className="listing__wrapper">
     <Container>
       <Row>
         <section className="vanlist">
           <div className="van__content">
+            <div className="van__loading">
+              <ClipLoader
+                size={120}
+                color="#70C1B3"
+                loading={isSearchLoading}
+              />
+            </div>
             {vanList && vanList.map(item => (
               <div>
                 <div className="media" key={uuid()}>
@@ -78,6 +87,7 @@ const VanListing = ({ vanList, bookingHandler }) => (
 
 VanListing.propTypes = {
   bookingHandler: PropTypes.func,
+  isSearchLoading: PropTypes.bool,
   vanList: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,
@@ -103,7 +113,7 @@ VanListing.propTypes = {
         created_at: PropTypes.string,
         updated_at: PropTypes.string,
       })
-    }).isRequired
+    }).isRequired,
   ),
 }
 
