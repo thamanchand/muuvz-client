@@ -5,9 +5,6 @@ import {
   all,
 } from 'redux-saga/effects';
 
-import auth from '../../utils/auth';
-import request from '../../utils/request';
-
 // constants
 import {
   onVanListLoadSuccess,
@@ -25,6 +22,10 @@ import {
 } from './constants';
 
 // import { filterInt } from '../utils';
+
+import auth from '../../utils/auth';
+import request from '../../utils/request';
+import { randomHsl } from '../utils';
 
 import * as api from './api';
 
@@ -46,7 +47,7 @@ export function* vanInfoSaveWatcher(action) {
 
   try {
     // Prepare resource post payload
-    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, user: loggedUserId, status: 'Available' };
+    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, user: loggedUserId, status: 'Available', color: randomHsl() };
 
     const vanList = yield call(api.postResource,  resourcePayload);
     if (vanList) {
