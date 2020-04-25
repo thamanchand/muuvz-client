@@ -13,3 +13,9 @@ export const selectBookingSelector = () =>
     selectBookingDomain,
     subState => subState.get('bookingResult').toJS()
   );
+
+export const resourceListSelector = () =>
+  createSelector(
+    selectBookingDomain,
+    subState => subState.get('resourceList').toJS()
+  );
