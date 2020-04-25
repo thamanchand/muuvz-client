@@ -35,12 +35,12 @@ const VanListing = ({ vanList, bookingHandler }) => (
                         {cost.price}
                       </span>
                     ))}
-                    <span className="hr-small">,hr</span>
+                    <span className="hr-small">/hr</span>
                     <button
                       type="button"
                       className="square btn btn-danger"
                       onClick={() => bookingHandler(item.id)}
-                    >Book</button>
+                    >BOOK VAN</button>
                   </div>
                   <div className="slideshow">
                     <GalleySlideshow input={item.cover} ratio="3:2" mode="manual" />
