@@ -17,7 +17,7 @@ const iconStyles = {
   color: '#70C1B3'
 };
 
-const VanListing = ({ vanList, bookingHandler, isSearchLoading }) => (
+const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked }) => (
   <div className="listing__wrapper">
     <Container>
       <Row>
@@ -49,6 +49,7 @@ const VanListing = ({ vanList, bookingHandler, isSearchLoading }) => (
                       type="button"
                       className="square btn btn-danger"
                       onClick={() => bookingHandler(item.id)}
+                      disabled={isBooked}
                     >BOOK VAN</button>
                   </div>
                   <div className="slideshow">
@@ -88,6 +89,7 @@ const VanListing = ({ vanList, bookingHandler, isSearchLoading }) => (
 VanListing.propTypes = {
   bookingHandler: PropTypes.func,
   isSearchLoading: PropTypes.bool,
+  isBooked: PropTypes.bool,
   vanList: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,
