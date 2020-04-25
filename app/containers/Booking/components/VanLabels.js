@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Card, CardBody, Col } from 'reactstrap';
+
+const { uuid } = require('uuidv4');
 
 const EventLabels = ({ resourceList }) => (
   <Col md={12} lg={12} xl={3}>
@@ -11,7 +12,7 @@ const EventLabels = ({ resourceList }) => (
           <h5 className="bold-text">Resource labels</h5>
         </div>
         {resourceList && resourceList.map(resource => (
-          <p>
+          <p key={uuid()}>
             <span className="calendar-label" style={{backgroundColor: resource.color}} /> {resource.brand}
           </p>
         ))}
