@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 import { Card, CardBody, Col } from 'reactstrap';
 
-const EventLabels = ({ bookingList }) => (
+const EventLabels = ({ resourceList }) => (
   <Col md={12} lg={12} xl={3}>
     <Card className="card--not-full-height">
       <CardBody>
         <div className="card__title">
           <h5 className="bold-text">Resource labels</h5>
         </div>
-        {bookingList.map(event => (
+        {resourceList && resourceList.map(resource => (
           <p>
-            <span className="calendar-label" style={{backgroundColor: event.resource.color}} /> {event.resource.brand}
+            <span className="calendar-label" style={{backgroundColor: resource.color}} /> {resource.brand}
           </p>
         ))}
 
@@ -22,14 +22,6 @@ const EventLabels = ({ bookingList }) => (
 );
 
 EventLabels.propTypes = {
-  bookingList: PropTypes.arrayOf(PropTypes.shape({
-    event: PropTypes.id,
-    title: PropTypes.string,
-    start: PropTypes.obj,
-    end: PropTypes.obj,
-    color: PropTypes.string
-  }).isRequired
-  )
-};
-
+  resourceList: PropTypes.array,
+}
 export default EventLabels;
