@@ -11,12 +11,15 @@ import {
 import {
   onBookingLoadSuccess,
   onBookingLoadFailed,
+  onResourceLoadSuccess,
+  onResourceLoadFailed,
 } from './action';
 
 import * as api from './api';
 
 import {
   ON_BOOKING_LOAD,
+  ON_RESOURCE_LOAD,
 } from './constants';
 
 export function* onBookingLoadWatcher(action) {
@@ -32,10 +35,21 @@ export function* onBookingLoadWatcher(action) {
   }
 }
 
-export default function* defaultSaga() {
-  yield takeLatest(ON_BOOKING_LOAD, onBookingLoadWatcher);
+export function* onResourceLoadWatcher(action) {
+  console.log("Resource load action", action);
+
+  try {
+    const resourceList = yield call(api.getResources);
+    if (resourceList) {
+      console.log("api resourceList", resourceList)
+      yield put(onResourceLoadSuccess(resourceList));
+    }
+  } catch(error) {
+    yield put(onResourceLoadFailed(error));
+  }
 }
 
-// function forwardTo(location) {
-//   history.push(location);
-// }
+export default function* defaultSaga() {
+  yield takeLatest(ON_BOOKING_LOAD, onBookingLoadWatcher);
+  yield takeLatest(ON_RESOURCE_LOAD, onResourceLoadWatcher);
+}
