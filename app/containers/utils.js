@@ -18,3 +18,16 @@ export const filterInt = (value) => {
 
 
 export const randomHsl = () => `hsla(${Math.random() * 360}, 100%, 50%, 1)`
+
+// create unique booking ID
+export const uniqueBookingId = () => {
+  const numberOfChars = 5
+  const letters = "ABCDEFGHJKMNPQRSTUXY";
+  let result = "";
+  while (result.length < numberOfChars) {
+    const randInt = Math.floor((Math.random() * 19) + 1);
+    const randChr= letters[randInt];
+    if (result.substr(-1, 1)!== randChr) result += randChr;
+  }
+  return (result);
+}
