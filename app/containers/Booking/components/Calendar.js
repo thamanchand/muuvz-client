@@ -9,6 +9,7 @@ const localizer = BigCalendar.momentLocalizer(moment);
 
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
+
 export default class CalendarComponent extends PureComponent {
   static propTypes = {
     events: PropTypes.arrayOf(
@@ -70,7 +71,7 @@ export default class CalendarComponent extends PureComponent {
           localizer={localizer}
           events={events}
           views={['month', 'week', 'day']}
-          popup
+          popup={false}
           step={60}
           timeslots={1}
           showMultiDayTimes
@@ -79,7 +80,6 @@ export default class CalendarComponent extends PureComponent {
           messages={{
             previous: <span className="lnr lnr-chevron-left" />,
             next: <span className="lnr lnr-chevron-right" />,
-            today: <span className="lnr lnr-calendar-full" />,
           }}
         />
       </div>
