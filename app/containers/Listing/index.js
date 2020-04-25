@@ -61,17 +61,22 @@ class VanListPage extends PureComponent {
             <Row>
               <Col md={3} className="van__search">
                 <div className="van__list-nav">
-                  <span
+                  <div
+                    className="edit-btn"
                     role="button"
                     tabIndex="0"
                     onClick={this.onSearchEditToggle}
                     onKeyDown={this.onSearchEditToggle}
-                  >Edit</span>
-                  <Search
-                    onSearch={this.onSearch}
-                    disabled={isEdit}
-                    storedValues={storedValues}
-                  />
+                  >
+                    Edit search
+                  </div>
+                  <div className="search__wrapper">
+                    <Search
+                      onSearch={this.onSearch}
+                      disabled={isEdit}
+                      storedValues={storedValues}
+                    />
+                  </div>
                 </div>
               </Col>
               <Col md={9} className="van__content">

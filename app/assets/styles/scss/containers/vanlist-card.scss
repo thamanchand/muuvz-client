@@ -168,7 +168,7 @@
 
 .pricing__content {
   background: #ffffff;
-  padding: 4px;
+  padding: 20px;
   text-align: center;
   right: 0;
   position: absolute;
@@ -185,9 +185,20 @@
 }
 .hr-small{
   font-size: 24px;
-  color: #70C1B3;
+  color: #FF1654;
 }
 
+.edit-btn {
+  color: #646777;
+  outline: none;
+  cursor: pointer;
+  float: right;
+  font-size: 14px;
+}
+
+.search__wrapper {
+  margin-top: 25px;
+}
 img .feature__icon {
   width: 20px;
   height: 20px;
