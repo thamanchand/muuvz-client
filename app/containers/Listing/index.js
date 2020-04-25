@@ -12,7 +12,7 @@ import injectReducer from 'utils/injectReducer';
 import auth from '../../utils/auth';
 
 import { onSearch, onBooking } from './actions';
-import { selectResourcesSelector } from './selectors';
+import { selectResourcesSelector, isSearchLoadingSelector } from './selectors';
 import Search from '../../shared/SearchForm';
 import VanListing from './components/VanListing';
 import saga from './saga';
@@ -49,7 +49,7 @@ class VanListPage extends PureComponent {
 
 
   render() {
-    const { resourceList } = this.props;
+    const { resourceList, isSearchLoading } = this.props;
     const { isEdit } = this.state;
     const storedValues = JSON.parse(window.localStorage.getItem('searchQuery'));
 
@@ -84,6 +84,7 @@ class VanListPage extends PureComponent {
                   <VanListing
                     vanList={resourceList}
                     bookingHandler={this.bookingHandler}
+                    isSearchLoading={isSearchLoading}
                   />
                 </div>
               </Col>
@@ -99,6 +100,7 @@ VanListPage.propTypes = {
   // onVanListLoad: PropTypes.func,
   resourceList: PropTypes.object,
   onSearch: PropTypes.func,
+  isSearchLoading: PropTypes.bool,
   // vanList: PropTypes.arrayOf(PropTypes.shape({
   //   _id: PropTypes.string,
   //   createdAt: PropTypes.string,
@@ -123,6 +125,7 @@ VanListPage.propTypes = {
 }
 const mapStateToProps = createStructuredSelector({
   resourceList: selectResourcesSelector(),
+  isSearchLoading: isSearchLoadingSelector()
 });
 
 const mapDispatchToProps = (dispatch) => ({
