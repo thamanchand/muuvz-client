@@ -23,10 +23,11 @@
 
   .badge {
     color: #ffffff;
-    padding: 6px 20px;
+    padding: 6px;
     border-radius: 15px;
     font-size: 12px;
     font-weight: 400;
+    width: 100px;
 
     &.badge-success {
       background-color: $color-accent;
