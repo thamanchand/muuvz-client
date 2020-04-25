@@ -10,12 +10,16 @@ import {
   ON_SEARCH,
   ON_SEARCH_SUCCESS,
   ON_SEARCH_FAILED,
+  ON_BOOKING,
+  ON_BOOKING_SUCCESS,
+  ON_BOOKING_FAILED,
 } from './constants';
 
 
 export const initialState = fromJS({
   searchResult: [],
   searchLoading: false,
+  isBooked: false,
 });
 
 function searchItemReducer(state = initialState, action) {
@@ -34,6 +38,19 @@ function searchItemReducer(state = initialState, action) {
       return state
         .set('error', fromJS(action.error))
         .set('searchLoading', false)
+
+    case ON_BOOKING:
+      return state
+        .set('isBooked', true);
+
+    case ON_BOOKING_SUCCESS:
+      return state
+        .set('isBooked', false);
+
+    case ON_BOOKING_FAILED:
+      return state
+        .set('error', fromJS(action.error))
+        .set('isBooked', false)
 
     default:
       return state;
