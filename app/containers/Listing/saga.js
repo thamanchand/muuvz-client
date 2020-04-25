@@ -3,6 +3,7 @@ import {
   takeLatest,
   put,
 } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 
 // Utils
 import request from 'utils/request';
@@ -15,6 +16,8 @@ import {
   onBookingSuccess,
   onBookingFailed,
 } from './actions';
+
+import { uniqueBookingId } from '../utils';
 
 import * as api from './api';
 
@@ -43,9 +46,11 @@ export function* onBookingWatcher(action) {
   console.log("Booking action", action);
 
   try {
-    const payload = action.bookingPayload;
+    const getUniqueBookingId = uniqueBookingId();
+    const payload = {...action.bookingPayload, bookingId: getUniqueBookingId};
     const bookingResponse = yield call(api.postResourceBooking, payload);
     if (bookingResponse) {
+      yield put(push(`${'/listing/bookingconfirmation?'}${'bookingId='}${getUniqueBookingId}`));
       yield put(onBookingSuccess(bookingResponse));
     }
   } catch(error) {
