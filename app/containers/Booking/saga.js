@@ -41,7 +41,6 @@ export function* onResourceLoadWatcher(action) {
   try {
     const resourceList = yield call(api.getResources);
     if (resourceList) {
-      console.log("api resourceList", resourceList)
       yield put(onResourceLoadSuccess(resourceList));
     }
   } catch(error) {
