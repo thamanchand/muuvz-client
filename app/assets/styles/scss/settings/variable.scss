@@ -35,6 +35,16 @@ $themes: (
   @return map-get($theme-map, $key);
 }
 
+$primary-color: #247BA0;
+$secondary-color: #EE2761;
+$text-color: #6C7486;
+$header-color: #3F4656;
+$field-border: #CDD9ED;
+$field-hover-border: #99A3BA;
+$field-error-border: #EE2761;
+
+
+
 $field-bg-color: #F2F2F2;
 $color-accent: #4ce1b6;
 $input-field-hover-border-color: #4ce1b6;
