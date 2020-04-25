@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Card, CardBody, Col, Row
 } from 'reactstrap';
@@ -7,7 +8,7 @@ import CheckboxMarkedCircleIcon from 'mdi-react/CheckboxMarkedCircleIcon';
 import Footer from '../HomePage/components/Footer';
 import HeaderNav from '../../shared/Header';
 
-const EmailConfirmationCard = () => (
+const EmailConfirmationCard = (props) => (
   <>
     <HeaderNav source="listing" />
     <div className="Listing__page">
@@ -22,8 +23,9 @@ const EmailConfirmationCard = () => (
                       <div className="email-confirmation__icon">
                         <CheckboxMarkedCircleIcon className="email-confirmation__check" />
                       </div>
-                      <h3 className="email-confirmation__title">Booking ID: #fedeef </h3>
+                      <h3 className="email-confirmation__title">Booking ID: {(props.location.search).split('=')[1]} </h3>
                       <p className="email-confirmation__sub">You successfully created booking</p>
+                      <p className="email-confirmation__sub">Please your check email for booking details</p>
                     </div>
                   </CardBody>
                 </Card>
@@ -37,4 +39,9 @@ const EmailConfirmationCard = () => (
   </>
 );
 
+EmailConfirmationCard.propTypes = {
+  location: PropTypes.shapeOf({
+    search: PropTypes.string,
+  })
+}
 export default EmailConfirmationCard;
