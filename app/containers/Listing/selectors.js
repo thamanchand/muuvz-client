@@ -19,3 +19,9 @@ export const isSearchLoadingSelector = () =>
     selectResourceDomain,
     subState => subState.get('searchLoading')
   );
+
+export const isBookedSelector = () =>
+  createSelector(
+    selectResourceDomain,
+    subState => subState.get('isBooked')
+  );
