@@ -23,6 +23,7 @@ import ConnectPage from 'containers/ConnectPage';
 import LoginPage from 'containers/LoginPage';
 import RegisterPage from 'containers/RegisterPage';
 import VanListing from '../Listing';
+import BookingConfirmation from '../BookingConfirmation';
 import MainWrapper from '../../components/Wrapper';
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/listing" component={VanListing} />
+          <Route exact path="/listing/bookingconfirmation" component={BookingConfirmation} />
           <PrivateRoute exact path="/dashboard/booking" component={Booking} />
           <PrivateRoute exact path="/dashboard/resources" component={Resources} />
           <PrivateRoute exact path="/dashboard/profile" component={ProfilePage} />
