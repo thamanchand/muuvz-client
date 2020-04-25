@@ -7,7 +7,8 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Switch, Route, Redirect} from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage';
@@ -33,7 +34,19 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/listing" component={VanListing} />
-          <Route exact path="/listing/bookingconfirmation" component={BookingConfirmation} />
+          <Route
+            exact
+            path="/listing/bookingconfirmation"
+            render={props => {
+              const searchParam = props.location.search;
+              if(searchParam.startsWith('?')) {
+                return (
+                  <BookingConfirmation {...props} />
+                )
+              }
+              return <Redirect to='/' />
+            }}
+          />
           <PrivateRoute exact path="/dashboard/booking" component={Booking} />
           <PrivateRoute exact path="/dashboard/resources" component={Resources} />
           <PrivateRoute exact path="/dashboard/profile" component={ProfilePage} />
@@ -46,4 +59,10 @@ export default function App() {
       </main>
     </MainWrapper>
   );
+}
+
+App.propTypes = {
+  location: PropTypes.shapeOf({
+    search: PropTypes.string,
+  })
 }
