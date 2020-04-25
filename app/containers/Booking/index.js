@@ -10,8 +10,8 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import auth from '../../utils/auth';
 
-import { onBookingLoad } from './action';
-import { selectBookingSelector } from './selector';
+import { onBookingLoad, onResourceLoad } from './action';
+import { selectBookingSelector, resourceListSelector } from './selector';
 
 import saga from './saga';
 import reducer from './reducer';
@@ -30,10 +30,11 @@ class BookingDashboard extends React.PureComponent {
 
   componentDidMount() {
     this.props.onBookingLoad();
+    this.props.onResourceLoad();
   }
 
   render() {
-    const { bookingList } = this.props;
+    const { bookingList, resourceList } = this.props;
 
     return (
       <div>
@@ -54,7 +55,7 @@ class BookingDashboard extends React.PureComponent {
               <div className="container dashboard">
                 <Row>
                   <BigCalendar bookingList={bookingList} />
-                  <EventLabels bookingList={bookingList} />
+                  <EventLabels resourceList={resourceList} />
                 </Row>
               </div>
             </Row>
@@ -68,13 +69,18 @@ class BookingDashboard extends React.PureComponent {
 BookingDashboard.propTypes = {
   onBookingLoad: PropTypes.func,
   bookingList: PropTypes.array,
+  onResourceLoad: PropTypes.array,
+  resourceList: PropTypes.array,
 }
+
 const mapStateToProps = createStructuredSelector({
   bookingList: selectBookingSelector(),
+  resourceList: resourceListSelector(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onBookingLoad: bindActionCreators(onBookingLoad, dispatch),
+  onResourceLoad: bindActionCreators(onResourceLoad, dispatch),
 });
 
 
