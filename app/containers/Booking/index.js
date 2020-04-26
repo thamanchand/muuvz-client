@@ -21,6 +21,8 @@ import Statistics from './components/Statistics';
 import BigCalendar from './components/BigCalendar';
 import EventLabels from './components/VanLabels';
 
+import { filterCurrentBookings } from '../utils';
+
 const key = 'bookingPage';
 
 const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
@@ -55,7 +57,10 @@ class BookingDashboard extends React.PureComponent {
               <div className="container dashboard">
                 <Row>
                   <BigCalendar bookingList={bookingList} />
-                  <EventLabels resourceList={resourceList} />
+                  <EventLabels
+                    resourceList={resourceList}
+                    currentBookings={filterCurrentBookings(bookingList)}
+                  />
                 </Row>
               </div>
             </Row>
