@@ -104,8 +104,11 @@
   width:100%;
 }
 .van__content {
-  background: #F1F1F1;
+  background: #f2f2f2;
   padding: 5px;
+}
+.van__card {
+  background-color: #FFF;
 }
 .media {
   background: #fff;
@@ -124,7 +127,7 @@
 .media-body {
   border-left:0;
   height: 150px;
-  padding: 15px;
+  padding: 20px !important;
 }
 .media .price {
   font-size: 24px;
@@ -171,11 +174,10 @@
 
 .pricing__content {
   background: #ffffff;
-  padding: 20px;
   text-align: center;
   right: 0;
-  position: absolute;
 }
+
 .price__icon {
   color: #FF1654;
   font-size: 48px;
@@ -191,6 +193,27 @@
   color: #FF1654;
 }
 
+.resource__name {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #646777;
+  margin-top: 10px;
+}
+.resource__location {
+  margin-right: 10px;
+  font-size: 14px;
+  color: #70bbfd;
+  margin-top: 2px;
+}
+.resource__icon {
+  padding: 2px 8px;
+  color: #646777;
+  font-size: 14px;
+}
+
+.resources__icon_list {
+  padding: 5px;
+}
 .edit-btn {
   color: #646777;
   outline: none;
@@ -211,4 +234,25 @@ img .feature__icon {
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+.book__van {
+  padding: 10px 0px;
+  width: 75%;
+}
+
+.resource__feature {
+  display: flex;
+}
+.description {
+  padding-top: 10px;
+}
+.resource__star_icon {
+  top: 0px;
+  position: absolute;
+  margin-top: 13px;
+}
+.resource_favourite {
+  top: 0px;
+  margin-top: -9px;
 }
