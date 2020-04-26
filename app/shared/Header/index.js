@@ -25,7 +25,7 @@ const HeaderNav = ({ source }) => {
               <div className="landing__menu-wrap">
                 <p className="landing__menu-logo">
                   <Link to="/">
-                    <img src={logo} alt="" />
+                    <img src={logo} alt="" className="logo" />
                   </Link>
                 </p>
 
