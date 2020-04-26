@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardBody, Col } from 'reactstrap';
+import { Card, CardBody, Col, Badge } from 'reactstrap';
 import moment from 'moment';
 
 const { uuid } = require('uuidv4');
@@ -19,9 +19,11 @@ const EventLabels = ({ resourceList, currentBookings }) => (
               {currentBookingItem.resource.brand} ( {moment(currentBookingItem.bookedStartDateTime).format('HH:mm')} - {moment(currentBookingItem.bookedEndDateTime).format('HH:mm')})
             </p>
             <p>
-              <span className="booking__status">
-                {currentBookingItem.resource.status}
-              </span>
+              {currentBookingItem.resource.status ==='Available' && <Badge color="success">AVAILABLE</Badge>}
+              {currentBookingItem.resource.status ==='Booked' && <Badge color="badge badge-primary booking">BOOKED</Badge>}
+              {currentBookingItem.resource.status ==='Inuse' && <Badge color="badge badge-warning booking">IN USE</Badge>}
+              {currentBookingItem.resource.status ==='Waiting' && <Badge color="badge badge-danger booking">WAITING</Badge>}
+              {currentBookingItem.resource.status ==='Cancelled' && <Badge color="badge badge-info booking">CANCELLED</Badge>}
             </p>
           </>
         ))}
