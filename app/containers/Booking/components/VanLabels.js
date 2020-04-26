@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardBody, Col, Badge } from 'reactstrap';
+import { Card, CardBody, Col } from 'reactstrap';
 import moment from 'moment';
 
 const { uuid } = require('uuidv4');
@@ -18,13 +18,36 @@ const EventLabels = ({ resourceList, currentBookings }) => (
               <span className="calendar-label" style={{backgroundColor: currentBookingItem.resource.color}} />
               {currentBookingItem.resource.brand} ( {moment(currentBookingItem.bookedStartDateTime).format('HH:mm')} - {moment(currentBookingItem.bookedEndDateTime).format('HH:mm')})
             </p>
-            <p>
-              {currentBookingItem.resource.status ==='Available' && <Badge color="success">AVAILABLE</Badge>}
-              {currentBookingItem.resource.status ==='Booked' && <Badge color="badge badge-primary booking">BOOKED</Badge>}
-              {currentBookingItem.resource.status ==='Inuse' && <Badge color="badge badge-warning booking">IN USE</Badge>}
-              {currentBookingItem.resource.status ==='Waiting' && <Badge color="badge badge-danger booking">WAITING</Badge>}
-              {currentBookingItem.resource.status ==='Cancelled' && <Badge color="badge badge-info booking">CANCELLED</Badge>}
-            </p>
+            <div className="booking__label">
+              {currentBookingItem.resource.status ==='Available' && (
+                <>
+                  <span className="booking__label_status">AVAILABLE</span>
+                  <span className="booking__action"> ACCEPT </span>
+                </>
+              )}
+              {currentBookingItem.resource.status ==='Booked' && (
+                <>
+                  <span className="booking__label_status">BOOKED</span>
+                  <span className="booking__action"> ACCEPT </span>
+                </>
+              )}
+              {currentBookingItem.resource.status ==='Inuse' && (
+                <>
+                  <span className="booking__label_status">IN USE</span>
+                </>
+              )}
+              {currentBookingItem.resource.status ==='Waiting' && (
+                <>
+                  <span className="booking__label_status">WAITING</span>
+                  <span className="booking__action"> WAITING </span>
+                </>
+              )}
+              {currentBookingItem.resource.status ==='Cancelled' && (
+                <>
+                  <span className="booking__label_status">CANCELLED</span>
+                </>
+              )}
+            </div>
           </>
         ))}
 
