@@ -33,7 +33,15 @@ export const uniqueBookingId = () => {
 }
 
 // filter current bookings from resourceList
-export const filterCurrentBookings = data => {
+export const filterCurrentBookings = (bookingList, userId) => {
   const currentDate = new Date();
-  return data.filter((item) => new Date(item.bookedStartDateTime).getTime() > currentDate);
+  return bookingList.filter((item) =>
+    new Date(item.bookedStartDateTime).getTime() > currentDate
+    && item.resource && item.resource.user === userId
+  );
 }
+
+
+// filter resources belongs to User
+export const filterResourcesBelongsToUser = (resourceList, userId) =>
+  resourceList.filter((item) => item.user && item.user.id === userId)
