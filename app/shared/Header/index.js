@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import auth from 'utils/auth';
 
-import logo from '../../assets/images/muverz.svg';
+import logo from '../../assets/images/muuvz.svg';
 
 const HeaderNav = ({ source }) => {
   const [isLoggedIn, setisLoggedIn] = React.useState(auth.getToken());
