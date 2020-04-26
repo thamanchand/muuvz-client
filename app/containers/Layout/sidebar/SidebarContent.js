@@ -19,30 +19,35 @@ class SidebarContent extends Component {
       <div className="sidebar__content">
         <ul className="sidebar__block">
           <SidebarLink
+            id= '1'
             title="Booking"
             icon="calendar-full"
             route="/dashboard/booking"
             onClick={this.hideSidebar}
           />
           <SidebarLink
+            id= '2'
             title="Vans"
             icon="car"
             route="/dashboard/resources"
             onClick={this.hideSidebar}
           />
           <SidebarLink
+            id= '3'
             title="Profile"
             icon="user"
             route="/dashboard/profile"
             onClick={this.hideSidebar}
           />
           <SidebarLink
+            id= '4'
             title="Account"
             icon="cog"
             route="/dashboard/account"
             onClick={this.hideSidebar}
           />
           <SidebarLink
+            id= '5'
             title="Logout"
             icon="exit"
             onClick={() => auth.clearAppStorage()}
