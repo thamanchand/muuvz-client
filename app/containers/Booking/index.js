@@ -21,7 +21,7 @@ import Statistics from './components/Statistics';
 import BigCalendar from './components/BigCalendar';
 import EventLabels from './components/VanLabels';
 
-import { filterCurrentBookings } from '../utils';
+import { filterCurrentBookings, filterResourcesBelongsToUser } from '../utils';
 
 const key = 'bookingPage';
 
@@ -37,6 +37,17 @@ class BookingDashboard extends React.PureComponent {
 
   render() {
     const { bookingList, resourceList } = this.props;
+    const userId = auth.get('userInfo') && auth.get('userInfo').id;
+
+    // filter resources blongs to currently logged in user
+    const getUserResources = filterResourcesBelongsToUser(
+      resourceList,
+      userId
+    );
+
+    // filter current bookings belongs to user and booking start time is
+    // greater than current date and time
+    const getUserCurrentBookings = filterCurrentBookings(bookingList, userId);
 
     return (
       <div>
@@ -56,10 +67,10 @@ class BookingDashboard extends React.PureComponent {
             <Row>
               <div className="container dashboard">
                 <Row>
-                  <BigCalendar bookingList={bookingList} />
+                  <BigCalendar bookingList={getUserCurrentBookings} />
                   <EventLabels
-                    resourceList={resourceList}
-                    currentBookings={filterCurrentBookings(bookingList)}
+                    resourceList={getUserResources}
+                    currentBookings={getUserCurrentBookings}
                   />
                 </Row>
               </div>
