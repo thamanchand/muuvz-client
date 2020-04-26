@@ -78,7 +78,7 @@ class Profile extends React.PureComponent {
               <ProfileForm
                 onProfileFormSave={this.profileSaveHandler}
                 onProfileFormEdit={this.profileEditHandler}
-                initialValues={userProfile || {}}
+                initialValues={userProfile}
                 onAvatarDelete={this.onAvatarDelete}
               />
             </Row>
