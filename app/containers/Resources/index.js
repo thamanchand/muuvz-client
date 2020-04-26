@@ -21,7 +21,7 @@ import saga from './saga';
 import reducer from './reducers';
 
 import auth from '../../utils/auth';
-import { filterResourcesBelongsToUser } from './utils';
+import { filterResourcesBelongsToUser } from '../utils';
 
 const key = 'resourcePage';
 
