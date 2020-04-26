@@ -31,3 +31,9 @@ export const uniqueBookingId = () => {
   }
   return (result);
 }
+
+// filter current bookings from resourceList
+export const filterCurrentBookings = data => {
+  const currentDate = new Date();
+  return data.filter((item) => new Date(item.bookedStartDateTime).getTime() > currentDate);
+}
