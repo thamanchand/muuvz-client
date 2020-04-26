@@ -25,6 +25,7 @@
   text-transform: uppercase;
   position: relative;
 
+
   &:not(:first-child) {
     margin-top: 40px;
   }
@@ -58,4 +59,24 @@
   .card-body {
     box-shadow: 0 10px 30px 1px rgba(0, 0, 0, 0.06);
   }
+}
+.booking__label {
+  font-weight: 500;
+  color: #646777;
+  font-size: 12px;
+  padding: 6px 18px 3px;
+}
+
+.booking__action {
+  font-weight: 600;
+    color: #007bff;
+    font-size: 11px;
+    padding: 0px 12px;
+    margin-left: 16px;
+    text-transform: uppercase;
+    float: right;
+}
+
+.booking__label_status {
+  width: 100px;
 }
