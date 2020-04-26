@@ -2,15 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row } from 'reactstrap';
 import Icon from 'react-icons-kit';
-import {heartO} from 'react-icons-kit/fa/heartO'
+
 import {ic_euro_symbol as euroSymbol} from 'react-icons-kit/md/ic_euro_symbol'
 import ClipLoader from "react-spinners/ClipLoader";
 
+import StarOutlineIcon from 'mdi-react/StarOutlineIcon';
+import MapMarkerIcon from 'mdi-react/MapMarkerIcon';
+import HeartOutlineIcon from 'mdi-react/HeartOutlineIcon';
 
 // import { formatNumber } from '../../utils';
 import GalleySlideshow from '../../../shared/GalleySlideshow';
 
 const { uuid } = require('uuidv4');
+
 const iconStyles = {
   fontFamily: 'flaticon',
   fontStyle: 'normal',
@@ -31,50 +35,73 @@ const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked }) => (
               />
             </div>
             {vanList && vanList.map(item => (
-              <div>
-                <div className="media" key={uuid()}>
-                  <div className="fav-box">
-                    <Icon icon={heartO} size={15} />
-
-                  </div>
-                  <div className="pricing__content">
-                    <span className="price__icon"><Icon icon={euroSymbol} size={25} /></span>
-                    {item.pricing && item.pricing.map((cost) => (
-                      <span className="price-large" key={uuid()}>
-                        {cost.price}
-                      </span>
-                    ))}
-                    <span className="hr-small">/hr</span>
-                    <button
-                      type="button"
-                      className="square btn btn-danger"
-                      onClick={() => bookingHandler(item.id)}
-                      disabled={isBooked}
-                    >BOOK VAN</button>
-                  </div>
-                  <div className="slideshow">
-                    <GalleySlideshow input={item.cover} ratio="3:2" mode="manual" />
-                  </div>
-                  {/* item.vanmedias.map(img => (
-                      <img className="d-flex align-self-start" src={img.filename[0.].name} alt={item.brand} />
-                    )) */}
-                  <div className="media-body pl-3">
-                    <div className="price">{item.brand}<small>{item.model}</small></div>
-                    <div className="stats">
-                      <span>
-                        <i className="flaticon-049-gasoline" style={iconStyles}></i>
-                        {item.fueltype}
-                      </span>
-                      <span>
-                        <i className="flaticon-015-gear" style={iconStyles}></i>
-                        {item.transmission}
-                      </span>
-                      <span>
-                        <i className="flaticon-037-wristwatch" style={iconStyles}></i>
-                        {item.mileage}
-                      </span>
+              <div className="row mb-3">
+                <div className="col-md-12">
+                  <div className="van__card">
+                    <div className="row">
+                      <div className="col-md-3">
+                        <div className="slideshow">
+                          <GalleySlideshow input={item.cover} ratio="3:2" mode="manual" />
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="list-title">
+                          <ul className="list-inline list-unstyled">
+                            <li className="list-inline-item">
+                              <div className="resource__name">
+                                <span>{item.brand}</span><span> ({item.model})</span>
+                              </div>
+                            </li>
+                            <li className="list-inline-item text-warning resource__star_icon">
+                              <StarOutlineIcon size="20" color="#ff4861" />
+                            </li>
+                            <li className="list-inline-item text-success">
+                              <i className="fa fa-thumbs-up"></i>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="resource__location">
+                          <MapMarkerIcon size="20" color="#ff4861" /> Sparks, Reno – Show on map (4.7 km from center)
+                        </div>
+                        <div className="resources__icon_list">
+                          <span>
+                            <i className="flaticon-049-gasoline" style={iconStyles}></i>
+                            <span className="resource__icon">{item.fueltype}</span>
+                          </span>
+                          <span>
+                            <i className="flaticon-001-gear" style={iconStyles}></i>
+                            <span className="resource__icon">{item.transmission}</span>
+                          </span>
+                          <span>
+                            <i className="flaticon-044-manometer" style={iconStyles}></i>
+                            <span className="resource__icon">{item.mileage}</span>
+                          </span>
+                        </div>
+                        <div className="resource__feature">
+                          <p className="description">{item.features}</p>
+                        </div>
+                      </div>
+                      <div className="col-md-3 border-left">
+                        <div className="pricing__content">
+                          <span className="price__icon"><Icon icon={euroSymbol} size={25} /></span>
+                          {item.pricing && item.pricing.map((cost) => (
+                            <span className="price-large" key={uuid()}>
+                              {cost.price}
+                            </span>
+                          ))}
+                          <span className="hr-small">/hr</span>
+                          <button
+                            type="button"
+                            className="square btn btn-danger book__van"
+                            onClick={() => bookingHandler(item.id)}
+                            disabled={isBooked}
+                          >BOOK VAN</button>
+                          <div className="resource_favourite">
+                            <HeartOutlineIcon size="20" color="#ff4861" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="address">{item.features}</div>
                   </div>
                 </div>
               </div>
