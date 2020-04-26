@@ -31,7 +31,7 @@ class DateTimePickerField extends PureComponent {
           selected={initialDate}
           onChange={this.handleChange}
           showTimeSelect
-          dateFormat="MMMM d, yyyy h:mm aa"
+          dateFormat="MMMM d, yyyy h:mm"
           dropDownMode="select"
           defaultValue="2019"
           disabled={disabled}
