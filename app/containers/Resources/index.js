@@ -21,6 +21,7 @@ import saga from './saga';
 import reducer from './reducers';
 
 import auth from '../../utils/auth';
+import { filterResourcesBelongsToUser } from './utils';
 
 const key = 'resourcePage';
 
@@ -140,6 +141,8 @@ class ResourcesPage extends React.PureComponent {
     const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
     const { vanList } = this.props;
+    const resourceList = filterResourcesBelongsToUser(vanList, auth.get('userInfo').id)
+
     const Icon = <span className="lnr lnr-cross-circle modal__title-icon" />;
     return (
       <div>
@@ -164,7 +167,7 @@ class ResourcesPage extends React.PureComponent {
             <Row>
               {this.props.vanInfoSavedCompleted ? 'Saved' : null}
               <ResourceList
-                vanList={vanList}
+                vanList={resourceList}
                 onSaveVan={this.vanInfoSaveHandler}
                 openModel={this.state.openModel}
                 showVanModelHandler={this.showVanModelHandler}
