@@ -14,7 +14,7 @@ import FacebookIcon from 'mdi-react/FacebookIcon';
 import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
 import RegisterForm from './components/RegisterForm';
 import Footer from '../HomePage/components/Footer';
-import logo from '../../assets/images/muverz.svg';
+import logo from '../../assets/images/muuvz.svg';
 
 import { onRegisterSubmit, onRegisterPageLoad } from './actions';
 import { emailRegisteredSelector, registerErrorSelector } from './selectors';
@@ -78,7 +78,7 @@ class RegisterPage extends React.PureComponent {
                   isEmailRegistered={isEmailRegistered}
                 />
                 <div className="account__or">
-                  <p>Or Easily Using</p>
+                  <p>Or Sign up</p>
                 </div>
                 <div className="account__social">
                   <a

@@ -13,7 +13,7 @@ import FacebookIcon from 'mdi-react/FacebookIcon';
 import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
 import LogInForm from './components/LogInForm';
 import Footer from '../HomePage/components/Footer';
-import logo from '../../assets/images/muverz.svg';
+import logo from '../../assets/images/muuvz.svg';
 
 import { loginErrorSelector, loginStateSelector } from './selectors';
 
@@ -63,7 +63,7 @@ class LoginPage extends React.PureComponent {
                 <div className="error">{loginError.response.payload.message[0].messages[0].message}</div>
               )}
               <Link to="/">
-                <img src={logo} alt="muverz" className="account__register-logo" />
+                <img src={logo} alt="muuvz" className="account__register-logo" />
               </Link>
               <div className="account__head">
                 <h3 className="account__title">Join now</h3>
@@ -80,7 +80,7 @@ class LoginPage extends React.PureComponent {
                 <p>Need a Muverz account? <Link to="/register">Create an account </Link></p>
               </div>
               <div className="account__or">
-                <p>Or Easily Using</p>
+                <p>Or Login using</p>
               </div>
               <div className="account__social">
                 <a
