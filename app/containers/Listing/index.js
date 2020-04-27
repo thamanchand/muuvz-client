@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Row, Col } from 'reactstrap';
+import { Col } from 'reactstrap';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
 import { Form, Field } from 'react-final-form';
@@ -19,6 +19,7 @@ import {
   isBookedSelector,
 } from './selectors';
 
+import Footer from '../HomePage/components/Footer';
 import VanListing from './components/VanListing';
 import saga from './saga';
 import reducer from './reducers';
@@ -150,7 +151,7 @@ class VanListPage extends PureComponent {
                         <Error name="dropOfftDateTime" />
                       </div>
                     </div>
-                    <div className="col-lg-3 col-md-3 col-sm-12 resource__searchbar">
+                    <div className="col-lg-6 col-md-6 col-sm-6 resource__searchbar">
                       <div className="form__form-group">
                         <div className="form__form-group-field resource__page__checkbox">
                           <Field
@@ -178,21 +179,19 @@ class VanListPage extends PureComponent {
               />
             </div>
           </div>
-
-          <Container>
-            <Row>
-              <Col md={12} className="van__content">
-                <div className="van__list">
-                  <VanListing
-                    vanList={resourceList}
-                    bookingHandler={this.bookingHandler}
-                    isSearchLoading={isSearchLoading}
-                    isBooked={isBooked}
-                  />
-                </div>
-              </Col>
-            </Row>
-          </Container>
+          <div>
+            <Col md={12} className="van__content">
+              <div className="van__list">
+                <VanListing
+                  vanList={resourceList}
+                  bookingHandler={this.bookingHandler}
+                  isSearchLoading={isSearchLoading}
+                  isBooked={isBooked}
+                />
+              </div>
+              <Footer />
+            </Col>
+          </div>
         </div>
       </>
     );
