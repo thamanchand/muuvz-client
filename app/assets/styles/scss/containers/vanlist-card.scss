@@ -110,6 +110,11 @@
 .van__card {
   background-color: #FFF;
 }
+@media screen and (max-width: 768px) {
+  .van__card {
+    padding: 15px;
+  }
+}
 .media {
   background: #fff;
   position: relative;
@@ -198,6 +203,12 @@
   font-size: 20px;
   color: #646777;
   margin-top: 10px;
+  @media screen and (min-width: 768px) {
+    .resource__name {
+      padding: 15px;
+    }
+  }
+
 }
 .resource__location {
   margin-right: 10px;
@@ -215,13 +226,20 @@
   padding: 5px;
 }
 .edit-btn {
-  color: #646777;
+  color: #70bbfd;
   outline: none;
   cursor: pointer;
   float: right;
   font-size: 14px;
+  padding: 15px;
+  float: left;
+  font-weight: 600;
 }
 
+.editbtn__wrapper {
+  width: 100%;
+  background: #FFF;
+}
 .search__wrapper {
   margin-top: 25px;
 }
@@ -255,4 +273,18 @@ img .feature__icon {
 .resource_favourite {
   top: 0px;
   margin-top: -9px;
+}
+
+.resource__page__checkbox {
+  margin-top: 28px;
+}
+
+.search-btn {
+  width: 100px;
+  left: 51px;
+  top: -12px;
+}
+
+.resource__searchbar {
+  height: 80px;
 }
