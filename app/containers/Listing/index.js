@@ -45,15 +45,19 @@ class VanListPage extends PureComponent {
   }
 
   bookingHandler = (resourceId) => {
-    const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
+    const userId = auth.get('userInfo') && auth.get('userInfo').id;
 
-    const payload = {
-      resource: resourceId,
-      user: auth.get('userInfo').id,
-      bookedStartDateTime: searchQuery.pickupDateTime,
-      bookedEndDateTime: searchQuery.dropOfftDateTime
+    const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
+    if (userId && searchQuery) {
+      const payload = {
+        resource: resourceId,
+        user: userId,
+        bookedStartDateTime: searchQuery.pickupDateTime,
+        bookedEndDateTime: searchQuery.dropOfftDateTime
+      }
+      this.props.onBooking(payload);
     }
-    this.props.onBooking(payload);
+    alert("Login please")
   }
 
 
