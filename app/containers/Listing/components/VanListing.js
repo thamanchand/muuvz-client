@@ -90,12 +90,15 @@ const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked }) => (
                             </span>
                           ))}
                           <span className="hr-small">/hr</span>
-                          <button
-                            type="button"
-                            className="square btn btn-danger book__van"
-                            onClick={() => bookingHandler(item.id)}
-                            disabled={isBooked}
-                          >BOOK VAN</button>
+                          <div>
+                            <button
+                              type="button"
+                              className="rounded btn btn-danger book__van"
+                              onClick={() => bookingHandler(item.id)}
+                              disabled={isBooked}
+                            >BOOK VAN
+                            </button>
+                          </div>
                           <div className="resource_favourite">
                             <HeartOutlineIcon size="20" color="#ff4861" />
                           </div>
