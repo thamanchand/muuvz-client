@@ -12,11 +12,19 @@ class DateTimePickerField extends PureComponent {
   }
 
   handleChange = date => {
-    const { input } = this.props;
+    const { input, startDateChanged, endDateChanged } = this.props;
     this.setState({
       startDate: date,
     });
-    input.onChange(date);
+
+    if (input.name === 'dropOfftDateTime') {
+      input.onChange(date);
+      endDateChanged(date)
+    }
+    else if (input.name === 'pickupDateTime') {
+      input.onChange(date);
+      startDateChanged(date)
+    }
   };
 
   render() {
@@ -35,6 +43,7 @@ class DateTimePickerField extends PureComponent {
           dropDownMode="select"
           defaultValue="2019"
           disabled={disabled}
+          minDate={new Date()}
         />
       </div>
     );
@@ -46,12 +55,20 @@ DateTimePickerField.propTypes = {
     onChange: PropTypes.func,
     name: PropTypes.string,
   }).isRequired,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  startDateChanged: PropTypes.object,
+  endDateChanged: PropTypes.object,
 }
 
 const renderDateTimePickerField = props => {
-  const { input, disabled, meta } = props;
-  return <DateTimePickerField input={input} disabled={disabled} meta={meta} />;
+  const { input, disabled, meta, endDateChanged, startDateChanged } = props;
+  return <DateTimePickerField
+    input={input}
+    disabled={disabled}
+    meta={meta}
+    endDateChanged={endDateChanged}
+    startDateChanged={startDateChanged}
+  />;
 };
 
 renderDateTimePickerField.propTypes = {
@@ -61,6 +78,8 @@ renderDateTimePickerField.propTypes = {
   }).isRequired,
   disabled: PropTypes.bool.isRequired,
   meta: PropTypes.object,
+  startDateChanged: PropTypes.object,
+  endDateChanged: PropTypes.object,
 };
 
 export default renderDateTimePickerField;
