@@ -15,9 +15,10 @@ import {
  * Sends the request to the API
  * @return {string}
  */
-export const onLoginSubmit = (payload) => ({
+export const onLoginSubmit = (payload, loginSource) => ({
   type: ON_LOGIN_SUBMIT,
   payload,
+  loginSource,
 });
 
 export const onLoginSubmitSuccess = () => ({
