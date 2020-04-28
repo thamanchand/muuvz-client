@@ -205,7 +205,7 @@ class VanListPage extends PureComponent {
                             disabled={!isEdit}
                           />
                           <button
-                            className="rounded btn btn-primary search-btn"
+                            className="rounded btn btn-success search-btn"
                             type="button"
                             onClick={() => handleSubmit(values)}
                             disabled={!isEdit}
