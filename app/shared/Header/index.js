@@ -12,6 +12,15 @@ const HeaderNav = ({ source }) => {
   const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
   const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
+
+  React.useEffect( () => {
+    if( auth.getToken()){
+      setisLoggedIn( true );
+    } else {
+      setisLoggedIn(false)
+    }
+  }, [ auth.getToken() ]);
+
   const logout = () => {
     auth.clearAppStorage();
     setisLoggedIn(false);
