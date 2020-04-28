@@ -20,8 +20,10 @@ import { ON_LOGIN_SUBMIT } from './constants';
 import { onLoginSubmitSuccess, onLoginSubmitFailed } from './actions';
 
 export function* submitForm(action) {
+  console.log("Login action");
   try {
     const body = action.payload;
+    const isLoggedFromListingPage = action.loginSource === 'listingPage';
     const requestURL = 'http://localhost:1337/auth/local';
     const response = yield call(request, requestURL, { method: 'POST', body });
 
@@ -35,7 +37,12 @@ export function* submitForm(action) {
       ]);
       const isBusiness = auth.get('userInfo').isbusiness;
       const isProfileCompleted = auth.get('userInfo').profileCompleted;
-      if (isBusiness && isProfileCompleted) {
+      if (isLoggedFromListingPage) {
+        yield put(onLoginSubmitSuccess());
+        yield call(forwardTo, `${'/listing?loginSuccess'}`);
+        // const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
+      }
+      else if (isBusiness && isProfileCompleted) {
         yield put(onLoginSubmitSuccess());
         yield call(forwardTo, '/dashboard/booking');
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
@@ -45,7 +52,7 @@ export function* submitForm(action) {
         yield call(forwardTo, '/dashboard/profile');
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
         yield cancel(submitWatcher);
-      } else {
+      } else if (!isLoggedFromListingPage && !isBusiness) {
         yield put(onLoginSubmitSuccess());
         yield call(forwardTo, '/');
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
