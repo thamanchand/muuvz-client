@@ -71,7 +71,7 @@ const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) =>
           </div>
         </div>
         <div className="account__btns">
-          <button className="square btn btn-success" type="submit" onClick={() => onLoginSubmitHandler(values)}>Sign In</button>
+          <button className="rounded btn btn-success" type="submit" onClick={() => onLoginSubmitHandler(values)}>Sign In</button>
         </div>
       </form>
     )}

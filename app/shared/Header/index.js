@@ -71,7 +71,7 @@ const HeaderNav = ({ source }) => {
                           }
                         </li>
                         <li className="nav-item landing__navbar-item">
-                          <button className="btn btn-outline-primary btn-sm" type="button" onClick={() => logout()}>
+                          <button className="btn rounded btn-outline-primary btn-sm" type="button" onClick={() => logout()}>
                           Logout
                           </button>
 
@@ -85,7 +85,7 @@ const HeaderNav = ({ source }) => {
                             </Link>
                           </li>
                           <li className="nav-item landing__navbar-item">
-                            <Link className="btn btn-danger btn-sm" to="/register">
+                            <Link className="btn btn-success btn-sm rounded" to="/register">
                               Register
                             </Link>
                           </li>

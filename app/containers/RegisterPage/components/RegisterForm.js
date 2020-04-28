@@ -99,7 +99,7 @@ const RegisterForm = ({ onRegisterHandler }) => (
           </div>
         </div>
         <div className="account__btns">
-          <button className="square btn btn-success" type="submit" onClick={() => onRegisterHandler(values)}>Register</button>
+          <button className="rounded btn btn-success" type="submit" onClick={() => onRegisterHandler(values)}>Register</button>
         </div>
 
       </form>
