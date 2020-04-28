@@ -193,15 +193,16 @@ class VanListPage extends PureComponent {
                         <Error name="dropOfftDateTime" />
                       </div>
                     </div>
-                    <div className="col-lg-6 col-md-6 col-sm-6 resource__searchbar">
+                    <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
                       <div className="form__form-group">
                         <div className="form__form-group-field resource__page__checkbox">
+                          <span className="dropoff__label">Drop off</span>
                           <Field
                             name="dropAtPickUpLocation"
                             component={renderCheckBoxField}
                             color="#646777"
-                            className="checkbox-btn  checkbox-btn--colored"
-                            label="Drop-off at pickup location"
+                            className="checkbox-btn  checkbox-btn--colored resource__checkbox"
+                            label="Pickup location"
                             disabled={!isEdit}
                           />
                           <button

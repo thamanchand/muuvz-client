@@ -283,12 +283,12 @@ img .feature__icon {
 
 .search-btn {
   width: 100px;
-  left: 51px;
-  top: -12px;
+  left: 15px;
+  top: -8px;
 }
 
 .resource__searchbar {
-  height: 63px;
+  height: 68px;
 }
 
 .list__item {
@@ -303,4 +303,15 @@ img .feature__icon {
 .resource__true_feature_icon {
   left: 16px;
   position: absolute;
+}
+
+.dropoff__label {
+  position: absolute;
+  font-weight: bold;
+  color: #646777;
+  margin-top: -20px;
+}
+
+.resource__checkbox {
+  margin-top: 9px;
 }
