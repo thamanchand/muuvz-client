@@ -96,6 +96,9 @@ class Slideshow extends React.Component {
               </div>
               <img className="image" src={`${'http://localhost:1337'}${image.url}`} alt={image.caption} />
               {/* <div className="caption-text">{image.caption}</div> */}
+              <div className="overlay">
+
+              </div>
             </div>
           ))}
 
