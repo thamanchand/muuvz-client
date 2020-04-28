@@ -28,11 +28,20 @@ import HeaderNav from '../../shared/Header';
 import renderDateTimePickerField from '../../shared/DateTimePicker/index';
 import renderCheckBoxField from '../../shared/Checkbox/index';
 import Error from '../../shared/ErrorField';
+import Modal from '../../shared/Modal'
+import LoginPage from '../LoginPage';
 
 const key = 'listingPage';
 
 class VanListPage extends PureComponent {
-  state = { isEdit: false }
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.location.search === "?loginSuccess") {
+      return ({ showLoginPage: false, isEdit: false })
+    }
+    return null;
+  }
+
+  state = { isEdit: false, showLoginPage: false, }
 
   componentDidMount() {
     const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
@@ -44,9 +53,20 @@ class VanListPage extends PureComponent {
     this.setState({ isEdit: !isEdit})
   }
 
+  LoginModalToggle = () => {
+    this.setState((prevState) => ({
+      showLoginPage: !prevState.showLoginPage
+    }))
+  }
+
+  closeLoginModal = () => {
+    this.setState((prevState) => ({
+      showLoginPage: !prevState.showLoginPage
+    }))
+  };
+
   bookingHandler = (resourceId) => {
     const userId = auth.get('userInfo') && auth.get('userInfo').id;
-
     const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
     if (userId && searchQuery) {
       const payload = {
@@ -56,10 +76,17 @@ class VanListPage extends PureComponent {
         bookedEndDateTime: searchQuery.dropOfftDateTime
       }
       this.props.onBooking(payload);
+    } else {
+      this.setState({showLoginPage: true})
     }
-    alert("Login please")
+
   }
 
+  modelToggle = () => {
+    this.setState((prevState) => ({
+      showLoginPage: !prevState.showLoginPage
+    }))
+  };
 
   render() {
     const { resourceList, isSearchLoading, isBooked } = this.props;
@@ -68,6 +95,17 @@ class VanListPage extends PureComponent {
 
     return (
       <>
+        <Modal
+          color="primary"
+          title="Login to continue booking"
+          header
+          md
+          openModel={this.state.showLoginPage}
+          onClose={this.closeLoginModal}
+          modelToggle={this.modelToggle}
+        >
+          <LoginPage source="listingPage" />
+        </Modal>
         <HeaderNav source="listing" />
 
         <div className="Listing__page">
@@ -208,6 +246,9 @@ VanListPage.propTypes = {
   onSearch: PropTypes.func,
   isSearchLoading: PropTypes.bool,
   isBooked: PropTypes.bool,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  })
   // vanList: PropTypes.arrayOf(PropTypes.shape({
   //   _id: PropTypes.string,
   //   createdAt: PropTypes.string,
