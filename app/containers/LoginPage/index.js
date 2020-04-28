@@ -41,19 +41,20 @@ class LoginPage extends React.PureComponent {
   }
 
   onLoginSubmitHandler = (loginPayload) => {
+    const loginSource = this.props.source;
     if (loginPayload.identifier && loginPayload.password) {
-      this.props.onLoginSubmit(loginPayload);
+      this.props.onLoginSubmit(loginPayload, loginSource);
     }
   }
 
   render() {
-    const { isLoginSuccess, loginError } = this.props;
+    const { isLoginSuccess, loginError, source} = this.props;
 
     return (
       <div>
-        <div className="account account--photo">
+        <div className="account account--photo" style={source === 'listingPage' ? {height: '0px, minHeight: 0px'} : null}>
           <div className="account__wrapper">
-            <div className="account__card">
+            <div className="account__card" style={source === 'listingPage' ? {padding: '19px 60px'} : null}>
               {loginError
                 && loginError.response
                 && loginError.response.payload
@@ -62,9 +63,11 @@ class LoginPage extends React.PureComponent {
                 && loginError.response.payload.message[0].messages[0].message && (
                 <div className="error">{loginError.response.payload.message[0].messages[0].message}</div>
               )}
-              <Link to="/">
-                <img src={logo} alt="muuvz" className="account__register-logo" />
-              </Link>
+              {source !== 'listingPage' && (
+                <Link to="/">
+                  <img src={logo} alt="muuvz" className="account__register-logo" />
+                </Link>
+              )}
               <div className="account__head">
                 <h3 className="account__title">Join now</h3>
                 <h4 className="account__subhead subhead">Start your business easily</h4>
@@ -110,6 +113,7 @@ LoginPage.propTypes = {
   isLoginSuccess: PropTypes.bool,
   loginError: PropTypes.object,
   onLoginPageLoad: PropTypes.func,
+  source: PropTypes.string,
 };
 
 const mapDispatchToProps = (dispatch) => ({
