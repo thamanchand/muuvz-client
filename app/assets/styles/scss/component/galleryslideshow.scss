@@ -67,33 +67,50 @@
   cursor: pointer;
   position: absolute;
   top: 50%;
-  width: auto;
   margin-top: -22px;
   padding: 8px;
   font-size: 18px;
-  background-color: #4d4d4d;
-  color: #fff;
+  background-color: #FFF;
+  color: #4d4d4d;
   font-weight: bold;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
 }
 
 .lp-slideshow:hover > .container > .prev,
 .lp-slideshow:hover > .container > .next {
-  background-color: rgba(0, 0, 0, 0.9);
+
 }
 
 .lp-slideshow:hover > .container > .prev:hover,
 .lp-slideshow:hover > .container > .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .lp-slideshow > .container > .next {
-  right: 0;
-  border-radius: 0px;
+  right: 5px;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  padding-top: 1px;
+  padding-left: 10px;
+  &:hover {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    color: #ff4861;
+  }
 }
 
 .lp-slideshow > .container > .prev {
-  left: 0;
-  border-radius: 0px;
+  left: 5px;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  padding-top: 1px;
+  padding-left: 9px;
+  &:hover{
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    color: #ff4861;
+  }
 }
 
 .lp-slideshow > .dot-container {
@@ -105,8 +122,8 @@
 }
 
 .lp-slideshow > .dot-container > .dot {
-  height: 13px;
-  width: 13px;
+  height: 9px;
+  width: 9px;
   margin: 0 0.2rem;
   background-color: #dedede;
   border-radius: 50%;

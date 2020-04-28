@@ -91,14 +91,12 @@ class Slideshow extends React.Component {
                 this.state.slideIndex === index ? "active" : ""
               }`}
             >
-              <div className="number-text">
+              {/* <div className="number-text">
                 {`${index + 1} / ${input.length}`}
-              </div>
+              </div> */}
               <img className="image" src={`${'http://localhost:1337'}${image.url}`} alt={image.caption} />
               {/* <div className="caption-text">{image.caption}</div> */}
-              <div className="overlay">
-
-              </div>
+              {/* <div className="overlay"></div> */}
             </div>
           ))}
 
