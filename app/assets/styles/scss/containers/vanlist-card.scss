@@ -290,3 +290,17 @@ img .feature__icon {
 .resource__searchbar {
   height: 63px;
 }
+
+.list__item {
+  list-style: none;
+}
+.resource__true_feature_label {
+  padding: 2px 8px;
+  color: #646777;
+  font-size: 14px;
+}
+
+.resource__true_feature_icon {
+  left: 16px;
+  position: absolute;
+}
