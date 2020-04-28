@@ -27,9 +27,9 @@ const auth = {
    * Clear all app storage
    */
   clearAppStorage() {
-    if (localStorage) {
-      localStorage.clear();
-    }
+    // if (localStorage) {
+    //   localStorage.clear();
+    // }
 
     if (sessionStorage) {
       sessionStorage.clear();
