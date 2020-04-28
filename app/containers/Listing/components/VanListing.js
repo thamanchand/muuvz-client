@@ -9,6 +9,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import StarOutlineIcon from 'mdi-react/StarOutlineIcon';
 import MapMarkerIcon from 'mdi-react/MapMarkerIcon';
 import HeartOutlineIcon from 'mdi-react/HeartOutlineIcon';
+import CheckCircleOutlineIcon from 'mdi-react/CheckCircleOutlineIcon';
 
 // import { formatNumber } from '../../utils';
 import GalleySlideshow from '../../../shared/GalleySlideshow';
@@ -76,6 +77,36 @@ const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked }) => (
                             <i className="flaticon-044-manometer" style={iconStyles}></i>
                             <span className="resource__icon">{item.mileage}</span>
                           </span>
+                        </div>
+                        <div>
+                          <ul className="list list--icon">
+                            {item.cruisecontrol && (
+                              <li className="list__item">
+                                <span className="resource__true_feature_icon">
+                                  <CheckCircleOutlineIcon size="15" color="#ff4861" />
+                                </span>
+                                <span className="resource__true_feature_label">
+                                  Cruise control
+                                </span>
+                              </li>
+                            )}
+                            {item.airbag && (
+                              <li className="list__item">
+                                <span className="resource__true_feature_icon">
+                                  <CheckCircleOutlineIcon size="15" color="#ff4861" />
+                                </span>
+                                <span className="resource__true_feature_label">Airbag</span>
+                              </li>
+                            )}
+                            {item.airconditioner && (
+                              <li className="list__item">
+                                <span className="resource__true_feature_icon">
+                                  <CheckCircleOutlineIcon size="15" color="#ff4861" />
+                                </span>
+                                <span className="resource__true_feature_label">Airconditioner</span>
+                              </li>
+                            )}
+                          </ul>
                         </div>
                         <div className="resource__feature">
                           <p className="description">{item.features}</p>
