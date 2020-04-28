@@ -56,8 +56,8 @@ DateTimePickerField.propTypes = {
     name: PropTypes.string,
   }).isRequired,
   disabled: PropTypes.bool,
-  startDateChanged: PropTypes.object,
-  endDateChanged: PropTypes.object,
+  startDateChanged: PropTypes.func,
+  endDateChanged: PropTypes.func,
 }
 
 const renderDateTimePickerField = props => {
@@ -78,8 +78,8 @@ renderDateTimePickerField.propTypes = {
   }).isRequired,
   disabled: PropTypes.bool.isRequired,
   meta: PropTypes.object,
-  startDateChanged: PropTypes.object,
-  endDateChanged: PropTypes.object,
+  startDateChanged: PropTypes.func,
+  endDateChanged: PropTypes.func,
 };
 
 export default renderDateTimePickerField;
