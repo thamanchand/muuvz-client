@@ -6,7 +6,7 @@ import {
   takeLatest,
   take,
   cancel,
-  fork
+  fork,
 } from 'redux-saga/effects';
 
 // Utils
@@ -30,6 +30,8 @@ export function* submitForm(action) {
     if (response.jwt) {
       const { email, confirmed, profileCompleted, isbusiness, id } = response.user;
       const userFieldsLocallyStored = { email, confirmed, profileCompleted, isbusiness, id}
+      auth.clearAppStorage();
+
       // Set the user's credentials
       yield all([
         call(auth.setToken, response.jwt, body.rememberMe),
