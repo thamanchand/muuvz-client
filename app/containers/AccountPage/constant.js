@@ -1,3 +1,3 @@
-export const ON_PASSWORD_CHANGE = 'app/ResourcePage/ON_PASSWORD_CHANGE';
-export const ON_PASSWORD_CHANGE_SUCCESS = 'app/ResourcePage/ON_PASSWORD_CHANGE_SUCCESS';
-export const ON_PASSWORD_CHANGE_FAILED = 'app/ResourcePage/ON_PROFILE_EDIT_FAILED';
+export const ON_PASSWORD_CHANGE = 'app/AccountPage/ON_PASSWORD_CHANGE';
+export const ON_PASSWORD_CHANGE_SUCCESS = 'app/AccountPage/ON_PASSWORD_CHANGE_SUCCESS';
+export const ON_PASSWORD_CHANGE_FAILED = 'app/AccountPage/ON_PROFILE_EDIT_FAILED';
