@@ -603,10 +603,15 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
 }
 
 .hamburger__menu {
-  float: left;
-  margin-top: 0px;
+  float: right;
+  margin-top: 16px;
   left: 0px;
   height: 53px;
+  background-color: #FFF;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px !important;
+  padding: -5px;
+  border-radius: 12px solid #dedede;
+  width: 100%;
 }
 .mdi-icon__close, .mdi-icon__open {
   right: 10px;
