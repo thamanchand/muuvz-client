@@ -82,13 +82,15 @@ const AccountForm = ({ changePassword }) => (
                 </div>
                 <Error name="confirmPassword" />
               </div>
+
               <div className="profile__btns">
                 <button
-                  className="square btn-sm btn-primary"
+                  className="btn btn-success btn-sm rounded"
                   type="submit"
 
                 >Change password</button>
               </div>
+
             </form>
           )}
         />
