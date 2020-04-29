@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -53,12 +53,10 @@ const HeaderNav = ({ source }) => {
   }
 
   const onMenuHover= () => {
-    console.log("mouse enter")
     setHamburgerMenuHover(true)
   }
 
   const onMenuLeave = () => {
-    console.log("mouse leave")
     setHamburgerMenuHover(false)
   }
 
