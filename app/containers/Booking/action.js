@@ -10,9 +10,8 @@ import {
  * Sends the request to the API
  * @return {string}
  */
-export const onBookingLoad = (bookingPayload) => ({
+export const onBookingLoad = () => ({
   type: ON_BOOKING_LOAD,
-  bookingPayload,
 });
 
 export const onBookingLoadSuccess = (bookingResult) => ({
@@ -25,9 +24,8 @@ export const onBookingLoadFailed = (error) => ({
   error
 });
 
-export const onResourceLoad = (bookingPayload) => ({
+export const onResourceLoad = () => ({
   type: ON_RESOURCE_LOAD,
-  bookingPayload,
 });
 
 export const onResourceLoadSuccess = (resourceList) => ({
