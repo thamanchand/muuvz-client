@@ -6,7 +6,7 @@ $landing-gradient: linear-gradient(228deg, rgba(127, 244, 222, 0.95), rgba(56, 1
 $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95), 5%), darken(rgba(56, 199, 225, 1), 5%));
 
 .landing {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   width: 100%;
   background: #ffffff;
   position: absolute;
@@ -92,6 +92,15 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   position: absolute;
   width: 100%;
 }
+.landing__nav_item {
+  position: absolute;
+  right: 0px;
+  list-style: none;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
 
 .landing__menu__listing {
   width: 100%;
@@ -106,6 +115,7 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
 .landing__menu-wrap {
   width: 100%;
   display: flex;
+  margin-top: 15px;
 }
 
 .landing__menu-logo {
@@ -153,6 +163,12 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
 
 .landing__navbar-item {
   margin: 0px 10px;
+  list-style: none;
+  margin-top: -12px;
+}
+
+.login_register {
+    margin-top: 17px;
 }
 //Header
 
@@ -584,4 +600,19 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   font-size: 13px;
   line-height: 1.54;
   margin: 0;
+}
+
+.hamburger__menu {
+  float: left;
+  margin-top: 0px;
+  left: 0px;
+  height: 53px;
+}
+.mdi-icon__close, .mdi-icon__open {
+  right: 10px;
+  float: right;
+  margin-right: 16px;
+  margin-top: -25px;
+  color: #646777;
+  cursor: pointer;
 }
