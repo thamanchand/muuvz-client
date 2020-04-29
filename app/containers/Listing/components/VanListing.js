@@ -62,7 +62,8 @@ const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked }) => (
                           </ul>
                         </div>
                         <div className="resource__location">
-                          <MapMarkerIcon size="20" color="#ff4861" /> Sparks, Reno – Show on map (4.7 km from center)
+                          <MapMarkerIcon size="20" color="#ff4861" />
+                          <span>{item.profile && item.profile.address}</span>
                         </div>
                         <div className="resources__icon_list">
                           <span>
