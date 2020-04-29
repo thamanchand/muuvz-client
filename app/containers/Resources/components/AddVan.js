@@ -335,7 +335,7 @@ const AddVanForm = ({
                 <Button
                   color='success'
                   onClick={openPriceModalHandler}
-                  className="btn square add__pricing-btn"
+                  className="btn rounded btn-success add__pricing-btn"
                 >
                   Add price
                 </Button>
@@ -410,12 +410,12 @@ const AddVanForm = ({
                 <div className="addEditModal__footer">
                   <ButtonToolbar className="form__button-toolbar">
                     <button
-                      className="square btn btn-primary"
+                      className="rounded btn btn-danger"
                       type="submit"
                       onClick={() => onSaveVan(values)}
                       disabled={submitting || pristine || invalid}
                     >
-                      Save
+                      Save van
                     </button>
                   </ButtonToolbar>
                 </div>
