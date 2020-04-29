@@ -13,9 +13,10 @@ import PropTypes from 'prop-types';
 
 import auth from '../../utils/auth';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, path, ...rest }) => (
   <Route
     {...rest}
+    path={path}
     render={props =>
       auth.getToken() !== null ? (
         <Component {...props} />
@@ -23,17 +24,21 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         <Redirect
           to={{
             pathname: '/auth/login',
-            state: { from: props.location },
+            state: {
+              from: props.location,
+              authFailed: true,
+            },
           }}
         />
       )
     }
   />
-);
+)
 
 PrivateRoute.propTypes = {
   component: PropTypes.element,
   location: PropTypes.string,
+  path: PropTypes.string,
 };
 
 export default PrivateRoute;
