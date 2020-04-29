@@ -34,7 +34,7 @@ class Profile extends React.PureComponent {
 
   componentDidMount() {
     const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
-    if (isProfileCompleted) {
+    if (auth.getToken() && isProfileCompleted) {
       this.props.onProfileLoad(auth.get('userInfo').id);
     }
   }

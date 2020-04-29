@@ -31,8 +31,11 @@ const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileC
 class BookingDashboard extends React.PureComponent {
 
   componentDidMount() {
-    this.props.onBookingLoad();
-    this.props.onResourceLoad();
+    console.log("BookingDashboard componentDidMount")
+    if (auth.getToken()) {
+      this.props.onBookingLoad();
+      this.props.onResourceLoad();
+    }
   }
 
   render() {
