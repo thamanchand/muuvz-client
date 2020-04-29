@@ -8,7 +8,7 @@ const { uuid } = require('uuidv4');
 const EventLabels = ({ resourceList, currentBookings }) => (
   <Col md={12} lg={12} xl={3}>
     <Card className="card--not-full-height">
-      <CardBody>
+      <CardBody className="currentbooking__label">
         <div className="card__title">
           <h5 className="bold-text">Current booking</h5>
         </div>
