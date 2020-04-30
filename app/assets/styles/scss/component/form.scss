@@ -66,6 +66,7 @@
 
       @include themify($themes) {
         background: themed('colorBackgroundBody');
+        color: $color-additional;
       }
 
       &:focus, &:active {
