@@ -8,6 +8,7 @@ class DateTimePickerField extends PureComponent {
     super(props);
     this.state = {
       startDate: null,
+      monthChange: false,
     };
   }
 
@@ -27,6 +28,10 @@ class DateTimePickerField extends PureComponent {
     }
   };
 
+  monthChanged = () => {
+    this.setState({ monthChange: true});
+  }
+
   render() {
     const { startDate } = this.state;
     const { disabled, input } = this.props;
@@ -44,7 +49,14 @@ class DateTimePickerField extends PureComponent {
           defaultValue="2019"
           disabled={disabled}
           minDate={new Date()}
-        />
+          onSelect={this.monthChanged}
+        >
+          {this.state.monthChange  && (
+            <div className="datepicker__select_time">
+              Select booking start & end time!
+            </div>
+          )}
+        </DatePicker>
       </div>
     );
   }
@@ -61,6 +73,7 @@ DateTimePickerField.propTypes = {
 }
 
 const renderDateTimePickerField = props => {
+  console.log("renderDateTimePickerField", props);
   const { input, disabled, meta, endDateChanged, startDateChanged } = props;
   return <DateTimePickerField
     input={input}
