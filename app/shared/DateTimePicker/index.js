@@ -44,16 +44,21 @@ class DateTimePickerField extends PureComponent {
           selected={initialDate}
           onChange={this.handleChange}
           showTimeSelect
-          dateFormat="MMMM d, yyyy h:mm"
+          dateFormat="MMMM d, yyyy HH:mm"
           dropDownMode="select"
-          defaultValue="2019"
+          defaultValue="2020"
           disabled={disabled}
           minDate={new Date()}
           onSelect={this.monthChanged}
+          onDayMouseEnter={this.monthChanged}
+          onMonthChange={this.monthChanged}
+          onTimeChange={this.monthChanged}
+          setOpen={this.monthChanged}
         >
           {this.state.monthChange  && (
             <div className="datepicker__select_time">
               Select booking start & end time!
+              <span className="arrow up" />
             </div>
           )}
         </DatePicker>
