@@ -1416,4 +1416,24 @@
 .add__resource {
   cursor: pointer;
   outline: none;
+  width: 150px;
+}
+
+.resource__add_icon {
+  height: 18px;
+  width: 18px;
+}
+.add__resource_label {
+  display: flex;
+  transition: all 0.3s;
+  font-weight: 500;
+  color: #444444;
+  text-transform: uppercase;
+}
+
+.delete__confirmation {
+  padding: 15px;
+  display: flex;
+  left: 29px;
+  margin: 15px 1px 0px 50px;
 }
