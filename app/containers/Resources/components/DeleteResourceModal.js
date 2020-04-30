@@ -15,7 +15,7 @@ const DeleteResourceModal = ({ show, onClose, deleteResourceAction }) => (
   >
     <Row>
       <p className="delete__modal__label">Are you sure you want to delete this resource?</p>
-      <div className="addEditModal__footer">
+      <div className="delete__confirmation">
         <span
           role="presentation"
           className="cancel__button"
