@@ -15,8 +15,6 @@ const iconStyles = {
   cursor: 'pointer'
 };
 
-const AddIcon = <PlusCircleIcon className="addIcon" size="30" color="#555555"/>;
-
 const ResourceList = ({
   vanList,
   onSaveVan,
@@ -59,15 +57,18 @@ const ResourceList = ({
               />
             </Modal>
           </div>
-          <div className="col-md-2 header__filter">
-            <span className="filter__wrapper">Filter</span>
-            <span
-              className="add__resource"
-              role="presentation"
-              onKeyPress={showVanModelHandler}
-              onClick={showVanModelHandler}>
-              {AddIcon}
-            </span>
+          <div className="col-md-4 header__filter">
+            {/* <span className="filter__wrapper">Filter</span> */}
+            <button
+              className="icon icon--right btn rounded btn-success btn-sm add__resource"
+              onClick={showVanModelHandler}
+              type="button"
+            >
+              <p className="add__resource_label">
+                Add van
+                <PlusCircleIcon className="resource__add_icon" size="30" color="#555555"/>
+              </p>
+            </button>
           </div>
         </div>
         <div className="table-responsive">
