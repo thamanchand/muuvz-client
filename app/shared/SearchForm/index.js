@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import TimetableIcon from 'mdi-react/TimetableIcon';
@@ -8,26 +8,39 @@ import Error from '../ErrorField';
 import renderDateTimePickerField from '../DateTimePicker/index';
 import renderCheckBoxField from '../Checkbox/index';
 
+// custom hook for getting previous value
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 const Search = ({ onSearch, disabled, storedValues }) => {
   const [duration, setDuration] = React.useState()
   const [bookingStartDateTime, setBookingStartDateTime] = React.useState();
   const [bookingEndDateTime, setBookingEndDateTime] = React.useState();
 
+  const prevBookingStartDateTime = usePrevious(bookingStartDateTime);
+  const prevBookingEndDateTime = usePrevious(bookingEndDateTime);
+
+
   const endDateChange = (endDateTime) => {
-    setBookingEndDateTime(moment(endDateTime).format('YYYY/MM/DDTHH:mm'));
+    setBookingEndDateTime(moment(moment.utc(endDateTime)).format('YYYY-MM-DDTHH:mm:ss'));
     // calculate number of hours
     const bookingHours = moment
-      .duration(moment(bookingEndDateTime, 'YYYY/MM/DDTHH:mm')
-        .diff(moment(bookingStartDateTime, 'YYYY/MM/DDTHH:mm'))
+      .duration(moment(endDateTime, 'YYYY-MM-DDTHH:mm:ss')
+        .diff(moment(prevBookingStartDateTime, 'YYYY-MM-DDTHH:mm:ss.SSS'))
       ).asHours();
     setDuration(bookingHours);
   }
   const startDateChange = (startDateTime) => {
-    setBookingStartDateTime(moment(startDateTime).format('YYYY/MM/DDTHH:mm'));
+    setBookingStartDateTime(moment(moment.utc(startDateTime)).format('YYYY-MM-DDTHH:mm:ss'));
     // calculate number of hours
     const bookingHours = moment
-      .duration(moment(bookingEndDateTime, 'YYYY/MM/DDTHH:mm')
-        .diff(moment(bookingStartDateTime, 'YYYY/MM/DDTHH:mm'))
+      .duration(moment(moment, 'YYYY-MM-DDTHH:mm:ss')
+        .diff(moment(prevBookingEndDateTime, 'YYYY-MM-DDTHH:mm:ss'))
       ).asHours();
     setDuration(bookingHours);
   }
