@@ -33,14 +33,15 @@ const ProfileForm = ({
           <div>
             {!isProfileCompleted && (
               <>
-                <h4 className="profile__header_label">To use Muverz service you need to complete profile</h4>
-                <p>Fill information below </p>
+                <h3 className="profile__header_label">Thank you for choosing MUUVZ</h3>
+                <hr />
+                <h4 className="profile__header_label">Now complete your profile to start using MUUVZ services</h4>
               </>
             )}
           </div>
           <div className="card__title">
-            <h5 className="bold-text">Business</h5>
-            <h5 className="subhead">Fill all fields</h5>
+            <h5 className="bold-text">Business Info</h5>
+            <h5 className="subhead">Fill all required fields</h5>
             {initialValues && initialValues.avatar && initialValues.avatar.id && (
               <div className="profile__information">
                 <div className="profile__avatar">
