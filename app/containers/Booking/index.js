@@ -7,7 +7,7 @@ import { bindActionCreators, compose } from 'redux';
 
 
 
-import { onBookingLoad, onResourceLoad } from './action';
+import { onBookingLoad, onResourceLoad, onBookingAccept } from './action';
 import { selectBookingSelector, resourceListSelector } from './selector';
 
 import saga from './saga';
@@ -38,6 +38,17 @@ class BookingDashboard extends React.Component {
     }
   }
 
+  acceptBookingHandler = (bookingId, resourceId) => {
+    console.log("bookingId", bookingId);
+    console.log("resourceId", resourceId);
+    this.props.onBookingAccept(bookingId, resourceId);
+  }
+
+  cancelBookingHandler = (bookingId, resourceId) => {
+    console.log("cancel bookingId", bookingId);
+    console.log("cancel resourceId", resourceId);
+  }
+
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
     const { bookingList, resourceList } = this.props;
@@ -56,6 +67,7 @@ class BookingDashboard extends React.Component {
       ? filterBusinessCurrentBookings(bookingList, userId)
       : filterCustomerCurrentBookings(bookingList, userId);
 
+    console.log("getUserCurrentBookings", getUserCurrentBookings)
     return (
       <div>
         <Layout />
@@ -79,6 +91,8 @@ class BookingDashboard extends React.Component {
                     <EventLabels
                       resourceList={getUserResources}
                       currentBookings={getUserCurrentBookings}
+                      acceptBookingHandler={this.acceptBookingHandler}
+                      cancelBookingHandler={this.cancelBookingHandler}
                     />
                   </Row>
                 </div>
@@ -98,6 +112,7 @@ BookingDashboard.propTypes = {
   bookingList: PropTypes.array,
   onResourceLoad: PropTypes.func,
   resourceList: PropTypes.array,
+  onBookingAccept: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -108,6 +123,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   onBookingLoad: bindActionCreators(onBookingLoad, dispatch),
   onResourceLoad: bindActionCreators(onResourceLoad, dispatch),
+  onBookingAccept: bindActionCreators(onBookingAccept, dispatch),
 });
 
 
