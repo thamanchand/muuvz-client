@@ -8,7 +8,8 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { Col, Container, Row } from 'reactstrap';
 import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
-import ProfileForm from './components/ProfileForm';
+import BusinessProfile from './components/BusinessProfile';
+import CustomerProfile from './components/CustomerProfile';
 
 import auth from '../../utils/auth';
 
@@ -58,6 +59,8 @@ class Profile extends React.PureComponent {
   render() {
     const { userProfile } = this.props;
     const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+    const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
+
     return (
       <div>
         <Layout />
@@ -74,13 +77,22 @@ class Profile extends React.PureComponent {
               </Row>
             )}
             <Row>
-
-              <ProfileForm
-                onProfileFormSave={this.profileSaveHandler}
-                onProfileFormEdit={this.profileEditHandler}
-                initialValues={userProfile}
-                onAvatarDelete={this.onAvatarDelete}
-              />
+              {isBusiness
+                ?
+                <BusinessProfile
+                  onProfileFormSave={this.profileSaveHandler}
+                  onProfileFormEdit={this.profileEditHandler}
+                  initialValues={userProfile}
+                  onAvatarDelete={this.onAvatarDelete}
+                />
+                :
+                <CustomerProfile
+                  onProfileFormSave={this.profileSaveHandler}
+                  onProfileFormEdit={this.profileEditHandler}
+                  initialValues={userProfile}
+                  onAvatarDelete={this.onAvatarDelete}
+                />
+              }
             </Row>
           </Container>
         </div>
