@@ -64,7 +64,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
     <Card className="card--not-full-height">
       <CardBody>
         <div className="card__title">
-          <h5 className="bold-text">Resource labels</h5>
+          <h5 className="bold-text">Your vans</h5>
         </div>
         {resourceList && resourceList.map(resource => (
           <p key={uuid()}>
