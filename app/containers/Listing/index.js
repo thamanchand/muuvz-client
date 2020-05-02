@@ -31,6 +31,8 @@ import Error from '../../shared/ErrorField';
 import Modal from '../../shared/Modal'
 import LoginPage from '../LoginPage';
 
+import { filterAvailableResources } from '../utils';
+
 const key = 'listingPage';
 
 class VanListPage extends PureComponent {
@@ -94,7 +96,7 @@ class VanListPage extends PureComponent {
     const { resourceList, isSearchLoading, isBooked } = this.props;
     const { isEdit } = this.state;
     const storedValues = JSON.parse(window.localStorage.getItem('searchQuery'));
-
+    const availableResources = filterAvailableResources(resourceList);
     return (
       <>
         <Modal
@@ -228,7 +230,7 @@ class VanListPage extends PureComponent {
             <Col md={12} className="van__content">
               <div className="van__list">
                 <VanListing
-                  vanList={resourceList}
+                  vanList={availableResources}
                   bookingHandler={this.bookingHandler}
                   isSearchLoading={isSearchLoading}
                   isBooked={isBooked}
