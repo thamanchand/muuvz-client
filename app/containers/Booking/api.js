@@ -27,3 +27,31 @@ export const getResources = () => axios
   }).then(response => response.data).catch(err => {
     throw err;
   });
+
+// update resource status
+export const updateResource = (payload, resourceId) => axios
+  .put(`${BASE_URL}${'resources/'}${resourceId}`,
+    {...payload },
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    }
+  ).then(response => response.data).catch(err => {
+    throw err;
+  });
+
+// update booking status
+export const updateBooking = (payload, bookingId) => axios
+  .put(`${BASE_URL}${'bookings/'}${bookingId}`,
+    {...payload },
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    }
+  ).then(response => response.data).catch(err => {
+    throw err;
+  });
