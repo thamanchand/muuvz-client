@@ -11,6 +11,7 @@ import Error from '../../../shared/ErrorField';
 import toggleField from '../../../shared/ToggleField';
 import renderDropZoneMultipleField from '../../../shared/DropzoneMultipleFiles';
 import renderSelectField from '../../../shared/SelectField';
+import renderMaskInput from '../../../shared/MaskInput';
 
 import AddPrice from './AddPrice';
 import Modal from '../../../shared/Modal';
@@ -18,6 +19,8 @@ import Modal from '../../../shared/Modal';
 const iconStyles = {
   marginRight: '10px',
 };
+
+const all = /[A-Za-z0-9]/;
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
@@ -95,16 +98,18 @@ const AddVanForm = ({
 
               <Col md={3} sm={6}>
                 <div className="form__form-group">
-                  <span className="form__form-group-label">License-plate</span>
+                  <span className="form__form-group-label">License-plate <span> (IKS-314)</span></span>
                   <div className="form__form-group-field">
                     <Field
+                      placeholder="IKS-314"
                       name="platenum"
-                      component="input"
+                      component={renderMaskInput}
                       type="text"
-                      placeholder="XKR-323"
                       required
+                      mask={[all, all, all, '-', all, all, all]}
                     />
                   </div>
+                  <Error name="platenum" />
                 </div>
               </Col>
 
