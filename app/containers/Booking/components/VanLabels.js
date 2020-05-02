@@ -12,50 +12,53 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
         <div className="card__title">
           <h5 className="bold-text">Current booking</h5>
         </div>
-        {currentBookings && currentBookings.map(currentBookingItem => (
-          <>
-            <p key={uuid()}>
-              <span className="calendar-label" style={{backgroundColor: currentBookingItem.resource.color}} />
-              {currentBookingItem.resource.brand} ( {moment(currentBookingItem.bookedStartDateTime).format('HH:mm')} - {moment(currentBookingItem.bookedEndDateTime).format('HH:mm')})
-            </p>
-            <div className="booking__label">
-              {currentBookingItem.resource.status ==='Requested' && (
-                <>
-                  <span className="booking__label_status">REQUESTED</span>
-                  <span
-                    role="presentation"
-                    className="booking__action"
-                    onClick={() => acceptBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
-                  > ACCEPT
-                  </span>
-                  <span
-                    role="presentation"
-                    className="booking__action"
-                    onClick={() => cancelBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
-                  > CANCEL
-                  </span>
-                </>
-              )}
-              {currentBookingItem.resource.status ==='Booked' && (
-                <>
-                  <span className="booking__label_status">BOOKED</span>
-                </>
-              )}
-              {currentBookingItem.resource.status ==='Inuse' && (
-                <>
-                  <span className="booking__label_status">IN USE</span>
-                </>
-              )}
+        {currentBookings && currentBookings.length ? (
+          currentBookings && currentBookings.map(currentBookingItem => (
+            <>
+              <p key={uuid()}>
+                <span className="calendar-label" style={{backgroundColor: currentBookingItem.resource.color}} />
+                {currentBookingItem.resource.brand} ( {moment(currentBookingItem.bookedStartDateTime).format('HH:mm')} - {moment(currentBookingItem.bookedEndDateTime).format('HH:mm')})
+              </p>
+              <div className="booking__label">
+                {currentBookingItem.resource.status ==='Requested' && (
+                  <>
+                    <span className="booking__label_status">REQUESTED</span>
+                    <span
+                      role="presentation"
+                      className="booking__action"
+                      onClick={() => acceptBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
+                    > ACCEPT
+                    </span>
+                    <span
+                      role="presentation"
+                      className="booking__action"
+                      onClick={() => cancelBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
+                    > CANCEL
+                    </span>
+                  </>
+                )}
+                {currentBookingItem.resource.status ==='Booked' && (
+                  <>
+                    <span className="booking__label_status">BOOKED</span>
+                  </>
+                )}
+                {currentBookingItem.resource.status ==='Inuse' && (
+                  <>
+                    <span className="booking__label_status">IN USE</span>
+                  </>
+                )}
 
-              {currentBookingItem.resource.status ==='Cancelled' && (
-                <>
-                  <span className="booking__label_status">CANCELLED</span>
-                </>
-              )}
-            </div>
-          </>
-        ))}
-
+                {currentBookingItem.resource.status ==='Cancelled' && (
+                  <>
+                    <span className="booking__label_status">CANCELLED</span>
+                  </>
+                )}
+              </div>
+            </>
+          ))
+        ) : (
+          <p>No booking yet!</p>
+        )}
       </CardBody>
     </Card>
     <Card className="card--not-full-height">
