@@ -6,7 +6,7 @@ import { bindActionCreators, compose } from 'redux';
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 import { Col, Container, Row } from 'reactstrap';
-import Statistics from '../Booking/components/Statistics';
+// import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
 import BusinessProfile from './components/BusinessProfile';
 import CustomerProfile from './components/CustomerProfile';
@@ -58,7 +58,7 @@ class Profile extends React.PureComponent {
 
   render() {
     const { userProfile } = this.props;
-    const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+    // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
     const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
 
     return (
@@ -71,11 +71,11 @@ class Profile extends React.PureComponent {
                 <h3 className="page-title">Profile</h3>
               </Col>
             </Row>
-            {isProfileCompleted && (
+            {/* isProfileCompleted && (
               <Row>
                 <Statistics />
               </Row>
-            )}
+            ) */}
             <Row>
               {isBusiness
                 ?

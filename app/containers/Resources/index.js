@@ -10,7 +10,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
 import ResourceList from './components/ResourceList';
-import Statistics from '../Booking/components/Statistics';
+// import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
 import Modal from '../../shared/Modal'
 import DeleteResourceModal from './components/DeleteResourceModal';
@@ -138,7 +138,7 @@ class ResourcesPage extends React.PureComponent {
   };
 
   render() {
-    const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+    // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
     const { vanList } = this.props;
     const resourceList = filterResourcesBelongsToUser(vanList, auth.get('userInfo').id)
@@ -159,11 +159,11 @@ class ResourcesPage extends React.PureComponent {
                 <h3 className="page-title">Resources</h3>
               </Col>
             </Row>
-            {isProfileCompleted && (
+            {/* isProfileCompleted && (
               <Row>
                 <Statistics />
               </Row>
-            )}
+            ) */}
             <Row>
               {this.props.vanInfoSavedCompleted ? 'Saved' : null}
               <ResourceList

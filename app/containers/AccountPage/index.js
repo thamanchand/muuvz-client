@@ -11,7 +11,7 @@ import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 
-import Statistics from '../Booking/components/Statistics';
+// import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout/index';
 import AccountForm from './components/AccountForm';
 
@@ -19,7 +19,7 @@ import auth from '../../utils/auth';
 
 import { onPasswordChange } from './action';
 
-const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+// const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
 class AccountPage extends React.PureComponent {
   componentDidMount() {}
@@ -42,11 +42,11 @@ class AccountPage extends React.PureComponent {
                 <h3 className="page-title">Account</h3>
               </Col>
             </Row>
-            {isProfileCompleted && (
+            {/* isProfileCompleted && (
               <Row>
                 <Statistics />
               </Row>
-            )}
+            ) */}
             <Row>
               <AccountForm
                 changePassword={this.changePasswordHandler}
