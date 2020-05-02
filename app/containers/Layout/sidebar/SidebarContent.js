@@ -29,6 +29,14 @@ class SidebarContent extends Component {
             route="/dashboard/booking"
             onClick={this.hideSidebar}
           />}
+          {isBusiness && isProfileCompleted &&
+          <SidebarLink
+            id= '1'
+            title="Booking"
+            icon="calendar-full"
+            route="/dashboard/booking"
+            onClick={this.hideSidebar}
+          />}
           {!isBusiness && isProfileCompleted &&
           <SidebarLink
             id= '1'
