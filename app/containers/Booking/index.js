@@ -42,6 +42,7 @@ class BookingDashboard extends React.Component {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
     const { bookingList, resourceList } = this.props;
     const userId = auth.get('userInfo') && auth.get('userInfo').id;
+    const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
 
     // filter resources blongs to currently logged in user
     const getUserResources = filterResourcesBelongsToUser(
@@ -54,8 +55,6 @@ class BookingDashboard extends React.Component {
     const getUserCurrentBookings = isBusiness
       ? filterBusinessCurrentBookings(bookingList, userId)
       : filterCustomerCurrentBookings(bookingList, userId);
-
-    const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
 
     return (
       <div>
