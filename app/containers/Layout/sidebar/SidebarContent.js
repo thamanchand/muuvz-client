@@ -15,16 +15,21 @@ class SidebarContent extends Component {
   };
 
   render() {
+    const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
+    const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+
     return (
       <div className="sidebar__content">
         <ul className="sidebar__block">
+          {isBusiness && !isProfileCompleted &&
           <SidebarLink
             id= '1'
             title="Booking"
             icon="calendar-full"
             route="/dashboard/booking"
             onClick={this.hideSidebar}
-          />
+          />}
+          {isBusiness && isProfileCompleted &&
           <SidebarLink
             id= '2'
             title="Vans"
@@ -32,6 +37,7 @@ class SidebarContent extends Component {
             route="/dashboard/resources"
             onClick={this.hideSidebar}
           />
+          }
           <SidebarLink
             id= '3'
             title="Profile"
