@@ -126,7 +126,7 @@ const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked }) => (
                             <button
                               type="button"
                               className="rounded btn btn-danger book__van"
-                              onClick={() => bookingHandler(item.id)}
+                              onClick={() => bookingHandler(item.id, item.address)}
                               disabled={isBooked}
                             >BOOK VAN
                             </button>
