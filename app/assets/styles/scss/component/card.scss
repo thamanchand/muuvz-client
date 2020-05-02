@@ -64,19 +64,20 @@
   font-weight: 500;
   color: #646777;
   font-size: 12px;
-  padding: 6px 18px 3px;
+  padding: 6px 2px 3px;
 }
 
 .booking__action {
   font-weight: 600;
-    color: #007bff;
-    font-size: 11px;
-    padding: 0px 12px;
-    margin-left: 16px;
-    text-transform: uppercase;
-    float: right;
+  color: #007bff;
+  font-size: 13px;
+  margin: -1px 9px 10px -6px;
+  margin-left: 0px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .booking__label_status {
   width: 100px;
+  margin-right: 12px;
 }
