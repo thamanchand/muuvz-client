@@ -7,7 +7,7 @@ import { bindActionCreators, compose } from 'redux';
 
 
 
-import { onBookingLoad, onResourceLoad, onBookingAccept } from './action';
+import { onBookingLoad, onResourceLoad, onBookingAccept, onBookingCancel } from './action';
 import { selectBookingSelector, resourceListSelector } from './selector';
 
 import saga from './saga';
@@ -39,14 +39,11 @@ class BookingDashboard extends React.Component {
   }
 
   acceptBookingHandler = (bookingId, resourceId) => {
-    console.log("bookingId", bookingId);
-    console.log("resourceId", resourceId);
     this.props.onBookingAccept(bookingId, resourceId);
   }
 
   cancelBookingHandler = (bookingId, resourceId) => {
-    console.log("cancel bookingId", bookingId);
-    console.log("cancel resourceId", resourceId);
+    this.props.onBookingCancel(bookingId, resourceId);
   }
 
   render() {
@@ -67,7 +64,6 @@ class BookingDashboard extends React.Component {
       ? filterBusinessCurrentBookings(bookingList, userId)
       : filterCustomerCurrentBookings(bookingList, userId);
 
-    console.log("getUserCurrentBookings", getUserCurrentBookings)
     return (
       <div>
         <Layout />
@@ -113,6 +109,7 @@ BookingDashboard.propTypes = {
   onResourceLoad: PropTypes.func,
   resourceList: PropTypes.array,
   onBookingAccept: PropTypes.func,
+  onBookingCancel: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -124,6 +121,7 @@ const mapDispatchToProps = (dispatch) => ({
   onBookingLoad: bindActionCreators(onBookingLoad, dispatch),
   onResourceLoad: bindActionCreators(onResourceLoad, dispatch),
   onBookingAccept: bindActionCreators(onBookingAccept, dispatch),
+  onBookingCancel: bindActionCreators(onBookingCancel, dispatch),
 });
 
 
