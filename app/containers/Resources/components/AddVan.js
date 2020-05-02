@@ -342,7 +342,7 @@ const AddVanForm = ({
                   onClick={openPriceModalHandler}
                   className="btn rounded btn-success add__pricing-btn"
                 >
-                  Add price
+                  Add pricing option
                 </Button>
                 <Modal
                   color="primary"
