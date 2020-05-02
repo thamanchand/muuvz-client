@@ -46,10 +46,19 @@ export function* onBookingWatcher(action) {
   console.log("Booking action", action);
 
   try {
+    // generate random booking number
     const getUniqueBookingId = uniqueBookingId();
+    // get resource Id
+    const resourceId = action.bookingPayload.resource;
+    // prepare booking POST payload
     const payload = {...action.bookingPayload, bookingId: getUniqueBookingId};
+    // prepare payload to update resource
+    const updateResourceResp = { status: 'Requested' };
+    // call booking POST api
     const bookingResponse = yield call(api.postResourceBooking, payload);
-    if (bookingResponse) {
+    // call update resource api
+    const updateResourceResponse = yield call(api.editResource, updateResourceResp, resourceId);
+    if (bookingResponse && updateResourceResponse) {
       yield put(push(`${'/listing/bookingconfirmation?'}${'bookingId='}${getUniqueBookingId}`));
       yield put(onBookingSuccess(bookingResponse));
     }
