@@ -11,8 +11,9 @@ import {
 
 // Utils
 import auth from 'utils/auth';
-import request from 'utils/request';
 import  history from '../../utils/history';
+
+import * as api from './api';
 
 // constants
 import { ON_LOGIN_SUBMIT } from './constants';
@@ -23,19 +24,20 @@ export function* submitForm(action) {
   console.log("Login action");
   try {
     const body = action.payload;
+    // find out if login source is from listing page
     const isLoggedFromListingPage = action.loginSource === 'listingPage';
-    const requestURL = 'http://localhost:1337/auth/local';
-    const response = yield call(request, requestURL, { method: 'POST', body });
 
+    const response = yield call(api.loginUser, body);
     if (response.jwt) {
+      auth.clearToken();
       const { email, confirmed, profileCompleted, isbusiness, id } = response.user;
       const userFieldsLocallyStored = { email, confirmed, profileCompleted, isbusiness, id}
-      auth.clearAppStorage();
+      // auth.clearAppStorage();
 
       // Set the user's credentials
       yield all([
-        call(auth.setToken, response.jwt, body.rememberMe),
-        call(auth.setUserInfo, userFieldsLocallyStored, body.rememberMe),
+        call(auth.setToken, response.jwt,  body.rememberMe),
+        call(auth.setUserInfo, userFieldsLocallyStored),
       ]);
       const isBusiness = auth.get('userInfo').isbusiness;
       const isProfileCompleted = auth.get('userInfo').profileCompleted;
@@ -50,6 +52,11 @@ export function* submitForm(action) {
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
         yield cancel(submitWatcher);
       } else if (isBusiness && !isProfileCompleted) {
+        yield put(onLoginSubmitSuccess());
+        yield call(forwardTo, '/dashboard/profile');
+        const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
+        yield cancel(submitWatcher);
+      } else if (!isBusiness && !isProfileCompleted) {
         yield put(onLoginSubmitSuccess());
         yield call(forwardTo, '/dashboard/profile');
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
