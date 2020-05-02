@@ -5,10 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
 
-// Utils
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import auth from '../../utils/auth';
+
 
 import { onBookingLoad, onResourceLoad } from './action';
 import { selectBookingSelector, resourceListSelector } from './selector';
@@ -17,28 +14,32 @@ import saga from './saga';
 import reducer from './reducer';
 
 import Layout from '../Layout/index';
-import Statistics from './components/Statistics';
+// import Statistics from './components/Statistics';
 import BigCalendar from './components/BigCalendar';
 import EventLabels from './components/VanLabels';
+import UserBooking from './components/UserBooking';
 
-import { filterCurrentBookings, filterResourcesBelongsToUser } from '../utils';
+import { filterCustomerCurrentBookings, filterBusinessCurrentBookings, filterResourcesBelongsToUser } from '../utils';
+
+// Utils
+import auth from '../../utils/auth';
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
 
 const key = 'bookingPage';
 
-const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
-
-
-class BookingDashboard extends React.PureComponent {
+class BookingDashboard extends React.Component {
 
   componentDidMount() {
-    console.log("BookingDashboard componentDidMount")
-    if (auth.getToken()) {
+    const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+    if (auth.getToken() && isProfileCompleted) {
       this.props.onBookingLoad();
       this.props.onResourceLoad();
     }
   }
 
   render() {
+    // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
     const { bookingList, resourceList } = this.props;
     const userId = auth.get('userInfo') && auth.get('userInfo').id;
 
@@ -50,7 +51,11 @@ class BookingDashboard extends React.PureComponent {
 
     // filter current bookings belongs to user and booking start time is
     // greater than current date and time
-    const getUserCurrentBookings = filterCurrentBookings(bookingList, userId);
+    const getUserCurrentBookings = isBusiness
+      ? filterBusinessCurrentBookings(bookingList, userId)
+      : filterCustomerCurrentBookings(bookingList, userId);
+
+    const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
 
     return (
       <div>
@@ -62,22 +67,26 @@ class BookingDashboard extends React.PureComponent {
                 <h3 className="page-title">Booking</h3>
               </Col>
             </Row>
-            {isProfileCompleted && (
+            {/* isProfileCompleted && (
               <Row>
                 <Statistics />
               </Row>
+            ) */}
+            {isBusiness ? (
+              <Row>
+                <div className="container dashboard">
+                  <Row>
+                    <BigCalendar bookingList={getUserCurrentBookings} />
+                    <EventLabels
+                      resourceList={getUserResources}
+                      currentBookings={getUserCurrentBookings}
+                    />
+                  </Row>
+                </div>
+              </Row>
+            ) : (
+              <UserBooking currentBookings={getUserCurrentBookings} />
             )}
-            <Row>
-              <div className="container dashboard">
-                <Row>
-                  <BigCalendar bookingList={getUserCurrentBookings} />
-                  <EventLabels
-                    resourceList={getUserResources}
-                    currentBookings={getUserCurrentBookings}
-                  />
-                </Row>
-              </div>
-            </Row>
           </Container>
         </div>
       </div>
