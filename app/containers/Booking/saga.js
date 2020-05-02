@@ -24,6 +24,7 @@ import {
   ON_BOOKING_LOAD,
   ON_RESOURCE_LOAD,
   ON_BOOKING_ACCEPT,
+  ON_BOOKING_CANCEL,
 } from './constants';
 
 export function* onBookingLoadWatcher(action) {
@@ -53,7 +54,7 @@ export function* onResourceLoadWatcher(action) {
 }
 
 export function* onBookingAcceptWatcher(action) {
-  console.log("Booking cancel action", action);
+  console.log("Booking accept action", action);
   const { resourceId, bookingId } = action;
 
   const resourceUpadatePayload = { status: 'Booked' };
@@ -71,8 +72,30 @@ export function* onBookingAcceptWatcher(action) {
     yield put(onBookingAcceptFailed(error));
   }
 }
+
+export function* onBookingCancelWatcher(action) {
+  console.log("Booking cancel action", action);
+  const { resourceId, bookingId } = action;
+
+  const resourceUpadatePayload = { status: 'Cancelled' };
+  const bookingUpdatePayload = { status: 'Cancelled' };
+
+
+  try {
+    const updateResource = yield call(api.updateResource, resourceUpadatePayload, resourceId);
+    const updateBooking = yield call(api.updateBooking, bookingUpdatePayload, bookingId);
+
+    if (updateResource && updateBooking) {
+      yield put(onBookingAcceptSuccess());
+    }
+  } catch(error) {
+    yield put(onBookingAcceptFailed(error));
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(ON_BOOKING_LOAD, onBookingLoadWatcher);
   yield takeLatest(ON_RESOURCE_LOAD, onResourceLoadWatcher);
   yield takeLatest(ON_BOOKING_ACCEPT, onBookingAcceptWatcher);
+  yield takeLatest(ON_BOOKING_CANCEL, onBookingCancelWatcher);
 }
