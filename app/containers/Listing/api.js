@@ -18,3 +18,17 @@ export const postResourceBooking = payload => axios
   .catch(error => {
     throw error;
   });
+
+// update resource status
+export const editResource = (payload, resourceId) => axios
+  .put(`${BASE_URL}${'resources/'}${resourceId}`,
+    {...payload },
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    }
+  ).then(response => response.data).catch(err => {
+    throw err;
+  });
