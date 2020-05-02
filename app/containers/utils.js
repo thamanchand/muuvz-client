@@ -53,3 +53,7 @@ export const filterCustomerCurrentBookings = (bookingList, userId) => {
 // filter resources belongs to User
 export const filterResourcesBelongsToUser = (resourceList, userId) =>
   resourceList.filter((item) => item.user && item.user.id === userId)
+
+// filter only available resources
+export const filterAvailableResources = (resourceList) =>
+  resourceList.filter((item) => item.status === 'Available')
