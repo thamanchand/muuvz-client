@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Card, CardBody, Col, Table } from 'reactstrap';
+import { Card, CardBody, Col, Table, Badge } from 'reactstrap';
 
 const UserBooking = ({ currentBookings }) => (
   <Col md={12} lg={12} xl={12}>
@@ -36,7 +36,9 @@ const UserBooking = ({ currentBookings }) => (
                       {item.address}
                     </td>
                     <td>
-                      {item.status}
+                      {item.status ==='Booked' && <Badge color="badge badge-danger">BOOKED</Badge>}
+                      {item.status ==='Cancelled' && <Badge color="badge badge-info">CANCELLED</Badge>}
+                      {item.status ==='Requested' && <Badge color="badge badge-info">WAITING..</Badge>}
                     </td>
                   </tr>
                 ))}
