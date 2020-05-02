@@ -69,10 +69,10 @@ const AddPrice = ({ onPriceInfoSave }) => (
 
 
               <Row>
-                <div className="addEditModal__footer">
+                <div className="add__pricing_btn">
                   <ButtonToolbar className="form__button-toolbar">
                     <button
-                      className="square btn btn-primary"
+                      className="square btn btn-success rounded"
                       type="submit"
                       disabled={submitting || pristine || invalid}
                       onClick={() => onPriceInfoSave(values)}

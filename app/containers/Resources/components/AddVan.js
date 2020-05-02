@@ -371,12 +371,13 @@ const AddVanForm = ({
                 }
                 {priceList && !priceList.length > 0
                   ?
-                  (
-                    <h5 className="page-subhead subhead">No data </h5>
-
+                  ( <>
+                      <h5 className="page-subhead subhead">No data </h5>
+                      <p className="datepicker__select_time">Please add van pricing info </p>
+                    </>
                   )
                   : (
-                    <div className="table-responsive">
+                    <div className="table-responsive price__table">
                       <Table striped responsive>
                         <thead>
                           <tr>
