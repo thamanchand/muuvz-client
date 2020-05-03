@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Badge } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
-const SidebarLink = ({ title, icon, newLink, route, onClick }) => (
-  <NavLink to={route} onClick={onClick} activeClassName="sidebar__link-active">
+const SidebarLink = ({ title, icon, newLink, route, onClick, selected }) => (
+
+  <NavLink to={route} onClick={onClick} className={selected ? "sidebar__link-active" : null }>
     <li className="sidebar__link">
       {icon ? <span className={`sidebar__link-icon lnr lnr-${icon}`} /> : ''}
       <p className="sidebar__link-title">
@@ -27,6 +28,7 @@ SidebarLink.propTypes = {
   newLink: PropTypes.bool,
   route: PropTypes.string,
   onClick: PropTypes.func,
+  selected: PropTypes.string,
 };
 
 SidebarLink.defaultProps = {
