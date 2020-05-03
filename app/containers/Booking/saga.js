@@ -60,12 +60,15 @@ export function* onBookingAcceptWatcher(action) {
   const resourceUpadatePayload = { status: 'Booked' };
   const bookingUpdatePayload = { status: 'Booked' };
 
-
   try {
     const updateResource = yield call(api.updateResource, resourceUpadatePayload, resourceId);
     const updateBooking = yield call(api.updateBooking, bookingUpdatePayload, bookingId);
 
     if (updateResource && updateBooking) {
+      const bookingResult = yield call(api.getBookings);
+      if (bookingResult) {
+        yield put(onBookingLoadSuccess(bookingResult));
+      }
       yield put(onBookingAcceptSuccess());
     }
   } catch(error) {
