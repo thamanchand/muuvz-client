@@ -16,7 +16,7 @@ const BigCalendar = ({ bookingList }) => {
   })
 
   return (
-    <Col md={12} lg={12} xl={9}>
+    <Col md={12} lg={12} xl={8}>
       <Card>
         <CardBody>
           <Calendar events={events} />
