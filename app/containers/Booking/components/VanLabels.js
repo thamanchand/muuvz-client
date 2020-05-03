@@ -69,7 +69,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                               <div className="resources__icon_list">
                                 <span>
                                   <span className="lnr lnr-user booking__user__icon" />
-                                  <span className="booking__user">{currentBookingItem.profile.businessName}</span>
+                                  <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
                                 </span>
                               </div>
                             </div>
@@ -77,7 +77,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                               <div className="resources__icon_list">
                                 <span>
                                   <i className="lnr lnr-phone-handset booking__user__icon" />
-                                  <span className="">{currentBookingItem.profile.phoneNumber}</span>
+                                  <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
                                 </span>
                               </div>
                             </div>
@@ -102,7 +102,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                               <div className="resources__icon_list">
                                 <span>
                                   <span className="lnr lnr-user booking__user__icon" />
-                                  <span className="booking__user">{currentBookingItem.profile.businessName}</span>
+                                  <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
                                 </span>
                               </div>
                             </div>
@@ -110,7 +110,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                               <div className="resources__icon_list">
                                 <span>
                                   <i className="lnr lnr-phone-handset booking__user__icon" />
-                                  <span className="">{currentBookingItem.profile.phoneNumber}</span>
+                                  <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
                                 </span>
                               </div>
                             </div>
@@ -126,7 +126,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                           <div className="resources__icon_list">
                             <span>
                               <span className="lnr lnr-user booking__user__icon" />
-                              <span className="booking__user">{currentBookingItem.profile.businessName}</span>
+                              <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
                             </span>
                           </div>
                         </div>
@@ -134,7 +134,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                           <div className="resources__icon_list">
                             <span>
                               <i className="lnr lnr-phone-handset booking__user__icon" />
-                              <span className="">{currentBookingItem.profile.phoneNumber}</span>
+                              <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
                             </span>
                           </div>
                         </div>
@@ -147,7 +147,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                           <div className="resources__icon_list">
                             <span>
                               <span className="lnr lnr-user booking__user__icon" />
-                              <span className="booking__user">{currentBookingItem.profile.businessName}</span>
+                              <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
                             </span>
                           </div>
                         </div>
@@ -155,7 +155,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                           <div className="resources__icon_list">
                             <span>
                               <i className="lnr lnr-phone-handset booking__user__icon" />
-                              <span className="">{currentBookingItem.profile.phoneNumber}</span>
+                              <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
                             </span>
                           </div>
                         </div>
@@ -169,7 +169,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                           <div className="resources__icon_list">
                             <span>
                               <span className="lnr lnr-user booking__user__icon" />
-                              <span className="booking__user">{currentBookingItem.profile.businessName}</span>
+                              <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
                             </span>
                           </div>
                         </div>
@@ -177,7 +177,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                           <div className="resources__icon_list">
                             <span>
                               <i className="lnr lnr-phone-handset booking__user__icon" />
-                              <span className="">{currentBookingItem.profile.phoneNumber}</span>
+                              <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
                             </span>
                           </div>
                         </div>
