@@ -21,6 +21,8 @@ import { uniqueBookingId } from '../utils';
 
 import * as api from './api';
 
+import { getUserInfo } from '../Profile/api';
+
 import {
   ON_SEARCH,
   ON_BOOKING,
@@ -50,18 +52,30 @@ export function* onBookingWatcher(action) {
     const getUniqueBookingId = uniqueBookingId();
     // get resource Id
     const resourceId = action.bookingPayload.resource;
-    // prepare booking POST payload
-    const payload = {...action.bookingPayload, bookingId: getUniqueBookingId};
-    // prepare payload to update resource
-    const updateResourceResp = { status: 'Requested' };
-    // call booking POST api
-    const bookingResponse = yield call(api.postResourceBooking, payload);
-    // call update resource api
-    const updateResourceResponse = yield call(api.editResource, updateResourceResp, resourceId);
-    if (bookingResponse && updateResourceResponse) {
-      yield put(push(`${'/listing/bookingconfirmation?'}${'bookingId='}${getUniqueBookingId}`));
-      yield put(onBookingSuccess(bookingResponse));
+    // get userId
+    const userId = action.bookingPayload.user;
+    const userApiResponse = yield call(getUserInfo, userId);
+
+    if (userApiResponse) {
+      // prepare booking POST payload
+      const payload = {
+        ...action.bookingPayload,
+        bookingId: getUniqueBookingId,
+        profile: userApiResponse.profile.id
+      };
+      // prepare payload to update resource
+      const updateResourceResp = { status: 'Requested' };
+
+      // call booking POST api
+      const bookingResponse = yield call(api.postResourceBooking, payload);
+      // call update resource api
+      const updateResourceResponse = yield call(api.editResource, updateResourceResp, resourceId);
+      if (bookingResponse && updateResourceResponse) {
+        yield put(push(`${'/listing/bookingconfirmation?'}${'bookingId='}${getUniqueBookingId}`));
+        yield put(onBookingSuccess(bookingResponse));
+      }
     }
+
   } catch(error) {
     yield put(onBookingFailed(error));
   }
