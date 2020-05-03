@@ -37,8 +37,15 @@
 }
 
 .sidebar__link-active {
-
+  color: #646777;
+  .sidebar__link-icon {
+    font-weight: bold;
+  }
+  .sidebar__link-title {
+    font-weight: bold;
+  }
   .sidebar__link {
+
 
     &:before {
       opacity: 1;
@@ -133,6 +140,7 @@
     transition: left 0.3s;
     top: 50%;
     transform: translateY(-50%);
+    text-transform: uppercase;
   }
 
   &:hover {
@@ -150,7 +158,7 @@
 
 .sidebar__link-title {
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 16px;
   position: relative;
   display: flex;
@@ -160,7 +168,11 @@
   margin-right: 10px;
   font-size: 13px;
   line-height: 13px;
-  color: #b1c3c8;
+  color: #646777;
+
+  &:active {
+
+  }
 }
 
 .sidebar__submenu {
