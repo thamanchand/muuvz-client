@@ -61,23 +61,34 @@
   }
 }
 .booking__label {
-  font-weight: 500;
   color: #646777;
-  font-size: 12px;
+  font-size: 10px;
   padding: 6px 2px 3px;
+  font-weight: 600;
 }
 
 .booking__action {
   font-weight: 600;
   color: #007bff;
-  font-size: 13px;
-  margin: -1px 9px 10px -6px;
+  font-size: 12px;
+  margin: -1px 14px 10px -6px;
   margin-left: 0px;
   text-transform: uppercase;
   cursor: pointer;
+
+  @media screen and (min-width: 1200px) and (max-width: 1386px) {
+    margin: 0px 15px 8px 0px;;
+  }
 }
 
 .booking__label_status {
   width: 100px;
   margin-right: 12px;
+  @media screen and (min-width: 1200px) and (max-width: 1386px) {
+    width: 100%;
+  }
+}
+
+.booking__label_status-break {
+  margin-top: 5px;
 }
