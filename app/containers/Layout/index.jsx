@@ -21,9 +21,14 @@ class Layout extends Component {
     dispatch(changeSidebarVisibility());
   };
 
-  changeMobileSidebarVisibility = () => {
+  changeMobileSidebarVisibility = (selectedLink) => {
     const { dispatch } = this.props;
-    dispatch(changeMobileSidebarVisibility());
+    if (selectedLink === 'Logout') {
+      dispatch(changeMobileSidebarVisibility('Booking'));
+      auth.clearAppStorage();
+    } else {
+      dispatch(changeMobileSidebarVisibility(selectedLink));
+    }
   };
 
   changeSideNav = (selectedLink) => {
