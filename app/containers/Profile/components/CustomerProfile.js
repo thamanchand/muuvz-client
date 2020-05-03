@@ -121,6 +121,20 @@ const ProfileForm = ({
                     </div>
                     <Error name="address" />
                   </div>
+                  <div className="form__form-group">
+                    <span className="form__form-group-label">Licence </span>
+                    <span className="form__form-group-label_right">Required</span>
+                    <div className="form__form-group-field">
+                      <Field
+                        name="licenseTypes"
+                        component="input"
+                        type="text"
+                        placeholder="A, B"
+                      />
+
+                    </div>
+                    <Error name="address" />
+                  </div>
 
 
                   <Col md={12} sm={12}>
