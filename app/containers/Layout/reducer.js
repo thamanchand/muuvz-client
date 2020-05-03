@@ -19,7 +19,7 @@ const layoutReducer = (state = initialState, action) => {
     case CHANGE_SIDEBAR_VISIBILITY:
       return { ...state, collapse: !state.collapse };
     case CHANGE_MOBILE_SIDEBAR_VISIBILITY:
-      return { ...state, show: !state.show };
+      return { ...state, show: !state.show, selected: action.activeNav };
 
     case CHANGE_SIDENAV_SELECTED:
       return { ...state, selected: action.activeNav };

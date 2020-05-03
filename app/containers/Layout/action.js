@@ -10,9 +10,10 @@ export function changeSidebarVisibility() {
   };
 }
 
-export function changeMobileSidebarVisibility() {
+export function changeMobileSidebarVisibility(activeNav) {
   return {
     type: CHANGE_MOBILE_SIDEBAR_VISIBILITY,
+    activeNav,
   };
 }
 
