@@ -9,12 +9,13 @@ class SidebarContent extends Component {
     onClick: PropTypes.func.isRequired,
   };
 
-  hideSidebar = () => {
+  hideSidebar = (selectedNav) => {
     const { onClick } = this.props;
-    onClick();
+    onClick(selectedNav);
   };
 
   render() {
+    const { selectedNav } = this.props;
     const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
     const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
@@ -23,61 +24,60 @@ class SidebarContent extends Component {
         <ul className="sidebar__block">
           {isBusiness && !isProfileCompleted &&
           <SidebarLink
-            id= '1'
             title="Booking"
             icon="calendar-full"
             route="/dashboard/booking"
-            onClick={this.hideSidebar}
+            onClick={() => this.hideSidebar('Booking')}
+            selected={selectedNav === 'Booking'}
           />}
           {isBusiness && isProfileCompleted &&
           <SidebarLink
-            id= '1'
             title="Booking"
             icon="calendar-full"
             route="/dashboard/booking"
-            onClick={this.hideSidebar}
+            onClick={() => this.hideSidebar('Booking')}
+            selected={selectedNav === 'Booking'}
           />}
           {!isBusiness && isProfileCompleted &&
           <SidebarLink
-            id= '1'
             title="Booking"
             icon="calendar-full"
             route="/dashboard/booking"
-            onClick={this.hideSidebar}
+            onClick={() => this.hideSidebar('Booking')}
+            selected={selectedNav === 'Booking'}
           />}
           {isBusiness && !isProfileCompleted &&
           <SidebarLink
-            id= '1'
             title="Booking"
             icon="calendar-full"
             route="/dashboard/booking"
-            onClick={this.hideSidebar}
+            onClick={() => this.hideSidebar('Booking')}
+            selected={selectedNav === 'Booking'}
           />}
           {isBusiness && isProfileCompleted &&
           <SidebarLink
-            id= '2'
             title="Vans"
             icon="car"
             route="/dashboard/resources"
-            onClick={this.hideSidebar}
+            onClick={() => this.hideSidebar('Vans')}
+            selected={selectedNav === 'Vans'}
           />
           }
           <SidebarLink
-            id= '3'
             title="Profile"
             icon="user"
             route="/dashboard/profile"
-            onClick={this.hideSidebar}
+            onClick={() => this.hideSidebar('Profile')}
+            selected={selectedNav === 'Profile'}
           />
           <SidebarLink
-            id= '4'
             title="Account"
             icon="cog"
             route="/dashboard/account"
-            onClick={this.hideSidebar}
+            onClick={() => this.hideSidebar('Account')}
+            selected={selectedNav === 'Account'}
           />
           <SidebarLink
-            id= '5'
             title="Logout"
             icon="exit"
             onClick={() => auth.clearAppStorage()}
@@ -87,5 +87,9 @@ class SidebarContent extends Component {
     );
   }
 }
+
+SidebarContent.propTypes = {
+  selectedNav: PropTypes.string
+};
 
 export default SidebarContent;
