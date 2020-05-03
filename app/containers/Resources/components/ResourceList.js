@@ -99,12 +99,12 @@ const ResourceList = ({
                   <td>
                     <span style={iconStyles}>
                       <DeleteForeverIcon
-                        size="25" color="#ff4861"
+                        size="22" color="#ff4861"
                         onClick={() => deleteResourceHandler(item.id)}
                       />
                     </span>
                     <span style={iconStyles}>
-                      <SquareEditOutlineIcon size="25" color="#555555" />
+                      <SquareEditOutlineIcon size="22" color="#555555" />
                     </span>
                   </td>
                 </tr>
