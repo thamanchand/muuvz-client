@@ -4,7 +4,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import SidebarContent from './SidebarContent';
 
-const Sidebar = ({ changeMobileSidebarVisibility, sidebar }) => {
+const Sidebar = ({ changeMobileSidebarVisibility, sidebar, changeSideNav }) => {
+
+  const navHandler = (selected) => {
+    changeSideNav(selected);
+  }
+
   const sidebarClass = classNames({
     sidebar: true,
     'sidebar--show': sidebar.show,
@@ -20,7 +25,7 @@ const Sidebar = ({ changeMobileSidebarVisibility, sidebar }) => {
       />
       <Scrollbar className="sidebar__scroll scroll">
         <div className="sidebar__wrapper sidebar__wrapper--desktop">
-          <SidebarContent onClick={() => {}} />
+          <SidebarContent onClick={navHandler} selectedNav={sidebar.selected} />
         </div>
         <div className="sidebar__wrapper sidebar__wrapper--mobile">
           <SidebarContent onClick={changeMobileSidebarVisibility} />
@@ -36,6 +41,7 @@ Sidebar.propTypes = {
     show: PropTypes.bool,
     collapse: PropTypes.bool,
   }).isRequired,
+  changeSideNav: PropTypes.func,
 };
 
 export default Sidebar;
