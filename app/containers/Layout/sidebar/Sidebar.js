@@ -9,6 +9,9 @@ const Sidebar = ({ changeMobileSidebarVisibility, sidebar, changeSideNav }) => {
   const navHandler = (selected) => {
     changeSideNav(selected);
   }
+  const mobileNavHandler = (selected) => {
+    changeMobileSidebarVisibility(selected)
+  }
 
   const sidebarClass = classNames({
     sidebar: true,
@@ -28,7 +31,7 @@ const Sidebar = ({ changeMobileSidebarVisibility, sidebar, changeSideNav }) => {
           <SidebarContent onClick={navHandler} selectedNav={sidebar.selected} />
         </div>
         <div className="sidebar__wrapper sidebar__wrapper--mobile">
-          <SidebarContent onClick={changeMobileSidebarVisibility} />
+          <SidebarContent onClick={mobileNavHandler} selectedNav={sidebar.selected} />
         </div>
       </Scrollbar>
     </div>
