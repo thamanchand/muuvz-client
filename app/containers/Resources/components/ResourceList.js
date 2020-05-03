@@ -94,6 +94,7 @@ const ResourceList = ({
                     {item.status ==='Inuse' && <Badge color="badge badge-warning">IN USE</Badge>}
                     {item.status ==='Waiting' && <Badge color="badge badge-danger">WAITING</Badge>}
                     {item.status ==='Cancelled' && <Badge color="badge badge-info">CANCELLED</Badge>}
+                    {item.status ==='Requested' && <Badge color="badge badge-info">WAITING</Badge>}
                   </td>
                   <td>
                     <span style={iconStyles}>
