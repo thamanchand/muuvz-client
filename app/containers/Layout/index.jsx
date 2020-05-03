@@ -6,7 +6,11 @@ import PropTypes from 'prop-types';
 import Topbar from './topbar/Topbar';
 import Sidebar from './sidebar/Sidebar';
 
-import { changeMobileSidebarVisibility, changeSidebarVisibility } from './action';
+import {
+  changeMobileSidebarVisibility,
+  changeSidebarVisibility,
+  changeSideNav,
+} from './action';
 
 class Layout extends Component {
 
@@ -19,6 +23,11 @@ class Layout extends Component {
     const { dispatch } = this.props;
     dispatch(changeMobileSidebarVisibility());
   };
+
+  changeSideNav = (selectedLink) => {
+    const { dispatch } = this.props;
+    dispatch(changeSideNav(selectedLink));
+  }
 
   render() {
     const { sidebar } = this.props;
@@ -37,6 +46,7 @@ class Layout extends Component {
           <Sidebar
             sidebar={sidebar}
             changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
+            changeSideNav={this.changeSideNav}
           />
         </div>
       </React.Fragment>
