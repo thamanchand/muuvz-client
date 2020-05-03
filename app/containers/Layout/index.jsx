@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import Topbar from './topbar/Topbar';
 import Sidebar from './sidebar/Sidebar';
 
+import auth from '../../utils/auth';
+
 import {
   changeMobileSidebarVisibility,
   changeSidebarVisibility,
@@ -26,7 +28,12 @@ class Layout extends Component {
 
   changeSideNav = (selectedLink) => {
     const { dispatch } = this.props;
-    dispatch(changeSideNav(selectedLink));
+    if (selectedLink === 'Logout') {
+      dispatch(changeSideNav('Booking'));
+      auth.clearAppStorage();
+    } else {
+      dispatch(changeSideNav(selectedLink));
+    }
   }
 
   render() {
