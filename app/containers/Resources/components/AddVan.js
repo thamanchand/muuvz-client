@@ -378,7 +378,7 @@ const AddVanForm = ({
                   ?
                   ( <>
                       <h5 className="page-subhead subhead">No data </h5>
-                      <p className="datepicker__select_time">Please add van pricing info </p>
+                      <p className="validation__error">Please add van pricing options </p>
                     </>
                   )
                   : (

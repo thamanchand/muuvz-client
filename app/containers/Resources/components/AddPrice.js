@@ -77,7 +77,7 @@ const AddPrice = ({ onPriceInfoSave }) => (
                       disabled={submitting || pristine || invalid}
                       onClick={() => onPriceInfoSave(values)}
                     >
-                      Save
+                      Add price
                     </button>
                   </ButtonToolbar>
                 </div>
