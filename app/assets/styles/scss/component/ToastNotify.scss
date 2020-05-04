@@ -1,0 +1,19 @@
+.Toastify__toast-body {
+  padding-left: 15px !important;
+}
+
+.toast-warn-container {
+  @include toast_style($warn_color, $toast_box_shadow);
+}
+
+.toast-error-container {
+  @include toast_style($error_color, $toast_box_shadow);
+}
+
+.toast-success-container {
+  @include toast_style($success_color, $toast_box_shadow);
+}
+
+.toast-info-container {
+  @include toast_style($info_color, $toast_box_shadow);
+}
