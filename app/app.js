@@ -27,8 +27,11 @@ import LanguageProvider from 'containers/LanguageProvider';
 import history from './utils/history';
 
 // Load the favicon and the .htaccess file
-import '!file-loader?name=[name].[ext]!./images/favicon.ico';
+import '!file-loader?name=[name].[ext]!./assets/images/favicon/favicon.ico';
+import '!file-loader?name=[name].[ext]!./assets/images/favicon/apple-touch-icon.png';
+
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
+
 
 import configureStore from './configureStore';
 
