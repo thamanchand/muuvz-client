@@ -1,4 +1,5 @@
 @import 'settings/variable';  //themes' colors
+@import 'settings/mixins.scss';
 
 //vendor...
 //@import 'vendors';
@@ -30,6 +31,7 @@
 @import './component/dropzone';
 @import './component/emailconfirmation';
 @import './component/galleryslideshow';
+@import './component/ToastNotify';
 
 //pages...
 @import 'containers/landing';
