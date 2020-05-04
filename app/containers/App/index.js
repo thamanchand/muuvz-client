@@ -9,6 +9,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect} from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage';
@@ -30,6 +33,12 @@ import MainWrapper from '../../components/Wrapper';
 export default function App() {
   return (
     <MainWrapper>
+      <ToastContainer
+        autoClose={5000}
+        position="top-center"
+        className="toast-container"
+        toastClassName="dark-toast"
+      />
       <main>
         <Switch>
           <Route exact path="/" component={HomePage} />
