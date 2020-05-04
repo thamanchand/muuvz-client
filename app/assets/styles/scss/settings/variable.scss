@@ -68,3 +68,10 @@ $color-light-gray: #d8dfe9;
 
 $color-green: #b8e986;
 $color-green-hover: darken($color-green, 10%);
+
+
+$info_color: #17A2B8 !default;
+$warn_color: #FFC107 !default;
+$error_color: #EE0022 !default;
+$success_color: #34A853 !default;
+$toast_box_shadow: rgba(248, 175, 175, 0.1) !default;
