@@ -4,7 +4,8 @@ import {
   put,
 } from 'redux-saga/effects';
 
-// Utils
+import toast from '../../shared/ToastNotify';
+
 // import  history from '../../utils/history';
 
 // constants
@@ -69,6 +70,7 @@ export function* onBookingAcceptWatcher(action) {
       if (bookingResult) {
         yield put(onBookingLoadSuccess(bookingResult));
       }
+      toast.success('Booking accepted');
       yield put(onBookingAcceptSuccess());
     }
   } catch(error) {
@@ -93,6 +95,7 @@ export function* onBookingCancelWatcher(action) {
       if (bookingResult) {
         yield put(onBookingLoadSuccess(bookingResult));
       }
+      toast.error('Booking cancelled');
       yield put(onBookingAcceptSuccess());
     }
   } catch(error) {
