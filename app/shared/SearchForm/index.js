@@ -176,6 +176,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
                   disabled={!disabled}
                   startTimeChanged={(startTime) => startTimeChanged(startTime)}
                   className="search__field_input"
+                  source="main"
                 />
                 <div className="form__form-group-icon">
                   <ClockOutlineIcon />
@@ -211,6 +212,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
                   disabled={!disabled}
                   endTimeChanged={(endTime) => endTimeChanged(endTime)}
                   className="search__field_input"
+                  source="main"
                 />
                 <div className="form__form-group-icon">
                   <ClockOutlineIcon />
