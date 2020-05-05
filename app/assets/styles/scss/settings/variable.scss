@@ -83,3 +83,94 @@ $booking-cancelled: #ff4861 !default;
 $booking-available: #4ce1b6 !default;
 $booking-requested: #ffc107 !default;
 $booking-waiting: #17a2b8 !default;
+
+
+$directions: (
+  ltr: (
+    direction: ltr,
+
+    right: right,
+    left: left,
+
+    margin-right: 'margin-right',
+    margin-left: 'margin-left',
+
+    padding-left: 'padding-left',
+    padding-right: 'padding-right',
+
+    border-top-left-radius: 'border-top-left-radius',
+    border-bottom-left-radius: 'border-bottom-left-radius',
+
+    border-top-right-radius: 'border-top-right-radius',
+    border-bottom-right-radius: 'border-bottom-right-radius',
+
+    border-left: 'border-left',
+    border-right: 'border-right',
+
+    translate: 'translate(-50%, -50%);',
+    mirrorY: 'scale(1, 1)',
+
+    border-right-color: 'border-right-color',
+
+    transform-sidebar: 'rotate(90deg)',
+
+    flex-flow: row nowrap,
+    row: 'row',
+
+    sidebar-close: translateX(0),
+    sidebar-no-desktop: translateX(calc(0%)),
+    '-': '-',
+  ),
+  rtl: (
+    direction: rtl,
+
+    right: left,
+    left: right,
+
+    margin-right: 'margin-left',
+    margin-left: 'margin-right',
+
+    padding-left: 'padding-right',
+    padding-right: 'padding-left',
+
+    border-top-left-radius: 'border-top-right-radius',
+    border-bottom-left-radius: 'border-bottom-right-radius',
+
+    border-top-right-radius: 'border-top-left-radius',
+    border-bottom-right-radius: 'border-bottom-left-radius',
+
+    border-left: 'border-right',
+    border-right: 'border-left',
+
+    translate: 'translate(50%, -50%);',
+    mirrorY: 'scale(1, -1)',
+
+    border-right-color: 'border-left-color',
+    transform-sidebar: 'rotate(-90deg)',
+
+    flex-flow: row-reverse nowrap,
+    row: 'row-reverse',
+
+    sidebar-close: translateX(0),
+    sidebar-no-desktop:  translateX(calc(100%)),
+    '-': '+',
+  )
+);
+
+@mixin directify($directions) {
+  @each $direction, $map in $directions {
+    .#{$direction}-support & {
+      $direction-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($directions, $direction), '#{$key}');
+        $direction-map: map-merge($direction-map, ($key: $value)) !global;
+      }
+      @content;
+      $direction-map: null !global;
+    }
+  }
+}
+
+@function directed($key) {
+  @return map-get($direction-map, $key);
+}
