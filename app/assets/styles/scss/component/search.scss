@@ -1,0 +1,11 @@
+.startdatepicker__col {
+  padding: 0;
+}
+
+.form__form-group.form-pickuptime {
+  width: 95%;
+  float: right;
+  @media screen and (max-width: 990px) {
+    width: 100%;
+  }
+}
