@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import Error from '../ErrorField';
 import renderDateTimePickerField from '../DateTimePicker/index';
-import renderCheckBoxField from '../Checkbox/index';
+// import renderCheckBoxField from '../Checkbox/index';
 
 // custom hook for getting previous value
 function usePrevious(value) {
@@ -64,7 +64,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
       render={({ handleSubmit, values }) => (
         <form className="form" onSubmit={handleSubmit}>
           <div className="form__form-group">
-            <span className="form__form-group-label">Pickup location</span>
+            <span className="form__form-group-label">City</span>
             <div className="form__form-group-field">
               <Field
                 name="location"
@@ -77,7 +77,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
             </div>
             <Error name="location" />
           </div>
-          <div className="form__form-group">
+          {/* <div className="form__form-group">
             <div className="form__form-group-field">
               <Field
                 name="dropAtPickUpLocation"
@@ -88,7 +88,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
                 disabled={!disabled}
               />
             </div>
-          </div>
+          </div> */}
           <div className="form__form-group">
             <span className="form__form-group-label">Pickup date & time</span>
             <div className="form__form-group-field">
