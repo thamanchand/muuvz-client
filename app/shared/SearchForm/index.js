@@ -222,10 +222,15 @@ const Search = ({ onSearch, disabled, storedValues }) => {
           <div className="form__form-group">
             {isStartDateTimeGreater && (
               <div className="search__error">
-                Booking start date and time should be greater
+                Please select date, hour and minute
               </div>
             )
             }
+            {duration < '7200000' && (
+              <div className="search__error">
+                You can not book less than 2 hrs
+              </div>
+            )}
             <p className="booking__duration">
               {values.dropOffTime && values.pickupTime && (
                 humanizeDuration(duration,  { language: 'fi' })
