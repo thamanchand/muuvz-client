@@ -26,7 +26,7 @@ import reducer from './reducers';
 
 import HeaderNav from '../../shared/Header';
 import renderDateTimePickerField from '../../shared/DateTimePicker/index';
-import renderCheckBoxField from '../../shared/Checkbox/index';
+// import renderCheckBoxField from '../../shared/Checkbox/index';
 import Error from '../../shared/ErrorField';
 import Modal from '../../shared/Modal'
 import LoginPage from '../LoginPage';
@@ -147,9 +147,9 @@ class VanListPage extends PureComponent {
                 initialValues={storedValues}
                 render={({ handleSubmit, values }) => (
                   <form className="form" onSubmit={handleSubmit} style={{backgroundColor: '#FFF'}}>
-                    <div className="col-lg-3 col-md-3 col-sm-12 resource__searchbar">
+                    <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
                       <div className="form__form-group">
-                        <span className="form__form-group-label">Pickup location</span>
+                        <span className="form__form-group-label">City</span>
                         <div className="form__form-group-field">
                           <Field
                             name="location"
@@ -164,7 +164,7 @@ class VanListPage extends PureComponent {
                       </div>
                     </div>
 
-                    <div className="col-lg-3 col-md-3 col-sm-12 resource__searchbar">
+                    <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
                       <div className="form__form-group">
                         <span className="form__form-group-label">Pickup date & time</span>
                         <div className="form__form-group-field">
@@ -181,7 +181,7 @@ class VanListPage extends PureComponent {
                       </div>
                     </div>
 
-                    <div className="col-lg-3 col-md-3 col-sm-12 resource__searchbar">
+                    <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
                       <div className="form__form-group">
                         <span className="form__form-group-label">Drop-off date & time</span>
                         <div className="form__form-group-field">
@@ -196,8 +196,22 @@ class VanListPage extends PureComponent {
                         </div>
                         <Error name="dropOfftDateTime" />
                       </div>
+
                     </div>
                     <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
+                      <div className="form__form-group">
+                        <button
+                          className="rounded btn btn-success search-btn"
+                          type="button"
+                          onClick={() => handleSubmit(values)}
+                          disabled={!isEdit}
+                          storedValues={storedValues}
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                    {/* <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
                       <div className="form__form-group">
                         <div className="form__form-group-field resource__page__checkbox">
                           <span className="dropoff__label">Drop off</span>
@@ -220,7 +234,7 @@ class VanListPage extends PureComponent {
                           </button>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </form>
                 )}
               />
