@@ -77,6 +77,7 @@
     "glamor": "^2.20.40",
     "history": "4.9.0",
     "hoist-non-react-statics": "3.3.0",
+    "humanize-duration": "^3.22.0",
     "immer": "3.0.0",
     "immutable": "^4.0.0-rc.12",
     "interactjs": "^1.4.0",
