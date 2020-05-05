@@ -5,7 +5,9 @@ import { Col } from 'reactstrap';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
 import { Form, Field } from 'react-final-form';
-import TimetableIcon from 'mdi-react/TimetableIcon';
+import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
+import EventIcon from 'mdi-react/EventIcon';
+import moment from 'moment';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
@@ -25,13 +27,18 @@ import saga from './saga';
 import reducer from './reducers';
 
 import HeaderNav from '../../shared/Header';
-import renderDateTimePickerField from '../../shared/DateTimePicker/index';
+// import renderDateTimePickerField from '../../shared/DateTimePicker/index';
+import renderDatePickerField from '../../shared/Datepicker';
+import renderTimePickerFied from '../../shared/TimePicker';
+
 // import renderCheckBoxField from '../../shared/Checkbox/index';
 import Error from '../../shared/ErrorField';
 import Modal from '../../shared/Modal'
 import LoginPage from '../LoginPage';
 
 import { filterAvailableResources } from '../utils';
+
+const humanizeDuration = require('humanize-duration');
 
 const key = 'listingPage';
 
@@ -43,7 +50,14 @@ class VanListPage extends PureComponent {
     return null;
   }
 
-  state = { isEdit: false, showLoginPage: false, }
+  state = {
+    isEdit: false,
+    showLoginPage: false,
+    duration: null,
+    bookingStartDateTime: null,
+    bookingEndDateTime: null,
+    isStartDateTimeGreater: null,
+  }
 
   componentDidMount() {
     const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
@@ -92,6 +106,63 @@ class VanListPage extends PureComponent {
     }))
   };
 
+  startDateChanged = (startDate) => {
+    this.setState(() =>
+      ({ bookingStartDateTime: moment(startDate).format('YYYY-MM-DD') })
+    );
+  }
+
+  endDateChanged = (endDate) => {
+    this.setState(() => (
+      { bookingEndDateTime: moment(endDate).format('YYYY-MM-DD') })
+    );
+  }
+
+  endTimeChanged = (endTime) => {
+    const { bookingEndDateTime, bookingStartDateTime } = this.state;
+    // format End Time
+    const formatEndTime = moment(endTime).format('HH:mm');
+    // combined EndDate with endTime
+    const combinedWithEndDate = moment(`${moment(bookingEndDateTime).format('YYYY-MM-DD')}${formatEndTime}`, 'YYYY-MM-DDTHH:mm:ss');
+    this.setState(() => ({
+      bookingEndDateTime: moment(combinedWithEndDate).format('YYYY-MM-DDTHH:mm')
+    }));
+
+    // check if startDateTime is greater than endDateTime
+    this.setState((prevState) =>
+      ({ isStartDateTimeGreater: moment(prevState.bookingStartDateTime).isAfter(prevState.bookingEndDateTime)})
+    );
+
+    // calculate number of hours
+    const bookingHours = moment(bookingEndDateTime)
+      .diff(moment(bookingStartDateTime, 'YYYY-MM-DDTHH:mm'));
+    this.setState(() => ({ duration: bookingHours }));
+  }
+
+  startTimeChanged = (startTime) => {
+    const { bookingEndDateTime, bookingStartDateTime } = this.state;
+    // format startTime HH:mm
+    const formatStartTime = moment(startTime).format('HH:mm');
+    // combined startDate with startTime
+    const combinedWithStartDate = moment(`${moment(bookingStartDateTime).format('YYYY-MM-DD')}${formatStartTime}`, 'YYYY-MM-DDTHH:mm');
+    this.setState(() =>
+      ({
+        bookingStartDateTime: moment(combinedWithStartDate).format('YYYY-MM-DDTHH:mm')
+      })
+    );
+
+    this.setState((prevState) =>
+      ({
+        isStartDateTimeGreater: moment(prevState.bookingStartDateTime).isAfter(prevState.bookingEndDateTime)
+      })
+    );
+
+    // calculate number of hours
+    const bookingHours = moment(bookingEndDateTime)
+      .diff(moment(bookingStartDateTime, 'YYYY-MM-DDTHH:mm'));
+    this.setState(() => ({duration: bookingHours}));
+  }
+
   render() {
     const { resourceList, isSearchLoading, isBooked } = this.props;
     const { isEdit } = this.state;
@@ -135,11 +206,17 @@ class VanListPage extends PureComponent {
                   if (!values.location) {
                     errors.location = 'Location is required';
                   }
-                  if (!values.pickupDateTime) {
-                    errors.pickupDateTime = 'Pick up datetime is required';
+                  if (!values.pickupDate) {
+                    errors.pickupDate = 'Pick up date is required';
                   }
-                  if (!values.dropOfftDateTime) {
-                    errors.dropOfftDateTime = 'Drop off datetime is required';
+                  if (!values.pickupTime) {
+                    errors.pickupTime = 'Pikup time is required';
+                  }
+                  if (!values.dropOffDate) {
+                    errors.dropOffDate = 'Drop off date is required';
+                  }
+                  if (!values.dropOffTime) {
+                    errors.dropOffTime = 'Drop off time is required';
                   }
                   return errors
                 }}
@@ -147,7 +224,7 @@ class VanListPage extends PureComponent {
                 initialValues={storedValues}
                 render={({ handleSubmit, values }) => (
                   <form className="form" onSubmit={handleSubmit} style={{backgroundColor: '#FFF'}}>
-                    <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
+                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12 resource__searchbar">
                       <div className="form__form-group">
                         <span className="form__form-group-label">City</span>
                         <div className="form__form-group-field">
@@ -162,79 +239,106 @@ class VanListPage extends PureComponent {
                         </div>
                         <Error name="location" />
                       </div>
-                    </div>
+                    </Col>
 
-                    <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
+                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12">
                       <div className="form__form-group">
-                        <span className="form__form-group-label">Pickup date & time</span>
+                        <span className="form__form-group-label">Pickup date</span>
                         <div className="form__form-group-field">
                           <Field
-                            name="pickupDateTime"
-                            component={renderDateTimePickerField}
+                            name="pickupDate"
+                            component={renderDatePickerField}
                             disabled={!isEdit}
+                            startDateChanged={(startDate) => this.startDateChanged(startDate)}
+                            className="search__field_input"
                           />
                           <div className="form__form-group-icon">
-                            <TimetableIcon />
+                            <EventIcon />
                           </div>
                         </div>
-                        <Error name="pickupDateTime" />
+                        <Error name="pickupDate" />
                       </div>
-                    </div>
-
-                    <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
-                      <div className="form__form-group">
-                        <span className="form__form-group-label">Drop-off date & time</span>
+                    </Col>
+                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12">
+                      <div className="form__form-group form-pickuptime">
+                        <span className="form__form-group-label">Pickup time</span>
                         <div className="form__form-group-field">
                           <Field
-                            name="dropOfftDateTime"
-                            component={renderDateTimePickerField}
+                            name="pickupTime"
+                            component={renderTimePickerFied}
                             disabled={!isEdit}
+                            startTimeChanged={(startTime) => this.startTimeChanged(startTime)}
+                            className="search__field_input"
                           />
                           <div className="form__form-group-icon">
-                            <TimetableIcon />
+                            <ClockOutlineIcon />
                           </div>
                         </div>
-                        <Error name="dropOfftDateTime" />
+                        <Error name="pickupTime" />
                       </div>
-
-                    </div>
-                    <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
+                    </Col>
+                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12">
                       <div className="form__form-group">
-                        <button
-                          className="rounded btn btn-success search-btn"
-                          type="button"
-                          onClick={() => handleSubmit(values)}
-                          disabled={!isEdit}
-                          storedValues={storedValues}
-                        >
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                    {/* <div className="col-lg-3 col-md-6 col-sm-6 resource__searchbar">
-                      <div className="form__form-group">
-                        <div className="form__form-group-field resource__page__checkbox">
-                          <span className="dropoff__label">Drop off</span>
+                        <span className="form__form-group-label">Drop-off date</span>
+                        <div className="form__form-group-field">
                           <Field
-                            name="dropAtPickUpLocation"
-                            component={renderCheckBoxField}
-                            color="#646777"
-                            className="checkbox-btn  checkbox-btn--colored resource__checkbox"
-                            label="Pickup location"
+                            name="dropOffDate"
+                            component={renderDatePickerField}
                             disabled={!isEdit}
+                            endDateChanged={(endDate) => this.endDateChanged(endDate)}
                           />
-                          <button
-                            className="rounded btn btn-success search-btn"
-                            type="button"
-                            onClick={() => handleSubmit(values)}
-                            disabled={!isEdit}
-                            storedValues={storedValues}
-                          >
-                            Search
-                          </button>
+                          <div className="form__form-group-icon">
+                            <EventIcon />
+                          </div>
                         </div>
+                        <Error name="dropOffDate" />
                       </div>
-                    </div> */}
+                    </Col>
+                    <Col className="col-lg-2 col-md-6 col-sm-6 col-12">
+                      <div className="form__form-group form-pickuptime">
+                        <span className="form__form-group-label">Drop-off time</span>
+                        <div className="form__form-group-field">
+                          <Field
+                            name="dropOffTime"
+                            component={renderTimePickerFied}
+                            disabled={!isEdit}
+                            endTimeChanged={(endTime) => this.endTimeChanged(endTime)}
+                            className="search__field_input"
+                          />
+                          <div className="form__form-group-icon">
+                            <ClockOutlineIcon />
+                          </div>
+                        </div>
+                        <Error name="dropOffTime" />
+                      </div>
+                    </Col>
+                    <Col className="col-lg-2 col-md-6  col-sm-12 col-12" >
+                      <button
+                        className="rounded btn btn-success search-btn"
+                        type="button"
+                        onClick={() => handleSubmit(values)}
+                      >
+                      Search van
+                      </button>
+                    </Col>
+                    <Col className="col-md-12 col-sm-12">
+                      {this.state.isStartDateTimeGreater && (
+                        <div className="search__error">
+                          Please select date, hour and minute
+                        </div>
+                      )
+                      }
+                      {this.state.duration < '7200000' && (
+                        <div className="search__error">
+                          You can not book less than 2 hrs
+                        </div>
+                      )}
+                      <p className="booking__duration">
+                        {values.dropOffTime && values.pickupTime && (
+                          humanizeDuration(this.state.duration,  { language: 'fi' })
+                        )}
+                      </p>
+                    </Col>
                   </form>
                 )}
               />
