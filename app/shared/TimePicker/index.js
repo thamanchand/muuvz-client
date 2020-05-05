@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import TimePicker from 'rc-time-picker';
+import moment from 'moment';
 
 class TimePickerField extends PureComponent {
   static propTypes = {
@@ -14,7 +15,7 @@ class TimePickerField extends PureComponent {
 
   state = {
     open: false,
-    startTime: null,
+    startTime: moment(),
   };
 
   setOpen = ({ open }) => {
@@ -45,27 +46,42 @@ class TimePickerField extends PureComponent {
 
   render() {
     const {
-      name, theme,
+      name, theme, source,
     } = this.props;
     const { open } = this.state;
 
     const { startTime } = this.state;
     const { disabled, input } = this.props;
-    const initialDate = input.value ? Date.parse(input.value) : startTime;
+    const initialDate = input.value ? input.value : startTime;
 
     return (
       <div className="form__form-group-field">
-        <TimePicker
-          open={open}
-          selected={initialDate}
-          onOpen={this.setOpen}
-          onClose={this.setOpen}
-          name={name}
-          onChange={this.onTimeChange}
-          showSecond={false}
-          popupClassName={theme === 'theme-dark' ? 'theme-dark' : 'theme-light'}
-          disabled={disabled}
-        />
+        {source === 'main' ? (
+          <TimePicker
+            open={open}
+            selected={moment(initialDate)}
+            onOpen={this.setOpen}
+            onClose={this.setOpen}
+            name={name}
+            onChange={this.onTimeChange}
+            showSecond={false}
+            popupClassName={theme === 'theme-dark' ? 'theme-dark' : 'theme-light'}
+            disabled={disabled}
+          />
+        ) : (
+          <TimePicker
+            open={open}
+            selected={moment(initialDate)}
+            onOpen={this.setOpen}
+            onClose={this.setOpen}
+            name={name}
+            onChange={this.onTimeChange}
+            showSecond={false}
+            popupClassName={theme === 'theme-dark' ? 'theme-dark' : 'theme-light'}
+            disabled={disabled}
+            value={moment(initialDate)}
+          />
+        )}
       </div>
     );
   }
@@ -80,11 +96,21 @@ TimePickerField.propTypes = {
   disabled: PropTypes.bool,
   endTimeChanged: PropTypes.func,
   startTimeChanged: PropTypes.func,
+  source: PropTypes.string,
 };
 
 const renderTimePickerField = (props) => {
   // const { input, timeMode, theme } = props;
-  const { input, timeMode, disabled, theme, meta, endTimeChanged, startTimeChanged } = props;
+  const {
+    input,
+    timeMode,
+    disabled,
+    theme,
+    meta,
+    endTimeChanged,
+    startTimeChanged,
+    source,
+  } = props;
 
   return (
     <TimePickerField
@@ -95,6 +121,7 @@ const renderTimePickerField = (props) => {
       meta={meta}
       endTimeChanged={endTimeChanged}
       startTimeChanged={startTimeChanged}
+      source={source}
     />
   );
 };
@@ -110,6 +137,7 @@ renderTimePickerField.propTypes = {
   endTimeChanged: PropTypes.func,
   startTimeChanged: PropTypes.func,
   meta: PropTypes.object,
+  source: PropTypes.string,
 };
 
 renderTimePickerField.defaultProps = {
