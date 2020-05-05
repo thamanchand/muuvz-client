@@ -81,6 +81,7 @@
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.05);
     border: none;
     display: inline-flex;
+    margin-left: 15px;
   }
 
   .react-datepicker__time-container {
@@ -125,4 +126,19 @@
     }
   }
 
+}
+.react-datepicker__day--disabled {
+  color: #dedede;
+}
+
+.select__time {
+  position: absolute;
+  bottom: -26px;
+  height: 30px;
+  background: #FFF;
+  width: 100%;
+  padding-left: 15px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
 }
