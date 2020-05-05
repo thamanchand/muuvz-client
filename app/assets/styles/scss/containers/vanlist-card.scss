@@ -190,10 +190,16 @@
   font-size: 48px;
   margin: -4px 0px 0px -25px;
   position: absolute;
+  @media screen and (max-width: 1050px) and (min-width: 768px) {
+    margin: -17px 3px 0px -29px;
+  }
 }
 .pricing__content span.price-large{
   color: #FF1654;
-  font-size: 45px
+  font-size: 45px;
+  @media screen and (max-width: 1050px) and (min-width: 768px){
+    font-size: 30px;
+  }
 }
 .hr-small{
   font-size: 24px;
@@ -285,6 +291,10 @@ img .feature__icon {
   width: 100px;
   left: 15px;
   top: 15px;
+  @media screen and (minwidth: 1050px) {
+    width: 100px;
+    padding: 10px;
+  }
 }
 
 .resource__searchbar {
@@ -314,4 +324,11 @@ img .feature__icon {
 
 .resource__checkbox {
   margin-top: 9px;
+}
+
+.border-left {
+    border-left: 1px solid #dee2e6 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
