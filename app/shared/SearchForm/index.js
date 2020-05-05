@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import TimetableIcon from 'mdi-react/TimetableIcon';
 import moment from 'moment';
+import { Col } from 'reactstrap';
 
 import Error from '../ErrorField';
-import renderDateTimePickerField from '../DateTimePicker/index';
+// import renderDateTimePickerField from '../DateTimePicker/index';
+import renderDatePickerField from '../Datepicker';
+import renderTimePickerFied from '../TimePicker';
+
 // import renderCheckBoxField from '../Checkbox/index';
 
 // custom hook for getting previous value
@@ -18,16 +22,19 @@ function usePrevious(value) {
 }
 
 const Search = ({ onSearch, disabled, storedValues }) => {
-  const [duration, setDuration] = React.useState()
+  const [duration, setDuration] = React.useState();
   const [bookingStartDateTime, setBookingStartDateTime] = React.useState();
   const [bookingEndDateTime, setBookingEndDateTime] = React.useState();
+  const [isStartDateTimeGreater, setIsStartDateTimeGreater] = React.useState(false);
 
   const prevBookingStartDateTime = usePrevious(bookingStartDateTime);
   const prevBookingEndDateTime = usePrevious(bookingEndDateTime);
 
 
   const endDateChange = (endDateTime) => {
-    setBookingEndDateTime(moment(moment.utc(endDateTime)).format('YYYY-MM-DDTHH:mm:ss'));
+    setBookingEndDateTime(moment(moment(endDateTime)).format('YYYY-MM-DDTHH:mm:ss'));
+    setIsStartDateTimeGreater(moment(bookingStartDateTime).isAfter(bookingEndDateTime));
+
     // calculate number of hours
     const bookingHours = moment
       .duration(moment(endDateTime, 'YYYY-MM-DDTHH:mm:ss')
@@ -36,7 +43,8 @@ const Search = ({ onSearch, disabled, storedValues }) => {
     setDuration(bookingHours);
   }
   const startDateChange = (startDateTime) => {
-    setBookingStartDateTime(moment(moment.utc(startDateTime)).format('YYYY-MM-DDTHH:mm:ss'));
+    setBookingStartDateTime(moment(moment(startDateTime)).format('YYYY-MM-DDTHH:mm:ss'));
+    setIsStartDateTimeGreater(moment(bookingStartDateTime).isAfter(bookingEndDateTime));
     // calculate number of hours
     const bookingHours = moment
       .duration(moment(moment, 'YYYY-MM-DDTHH:mm:ss')
@@ -63,20 +71,22 @@ const Search = ({ onSearch, disabled, storedValues }) => {
       initialValues={storedValues}
       render={({ handleSubmit, values }) => (
         <form className="form" onSubmit={handleSubmit}>
-          <div className="form__form-group">
-            <span className="form__form-group-label">City</span>
-            <div className="form__form-group-field">
-              <Field
-                name="location"
-                component="input"
-                type="text"
-                placeholder="Helsinki"
-                required
-                disabled={!disabled}
-              />
+          <Col className="col-lg-12 col-md-12 col-sm-12 col-12 startdatepicker__col">
+            <div className="form__form-group">
+              <span className="form__form-group-label">City</span>
+              <div className="form__form-group-field">
+                <Field
+                  name="location"
+                  component="input"
+                  type="text"
+                  placeholder="Helsinki"
+                  required
+                  disabled={!disabled}
+                />
+              </div>
+              <Error name="location" />
             </div>
-            <Error name="location" />
-          </div>
+          </Col>
           {/* <div className="form__form-group">
             <div className="form__form-group-field">
               <Field
@@ -89,37 +99,77 @@ const Search = ({ onSearch, disabled, storedValues }) => {
               />
             </div>
           </div> */}
-          <div className="form__form-group">
-            <span className="form__form-group-label">Pickup date & time</span>
-            <div className="form__form-group-field">
-              <Field
-                name="pickupDateTime"
-                component={renderDateTimePickerField}
-                disabled={!disabled}
-                startDateChanged={(startDateTime) => startDateChange(startDateTime)}
-              />
-              <div className="form__form-group-icon">
-                <TimetableIcon />
+          <Col className="col-lg-6 col-md-12 col-sm-12 col-12 startdatepicker__col">
+            <div className="form__form-group">
+              <span className="form__form-group-label">Pickup date</span>
+              <div className="form__form-group-field">
+                <Field
+                  name="pickupDateTime"
+                  component={renderDatePickerField}
+                  disabled={!disabled}
+                  startDateChanged={(startDateTime) => startDateChange(startDateTime)}
+                  className="search__field_input"
+                />
+
               </div>
             </div>
-            <Error name="pickupDateTime" />
-          </div>
-          <div className="form__form-group">
-            <span className="form__form-group-label">Drop-off date & time</span>
-            <div className="form__form-group-field">
-              <Field
-                name="dropOfftDateTime"
-                component={renderDateTimePickerField}
-                disabled={!disabled}
-                endDateChanged={(endDateTime) => endDateChange(endDateTime)}
-              />
-              <div className="form__form-group-icon">
-                <TimetableIcon />
+          </Col>
+          <Col className="col-lg-6 col-md-12  col-sm-12 col-12 startdatepicker__col startimepicker__col">
+            <div className="form__form-group form-pickuptime">
+              <span className="form__form-group-label">Pickup time</span>
+              <div className="form__form-group-field">
+                <Field
+                  name="pickupDateTime"
+                  component={renderTimePickerFied}
+                  disabled={!disabled}
+                  startDateChanged={(startDateTime) => startDateChange(startDateTime)}
+                  className="search__field_input"
+                />
+
               </div>
+              <Error name="pickupDateTime" />
             </div>
-            <Error name="dropOfftDateTime" />
-          </div>
+          </Col>
+          <Col className="col-lg-6 col-md-12  col-sm-12 col-12 startdatepicker__col">
+            <div className="form__form-group">
+              <span className="form__form-group-label">Drop-off date & time</span>
+              <div className="form__form-group-field">
+                <Field
+                  name="dropOfftDateTime"
+                  component={renderDatePickerField}
+                  disabled={!disabled}
+                  endDateChanged={(endDateTime) => endDateChange(endDateTime)}
+                />
+                <div className="form__form-group-icon">
+                  <TimetableIcon />
+                </div>
+              </div>
+              <Error name="dropOfftDateTime" />
+            </div>
+          </Col>
+          <Col className="col-lg-6 col-md-12  col-sm-12 col-12 startdatepicker__col startimepicker__col">
+            <div className="form__form-group form-pickuptime">
+              <span className="form__form-group-label">Pickup time</span>
+              <div className="form__form-group-field">
+                <Field
+                  name="pickupDateTime"
+                  component={renderTimePickerFied}
+                  disabled={!disabled}
+                  startDateChanged={(startDateTime) => startDateChange(startDateTime)}
+                  className="search__field_input"
+                />
+
+              </div>
+              <Error name="pickupDateTime" />
+            </div>
+          </Col>
           <div className="form__form-group">
+            {isStartDateTimeGreater && (
+              <span className="validation__error">
+                Booking start time should be greater
+              </span>
+            )
+            }
             <p>
               {duration}
             </p>
