@@ -3,3 +3,23 @@
   max-height: 400px;
   padding: 21px;
 }
+
+.booked {
+  color: $booking-booked;
+}
+
+.requested {
+  color: $booking-requested;
+}
+
+.waiting {
+  color: $booking-waiting;
+}
+
+.cancelled {
+  color: $booking-cancelled;
+}
+
+.available {
+  color: $booking-available;
+}
