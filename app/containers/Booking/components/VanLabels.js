@@ -49,7 +49,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                 <div className="booking__label" style={{borderLeft: `${'2px solid'} ${currentBookingItem.resource.color}`}} >
                   {currentBookingItem.resource.status ==='Requested' && (
                     <>
-                      <span className="booking__label_status">REQUESTED</span>
+                      <span className="booking__label_status waiting">REQUESTED</span>
                       {(isMaxWidth || isMinWidth) && isMinWidthLess ?
                         (
                           <div className="booking__label_status-break">
@@ -121,7 +121,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                   )}
                   {currentBookingItem.resource.status ==='Booked' && (
                     <>
-                      <span className="booking__label_status">BOOKED</span>
+                      <span className="booking__label_status booked">BOOKED</span>
                         <div className="booking__user_info">
                           <div className="resources__icon_list">
                             <span>
@@ -142,7 +142,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                   )}
                   {currentBookingItem.resource.status ==='Inuse' && (
                     <>
-                      <span className="booking__label_status">IN USE</span>
+                      <span className="booking__label_status inuse">IN USE</span>
                         <div className="booking__user_info">
                           <div className="resources__icon_list">
                             <span>
@@ -164,7 +164,7 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
 
                   {currentBookingItem.resource.status ==='Cancelled' && (
                     <>
-                      <span className="booking__label_status">CANCELLED</span>
+                      <span className="booking__label_status cancelled">CANCELLED</span>
                         <div className="booking__user_info">
                           <div className="resources__icon_list">
                             <span>
