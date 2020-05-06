@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import DatePicker from 'react-datepicker';
 import { isMobileOnly } from 'react-device-detect';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 class DatePickerField extends PureComponent {
 
@@ -20,11 +21,11 @@ class DatePickerField extends PureComponent {
     });
 
     if (input.name === 'pickupDate') {
-      input.onChange(date);
+      input.onChange(moment(date).format('YYYY-MM-DD'));
       startDateChanged(date)
     }
     else if (input.name === 'dropOffDate') {
-      input.onChange(date);
+      input.onChange(moment(date).format('YYYY-MM-DD'));
       endDateChanged(date)
     }
   };
@@ -48,7 +49,7 @@ class DatePickerField extends PureComponent {
           minDate={new Date()}
           required
         >
-          <div className="select__time">Please select time</div>
+          <div className="select__time">Please select date, hrs and mins</div>
         </DatePicker>
       </div>
     );
