@@ -45,13 +45,13 @@ class TimePickerField extends PureComponent {
 
   render() {
     const { startTime } = this.state;
-    const { disabled } = this.props;
-
+    const { disabled, input } = this.props;
+    const initialDate = input.value ? moment(input.value, 'HH:mm').toDate() : startTime;
     return (
       <div className="form__form-group-field timepicker">
         <TimePicker
           className="form__form-group-datepicker"
-          selected={startTime}
+          selected={initialDate}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
