@@ -6,16 +6,31 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class TimePickerField extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      startTime: null,
+      minTime: this.calculateMinTime(new Date()),
+    };
+    this.calculateMinTime = this.calculateMinTime.bind(this);
+  }
 
-  state = {
-    startTime: moment("18:00", "HH:mm").toDate(),
-  };
+  // add these two functions to your component
+  calculateMinTime = (date) => {
+    const isToday = moment(date).isSame(moment(), 'day');
+    if (isToday) {
+      const nowAddOneHour = moment(new Date()).add({hours: 1}).toDate();
+      return nowAddOneHour;
+    }
+    return moment().startOf('day').toDate();
+  }
 
   onTimeChange = (changedTime) => {
     const { endTimeChanged, startTimeChanged, input } = this.props;
 
     this.setState({
       startTime: moment(changedTime, "HH:mm").toDate(),
+      minTime: this.calculateMinTime(changedTime),
     });
 
     if (input.name === 'pickupTime') {
@@ -44,6 +59,9 @@ class TimePickerField extends PureComponent {
           timeFormat="HH:mm"
           onChange={this.onTimeChange}
           disabled={disabled}
+          minDate={new Date()}
+          minTime={this.state.minTime}
+          maxTime={moment().endOf('day').toDate()} // set to 23:59 pm today
         />
       </div>
     );
