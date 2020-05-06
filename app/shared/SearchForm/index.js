@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import EventIcon from 'mdi-react/EventIcon';
+import CityIcon from 'mdi-react/CityIcon';
 
 import moment from 'moment';
 import { Col } from 'reactstrap';
@@ -10,6 +11,7 @@ import { Col } from 'reactstrap';
 import Error from '../ErrorField';
 // import renderDateTimePickerField from '../DateTimePicker/index';
 import renderDatePickerField from '../Datepicker';
+// import renderTimePickerFied from '../TimePicker';
 import renderTimePickerFied from '../TimePicker';
 
 const humanizeDuration = require('humanize-duration')
@@ -132,6 +134,9 @@ const Search = ({ onSearch, disabled, storedValues }) => {
                   required
                   disabled={!disabled}
                 />
+                <div className="form__form-group-icon">
+                  <CityIcon />
+                </div>
               </div>
               <Error name="location" />
             </div>
@@ -224,7 +229,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
           <div className="form__form-group">
             {isStartDateTimeGreater && (
               <div className="search__error">
-                Please select date, hour and minute
+                Please select both date and time
               </div>
             )
             }
