@@ -321,7 +321,7 @@ class VanListPage extends PureComponent {
                         <Error name="dropOffTime" />
                       </div>
                     </Col>
-                    <Col className="col-lg-2 col-md-6  col-sm-12 col-12" >
+                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12" >
                       <button
                         className="rounded btn btn-success search-btn"
                         type="button"
