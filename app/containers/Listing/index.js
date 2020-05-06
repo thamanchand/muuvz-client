@@ -7,6 +7,8 @@ import { bindActionCreators, compose } from 'redux';
 import { Form, Field } from 'react-final-form';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import EventIcon from 'mdi-react/EventIcon';
+import CityIcon from 'mdi-react/CityIcon';
+
 import moment from 'moment';
 
 // Utils
@@ -84,12 +86,16 @@ class VanListPage extends PureComponent {
   bookingHandler = (resourceId, resourceAddress) => {
     const userId = auth.get('userInfo') && auth.get('userInfo').id;
     const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
+
     if (userId && searchQuery) {
+      const combinedStartDateTime = `${searchQuery.pickupDate}${'T'}${searchQuery.pickupTime}`;
+      const combinedEndDateTime = `${searchQuery.dropOffDate}${'T'}${searchQuery.dropOffTime}`;
+
       const payload = {
         resource: resourceId,
         user: userId,
-        bookedStartDateTime: searchQuery.pickupDateTime,
-        bookedEndDateTime: searchQuery.dropOfftDateTime,
+        bookedStartDateTime: combinedStartDateTime,
+        bookedEndDateTime: combinedEndDateTime,
         address: resourceAddress,
         status: 'Requested',
       }
@@ -236,6 +242,9 @@ class VanListPage extends PureComponent {
                             required
                             disabled={!isEdit}
                           />
+                          <div className="form__form-group-icon">
+                            <CityIcon />
+                          </div>
                         </div>
                         <Error name="location" />
                       </div>
@@ -328,13 +337,14 @@ class VanListPage extends PureComponent {
                         </div>
                       )
                       }
-                      {this.state.duration < '7200000' && (
+                      {this.state.startDateTime
+                        && this.state.endDateTimethis.state.duration < '7200000' && (
                         <div className="search__error">
                           You can not book less than 2 hrs
                         </div>
                       )}
                       <p className="booking__duration">
-                        {values.dropOffTime && values.pickupTime && (
+                        {this.state.startDateTime && this.state.endDateTime && (
                           humanizeDuration(this.state.duration,  { language: 'fi' })
                         )}
                       </p>
