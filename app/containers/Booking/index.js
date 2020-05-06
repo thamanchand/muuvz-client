@@ -13,7 +13,7 @@ import { selectBookingSelector, resourceListSelector } from './selector';
 import saga from './saga';
 import reducer from './reducer';
 
-import Layout from '../Layout/index';
+import Layout from '../Layout';
 // import Statistics from './components/Statistics';
 import BigCalendar from './components/BigCalendar';
 import EventLabels from './components/VanLabels';

@@ -7,7 +7,7 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 import { Col, Container, Row } from 'reactstrap';
 // import Statistics from '../Booking/components/Statistics';
-import Layout from '../Layout/index';
+import Layout from '../Layout';
 import BusinessProfile from './components/BusinessProfile';
 import CustomerProfile from './components/CustomerProfile';
 

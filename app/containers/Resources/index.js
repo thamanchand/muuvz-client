@@ -11,7 +11,7 @@ import injectReducer from 'utils/injectReducer';
 
 import ResourceList from './components/ResourceList';
 // import Statistics from '../Booking/components/Statistics';
-import Layout from '../Layout/index';
+import Layout from '../Layout';
 import Modal from '../../shared/Modal'
 import DeleteResourceModal from './components/DeleteResourceModal';
 

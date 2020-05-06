@@ -12,7 +12,7 @@ import reducer from './reducer';
 import saga from './saga';
 
 // import Statistics from '../Booking/components/Statistics';
-import Layout from '../Layout/index';
+import Layout from '../Layout';
 import AccountForm from './components/AccountForm';
 
 import auth from '../../utils/auth';
