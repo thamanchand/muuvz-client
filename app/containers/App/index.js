@@ -62,7 +62,7 @@ export default function App() {
           <PrivateRoute exact path="/dashboard/account" component={AccountPage} />
           <Route exact path="/connect/:provider" component={ConnectPage} />
           <Route exact path="/auth/:authType/:id?" component={LoginPage} />
-          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/auth/:authType/:id?" component={RegisterPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </main>
