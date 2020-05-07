@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { Col, Container, Row, ButtonToolbar } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
@@ -12,8 +12,8 @@ import injectReducer from 'utils/injectReducer';
 import ResourceList from './components/ResourceList';
 // import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout';
-import Modal from '../../shared/Modal'
 import DeleteResourceModal from './components/DeleteResourceModal';
+import UnsaveDataModal from './components/UnsavedDataModal';
 
 import { onVanListLoad, onVanInfoSave, onResourceDelete } from './actions';
 import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
@@ -137,13 +137,18 @@ class ResourcesPage extends React.PureComponent {
     this.props.onResourceDelete(this.state.deleteResourceId);
   };
 
+  confirmClose = () => {
+    this.setState({
+      confirmModal: false,  openModel: false, priceList: []
+    })
+  }
+
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
     const { vanList } = this.props;
     const resourceList = filterResourcesBelongsToUser(vanList, auth.get('userInfo').id)
 
-    const Icon = <span className="lnr lnr-cross-circle modal__title-icon" />;
     return (
       <div>
         <Layout />
@@ -152,6 +157,12 @@ class ResourcesPage extends React.PureComponent {
           onClose={this.deleteModalCloseHandler}
           deleteResourceAction={this.deleteResourceAction}
         />
+        <UnsaveDataModal
+          show={this.state.confirmModal}
+          onClose={this.toggleConfirm}
+          confirmClose={this.confirmClose}
+        />
+
         <div className="container__wrap">
           <Container className="dashboard container">
             <Row>
@@ -183,37 +194,6 @@ class ResourcesPage extends React.PureComponent {
               />
             </Row>
           </Container>
-          <Modal
-            openModel={this.state.confirmModal}
-            modelToggle={() => this.toggleConfirm()}
-            className="modal-dialog--danger"
-            color="danger"
-          >
-            <div className="modal__header">
-              <button
-                className="lnr lnr-cross modal__close-btn"
-                type="button"
-                onClick={() => this.setState({confirmModal: false })} />
-              {Icon}
-              <h4 className="bold-text  modal__title">Do you want to close?</h4>
-            </div>
-            <div className="modal__body">
-              <p>Unsaved data</p>
-            </div>
-            <Row>
-              <div className="addEditModal__footer">
-                <ButtonToolbar className="form__button-toolbar">
-                  <button
-                    className="square btn btn-primary"
-                    type="submit"
-                    onClick={() => this.setState({confirmModal: false,  openModel: false, priceList: []})}
-                  >
-                    Confirm
-                  </button>
-                </ButtonToolbar>
-              </div>
-            </Row>
-          </Modal>
         </div>
       </div>
     );
