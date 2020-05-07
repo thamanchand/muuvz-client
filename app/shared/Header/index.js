@@ -110,7 +110,7 @@ const HeaderNav = ({ source }) => {
                           </Link>
                         </li>
                         <li className="nav-item landing__navbar-item">
-                          <Link className="btn btn-success btn-sm rounded login_register" to="/register">
+                          <Link className="btn btn-success btn-sm rounded login_register" to="/auth/register">
                             Register
                           </Link>
                         </li>
