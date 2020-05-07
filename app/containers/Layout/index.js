@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
+import { bindActionCreators, compose } from 'redux';
+
 import Topbar from './topbar/Topbar';
 import Sidebar from './sidebar/Sidebar';
+
+// Utils
+import injectSaga from '../../utils/injectSaga';
+import injectReducer from '../../utils/injectReducer';
+
+import saga from './saga';
+import reducer from './reducer';
 
 import auth from '../../utils/auth';
 
@@ -12,37 +22,58 @@ import {
   changeMobileSidebarVisibility,
   changeSidebarVisibility,
   changeSideNav,
+  onProfileLoad,
 } from './action';
+
+import {
+  userProfileSelector,
+  isSidebarCollapseSelector,
+  isMobileSidebarSelector,
+  selectedSideNavSelector,
+} from './selectors';
+
+
+const key = 'LayoutPage';
 
 class Layout extends Component {
 
+  componentDidMount() {
+    const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+    if (auth.getToken() && isProfileCompleted) {
+      this.props.onProfileLoad(auth.get('userInfo').id);
+    }
+  }
+
   changeSidebarVisibility = () => {
-    const { dispatch } = this.props;
-    dispatch(changeSidebarVisibility());
+    this.props.changeSidebarVisibility();
   };
 
   changeMobileSidebarVisibility = (selectedLink) => {
-    const { dispatch } = this.props;
     if (selectedLink === 'Logout') {
-      dispatch(changeMobileSidebarVisibility('Booking'));
+      this.props.changeMobileSidebarVisibility('Booking');
       auth.clearAppStorage();
     } else {
-      dispatch(changeMobileSidebarVisibility(selectedLink));
+      this.props.changeMobileSidebarVisibility(selectedLink);
     }
   };
 
   changeSideNav = (selectedLink) => {
-    const { dispatch } = this.props;
     if (selectedLink === 'Logout') {
-      dispatch(changeSideNav('Booking'));
+      this.props.changeSideNav('Booking');
       auth.clearAppStorage();
     } else {
-      dispatch(changeSideNav(selectedLink));
+      this.props.changeSideNav(selectedLink);
     }
   }
 
   render() {
-    const { sidebar } = this.props;
+    const { collapse, show, selected, userProfile } = this.props;
+    const sidebar = {
+      collapse,
+      show,
+      selected
+    };
+
     const layoutClass = classNames({
       layout: true,
       'layout--collapse': sidebar.collapse,
@@ -54,6 +85,7 @@ class Layout extends Component {
           <Topbar
             changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
             changeSidebarVisibility={this.changeSidebarVisibility}
+            userProfile={userProfile}
           />
           <Sidebar
             sidebar={sidebar}
@@ -67,13 +99,41 @@ class Layout extends Component {
 }
 
 Layout.propTypes = {
-  sidebar: PropTypes.shape({
-    show: PropTypes.bool,
-    collapse: PropTypes.bool,
-  }).isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
+  changeMobileSidebarVisibility: PropTypes.func,
+  changeSidebarVisibility: PropTypes.func,
+  changeSideNav: PropTypes.func,
+  userProfile: PropTypes.object,
+  onProfileLoad: PropTypes.func,
+  collapse: PropTypes.bool,
+  show: PropTypes.bool,
+  selected: PropTypes.string,
+}
 
-export default withRouter(connect(state => ({
-  sidebar: state.sidebar,
-}))(Layout));
+
+const mapDispatchToProps = (dispatch) => ({
+  onProfileLoad: bindActionCreators(onProfileLoad, dispatch),
+  changeSidebarVisibility: bindActionCreators(changeSidebarVisibility, dispatch),
+  changeMobileSidebarVisibility: bindActionCreators(changeMobileSidebarVisibility, dispatch),
+  changeSideNav: bindActionCreators(changeSideNav, dispatch),
+});
+
+const mapStateToProps = createStructuredSelector({
+  userProfile: userProfileSelector(),
+  collapse: isSidebarCollapseSelector(),
+  show: isMobileSidebarSelector(),
+  selected: selectedSideNavSelector(),
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key, reducer });
+const withSaga = injectSaga({ key, saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(Layout);
