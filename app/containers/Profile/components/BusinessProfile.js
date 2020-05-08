@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
 import { Form, Field } from 'react-final-form';
@@ -23,7 +23,10 @@ const ProfileForm = ({
   onProfileFormEdit,
   onAvatarDelete,
 }) => {
-  console.log("initialValues", initialValues)
+
+  // make sure component re-render when initialValues changed
+  useEffect(() => console.log('profile props changed!'), [initialValues]);
+
   const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
   return (
