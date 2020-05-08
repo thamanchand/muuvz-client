@@ -57,7 +57,7 @@ const AccountForm = ({ changePassword, isPasswordChangeButtonDisabled, isPasswor
             return errors
           }}
           onSubmit={onSubmit}
-          render={({ handleSubmit, values }) => (
+          render={({ handleSubmit, values, pristine, submitting }) => (
 
             <form className="form form-small form--horizontal" onSubmit={handleSubmit}>
               <div className="form__form-group">
@@ -93,7 +93,7 @@ const AccountForm = ({ changePassword, isPasswordChangeButtonDisabled, isPasswor
                   className="btn btn-success btn-sm rounded"
                   type="submit"
                   onClick={() => changePassword(values)}
-                  disabled={isPasswordChangeButtonDisabled}
+                  disabled={isPasswordChangeButtonDisabled || pristine || submitting}
                 >Change password</button>
               </div>
               {isPasswordChanged && (

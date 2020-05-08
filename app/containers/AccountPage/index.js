@@ -35,10 +35,18 @@ class AccountPage extends React.PureComponent {
       password: passPayload.password
     };
 
-    if (passPayload.password === passPayload.passwordConfirmation && userId && userEmail) {
+    if (
+      passPayload.password === ""
+      && passPayload.passwordConfirmation === ""
+    ) {
+      toast.error("Password is empty");
+    } else if (passPayload.password !== passPayload.passwordConfirmation) {
+      toast.error("Password didn't matched");
+    }
+    else if (!userId && !userEmail) {
+      toast.error("Failed to fetch user and email");
+    } else if( payload && userId && userEmail) {
       this.props.onPasswordChange(userId, payload);
-    } else {
-      toast.error('Error')
     }
   };
 
