@@ -87,14 +87,18 @@ const AccountForm = ({ changePassword, isPasswordChangeButtonDisabled, isPasswor
                 <Error name="passwordConfirmation" />
               </div>
 
-
-              <div className="profile__btns">
-                <button
-                  className="btn btn-success btn-sm rounded"
-                  type="submit"
-                  onClick={() => changePassword(values)}
-                  disabled={isPasswordChangeButtonDisabled || pristine || submitting}
-                >Change password</button>
+              <div className="form__form-group">
+                <span className="form__form-group-label"></span>
+                <div className="form__form-group-field">
+                  <div className="profile__btns">
+                    <button
+                      className="btn btn-success btn-sm rounded"
+                      type="submit"
+                      onClick={() => changePassword(values)}
+                      disabled={isPasswordChangeButtonDisabled || pristine || submitting}
+                    >Change password</button>
+                  </div>
+                </div>
               </div>
               {isPasswordChanged && (
                 <p className="passwordchange_notification">
