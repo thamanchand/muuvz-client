@@ -67,17 +67,18 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                             </span>
                             <div className="booking__user_info">
                               <div className="resources__icon_list">
-                                <span>
-                                  <span className="lnr lnr-user booking__user__icon" />
-                                  <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
-                                </span>
-                              </div>
-                            </div>
-                            <div className="booking__user_info">
-                              <div className="resources__icon_list">
-                                <span>
-                                  <i className="lnr lnr-phone-handset booking__user__icon" />
-                                  <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
+                                <img
+                                  className="topbar__avatar-img booking_user_avatar"
+                                  alt="profileImage"
+                                  src={currentBookingItem.profile.avatar ? `${'http://localhost:1337'}${currentBookingItem.profile.avatar.url}` : null }
+                                />
+                                <span className="booking_list">
+                                  <span className="booking__user_name">
+                                    {currentBookingItem.profile && currentBookingItem.profile.businessName}
+                                  </span>
+                                  <span className="booking_user_contact">
+                                    {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
+                                  </span>
                                 </span>
                               </div>
                             </div>
@@ -100,18 +101,19 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                             </span>
                             <div className="booking__user_info">
                               <div className="resources__icon_list">
-                                <span>
-                                  <span className="lnr lnr-user booking__user__icon" />
-                                  <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
-                                </span>
-                              </div>
-                            </div>
-                            <div className="booking__user_info">
-                              <div className="resources__icon_list">
-                                <span>
-                                  <i className="lnr lnr-phone-handset booking__user__icon" />
-                                  <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
-                                </span>
+                                <img
+                                  className="topbar__avatar-img booking_user_avatar"
+                                  alt="profileImage"
+                                  src={currentBookingItem.profile.avatar ? `${'http://localhost:1337'}${currentBookingItem.profile.avatar.url}` : null }
+                                />
+                                <div className="booking_list">
+                                  <span className="booking__user_name">
+                                    {currentBookingItem.profile && currentBookingItem.profile.businessName}
+                                  </span>
+                                  <span className="booking_user_contact">
+                                    {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </>
@@ -122,65 +124,68 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                   {currentBookingItem.resource.status ==='Booked' && (
                     <>
                       <span className="booking__label_status booked">BOOKED</span>
-                        <div className="booking__user_info">
-                          <div className="resources__icon_list">
-                            <span>
-                              <span className="lnr lnr-user booking__user__icon" />
-                              <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
+                      <div className="booking__user_info">
+                        <div className="resources__icon_list">
+                          <img
+                            className="topbar__avatar-img booking_user_avatar"
+                            alt="profileImage"
+                            src={currentBookingItem.profile.avatar ? `${'http://localhost:1337'}${currentBookingItem.profile.avatar.url}` : null }
+                          />
+                          <div className="booking_list">
+                            <span className="booking__user_name">
+                              {currentBookingItem.profile && currentBookingItem.profile.businessName}
+                            </span>
+                            <span className="booking_user_contact">
+                              {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
                             </span>
                           </div>
                         </div>
-                        <div className="booking__user_info">
-                          <div className="resources__icon_list">
-                            <span>
-                              <i className="lnr lnr-phone-handset booking__user__icon" />
-                              <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
-                            </span>
-                          </div>
-                        </div>
+                      </div>
                     </>
                   )}
                   {currentBookingItem.resource.status ==='Inuse' && (
                     <>
                       <span className="booking__label_status inuse">IN USE</span>
-                        <div className="booking__user_info">
-                          <div className="resources__icon_list">
-                            <span>
-                              <span className="lnr lnr-user booking__user__icon" />
-                              <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
+                      <div className="booking__user_info">
+                        <div className="resources__icon_list">
+                          <img
+                            className="topbar__avatar-img booking_user_avatar"
+                            alt="profileImage"
+                            src={currentBookingItem.profile.avatar ? `${'http://localhost:1337'}${currentBookingItem.profile.avatar.url}` : null }
+                          />
+                          <div className="booking_list">
+                            <span className="booking__user_name">
+                              {currentBookingItem.profile && currentBookingItem.profile.businessName}
+                            </span>
+                            <span className="booking_user_contact">
+                              {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
                             </span>
                           </div>
                         </div>
-                        <div className="booking__user_info">
-                          <div className="resources__icon_list">
-                            <span>
-                              <i className="lnr lnr-phone-handset booking__user__icon" />
-                              <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
-                            </span>
-                          </div>
-                        </div>
+                      </div>
                     </>
                   )}
 
                   {currentBookingItem.resource.status ==='Cancelled' && (
                     <>
                       <span className="booking__label_status cancelled">CANCELLED</span>
-                        <div className="booking__user_info">
-                          <div className="resources__icon_list">
-                            <span>
-                              <span className="lnr lnr-user booking__user__icon" />
-                              <span className="booking__user">{currentBookingItem.profile && currentBookingItem.profile.businessName}</span>
+                      <div className="booking__user_info">
+                        <div className="resources__icon_list">
+                          <img
+                            className="topbar__avatar-img booking_user_avatar"
+                            alt="profileImage"
+                            src={currentBookingItem.profile.avatar ? `${'http://localhost:1337'}${currentBookingItem.profile.avatar.url}` : null }
+                          />
+                          <div className="booking_list">
+                            <span className="booking__user_name">
+                              {currentBookingItem.profile && currentBookingItem.profile.businessName}
+                            </span>
+                            <span className="booking_user_contact">
+                              {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
                             </span>
                           </div>
                         </div>
-                        <div className="booking__user_info">
-                          <div className="resources__icon_list">
-                            <span>
-                              <i className="lnr lnr-phone-handset booking__user__icon" />
-                              <span className="">{currentBookingItem.profile && currentBookingItem.profile.phoneNumber}</span>
-                            </span>
-                          </div>
-                        </div>
+                      </div>
                     </>
                   )}
                 </div>
