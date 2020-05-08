@@ -24,7 +24,6 @@ const ProfileForm = ({
   onAvatarDelete,
 }) => {
   const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
-
   return (
     <Col md={12} lg={12}>
       <Card>
@@ -74,9 +73,12 @@ const ProfileForm = ({
               if (!values.address) {
                 errors.address = 'Address is required';
               }
+              if (!values.licenseTypes) {
+                errors.licenseTypes = 'License type is required';
+              }
               return errors
             }}
-            render={({ handleSubmit, values,  submitting }) => (
+            render={({ handleSubmit, values,  submitting, pristine }) => (
               <form className="form form--vertical" onSubmit={handleSubmit}>
                 <div className="form__half">
                   <div className="form__form-group">
@@ -133,7 +135,7 @@ const ProfileForm = ({
                       />
 
                     </div>
-                    <Error name="address" />
+                    <Error name="licenseTypes" />
                   </div>
 
 
@@ -163,22 +165,24 @@ const ProfileForm = ({
                       className="square btn btn-primary"
                       type="submit"
                       onClick={() => onProfileFormEdit(values, initialValues.id)}
-                      disabled={submitting }
-                    >Submit</button>
+                      disabled={submitting || pristine}
+                    >Update profile</button>
                   )}
                   {!(isProfileCompleted && initialValues.id) && (
                     <button
                       className="square btn btn-primary"
                       type="submit"
                       onClick={() => onProfileFormSave(values)}
-                    >Submit</button>
+                      disabled={submitting || pristine}
+                    >Save profile</button>
                   )}
                   {!isProfileCompleted && initialValues.id && (
                     <button
                       className="square btn btn-primary"
                       type="submit"
                       onClick={() => onProfileFormEdit(values, initialValues.id)}
-                    >Submit</button>
+                      disabled={submitting || pristine}
+                    >Update profile</button>
                   )}
                 </div>
               </form>
