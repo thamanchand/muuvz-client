@@ -4,11 +4,6 @@ import {
   put,
 } from 'redux-saga/effects';
 
-// Utils
-import request from 'utils/request';
-
-import auth from '../../utils/auth';
-
 // constants
 import {
   onPasswordChangeSuccess,
@@ -19,18 +14,13 @@ import {
   ON_PASSWORD_CHANGE
 } from './constant';
 
-const baseURL = "http://localhost:1337/";
+import { updatePassword } from './api';
 
 export function* onPasswordChangeWatcher(action) {
-  const { password } = action.passPayload;
-  const body = { password };
+  console.log("Change password action", action);
   try {
-    const requestURL = `${baseURL}${'users'}/${action.userId}`;
-    const response = yield call(request, requestURL, { method: 'put', body });
-    console.log("password change response", response);
+    const response = yield call(updatePassword, action.userId, action.passPayload);
     if (response) {
-      // update cookie
-      yield call(auth.setToken, response.jwt);
       yield put(onPasswordChangeSuccess());
     }
   } catch(error) {
