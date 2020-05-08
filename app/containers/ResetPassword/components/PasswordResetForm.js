@@ -36,10 +36,10 @@ const PasswordResetForm = ({ onPasswordResetHandler, isPasswordResetting }) => (
         errors.passwordConfirmation = 'Password didnt matched';
       }
       if (!values.password) {
-        errors.password = 'password cant be blank';
+        errors.password = 'Password cant be blank';
       }
       if (!values.passwordConfirmation) {
-        errors.passwordConfirmation = 'confirm password cant be blank';
+        errors.passwordConfirmation = 'Confirm password cant be blank';
       }
       return errors
     }}
