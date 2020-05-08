@@ -12,6 +12,7 @@ import {
 // Utils
 import auth from 'utils/auth';
 import  history from '../../utils/history';
+import toast from '../../shared/ToastNotify';
 
 import * as api from './api';
 
@@ -42,6 +43,7 @@ export function* submitForm(action) {
       const isBusiness = auth.get('userInfo').isbusiness;
       const isProfileCompleted = auth.get('userInfo').profileCompleted;
       if (isLoggedFromListingPage) {
+        toast.success("Logged in successfully!");
         yield put(onLoginSubmitSuccess());
         yield call(forwardTo, `${'/listing?loginSuccess'}`);
         // const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
@@ -49,21 +51,25 @@ export function* submitForm(action) {
       else if (isBusiness && isProfileCompleted) {
         yield put(onLoginSubmitSuccess());
         yield call(forwardTo, '/dashboard/booking');
+        toast.success("Logged in successfully!");
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
         yield cancel(submitWatcher);
       } else if (isBusiness && !isProfileCompleted) {
         yield put(onLoginSubmitSuccess());
         yield call(forwardTo, '/dashboard/profile');
+        toast.success("Logged in successfully!");
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
         yield cancel(submitWatcher);
       } else if (!isBusiness && !isProfileCompleted) {
         yield put(onLoginSubmitSuccess());
         yield call(forwardTo, '/dashboard/profile');
+        toast.success("Logged in successfully!");
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
         yield cancel(submitWatcher);
       } else if (!isLoggedFromListingPage && !isBusiness) {
         yield put(onLoginSubmitSuccess());
         yield call(forwardTo, '/');
+        toast.success("Logged in successfully!");
         const submitWatcher = yield fork(takeLatest, ON_LOGIN_SUBMIT, submitForm);
         yield cancel(submitWatcher);
       }
@@ -71,6 +77,7 @@ export function* submitForm(action) {
     }
   } catch(error) {
     yield put(onLoginSubmitFailed(error));
+    toast.error("Failed to login!");
     console.log("error", error.response.payload.message);
   }
 }
