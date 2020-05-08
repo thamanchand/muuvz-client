@@ -80,7 +80,7 @@ class LoginPage extends React.PureComponent {
                 loginError={loginError}
               />
               <div className="create__account_label">
-                <p>Need a Muverz account? <Link to="/register">Create an account </Link></p>
+                <p>Need a Muverz account? <Link to="/auth/register">Create an account </Link></p>
               </div>
               <div className="account__or">
                 <p>Or Login using</p>
