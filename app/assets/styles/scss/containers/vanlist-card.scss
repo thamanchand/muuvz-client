@@ -232,6 +232,7 @@
 
 .resources__icon_list {
   padding: 2px;
+  margin-top: 7px;
 }
 .edit-btn {
   color: #70bbfd;
@@ -335,4 +336,9 @@ img .feature__icon {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.booking_user_avatar {
+  width: 40px;
+  height: 40px;
 }
