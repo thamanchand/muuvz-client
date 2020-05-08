@@ -9,6 +9,7 @@ import PlusCircleIcon from 'mdi-react/PlusCircleIcon';
 import Modal from '../../../shared/Modal';
 import { formatDate } from '../../utils';
 import AddVan from './AddVan';
+import EditVanForm from './EditVan';
 
 const iconStyles = {
   marginRight: '10px',
@@ -29,6 +30,10 @@ const ResourceList = ({
   priceList,
   closeNotificationWarning,
   deleteResourceHandler,
+  editResourceHandler,
+  editItem,
+  openEditModal,
+  editModalToggle,
 }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
@@ -56,6 +61,29 @@ const ResourceList = ({
                 closeNotificationWarning={closeNotificationWarning}
               />
             </Modal>
+
+            <Modal
+              color="primary"
+              title="Edit van info"
+              header
+              md
+              openModel={openEditModal}
+              modelToggle={() => editModalToggle()}
+            >
+              <EditVanForm
+                onSaveVan={onSaveVan}
+                editItem={editItem}
+                onPriceInfoSave={priceInfoSaveHandler}
+                openPriceModalHandler={priceModalHandler}
+                showPriceModal={showPriceModal}
+                closePriceModal={() => closePriceModal()}
+                priceList={priceList}
+                showPriceWarning={showPriceWarning}
+                closeNotificationWarning={closeNotificationWarning}
+                initialValues={editItem}
+              />
+            </Modal>
+
           </div>
           <div className="col-md-4 header__filter">
             {/* <span className="filter__wrapper">Filter</span> */}
@@ -104,7 +132,11 @@ const ResourceList = ({
                       />
                     </span>
                     <span style={iconStyles}>
-                      <SquareEditOutlineIcon size="22" color="#555555" />
+                      <SquareEditOutlineIcon
+                        size="22"
+                        color="#555555"
+                        onClick={() => editResourceHandler(item.id)}
+                      />
                     </span>
                   </td>
                 </tr>
@@ -152,6 +184,10 @@ ResourceList.propTypes = {
   closeNotificationWarning: PropTypes.func,
   showPriceWarning: PropTypes.bool,
   deleteResourceHandler: PropTypes.func,
+  editResourceHandler: PropTypes.func,
+  editItem: PropTypes.array,
+  openEditModal: PropTypes.func,
+  editModalToggle: PropTypes.bool,
 };
 
 export default ResourceList;
