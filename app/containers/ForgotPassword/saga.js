@@ -8,6 +8,8 @@ import {
 
 import { postPassword } from './api';
 
+import toast from '../../shared/ToastNotify';
+
 // constants
 import { ON_PASSWORD_FORGOT } from './constants';
 import { onPasswordForgotSuccess, onPasswordForgotFailed} from './actions';
@@ -18,8 +20,10 @@ export function* onPasswordForgotWatcher(action) {
     const response = yield call(postPassword, action.payload );
     if (response && response.ok === true) {
       yield put(onPasswordForgotSuccess());
+      toast.success("Please check your email!")
     }
   } catch(error) {
+    toast.error("Failed to send email!")
     yield put(onPasswordForgotFailed(error));
     console.log(error.response.payload.message);
 
