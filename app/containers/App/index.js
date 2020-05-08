@@ -26,6 +26,10 @@ import ConnectPage from 'containers/ConnectPage';
 // import ProtectedRoute from 'containers/ProtectedRoute';
 import LoginPage from 'containers/LoginPage';
 import RegisterPage from 'containers/RegisterPage';
+import PasswordReset from 'containers/ResetPassword';
+
+import ForgotPassword from 'containers/ForgotPassword';
+
 import VanListing from '../Listing';
 import BookingConfirmation from '../BookingConfirmation';
 import MainWrapper from '../../components/Wrapper';
@@ -61,8 +65,11 @@ export default function App() {
           <PrivateRoute exact path="/dashboard/profile" component={ProfilePage} />
           <PrivateRoute exact path="/dashboard/account" component={AccountPage} />
           <Route exact path="/connect/:provider" component={ConnectPage} />
-          <Route exact path="/auth/:authType/:id?" component={LoginPage} />
-          <Route exact path="/auth/:authType/:id?" component={RegisterPage} />
+          <Route exact path="/auth/reset-password" component={PasswordReset} />
+
+          <Route exact path="/auth/forgot-password" component={ForgotPassword} />
+          <Route exact path="/auth/login" component={LoginPage} />
+          <Route exact path="/auth/register" component={RegisterPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </main>
