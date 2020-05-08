@@ -37,6 +37,8 @@ class ResourcesPage extends React.PureComponent {
       showPriceWarning: false,
       isDeleteModalShow: false,
       deleteResourceId: null,
+      currentEditItem: null,
+      openEditModal: false,
     };
   }
 
@@ -144,10 +146,25 @@ class ResourcesPage extends React.PureComponent {
     })
   }
 
+  editResourceHandler = (editResourceId ) => {
+    const { vanList } = this.props;
+    const editItem = vanList.find(item => item.id === editResourceId);
+    if (editItem) {
+      this.setState({currentEditItem:  editItem, openEditModal: true});
+    }
+  }
+
+  editModalToggle = () => {
+    this.setState((prevState) => ({
+      openEditModal: !prevState.openEditModal
+    }))
+  }
+
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
     const { vanList } = this.props;
+    const { currentEditItem, openEditModal } = this.state;
     const resourceList = filterResourcesBelongsToUser(vanList, auth.get('userInfo').id)
 
     return (
@@ -191,6 +208,10 @@ class ResourcesPage extends React.PureComponent {
                 showPriceWarning={this.state.showPriceWarning}
                 closeNotificationWarning={this.onCloseNotificationWarning}
                 deleteResourceHandler={this.deleteResourceHandler}
+                editResourceHandler={this.editResourceHandler}
+                editItem={currentEditItem}
+                openEditModal={openEditModal}
+                editModalToggle={this.editModalToggle}
               />
             </Row>
           </Container>
