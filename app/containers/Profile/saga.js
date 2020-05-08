@@ -29,6 +29,8 @@ import {
 
 import * as api from './api';
 
+import toast from '../../shared/ToastNotify';
+
 export function* profileSaveWatcher(action) {
   console.log("Save action", action)
 
@@ -73,10 +75,12 @@ export function* profileSaveWatcher(action) {
       if (avatarUploadResponse && profileUpdateResponse ) {
         // update userInfo cookie
         yield call(auth.setUserInfo, userFieldsLocallyStored);
+        toast.successfully("Your profile was created!");
         yield put(onProfileSaveSuccess(userProfile));
       }
     }
   } catch(error) {
+    toast.error("Failed to create profile info!");
     yield put(onProfileSaveFailed(error));
   }
 }
@@ -160,6 +164,7 @@ export function* profileEditWatcher(action) {
         console.log("Store userProfile", userProfile)
         yield call(auth.setUserInfo, userFieldsLocallyStored);
         yield put(onProfileEditSuccess(userProfile));
+        toast.success("Profile info update successfully!");
       }
     } else {
       console.log("else")
@@ -180,11 +185,13 @@ export function* profileEditWatcher(action) {
           avatar: editProfileResponse.avatar,
         }
         yield put(onProfileEditSuccess(userProfile));
+        toast.success("Profile info update successfully!");
       }
     }
 
   } catch(error) {
     yield put(onUserProfileDeleteFailed(error));
+    toast.error("Failed to update profile!");
   }
 
 }
@@ -220,6 +227,7 @@ export function* avatarDeleteWatcher(action) {
         // yield call(auth.setUserInfo, userFieldsLocallyStored);
         yield put(onUserProfileDeleteSuccess());
         yield put(onProfileEditSuccess(userProfile));
+        toast.success("Profile picture deleted successfully!")
         // yield call(forwardTo, '/dashboard/profile');
         yield put(push('/dashboard/profile'));
       }
@@ -227,6 +235,7 @@ export function* avatarDeleteWatcher(action) {
     }
   } catch {
     yield put(onUserProfileDeleteFailed());
+    toast.error("Failed to delete profile picture");
   }
 }
 
