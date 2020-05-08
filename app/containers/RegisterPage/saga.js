@@ -13,6 +13,8 @@ import request from 'utils/request';
 import { ON_REGISTER_SUBMIT } from './constants';
 import { onRegisterSuccess, onRegisterFailed} from './actions';
 
+import toast from '../../shared/ToastNotify';
+
 export function* registerFormWatcher(action) {
   try {
     const body = action.payload;
@@ -20,6 +22,7 @@ export function* registerFormWatcher(action) {
     const response = yield call(request, requestURL, { method: 'POST', body });
     if (response.jwt) {
       yield put(onRegisterSuccess());
+      toast.success("Your account is created successfully! Please check your email.")
     }
   } catch(error) {
     yield put(onRegisterFailed(error));
