@@ -29,6 +29,8 @@ import { randomHsl } from '../utils';
 
 import * as api from './api';
 
+import toast from '../../shared/ToastNotify';
+
 export function* vanLoadWatcher() {
   try {
     const vanList = yield call(api.getResources);
@@ -77,10 +79,12 @@ export function* vanInfoSaveWatcher(action) {
       }));
 
       if (priceReponse && coverUploadResponse) {
+        toast.success("Van info added successfully!")
         yield put(onVanInfoSaveSuccess(vanList));
       }
     }
   } catch(error) {
+    toast.error("Failed to add van info!")
     yield put(onVanInfoSaveFailed(error));
   }
 };
@@ -93,9 +97,11 @@ export function* vanResourceDeleteWatcher(action) {
     const deleteResponse = yield call(request, deleteURL, { method: 'DELETE' });
     const { id : deletedResourceId} = deleteResponse;
     if (deletedResourceId) {
+      toast.success("Van info deleted successfully!");
       yield put(onResourceDeleteSuccess(deletedResourceId));
     }
   } catch(error) {
+    toast.error("Failed to delete van record!");
     yield put(onResourceDeleteFailed(error));
   }
 };
