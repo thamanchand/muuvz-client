@@ -23,6 +23,8 @@ import * as api from './api';
 
 import { getUserInfo } from '../Profile/api';
 
+import toast from '../../shared/ToastNotify';
+
 import {
   ON_SEARCH,
   ON_BOOKING,
@@ -73,11 +75,13 @@ export function* onBookingWatcher(action) {
       if (bookingResponse && updateResourceResponse) {
         yield put(push(`${'/listing/bookingconfirmation?'}${'bookingId='}${getUniqueBookingId}`));
         yield put(onBookingSuccess(bookingResponse));
+        toast.success("Your booking was made successfully!")
       }
     }
 
   } catch(error) {
     yield put(onBookingFailed(error));
+    toast.error("Failed to make reservation!")
   }
 }
 
