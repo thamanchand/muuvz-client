@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 import EyeIcon from 'mdi-react/EyeIcon';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import * as EmailValidator from "email-validator";
 
 import renderCheckBoxField from '../../../shared/Checkbox/index';
@@ -58,7 +59,7 @@ const LogInForm = ({showPasswordHandler, onLoginSubmitHandler, showPassword}) =>
           </div>
           <Error name="password" />
           <div className="account__forgot-password">
-            <a href="/auth/forgot-password">Forgot a password?</a>
+            <Link to="/auth/forgot-password">Forgot a password?</Link>
           </div>
         </div>
         <div className="form__form-group">
