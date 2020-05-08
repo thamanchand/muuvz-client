@@ -106,6 +106,7 @@ export function* profileLoadWatcher(action) {
         linkedinLink: profileApiResponse.linkedinLink,
         address: profileApiResponse.address,
         avatar: profileApiResponse.avatar,
+        licenseTypes: profileApiResponse.licenseTypes,
       }
       if (userAPIresponse && profileApiResponse) {
         yield put(onProfileLoadSuccess(userProfile));
