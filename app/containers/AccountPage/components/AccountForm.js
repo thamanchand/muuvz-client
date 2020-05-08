@@ -8,7 +8,11 @@ import Error from '../../../shared/ErrorField';
 import auth from '../../../utils/auth';
 const userEmail = auth.get('userInfo') && auth.get('userInfo').email;
 
-const AccountForm = ({ changePassword }) => (
+const onSubmit = async values => {
+  console.log("submitted value", values)
+};
+
+const AccountForm = ({ changePassword, isPasswordChangeButtonDisabled, isPasswordChanged }) => (
   <Col md={12} lg={12}>
     <Card>
       <CardBody>
@@ -16,7 +20,7 @@ const AccountForm = ({ changePassword }) => (
           <h5 className="bold-text">Settings</h5>
         </div>
         <Form
-          onSubmit={changePassword}
+          onSubmit={onSubmit}
           render={({ handleSubmit }) => (
 
             <form className="form form-small form--horizontal" onSubmit={handleSubmit}>
@@ -41,19 +45,19 @@ const AccountForm = ({ changePassword }) => (
         <Form
           validate={values => { // validate both passowrds are same
             const errors = {};
-            if (values.password !== values.confirmPassword) {
-              errors.confirmPassword = 'Password didnt matched';
+            if (values.password !== values.passwordConfirmation) {
+              errors.passwordConfirmation = 'Password didnt matched';
             }
             if (!values.password) {
-              errors.password = 'password cant be blank';
+              errors.password = 'Password cant be blank';
             }
-            if (!values.confirmPassword) {
-              errors.confirmPassword = 'confirm password cant be blank';
+            if (!values.passwordConfirmation) {
+              errors.passwordConfirmation = 'Confirm password cant be blank';
             }
             return errors
           }}
-          onSubmit={changePassword}
-          render={({ handleSubmit }) => (
+          onSubmit={onSubmit}
+          render={({ handleSubmit, values }) => (
 
             <form className="form form-small form--horizontal" onSubmit={handleSubmit}>
               <div className="form__form-group">
@@ -73,24 +77,29 @@ const AccountForm = ({ changePassword }) => (
                 <span className="form__form-group-label">Re-Password</span>
                 <div className="form__form-group-field">
                   <Field
-                    name="confirmPassword"
+                    name="passwordConfirmation"
                     component="input"
                     type='password'
                     placeholder="Re-Password"
                   />
 
                 </div>
-                <Error name="confirmPassword" />
+                <Error name="passwordConfirmation" />
               </div>
+
 
               <div className="profile__btns">
                 <button
                   className="btn btn-success btn-sm rounded"
                   type="submit"
-
+                  onClick={() => changePassword(values)}
+                  disabled={isPasswordChangeButtonDisabled}
                 >Change password</button>
               </div>
-
+              {isPasswordChanged && (
+                <p className="passwordchange_notification">
+                Password is changed successfully!</p>
+              )}
             </form>
           )}
         />
@@ -100,6 +109,9 @@ const AccountForm = ({ changePassword }) => (
 );
 
 AccountForm.propTypes = {
-  changePassword: PropTypes.func
+  changePassword: PropTypes.func,
+  isPasswordChangeButtonDisabled: PropTypes.bool,
+  isPasswordChanged: PropTypes.bool,
 }
+
 export default AccountForm;
