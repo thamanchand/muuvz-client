@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { Col, Container, Row } from 'reactstrap';
+import { createStructuredSelector } from 'reselect';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
@@ -14,24 +15,35 @@ import saga from './saga';
 // import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout';
 import AccountForm from './components/AccountForm';
+import toast from '../../shared/ToastNotify';
 
 import auth from '../../utils/auth';
 
 import { onPasswordChange } from './action';
 
+import { isPasswordChangedSelector, isPasswordChangeLoadingSelector } from './selector'
 // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
 class AccountPage extends React.PureComponent {
-  componentDidMount() {}
 
   changePasswordHandler = (passPayload) => {
-    const { id } = auth.get('userInfo');
-    if (passPayload.password === passPayload.confirmPassword) {
-      this.props.onPasswordChange(id, passPayload.password);
+    const userId = auth.get('userInfo') && auth.get('userInfo').id;
+    const userEmail = auth.get('userInfo') && auth.get('userInfo').email;
+    const payload = {
+      username: userEmail,
+      email: userEmail,
+      password: passPayload.password
+    };
+
+    if (passPayload.password === passPayload.passwordConfirmation && userId && userEmail) {
+      this.props.onPasswordChange(userId, payload);
+    } else {
+      toast.error('Error')
     }
   };
 
   render() {
+    const { isPasswordChangeButtonDisabled, isPasswordChanged } = this.props;
     return (
       <div>
         <Layout />
@@ -50,6 +62,8 @@ class AccountPage extends React.PureComponent {
             <Row>
               <AccountForm
                 changePassword={this.changePasswordHandler}
+                isPasswordChangeButtonDisabled={isPasswordChangeButtonDisabled}
+                isPasswordChanged={isPasswordChanged}
               />
             </Row>
           </Container>
@@ -61,13 +75,22 @@ class AccountPage extends React.PureComponent {
 
 AccountPage.propTypes = {
   onPasswordChange: PropTypes.func,
+  isPasswordChangeButtonDisabled: PropTypes.bool,
+  isPasswordChanged: PropTypes.bool,
 }
 
 const mapDispatchToProps = (dispatch) => ({
   onPasswordChange: bindActionCreators(onPasswordChange, dispatch),
 });
 
-const withConnect = connect(null, mapDispatchToProps);
+
+const mapStateToProps = createStructuredSelector({
+  isPasswordChanged: isPasswordChangedSelector(),
+  isPasswordChangeButtonDisabled: isPasswordChangeLoadingSelector()
+});
+
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({ key: 'accountPage', reducer });
 const withSaga = injectSaga({ key: 'accountPage', saga });
