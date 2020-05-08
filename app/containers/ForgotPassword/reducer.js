@@ -9,6 +9,7 @@ import {
   ON_PASSWORD_FORGOT,
   ON_PASSWORD_FORGOT_SUCCESS,
   ON_PASSWORD_FORGOT_FAILED,
+  CLEAR_FORGOTPASSWORD_STATE,
 } from './constants';
 
 
@@ -35,6 +36,9 @@ function passForgotPageReducer(state = initialState, action) {
         .set('isPasswordSendToEmail', false)
         .set('showLoader', false);
 
+    case CLEAR_FORGOTPASSWORD_STATE:
+      return state
+        .set('isPasswordSendToEmail', false);
     default:
       return state;
   }

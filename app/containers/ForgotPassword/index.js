@@ -13,13 +13,16 @@ import ForgotPasswordForm from './components/ForgotPaswordForm';
 import Footer from '../HomePage/components/Footer';
 import logo from '../../assets/images/muuvz.svg';
 
-import { onPasswordForgot } from './actions';
+import { onPasswordForgot, clearForgotPasswordState } from './actions';
 import { isPasswordSendSelector, isLoadingSelector } from './selectors';
 
 import reducer from './reducer';
 import saga from './saga';
 
 class ForgotPasswordPage extends React.PureComponent {
+  componentDidMount() {
+    this.props.clearForgotPasswordState()
+  }
 
   onForgotPasswordHandler = (payload) => {
     const forgotPasswordPayload = {
@@ -69,10 +72,12 @@ ForgotPasswordPage.propTypes = {
   onPasswordForgot: PropTypes.func,
   isPasswordSendToEmail: PropTypes.func,
   isLoading: PropTypes.func,
+  clearForgotPasswordState: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onPasswordForgot: bindActionCreators(onPasswordForgot, dispatch)
+  onPasswordForgot: bindActionCreators(onPasswordForgot, dispatch),
+  clearForgotPasswordState: bindActionCreators(clearForgotPasswordState, dispatch),
 });
 
 const mapStateToProps = createStructuredSelector({

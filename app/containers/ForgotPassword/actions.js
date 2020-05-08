@@ -2,6 +2,7 @@ import {
   ON_PASSWORD_FORGOT,
   ON_PASSWORD_FORGOT_SUCCESS,
   ON_PASSWORD_FORGOT_FAILED,
+  CLEAR_FORGOTPASSWORD_STATE,
 } from './constants';
 /**
  * Sends the request to the API
@@ -20,4 +21,8 @@ export const onPasswordForgotSuccess = () => ({
 export const onPasswordForgotFailed = (error) => ({
   type: ON_PASSWORD_FORGOT_FAILED,
   error
+});
+
+export const clearForgotPasswordState = () => ({
+  type: CLEAR_FORGOTPASSWORD_STATE,
 });
