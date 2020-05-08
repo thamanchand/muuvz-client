@@ -54,6 +54,7 @@ class ResourcesPage extends React.PureComponent {
       const { priceList } = this.state;
       // Dispatch action
       this.props.onVanInfoSave(vanInfo, priceList);
+      this.setState({ priceList: [], showPriceWarning: false });
     }
   }
 
@@ -176,7 +177,6 @@ class ResourcesPage extends React.PureComponent {
               </Row>
             ) */}
             <Row>
-              {this.props.vanInfoSavedCompleted ? 'Saved' : null}
               <ResourceList
                 vanList={resourceList}
                 onSaveVan={this.vanInfoSaveHandler}
