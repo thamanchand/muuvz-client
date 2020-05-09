@@ -219,8 +219,43 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   height: 30px;
 }
 .landing__header-dot {
-  padding-right: 12px;
-  color: #28a745;
+  height: 8px;
+  width: 8px;
+  background-color: #ff4861;;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 5px;
+  @media screen and (min-width: 250px) {
+    height: 4px;
+    width: 4px;
+  }
+  @media screen and (min-width: 300px) {
+    height: 4px;
+    width: 4px;
+  }
+  @media screen and (min-width: 350px) {
+    height: 4px;
+    width: 4px;
+  }
+  @media screen and (min-width: 480px) {
+    height: 4px;
+    width: 4px;
+  }
+  @media screen and (min-width: 576px) {
+    height: 5px;
+    width: 5px;
+  }
+
+  @media screen and (min-width: 768px) {
+    height: 6px;
+    width: 6px;
+  }
+
+  @media screen and (min-width: 992px) {
+    height: 8px;
+    width: 8px;
+  }
 }
 
 .landing__header-img {
@@ -248,6 +283,10 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   }
 }
 
+.city_highlight {
+  border-bottom: 2px solid #ff4861;;
+  padding-bottom: 9px;
+}
 //Section
 
 .landing__section {

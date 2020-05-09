@@ -18,12 +18,12 @@ const Header = ({ onSearch }) => (
           <div className="landing__intro">
             <h1 className="landing__header-title">
               <b>
-                SEARCH<span className="landing__header-dot">.</span>
-                COMPARE<span className="landing__header-dot">.</span>
-                BOOK<span className="landing__header-dot">.</span>
+                SEARCH<span className="landing__header-dot"></span>
+              COMPARE<span className="landing__header-dot"></span>
+            BOOK<span className="landing__header-dot"></span>
               </b>
             </h1>
-            <p className="landing__header-subhead">Moving van with ease</p>
+            <p className="landing__header-subhead">MOVING VAN IN <span className="city_highlight">HESLINKI</span></p>
           </div>
         </Col>
         <Col md={6}>
