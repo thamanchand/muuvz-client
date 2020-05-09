@@ -21,6 +21,7 @@ const { uuid } = require('uuidv4');
 
 const iconStyles = {
   marginRight: '10px',
+  cursor: 'pointer',
 };
 
 const all = /[A-Za-z0-9]/;
@@ -501,7 +502,7 @@ const EditVanForm = ({
                                       onClick={() => deletePriceHandler(item.id)}
                                     />
                                   </span>
-                                  <span>
+                                  <span style={iconStyles}>
                                     <SquareEditOutlineIcon
                                       size="20"
                                       color="#555555"
