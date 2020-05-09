@@ -17,7 +17,7 @@ const isNumber = value => Number.isNaN(Number(value));
 const parse = value => (Number.isNaN(parseFloat(value)) ? "" : parseFloat(value));
 
 
-const AddPrice = ({ onPriceInfoSave }) => (
+const AddPrice = ({ onPriceInfoSave, currentlyEditedPriceItem }) => (
   <Col md={12} lg={12}>
     <Card>
       <CardBody>
@@ -32,6 +32,7 @@ const AddPrice = ({ onPriceInfoSave }) => (
             }
             return errors
           }}
+          initialValues={currentlyEditedPriceItem}
           onSubmit={onSubmit}
           render={({ handleSubmit, pristine, values, submitting, invalid}) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
@@ -92,5 +93,6 @@ const AddPrice = ({ onPriceInfoSave }) => (
 
 AddPrice.propTypes = {
   onPriceInfoSave: PropTypes.func,
+  currentlyEditedPriceItem: PropTypes.object
 }
 export default AddPrice;
