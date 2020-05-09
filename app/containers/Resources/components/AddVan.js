@@ -14,10 +14,12 @@ import renderSelectField from '../../../shared/SelectField';
 import renderMaskInput from '../../../shared/MaskInput';
 
 import AddPrice from './AddPrice';
+
 import Modal from '../../../shared/Modal';
 
 const iconStyles = {
   marginRight: '10px',
+  cursor: 'pointer',
 };
 
 const all = /[A-Za-z0-9]/;
@@ -37,6 +39,8 @@ const AddVanForm = ({
   priceList,
   showPriceWarning,
   closeNotificationWarning,
+  editPriceItem,
+  deletePriceItem,
 }) => (
   <Col md={12} lg={12}>
     <Card>
@@ -358,6 +362,7 @@ const AddVanForm = ({
                     closePriceModal={() => closePriceModal()}
                   />
                 </Modal>
+
               </div>
               <div className="container">
                 {showPriceWarning &&
@@ -398,10 +403,18 @@ const AddVanForm = ({
                               <td>{item.price}</td>
                               <td>
                                 <span style={iconStyles}>
-                                  <DeleteForeverIcon size="20" color="#ff4861" />
+                                  <DeleteForeverIcon
+                                    size="20"
+                                    color="#ff4861"
+                                    onClick={() => deletePriceItem(item.id)}
+                                  />
                                 </span>
-                                <span>
-                                  <SquareEditOutlineIcon size="20" color="#555555" />
+                                <span style={iconStyles}>
+                                  <SquareEditOutlineIcon
+                                    size="20"
+                                    color="#555555"
+                                    onClick={() => editPriceItem(item.id)}
+                                  />
                                 </span>
                               </td>
                             </tr>
@@ -446,5 +459,7 @@ AddVanForm.propTypes = {
   })),
   showPriceWarning: PropTypes.bool,
   closeNotificationWarning: PropTypes.func,
+  deletePriceItem: PropTypes.func,
+  editPriceItem: PropTypes.func,
 }
 export default AddVanForm;
