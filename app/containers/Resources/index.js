@@ -14,6 +14,7 @@ import ResourceList from './components/ResourceList';
 import Layout from '../Layout';
 import DeleteResourceModal from './components/DeleteResourceModal';
 import UnsaveDataModal from './components/UnsavedDataModal';
+import EditPriceModal from './components/EditPrice';
 
 import { onVanListLoad, onVanInfoSave, onResourceDelete } from './actions';
 import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
@@ -22,6 +23,8 @@ import reducer from './reducers';
 
 import auth from '../../utils/auth';
 import { filterResourcesBelongsToUser } from '../utils';
+
+const { uuid } = require('uuidv4');
 
 const key = 'resourcePage';
 
@@ -39,6 +42,8 @@ class ResourcesPage extends React.PureComponent {
       deleteResourceId: null,
       currentEditItem: null,
       openEditModal: false,
+      editPriceItem: null,
+      isEditPriceModalOpen: false,
     };
   }
 
@@ -91,7 +96,7 @@ class ResourcesPage extends React.PureComponent {
   priceInfoSaveHandler = (e) => {
     // create a new item
     const newItem = {
-      id: 1 + Math.random(),
+      id: uuid(),
       unit: e.unit,
       price: e.price,
     };
@@ -160,11 +165,43 @@ class ResourcesPage extends React.PureComponent {
     }))
   }
 
+  editPriceItemHandler = (editPriceId) => {
+    const { priceList } = this.state;
+    const currentlyEditPrice = priceList.find(item => item.id === editPriceId);
+    this.setState({ editPriceItem: currentlyEditPrice, isEditPriceModalOpen: true });
+  }
+
+  togglePriceEditModal = () => {
+    const { isEditPriceModalOpen } = this.state;
+    this.setState({ isEditPriceModalOpen: !isEditPriceModalOpen });
+  }
+
+  onPriceUpdateHandler = (priceItem) => {
+    const { priceList } = this.state;
+
+    this.setState({
+      priceList: priceList.map(item => (item.id === priceItem.id ? {...priceItem} : item)),
+      isEditPriceModalOpen: false,
+    })
+  }
+
+  deletePriceItem = (priceId) => {
+    this.setState(prevState => {
+      const priceList = prevState.priceList.filter(price => price.id !== priceId);
+      return { priceList };
+    });
+  }
+
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
     const { vanList } = this.props;
-    const { currentEditItem, openEditModal } = this.state;
+    const {
+      currentEditItem,
+      openEditModal,
+      editPriceItem,
+      isEditPriceModalOpen,
+    } = this.state;
     const resourceList = filterResourcesBelongsToUser(vanList, auth.get('userInfo').id)
 
     return (
@@ -180,7 +217,13 @@ class ResourcesPage extends React.PureComponent {
           onClose={this.toggleConfirm}
           confirmClose={this.confirmClose}
         />
+        <EditPriceModal
+          show={isEditPriceModalOpen}
+          onClose={this.togglePriceEditModal}
+          onPriceUpdate={this.onPriceUpdateHandler}
+          currentlyEditedPriceItem={editPriceItem}
 
+        />
         <div className="container__wrap">
           <Container className="dashboard container">
             <Row>
@@ -204,7 +247,7 @@ class ResourcesPage extends React.PureComponent {
                 showPriceModal={this.state.showPriceModal}
                 closePriceModal={this.closePriceModal}
                 priceInfoSaveHandler={this.priceInfoSaveHandler}
-                priceList={this.state.priceList}
+                priceList={this.state.priceList || currentEditItem.pricing}
                 showPriceWarning={this.state.showPriceWarning}
                 closeNotificationWarning={this.onCloseNotificationWarning}
                 deleteResourceHandler={this.deleteResourceHandler}
@@ -212,6 +255,8 @@ class ResourcesPage extends React.PureComponent {
                 editItem={currentEditItem}
                 openEditModal={openEditModal}
                 editModalToggle={this.editModalToggle}
+                editPriceItem={this.editPriceItemHandler}
+                deletePriceItem={this.deletePriceItem}
               />
             </Row>
           </Container>
