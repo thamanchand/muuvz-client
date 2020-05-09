@@ -69,3 +69,15 @@ export const deleteResource = (resourceId) => axios
   .catch(error => {
     throw error;
   });
+
+// DELETE price
+export const deletePricing = (pricingId) => axios
+  .delete(
+    `${BASE_URL}${'pricings/'}${pricingId}`,
+    {headers: {
+      'Authorization': `Bearer ${token}`
+    }},
+  ).then(response => response.data)
+  .catch(error => {
+    throw error;
+  });
