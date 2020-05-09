@@ -82,36 +82,36 @@ const HeaderNav = ({ source }) => {
                       <li className="nav-item landing__navbar-item">
                         {isBusiness && isProfileCompleted &&
                           <Link className="nav-link" to="/dashboard/booking">
-                            Dashboard
+                            DASHBOARD
                           </Link>
                         }
                         {isBusiness && !isProfileCompleted &&
                           <Link className="nav-link" to="/dashboard/profile" >
-                            Dashboard
+                            DASHBOARD
                           </Link>
                         }
                         {!isBusiness &&
                           <Link className="nav-link" to="/dashboard/booking" >
-                            Dashboard
+                            DASHBOARD
                           </Link>
                         }
                       </li>
                       <li className="nav-item landing__navbar-item">
-                        <button className="btn rounded btn-outline-success btn-sm login_register" type="button" onClick={() => logout()}>
-                          Logout
+                        <button className="btn rounded btn-outline-danger btn-sm login_register" type="button" onClick={() => logout()}>
+                          LOGOUT
                         </button>
                       </li>
                     </React.Fragment>
                     ) : (
                       <React.Fragment>
                         <li className="nav-item landing__navbar-item">
-                          <Link className="nav-link" to="/auth/login">
-                            Login
+                          <Link className="nav-link primary" to="/auth/login">
+                            LOGIN
                           </Link>
                         </li>
                         <li className="nav-item landing__navbar-item">
                           <Link className="btn btn-success btn-sm rounded login_register" to="/auth/register">
-                            Register
+                            REGISTER
                           </Link>
                         </li>
                       </React.Fragment>
