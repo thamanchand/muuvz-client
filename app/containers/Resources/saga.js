@@ -13,12 +13,15 @@ import {
   onVanInfoSaveFailed,
   onResourceDeleteSuccess,
   onResourceDeleteFailed,
+  onPriceDeleteSuccess,
+  onPriceDeleteFailed,
 } from './actions';
 
 import {
   ON_VANLIST_LOAD,
   ON_VAN_SAVE,
   ON_RESOURCE_DELETE,
+  ON_PRICE_DELETE,
 } from './constants';
 
 // import { filterInt } from '../utils';
@@ -106,9 +109,22 @@ export function* vanResourceDeleteWatcher(action) {
   }
 };
 
+export function* onPriceDeleteWatcher(action) {
+  console.log("Price delete action", action);
+
+  try {
+    const deleteResponse = yield call(api.deletePricing, action.priceId);
+    if (deleteResponse) {
+      yield put(onPriceDeleteSuccess());
+    }
+  } catch(error) {
+    yield put(onPriceDeleteFailed(error));
+  }
+}
 
 export default function* defaultSaga() {
   yield takeLatest(ON_VANLIST_LOAD, vanLoadWatcher);
   yield takeLatest(ON_VAN_SAVE, vanInfoSaveWatcher);
   yield takeLatest(ON_RESOURCE_DELETE, vanResourceDeleteWatcher);
+  yield takeLatest(ON_PRICE_DELETE, onPriceDeleteWatcher);
 }
