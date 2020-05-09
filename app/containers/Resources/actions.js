@@ -11,6 +11,9 @@ import {
   ON_RESOURCE_DELETE,
   ON_RESOURCE_DELETE_SUCCESS,
   ON_RESOURCE_DELETE_FAILED,
+  ON_PRICE_DELETE,
+  ON_PRICE_DELETE_SUCCESS,
+  ON_PRICE_DELETE_FAILED,
 } from './constants';
 /**
  * Sends the request to the API
@@ -74,5 +77,19 @@ export const onResourceDeleteSuccess = (deletedResourceId) => ({
 
 export const onResourceDeleteFailed = (error) => ({
   type: ON_RESOURCE_DELETE_FAILED,
+  error
+});
+
+export const onPriceDelete = (priceId) => ({
+  type: ON_PRICE_DELETE,
+  priceId
+});
+
+export const onPriceDeleteSuccess = () => ({
+  type: ON_PRICE_DELETE_SUCCESS,
+});
+
+export const onPriceDeleteFailed = (error) => ({
+  type: ON_PRICE_DELETE_FAILED,
   error
 });
