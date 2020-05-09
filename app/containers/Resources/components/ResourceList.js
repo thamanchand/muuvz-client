@@ -34,6 +34,10 @@ const ResourceList = ({
   editItem,
   openEditModal,
   editModalToggle,
+  editPriceItem,
+  deletePriceItem,
+  togglePriceEditModal,
+  onPriceUpdateHandler,
 }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
@@ -59,6 +63,8 @@ const ResourceList = ({
                 priceList={priceList}
                 showPriceWarning={showPriceWarning}
                 closeNotificationWarning={closeNotificationWarning}
+                editPriceItem={editPriceItem}
+                deletePriceItem={deletePriceItem}
               />
             </Modal>
 
@@ -71,9 +77,7 @@ const ResourceList = ({
               modelToggle={() => editModalToggle()}
             >
               <EditVanForm
-                onSaveVan={onSaveVan}
                 editItem={editItem}
-                onPriceInfoSave={priceInfoSaveHandler}
                 openPriceModalHandler={priceModalHandler}
                 showPriceModal={showPriceModal}
                 closePriceModal={() => closePriceModal()}
@@ -81,6 +85,8 @@ const ResourceList = ({
                 showPriceWarning={showPriceWarning}
                 closeNotificationWarning={closeNotificationWarning}
                 initialValues={editItem}
+                togglePriceEditModal={togglePriceEditModal}
+                onPriceUpdate={onPriceUpdateHandler}
               />
             </Modal>
 
@@ -188,6 +194,10 @@ ResourceList.propTypes = {
   editItem: PropTypes.array,
   openEditModal: PropTypes.func,
   editModalToggle: PropTypes.bool,
+  deletePriceItem: PropTypes.func,
+  editPriceItem: PropTypes.object,
+  togglePriceEditModal: PropTypes.func,
+  onPriceUpdateHandler: PropTypes.func,
 };
 
 export default ResourceList;
