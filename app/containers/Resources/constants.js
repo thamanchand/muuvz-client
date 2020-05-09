@@ -20,3 +20,7 @@ export const ON_PRICE_SAVE_FAILED = 'app/ResourcePage/ON_PRICE_SAVE_FAILED';
 export const ON_RESOURCE_DELETE = 'app/ResourcePage/ON_RESOURCE_DELETE';
 export const ON_RESOURCE_DELETE_SUCCESS = 'app/ResourcePage/ON_RESOURCE_DELETE_SUCCESS';
 export const ON_RESOURCE_DELETE_FAILED = 'app/ResourcePage/ON_RESOURCE_DELETE_FAILED';
+
+export const ON_PRICE_DELETE = 'app/ResourcePage/ON_PRICE_DELETE';
+export const ON_PRICE_DELETE_SUCCESS = 'app/ResourcePage/ON_PRICE_DELETE_SUCCESS';
+export const ON_PRICE_DELETE_FAILED = 'app/ResourcePage/ON_PRICE_DELETE_FAILED';
