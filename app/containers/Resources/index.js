@@ -16,7 +16,7 @@ import DeleteResourceModal from './components/DeleteResourceModal';
 import UnsaveDataModal from './components/UnsavedDataModal';
 import EditPriceModal from './components/EditPrice';
 
-import { onVanListLoad, onVanInfoSave, onResourceDelete } from './actions';
+import { onVanListLoad, onVanInfoSave, onResourceDelete, onPriceDelete } from './actions';
 import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
 import saga from './saga';
 import reducer from './reducers';
@@ -192,6 +192,16 @@ class ResourcesPage extends React.PureComponent {
     });
   }
 
+  updateVanRecordHandler = (values) => {
+    console.log("updateVanRecordHandler", values);
+    this.setState({openEditModal: false});
+  }
+
+  editModalPriceDelete = (priceId) => {
+    console.log("priceId", priceId);
+    this.props.onPriceDelete(priceId);
+  }
+
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
 
@@ -257,6 +267,8 @@ class ResourcesPage extends React.PureComponent {
                 editModalToggle={this.editModalToggle}
                 editPriceItem={this.editPriceItemHandler}
                 deletePriceItem={this.deletePriceItem}
+                onUpdateVanRecord={this.updateVanRecordHandler}
+                editModalPriceDelete={this.editModalPriceDelete}
               />
             </Row>
           </Container>
@@ -290,6 +302,7 @@ ResourcesPage.propTypes = {
   onVanInfoSave: PropTypes.func,
   vanInfoSavedCompleted: PropTypes.bool,
   onResourceDelete: PropTypes.func,
+  onPriceDelete: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -301,6 +314,7 @@ const mapDispatchToProps = (dispatch) => ({
   onVanListLoad: bindActionCreators(onVanListLoad, dispatch),
   onVanInfoSave: bindActionCreators(onVanInfoSave, dispatch),
   onResourceDelete: bindActionCreators(onResourceDelete, dispatch),
+  onPriceDelete: bindActionCreators(onPriceDelete, dispatch),
 });
 
 const withConnect = connect(
