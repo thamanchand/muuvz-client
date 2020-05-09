@@ -532,7 +532,6 @@ const EditVanForm = ({
                     </ButtonToolbar>
                   </div>
                 </Row>
-                <pre>{JSON.stringify(pricingList, null, 2)}</pre>
               </form>
             )}
           />
