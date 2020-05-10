@@ -15,6 +15,8 @@ import {
   onResourceDeleteFailed,
   onPriceDeleteSuccess,
   onPriceDeleteFailed,
+  onResourceCoverDeleteSuccess,
+  onResourceCoverDeleteFailed,
 } from './actions';
 
 import {
@@ -22,6 +24,7 @@ import {
   ON_VAN_SAVE,
   ON_RESOURCE_DELETE,
   ON_PRICE_DELETE,
+  ON_RESOURDE_COVER_DELETE,
 } from './constants';
 
 // import { filterInt } from '../utils';
@@ -122,9 +125,27 @@ export function* onPriceDeleteWatcher(action) {
   }
 }
 
+export function* resourceCoverDeleteWatcher(action) {
+  console.log("Resource delete action", action);
+
+  try {
+    const deleteResponse = yield call(api.deleteResourceCoverPicture, action.coverId);
+    if (deleteResponse) {
+      const vanList = yield call(api.getResources);
+      yield put(onVanListLoadSuccess(vanList));
+
+      yield put(onResourceCoverDeleteSuccess());
+      toast.success('Cover picture delete successfully!');
+    }
+  } catch(error) {
+    yield put(onResourceCoverDeleteFailed(error));
+    toast.error('Failed to delete cover picture!');
+  }
+}
 export default function* defaultSaga() {
   yield takeLatest(ON_VANLIST_LOAD, vanLoadWatcher);
   yield takeLatest(ON_VAN_SAVE, vanInfoSaveWatcher);
   yield takeLatest(ON_RESOURCE_DELETE, vanResourceDeleteWatcher);
   yield takeLatest(ON_PRICE_DELETE, onPriceDeleteWatcher);
+  yield takeLatest(ON_RESOURDE_COVER_DELETE, resourceCoverDeleteWatcher);
 }
