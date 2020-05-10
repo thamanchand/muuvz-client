@@ -16,6 +16,7 @@ import renderMaskInput from '../../../shared/MaskInput';
 import AddPrice from './AddPrice';
 import Modal from '../../../shared/Modal';
 import EditPriceModal from './EditPrice';
+import GallerySlideShow from '../../../shared/GalleySlideshow';
 
 const { uuid } = require('uuidv4');
 
@@ -419,8 +420,17 @@ const EditVanForm = ({
                 <div className="container">
                   <h5 className="bold-text header_label">Pictures</h5>
                 </div>
-
-                <Col md={12} sm={12}>
+                <div className="container">
+                  <div className="row justify-content-center">
+                    <Col md={6} sm={6} className="col-md-offset-3">
+                      <div className="slideshow">
+                        <GallerySlideShow input={initialValues.cover} ratio="3:2" mode="manual" />
+                      </div>
+                    </Col>
+                  </div>
+                </div>
+                <Col md={12} sm={12} >
+                  <h3 className="header_label pricing">Upload new pictures</h3>
                   <h5 className="subhead">You can upload multiple files</h5>
                   <div className="form__form-group">
                     <div className="form__form-group-field">
