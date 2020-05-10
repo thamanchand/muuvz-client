@@ -24,7 +24,7 @@ import {
   ON_VAN_SAVE,
   ON_RESOURCE_DELETE,
   ON_PRICE_DELETE,
-  ON_RESOURDE_COVER_DELETE,
+  ON_RESOURCE_COVER_DELETE,
 } from './constants';
 
 // import { filterInt } from '../utils';
@@ -127,15 +127,20 @@ export function* onPriceDeleteWatcher(action) {
 
 export function* resourceCoverDeleteWatcher(action) {
   console.log("Resource delete action", action);
+  const { resourcePayload, coverId } = action;
+  const resourceId = action.resourcePayload.id;
 
   try {
-    const deleteResponse = yield call(api.deleteResourceCoverPicture, action.coverId);
-    if (deleteResponse) {
-      const vanList = yield call(api.getResources);
-      yield put(onVanListLoadSuccess(vanList));
+    const updateResource = yield call(api.updateResource, resourcePayload, resourceId);
 
-      yield put(onResourceCoverDeleteSuccess());
-      toast.success('Cover picture delete successfully!');
+    if (updateResource) {
+      const deleteResponse = yield call(api.deleteResourceCoverPicture, coverId);
+      const vanList = yield call(api.getResources);
+      if (vanList && deleteResponse) {
+        yield put(onResourceCoverDeleteSuccess());
+        yield put(onVanListLoadSuccess(vanList));
+        toast.success('Cover picture delete successfully!');
+      }
     }
   } catch(error) {
     yield put(onResourceCoverDeleteFailed(error));
@@ -147,5 +152,5 @@ export default function* defaultSaga() {
   yield takeLatest(ON_VAN_SAVE, vanInfoSaveWatcher);
   yield takeLatest(ON_RESOURCE_DELETE, vanResourceDeleteWatcher);
   yield takeLatest(ON_PRICE_DELETE, onPriceDeleteWatcher);
-  yield takeLatest(ON_RESOURDE_COVER_DELETE, resourceCoverDeleteWatcher);
+  yield takeLatest(ON_RESOURCE_COVER_DELETE, resourceCoverDeleteWatcher);
 }
