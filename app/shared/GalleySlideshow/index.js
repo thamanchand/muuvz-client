@@ -1,18 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
-
-// Utils
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-
-import saga from './saga';
-import reducer from './reducer';
-
-import { onResourceCoverDelete } from './actions';
 
 const { uuid } = require('uuidv4');
 
@@ -21,7 +9,8 @@ class Slideshow extends React.Component {
     super(props);
     this.containerWrapperRef = React.createRef()
     this.state = {
-      slideIndex: 0
+      slideIndex: 0,
+      currentImageId: this.props && this.props.input[0] && this.props.input[0].id,
     };
 
     const { ratio } = this.props;
@@ -42,14 +31,18 @@ class Slideshow extends React.Component {
   };
 
   backward = () => {
+
     this.setState({
-      slideIndex: this.getNewSlideIndex(-1)
+      slideIndex: this.getNewSlideIndex(-1),
+      currentImageId: this.props.input[this.getNewSlideIndex(-1)].id
     });
   };
 
   forward = () => {
+
     this.setState({
-      slideIndex: this.getNewSlideIndex(1)
+      slideIndex: this.getNewSlideIndex(1),
+      currentImageId: this.props.input[this.getNewSlideIndex(1)].id
     });
   };
 
@@ -92,12 +85,12 @@ class Slideshow extends React.Component {
     if (this.automaticInterval) clearInterval(this.automaticInterval);
   }
 
-  resourceCoverDelete = (coverId) => {
-    this.props.onResourceCoverDelete(coverId);
-  }
-
   render() {
-    const { input, source } = this.props;
+    const { currentImageId } = this.state;
+    const { input, source, coverDelete } = this.props;
+    console.log("input", input);
+    console.log("current image Id", this.state.currentImageId);
+
     return (
       <div className="lp-slideshow">
         <div className="container " ref={this.containerWrapperRef}>
@@ -118,7 +111,7 @@ class Slideshow extends React.Component {
                 <span>
                   <DeleteForeverIcon
                     size="25" color="#646777"
-                    onClick={() => this.resourceCoverDelete(image.id)}
+                    onClick={() => coverDelete(currentImageId)}
                     className="resource_cover__delete"
                   />
                 </span>
@@ -152,7 +145,6 @@ class Slideshow extends React.Component {
 }
 Slideshow.defaultProps = {
   timeout: 0,
-  source: "",
 }
 
 Slideshow.propTypes = {
@@ -163,23 +155,7 @@ Slideshow.propTypes = {
   mode: PropTypes.string,
   timeout: PropTypes.number,
   source: PropTypes.string,
-  onResourceCoverDelete: PropTypes.func,
+  coverDelete: PropTypes.func,
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onResourceCoverDelete: bindActionCreators(onResourceCoverDelete, dispatch),
-});
-
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
-
-const withReducer = injectReducer({ key: 'gallerySlideShow', reducer });
-const withSaga = injectSaga({ key: 'gallerySlideShow', saga });
-
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(Slideshow);
+export default Slideshow;
