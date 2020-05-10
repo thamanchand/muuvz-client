@@ -92,6 +92,10 @@ class Slideshow extends React.Component {
     if (this.automaticInterval) clearInterval(this.automaticInterval);
   }
 
+  resourceCoverDelete = (coverId) => {
+    this.props.onResourceCoverDelete(coverId);
+  }
+
   render() {
     const { input, source } = this.props;
     return (
@@ -114,7 +118,7 @@ class Slideshow extends React.Component {
                 <span>
                   <DeleteForeverIcon
                     size="25" color="#646777"
-                    onClick={() => console.log(image.id)}
+                    onClick={() => this.resourceCoverDelete(image.id)}
                     className="resource_cover__delete"
                   />
                 </span>
@@ -159,6 +163,7 @@ Slideshow.propTypes = {
   mode: PropTypes.string,
   timeout: PropTypes.number,
   source: PropTypes.string,
+  onResourceCoverDelete: PropTypes.func,
 }
 
 const mapDispatchToProps = (dispatch) => ({
