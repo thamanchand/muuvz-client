@@ -38,6 +38,7 @@ const ResourceList = ({
   deletePriceItem,
   onUpdateVanRecord,
   editModalPriceDelete,
+  coverDeleteHandler,
 }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
@@ -80,6 +81,7 @@ const ResourceList = ({
                 onUpdateVanRecord={onUpdateVanRecord}
                 initialValues={editItem}
                 editModalPriceDelete={editModalPriceDelete}
+                coverDeleteHandler={coverDeleteHandler}
               />
             </Modal>
 
@@ -191,6 +193,7 @@ ResourceList.propTypes = {
   editPriceItem: PropTypes.object,
   onUpdateVanRecord: PropTypes.func,
   editModalPriceDelete: PropTypes.func,
+  coverDeleteHandler: PropTypes.func,
 };
 
 export default ResourceList;

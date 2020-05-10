@@ -37,6 +37,7 @@ const EditVanForm = ({
   onUpdateVanRecord,
   initialValues,
   editModalPriceDelete,
+  coverDeleteHandler,
 }) => {
   const [initialEditFormValues, setInitialEditFormValues] = React.useState(initialValues)
   const [pricingList, setPricinglist] = React.useState(initialValues && initialValues.pricing);
@@ -45,6 +46,10 @@ const EditVanForm = ({
   const [selectedPriceItem, setSelectedPriceItem] = React.useState();
   const [showPriceWarning, setShowPriceWarning] = React.useState(false);
   // const [isDeleteConfirm, setIsDeleteConfirm] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   setInitialEditFormValues(initialValues);
+  // }, [initialEditFormValues]);
 
   const deletePriceHandler = (priceId) => {
     // check if delete price is from api fetch. If it is then delete it by calling
@@ -425,10 +430,11 @@ const EditVanForm = ({
                     <Col md={6} sm={6} className="col-md-offset-3">
                       <div className="slideshow">
                         <GallerySlideShow
-                          input={initialValues.cover}
+                          input={initialEditFormValues.cover}
                           ratio="3:2"
                           mode="manual"
                           source="resourceEdit"
+                          coverDelete={(coverId) => coverDeleteHandler(coverId)}
                         />
                       </div>
                     </Col>
@@ -560,6 +566,7 @@ EditVanForm.propTypes = {
   onUpdateVanRecord: PropTypes.func,
   initialValues: PropTypes.object,
   editModalPriceDelete: PropTypes.func,
+  coverDeleteHandler: PropTypes.func,
 }
 
 export default EditVanForm;
