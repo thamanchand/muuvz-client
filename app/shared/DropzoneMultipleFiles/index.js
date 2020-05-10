@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react';
 import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
 
+const MAX_SIZE = 1048576;
+
 class DropZoneMultipleField extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
@@ -44,21 +46,31 @@ class DropZoneMultipleField extends PureComponent {
           className="dropzone__input"
           accept="image/jpeg, image/png"
           name={name}
+          minSize={0}
+          maxSize={MAX_SIZE}
           onDrop={(filesToUpload) => {
             this.onDrop(value ? value.concat(filesToUpload) : filesToUpload);
           }}
         >
-          {({ getRootProps, getInputProps }) => (
-            <div {...getRootProps()} className="dropzone__input">
-              {(!files || files.length === 0)
-              && (
-                <div className="dropzone__drop-here">
-                  <span className="lnr lnr-upload" /> Drop file here to upload
-                </div>
-              )}
-              <input {...getInputProps()} />
-            </div>
-          )}
+          {({ getRootProps, getInputProps, rejectedFiles }) => {
+            const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > MAX_SIZE;
+            return (
+              <div {...getRootProps()} className="dropzone__input">
+                {(!files || files.length === 0)
+                && (
+                  <div className="dropzone__drop-here">
+                    <span className="lnr lnr-upload" /> Drop file here to upload
+                  </div>
+                )}
+                {isFileTooLarge && (
+                  <div className="text-danger dropzone__drop-here">
+                    File is too large.
+                  </div>
+                )}
+                <input {...getInputProps()} />
+              </div>
+            )}
+          }
         </Dropzone>
         {files && Array.isArray(files)
         && (
