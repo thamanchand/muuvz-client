@@ -16,6 +16,9 @@ import {
   ON_RESOURCE_DELETE,
   ON_RESOURCE_DELETE_SUCCESS,
   ON_RESOURCE_DELETE_FAILED,
+  ON_RESOURDE_COVER_DELETE,
+  ON_RESOURDE_COVER_DELETE_SUCCESS,
+  ON_RESOURDE_COVER_DELETE_FAILED,
 } from './constants';
 
 
@@ -72,6 +75,19 @@ function vanListReducer(state = initialState, action) {
       return state
         .set('error', fromJS(action.error))
         .set('isVanInfoSaved', false);
+
+    case ON_RESOURDE_COVER_DELETE:
+      return state
+        .set('isCoverDeleted', false);
+
+    case ON_RESOURDE_COVER_DELETE_SUCCESS:
+      return state
+        .set('isCoverDeleted', true);
+
+    case ON_RESOURDE_COVER_DELETE_FAILED:
+      return state
+        .set('error', fromJS(action.error))
+        .set('isCoverDeleted', false);
 
     default:
       return state;
