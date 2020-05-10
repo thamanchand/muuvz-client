@@ -66,7 +66,7 @@ const AddVanForm = ({
           render={({ handleSubmit, pristine, values, submitting, invalid }) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
               <div className="container">
-                <h5 className="bold-text header_label">Business</h5>
+                <h5 className="bold-text header_label">Resource</h5>
               </div>
               <Col md={3} sm={6}>
                 <div className="form__form-group">
