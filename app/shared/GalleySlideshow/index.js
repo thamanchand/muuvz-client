@@ -1,5 +1,16 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
+import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
+
+// Utils
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+
+import saga from './saga';
+import reducer from './reducer';
 
 const { uuid } = require('uuidv4');
 
@@ -80,7 +91,7 @@ class Slideshow extends React.Component {
   }
 
   render() {
-    const { input } = this.props;
+    const { input, source } = this.props;
     return (
       <div className="lp-slideshow">
         <div className="container " ref={this.containerWrapperRef}>
@@ -97,6 +108,15 @@ class Slideshow extends React.Component {
               <img className="image" src={`${'http://localhost:1337'}${image.url}`} alt={image.caption} />
               {/* <div className="caption-text">{image.caption}</div> */}
               {/* <div className="overlay"></div> */}
+              {source === 'resourceEdit' && (
+                <span>
+                  <DeleteForeverIcon
+                    size="25" color="#646777"
+                    onClick={() => console.log(image.id)}
+                    className="resource_cover__delete"
+                  />
+                </span>
+              )}
             </div>
           ))}
 
@@ -126,6 +146,7 @@ class Slideshow extends React.Component {
 }
 Slideshow.defaultProps = {
   timeout: 0,
+  source: "",
 }
 
 Slideshow.propTypes = {
@@ -135,6 +156,19 @@ Slideshow.propTypes = {
   ratio: PropTypes.number,
   mode: PropTypes.string,
   timeout: PropTypes.number,
+  source: PropTypes.string,
 }
 
-export default Slideshow;
+const withConnect = connect(
+  null,
+  null,
+);
+
+const withReducer = injectReducer({ key: 'gallerySlideShow', reducer });
+const withSaga = injectSaga({ key: 'gallerySlideShow', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(Slideshow);
