@@ -418,13 +418,18 @@ const EditVanForm = ({
                 </Col>
 
                 <div className="container">
-                  <h5 className="bold-text header_label">Pictures</h5>
+                  <h5 className="bold-text header_label">Uploaded pictures</h5>
                 </div>
                 <div className="container">
                   <div className="row justify-content-center">
                     <Col md={6} sm={6} className="col-md-offset-3">
                       <div className="slideshow">
-                        <GallerySlideShow input={initialValues.cover} ratio="3:2" mode="manual" />
+                        <GallerySlideShow
+                          input={initialValues.cover}
+                          ratio="3:2"
+                          mode="manual"
+                          source="resourceEdit"
+                        />
                       </div>
                     </Col>
                   </div>
