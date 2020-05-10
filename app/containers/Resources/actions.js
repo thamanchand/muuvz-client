@@ -14,9 +14,9 @@ import {
   ON_PRICE_DELETE,
   ON_PRICE_DELETE_SUCCESS,
   ON_PRICE_DELETE_FAILED,
-  ON_RESOURDE_COVER_DELETE,
-  ON_RESOURDE_COVER_DELETE_SUCCESS,
-  ON_RESOURDE_COVER_DELETE_FAILED,
+  ON_RESOURCE_COVER_DELETE,
+  ON_RESOURCE_COVER_DELETE_SUCCESS,
+  ON_RESOURCE_COVER_DELETE_FAILED,
 } from './constants';
 /**
  * Sends the request to the API
@@ -98,16 +98,17 @@ export const onPriceDeleteFailed = (error) => ({
 });
 
 
-export const onResourceCoverDelete = (coverId) => ({
-  type: ON_RESOURDE_COVER_DELETE,
+export const onResourceCoverDelete = (resourcePayload, coverId) => ({
+  type: ON_RESOURCE_COVER_DELETE,
+  resourcePayload,
   coverId,
 });
 
 export const onResourceCoverDeleteSuccess = () => ({
-  type: ON_RESOURDE_COVER_DELETE_SUCCESS,
+  type: ON_RESOURCE_COVER_DELETE_SUCCESS,
 });
 
 export const onResourceCoverDeleteFailed = (error) => ({
-  type: ON_RESOURDE_COVER_DELETE_FAILED,
+  type: ON_RESOURCE_COVER_DELETE_FAILED,
   error,
 });
