@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 
@@ -11,6 +11,8 @@ import injectReducer from 'utils/injectReducer';
 
 import saga from './saga';
 import reducer from './reducer';
+
+import { onResourceCoverDelete } from './actions';
 
 const { uuid } = require('uuidv4');
 
@@ -159,9 +161,13 @@ Slideshow.propTypes = {
   source: PropTypes.string,
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  onResourceCoverDelete: bindActionCreators(onResourceCoverDelete, dispatch),
+});
+
 const withConnect = connect(
   null,
-  null,
+  mapDispatchToProps,
 );
 
 const withReducer = injectReducer({ key: 'gallerySlideShow', reducer });
