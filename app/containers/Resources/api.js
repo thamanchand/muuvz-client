@@ -81,3 +81,15 @@ export const deletePricing = (pricingId) => axios
   .catch(error => {
     throw error;
   });
+
+// delete resource cover
+export const deleteResourceCoverPicture = (coverId) => axios
+  .delete(
+    `${BASE_URL}${'upload/'}${'files'}${'/'}${coverId}`,
+    {headers: {
+      'Authorization': `Bearer ${token}`
+    }},
+  ).then(response => response.data)
+  .catch(error => {
+    throw error;
+  });
