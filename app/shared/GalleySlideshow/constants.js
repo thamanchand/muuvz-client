@@ -1,8 +1,0 @@
-/*
-* GallerySlide constants
-*
-*/
-
-export const ON_RESOURDE_COVER_DELETE = 'app/GallerySlide/ON_RESOURDE_COVER_DELETE';
-export const ON_RESOURDE_COVER_DELETE_SUCCESS = 'app/GallerySlide/ON_RESOURDE_COVER_DELETE_SUCCESS';
-export const ON_RESOURDE_COVER_DELETE_FAILED = 'app/GallerySlide/ON_RESOURDE_COVER_DELETE_FAILED';
