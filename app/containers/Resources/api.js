@@ -93,3 +93,16 @@ export const deleteResourceCoverPicture = (coverId) => axios
   .catch(error => {
     throw error;
   });
+
+// update resource
+export const updateResource = (payload, resourceId) => axios
+  .put(
+    `${BASE_URL}${'resources/'}${resourceId}`,
+    { ...payload },
+    {headers: {
+      'Authorization': `Bearer ${token}`
+    }},
+  ).then(response => response.data)
+  .catch(error => {
+    throw error;
+  });
