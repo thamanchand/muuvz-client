@@ -18,13 +18,13 @@ class Slideshow extends React.Component {
     this.ratioWH = ratioWHArray[0] / ratioWHArray[1];
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.input !== nextProps.input) {
-      this.setState({
-        currentImageId: nextProps.input[0] && nextProps.input[0].id
-      })
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props.input !== nextProps.input) {
+  //     this.setState({
+  //       currentImageId: nextProps.input[0] && nextProps.input[0].id
+  //     })
+  //   }
+  // }
 
   getNewSlideIndex = step => {
     const {slideIndex} = this.state;
@@ -88,10 +88,10 @@ class Slideshow extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    console.log("nextProps", nextProps)
-    return nextProps.input !== this.props.input;
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   console.log("nextProps", nextProps)
+  //   return nextProps.input !== this.props.input;
+  // }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
