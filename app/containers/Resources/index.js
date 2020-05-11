@@ -22,6 +22,7 @@ import {
   onResourceDelete,
   onPriceDelete,
   onResourceCoverDelete,
+  onVanInfoUpdate,
 } from './actions';
 import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
 import saga from './saga';
@@ -210,7 +211,10 @@ class ResourcesPage extends React.PureComponent {
     });
   }
 
-  updateVanRecordHandler = () => {
+  updateVanRecordHandler = (vanInfo) => {
+    const newPriceList = vanInfo && vanInfo.pricing && vanInfo.pricing.filter(item => !item.resource)
+    const oldPriceList = vanInfo && vanInfo.pricing && vanInfo.pricing.filter(item => item.resource);
+    this.props.onVanInfoUpdate(vanInfo, oldPriceList, newPriceList)
     this.setState({openEditModal: false});
   }
 
@@ -326,6 +330,7 @@ ResourcesPage.propTypes = {
   onResourceDelete: PropTypes.func,
   onPriceDelete: PropTypes.func,
   onResourceCoverDelete: PropTypes.func,
+  onVanInfoUpdate: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -339,6 +344,7 @@ const mapDispatchToProps = (dispatch) => ({
   onResourceDelete: bindActionCreators(onResourceDelete, dispatch),
   onPriceDelete: bindActionCreators(onPriceDelete, dispatch),
   onResourceCoverDelete: bindActionCreators(onResourceCoverDelete, dispatch),
+  onVanInfoUpdate: bindActionCreators(onVanInfoUpdate, dispatch),
 });
 
 const withConnect = connect(
