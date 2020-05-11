@@ -117,10 +117,11 @@ export const onResourceCoverDeleteFailed = (error) => ({
 });
 
 
-export const onVanInfoUpdate = (vanInfo, pricePayload) => ({
+export const onVanInfoUpdate = (vanInfo, oldPriceList, newPriceList) => ({
   type: ON_VAN_INFO_UPDATE,
   vanInfo,
-  pricePayload,
+  oldPriceList,
+  newPriceList
 });
 
 export const onVanInfoUpdateSuccess = (vanList) => ({
