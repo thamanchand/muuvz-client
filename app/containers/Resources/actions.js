@@ -17,6 +17,9 @@ import {
   ON_RESOURCE_COVER_DELETE,
   ON_RESOURCE_COVER_DELETE_SUCCESS,
   ON_RESOURCE_COVER_DELETE_FAILED,
+  ON_VAN_INFO_UPDATE,
+  ON_VAN_INFO_UPDATE_SUCCESS,
+  ON_VAN_INFO_UPDATE_FAILED,
 } from './constants';
 /**
  * Sends the request to the API
@@ -111,4 +114,21 @@ export const onResourceCoverDeleteSuccess = () => ({
 export const onResourceCoverDeleteFailed = (error) => ({
   type: ON_RESOURCE_COVER_DELETE_FAILED,
   error,
+});
+
+
+export const onVanInfoUpdate = (vanInfo, pricePayload) => ({
+  type: ON_VAN_INFO_UPDATE,
+  vanInfo,
+  pricePayload,
+});
+
+export const onVanInfoUpdateSuccess = (vanList) => ({
+  type: ON_VAN_INFO_UPDATE_SUCCESS,
+  vanList,
+});
+
+export const onVanInfoUpdateFailed = (error) => ({
+  type: ON_VAN_INFO_UPDATE_FAILED,
+  error
 });
