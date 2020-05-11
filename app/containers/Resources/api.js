@@ -117,3 +117,16 @@ export const updateResource = (payload, resourceId) => axios
   .catch(error => {
     throw error;
   });
+
+// update resource
+export const updatePricingRecord= (payload, priceId) => axios
+  .put(
+    `${BASE_URL}${'pricings/'}${priceId}`,
+    { ...payload },
+    {headers: {
+      'Authorization': `Bearer ${token}`
+    }},
+  ).then(response => response.data)
+  .catch(error => {
+    throw error;
+  });
