@@ -85,8 +85,10 @@ export function* vanInfoSaveWatcher(action) {
       }));
 
       if (priceReponse && coverUploadResponse) {
+        const getNewResource = yield call(api.getResource, id);
+
         toast.success("Van info added successfully!")
-        yield put(onVanInfoSaveSuccess(vanList));
+        yield put(onVanInfoSaveSuccess(getNewResource));
       }
     }
   } catch(error) {
