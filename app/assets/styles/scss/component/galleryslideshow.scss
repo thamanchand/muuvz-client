@@ -151,3 +151,23 @@
   position: relative;
   top: 0;
 }
+.resource_cover__delete {
+  position: absolute;
+  padding: 2px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  top: -14px;
+  right: -10px;
+  box-shadow: 1px 1px 1px 1px #dedede;
+}
+.resource_cover__delete:hover {
+  position: absolute;
+  padding: 2px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  top: -14px;
+  right: -10px;
+  box-shadow: 1px 1px 1px 1px #dedede;
+  fill: red;
+  cursor: pointer;
+}
