@@ -25,6 +25,7 @@ import {
   ON_RESOURCE_DELETE,
   ON_PRICE_DELETE,
   ON_RESOURCE_COVER_DELETE,
+  ON_VAN_INFO_UPDATE,
 } from './constants';
 
 // import { filterInt } from '../utils';
@@ -149,10 +150,73 @@ export function* resourceCoverDeleteWatcher(action) {
     toast.error('Failed to delete cover picture!');
   }
 }
+
+export function* vanInfoUpdateWatcher(action) {
+  console.log("Resource update action", action);
+  const { vanInfo, oldPriceList, newPriceList } = action;
+  const { id } = vanInfo;
+
+  try {
+    // Prepare resource post payload
+    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label };
+    const vanList = yield call(api.updateResource,  resourcePayload, id);
+
+    if (vanList) {
+
+      // insert price to pricing table
+      const priceInsertReponse = yield all(newPriceList.map(priceItem => call(
+        api.postPricing,
+        {
+          price: priceItem.price,
+          unit: priceItem.unit,
+          resource: id
+        }
+      )));
+      //
+      // update price record
+      const priceUpdateReponse = yield all(oldPriceList.map(priceItem => {
+        const priceId = priceItem.id;
+        return call(
+          api.updatePricingRecord,
+          {
+            price: priceItem.price,
+            unit: priceItem.unit,
+            ...priceItem
+          },
+          priceId
+        )
+      }));
+      // // upload resource images
+      const coverUploadResponse = yield all(vanInfo.files.map(avatarItem => {
+        const data = new FormData();
+        data.append('files', avatarItem);
+        data.append('refId', id);
+        data.append('ref', 'resource');
+        data.append('field', 'cover');
+
+        return call(
+          api.uploadResourceImages,
+          data
+        );
+      }));
+
+      if (priceUpdateReponse && priceInsertReponse &&  coverUploadResponse) {
+        const getNewResource = yield call(api.getResource, id);
+        toast.success("Van info updated successfully!")
+        yield put(onVanInfoSaveSuccess(getNewResource));
+      }
+    }
+  } catch(error) {
+    toast.error("Failed to add van info!")
+    yield put(onVanInfoSaveFailed(error));
+  }
+}
+
 export default function* defaultSaga() {
   yield takeLatest(ON_VANLIST_LOAD, vanLoadWatcher);
   yield takeLatest(ON_VAN_SAVE, vanInfoSaveWatcher);
   yield takeLatest(ON_RESOURCE_DELETE, vanResourceDeleteWatcher);
   yield takeLatest(ON_PRICE_DELETE, onPriceDeleteWatcher);
   yield takeLatest(ON_RESOURCE_COVER_DELETE, resourceCoverDeleteWatcher);
+  yield takeLatest(ON_VAN_INFO_UPDATE, vanInfoUpdateWatcher);
 }
