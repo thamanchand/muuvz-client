@@ -16,7 +16,13 @@ import DeleteResourceModal from './components/DeleteResourceModal';
 import UnsaveDataModal from './components/UnsavedDataModal';
 import EditPriceModal from './components/EditPrice';
 
-import { onVanListLoad, onVanInfoSave, onResourceDelete, onPriceDelete } from './actions';
+import {
+  onVanListLoad,
+  onVanInfoSave,
+  onResourceDelete,
+  onPriceDelete,
+  onResourceCoverDelete,
+} from './actions';
 import { makeSelectVans, isVanInfoSavedSelector } from './selectors';
 import saga from './saga';
 import reducer from './reducers';
@@ -44,6 +50,7 @@ class ResourcesPage extends React.PureComponent {
       openEditModal: false,
       editPriceItem: null,
       isEditPriceModalOpen: false,
+      currentlyEditedResourceId: null,
     };
   }
 
@@ -118,11 +125,18 @@ class ResourcesPage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { vanInfoSavedCompleted } = this.props;
+    const { currentlyEditedResourceId } = this.state;
+    const { vanInfoSavedCompleted, vanList } = this.props;
     if (vanInfoSavedCompleted !== nextProps.vanInfoSavedCompleted) {
       this.setState({
         openModel: false
       })
+    }
+    if (vanList !== nextProps.vanList) {
+      const editItem = vanList.find(item => item.id === currentlyEditedResourceId);
+      if(editItem) {
+        this.setState({ currentEditItem: editItem });
+      }
     }
   }
 
@@ -155,7 +169,11 @@ class ResourcesPage extends React.PureComponent {
     const { vanList } = this.props;
     const editItem = vanList.find(item => item.id === editResourceId);
     if (editItem) {
-      this.setState({currentEditItem:  editItem, openEditModal: true});
+      this.setState({
+        currentEditItem:  editItem,
+        openEditModal: true,
+        currentlyEditedResourceId: editResourceId,
+      });
     }
   }
 
@@ -192,14 +210,16 @@ class ResourcesPage extends React.PureComponent {
     });
   }
 
-  updateVanRecordHandler = (values) => {
-    console.log("updateVanRecordHandler", values);
+  updateVanRecordHandler = () => {
     this.setState({openEditModal: false});
   }
 
   editModalPriceDelete = (priceId) => {
-    console.log("priceId", priceId);
     this.props.onPriceDelete(priceId);
+  }
+
+  coverDeleteHandler = (coverId, updateResourcePayload) => {
+    this.props.onResourceCoverDelete(updateResourcePayload, coverId);
   }
 
   render() {
@@ -213,7 +233,8 @@ class ResourcesPage extends React.PureComponent {
       isEditPriceModalOpen,
     } = this.state;
     const resourceList = filterResourcesBelongsToUser(vanList, auth.get('userInfo').id)
-
+    console.log("resourceList", resourceList);
+    console.log("currentEditItem", currentEditItem)
     return (
       <div>
         <Layout />
@@ -269,6 +290,7 @@ class ResourcesPage extends React.PureComponent {
                 deletePriceItem={this.deletePriceItem}
                 onUpdateVanRecord={this.updateVanRecordHandler}
                 editModalPriceDelete={this.editModalPriceDelete}
+                coverDeleteHandler={this.coverDeleteHandler}
               />
             </Row>
           </Container>
@@ -303,6 +325,7 @@ ResourcesPage.propTypes = {
   vanInfoSavedCompleted: PropTypes.bool,
   onResourceDelete: PropTypes.func,
   onPriceDelete: PropTypes.func,
+  onResourceCoverDelete: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -315,6 +338,7 @@ const mapDispatchToProps = (dispatch) => ({
   onVanInfoSave: bindActionCreators(onVanInfoSave, dispatch),
   onResourceDelete: bindActionCreators(onResourceDelete, dispatch),
   onPriceDelete: bindActionCreators(onPriceDelete, dispatch),
+  onResourceCoverDelete: bindActionCreators(onResourceCoverDelete, dispatch),
 });
 
 const withConnect = connect(
