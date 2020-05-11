@@ -18,6 +18,14 @@ class Slideshow extends React.Component {
     this.ratioWH = ratioWHArray[0] / ratioWHArray[1];
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.input !== nextProps.input) {
+      this.setState({
+        currentImageId: nextProps.input[0] && nextProps.input[0].id
+      })
+    }
+  }
+
   getNewSlideIndex = step => {
     const {slideIndex} = this.state;
     const numberSlide = this.props.input.length;
@@ -80,6 +88,11 @@ class Slideshow extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    console.log("nextProps", nextProps)
+    return nextProps.input !== this.props.input;
+  }
+
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
     if (this.automaticInterval) clearInterval(this.automaticInterval);
@@ -119,12 +132,21 @@ class Slideshow extends React.Component {
             </div>
           ))}
 
-          <span role="presentation" className="prev" onClick={this.backward}>
-            ❮
-          </span>
-          <span role="presentation" className="next" onClick={this.forward}>
-            ❯
-          </span>
+          {currentImageId ?
+            ( <span role="presentation" className="prev" onClick={this.backward}>
+              ❮
+            </span>
+            ) : (
+              null
+            )}
+          {currentImageId ?
+            (
+              <span role="presentation" className="next" onClick={this.forward}>
+              ❯
+              </span>
+            ) : (
+              null
+            )}
         </div>
 
         <div className="dot-container">
