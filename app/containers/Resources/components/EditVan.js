@@ -39,17 +39,16 @@ const EditVanForm = ({
   editModalPriceDelete,
   coverDeleteHandler,
 }) => {
+  console.log("initialValues.cover", initialValues.cover);
   const [initialEditFormValues, setInitialEditFormValues] = React.useState(initialValues)
   const [pricingList, setPricinglist] = React.useState(initialValues && initialValues.pricing);
   const [isPriceEditModalOpen, setIsPriceEditModalOpen] = React.useState(false);
   const [isAddPriceModalOpen, setIsAddPriceModalOpen] = React.useState(false);
   const [selectedPriceItem, setSelectedPriceItem] = React.useState();
   const [showPriceWarning, setShowPriceWarning] = React.useState(false);
+  const [coverPicsList, setCoverPicsList] = React.useState(initialValues.cover);
   // const [isDeleteConfirm, setIsDeleteConfirm] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   setInitialEditFormValues(initialValues);
-  // }, [initialEditFormValues]);
+  console.log("coverPicsList", coverPicsList);
 
   const deletePriceHandler = (priceId) => {
     // check if delete price is from api fetch. If it is then delete it by calling
@@ -123,11 +122,20 @@ const EditVanForm = ({
     if(!pricingList.length > 0) {
       setShowPriceWarning(true);
     } else {
-      onUpdateVanRecord(values);
+      onUpdateVanRecord(values, pricingList);
       setPricinglist([]);
       setIsPriceEditModalOpen()
       setShowPriceWarning(false);
     }
+  }
+
+  const onCoverPicDelete = (coverId, formInitialValues) => {
+    const filterUnDeletedcoverImages = coverPicsList.filter(coverItem => coverItem.id !== coverId);
+    const resourceUpdatePayload = {
+      ...formInitialValues, cover: [...filterUnDeletedcoverImages]
+    };
+    coverDeleteHandler(coverId, resourceUpdatePayload);
+    setCoverPicsList(filterUnDeletedcoverImages);
   }
 
   return (
@@ -421,25 +429,32 @@ const EditVanForm = ({
                     </div>
                   </div>
                 </Col>
-
-                <div className="container">
-                  <h5 className="bold-text header_label">Uploaded pictures</h5>
-                </div>
-                <div className="container">
-                  <div className="row justify-content-center">
-                    <Col md={6} sm={6} className="col-md-offset-3">
-                      <div className="slideshow">
-                        <GallerySlideShow
-                          input={initialEditFormValues.cover}
-                          ratio="3:2"
-                          mode="manual"
-                          source="resourceEdit"
-                          coverDelete={(coverId) => coverDeleteHandler(coverId)}
-                        />
-                      </div>
-                    </Col>
+                {initialValues.cover && initialValues.cover.length > 0 && (
+                <>
+                  <div className="container">
+                    <h5 className="bold-text header_label">Uploaded pictures</h5>
                   </div>
-                </div>
+                  <div className="container">
+                    <div className="row justify-content-center">
+                      <Col md={6} sm={6} className="col-md-offset-3">
+                        <div className="slideshow">
+
+                          <GallerySlideShow
+                            input={coverPicsList}
+                            ratio="3:2"
+                            mode="manual"
+                            source="resourceEdit"
+                            coverDelete={(coverId) => onCoverPicDelete(
+                              coverId,
+                              initialValues
+                            )}
+                          />
+                        </div>
+                      </Col>
+                    </div>
+                  </div>
+                </>
+                )}
                 <Col md={12} sm={12} >
                   <h3 className="header_label pricing">Upload new pictures</h3>
                   <h5 className="subhead">You can upload multiple files</h5>
