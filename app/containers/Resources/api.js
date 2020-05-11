@@ -45,6 +45,17 @@ export const getResources = () => axios
     throw err;
   });
 
+// get a resource
+export const getResource = (resourceId) => axios
+  .get(`${BASE_URL}${'resources'}${'/'}${resourceId}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  }).then(response => response.data).catch(err => {
+    throw err;
+  });
+
 // upload resource cover image
 export const uploadResourceImages = data => axios
   .post(
