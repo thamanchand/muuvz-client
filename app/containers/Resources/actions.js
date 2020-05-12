@@ -124,9 +124,10 @@ export const onVanInfoUpdate = (vanInfo, oldPriceList, newPriceList) => ({
   newPriceList
 });
 
-export const onVanInfoUpdateSuccess = (vanList) => ({
+export const onVanInfoUpdateSuccess = (vanList, resourceId) => ({
   type: ON_VAN_INFO_UPDATE_SUCCESS,
   vanList,
+  resourceId,
 });
 
 export const onVanInfoUpdateFailed = (error) => ({
