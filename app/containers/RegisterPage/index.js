@@ -19,6 +19,8 @@ import logo from '../../assets/images/muuvz.svg';
 import { onRegisterSubmit, onRegisterPageLoad } from './actions';
 import { emailRegisteredSelector, registerErrorSelector } from './selectors';
 
+import toast from '../../shared/ToastNotify';
+
 import reducer from './reducer';
 import saga from './saga';
 
@@ -39,8 +41,12 @@ class RegisterPage extends React.PureComponent {
   }
 
   onRegisterHandler = (payload) => {
-    const registerPayload = { ...payload, username: payload.email}
-    this.props.onRegisterSubmit(registerPayload);
+    if(payload.email && payload.password) {
+      const registerPayload = { ...payload, username: payload.email}
+      this.props.onRegisterSubmit(registerPayload);
+    } else {
+      toast.error("Provide email and password")
+    }
   }
 
   render() {
