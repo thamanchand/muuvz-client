@@ -17,6 +17,8 @@ import {
   onPriceDeleteFailed,
   onResourceCoverDeleteSuccess,
   onResourceCoverDeleteFailed,
+  onVanInfoUpdateSuccess,
+  onVanInfoUpdateFailed,
 } from './actions';
 
 import {
@@ -200,15 +202,17 @@ export function* vanInfoUpdateWatcher(action) {
         );
       }));
 
-      if (priceUpdateReponse && priceInsertReponse &&  coverUploadResponse) {
-        const getNewResource = yield call(api.getResource, id);
+      const getUpadtedResource = yield call(api.getResource, id);
+      if (priceUpdateReponse && priceInsertReponse &&  coverUploadResponse && getUpadtedResource) {
+
+        console.log("getNewResource", getUpadtedResource)
         toast.success("Van info updated successfully!")
-        yield put(onVanInfoSaveSuccess(getNewResource));
+        yield put(onVanInfoUpdateSuccess(getUpadtedResource, id));
       }
     }
   } catch(error) {
     toast.error("Failed to add van info!")
-    yield put(onVanInfoSaveFailed(error));
+    yield put(onVanInfoUpdateFailed(error));
   }
 }
 
