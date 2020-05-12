@@ -211,9 +211,11 @@ class ResourcesPage extends React.PureComponent {
     });
   }
 
-  updateVanRecordHandler = (vanInfo) => {
-    const newPriceList = vanInfo && vanInfo.pricing && vanInfo.pricing.filter(item => !item.resource)
-    const oldPriceList = vanInfo && vanInfo.pricing && vanInfo.pricing.filter(item => item.resource);
+  updateVanRecordHandler = (vanInfo, priceList) => {
+    const newPriceList = priceList.filter(item => !item.resource)
+    const oldPriceList = priceList.filter(item => item.resource);
+    console.log("newPriceList", newPriceList);
+    console.log("oldPriceList", oldPriceList)
     this.props.onVanInfoUpdate(vanInfo, oldPriceList, newPriceList)
     this.setState({openEditModal: false});
   }
