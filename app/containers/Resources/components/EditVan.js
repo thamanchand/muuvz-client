@@ -103,13 +103,13 @@ const EditVanForm = ({
         : item
       ))
       setPricinglist(updatePriceItemFromAPI);
-      setInitialEditFormValues({...initialEditFormValues, pricing: [updatePriceItemFromAPI] })
+      setInitialEditFormValues({...initialEditFormValues, pricing: updatePriceItemFromAPI() })
       setIsPriceEditModalOpen(false);
 
     } else {
       const updatePriceItemFromStore = () => pricingList.map(item => (item.id === priceItem.id ? {...priceItem} : item))
       setPricinglist(updatePriceItemFromStore);
-      setInitialEditFormValues({...initialEditFormValues, pricing: [updatePriceItemFromStore] })
+      setInitialEditFormValues({...initialEditFormValues, pricing: updatePriceItemFromStore() })
       setIsPriceEditModalOpen(false);
     }
   }
