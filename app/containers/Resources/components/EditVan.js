@@ -39,7 +39,7 @@ const EditVanForm = ({
   editModalPriceDelete,
   coverDeleteHandler,
 }) => {
-  console.log("initialValues.cover", initialValues.cover);
+
   const [initialEditFormValues, setInitialEditFormValues] = React.useState(initialValues)
   const [pricingList, setPricinglist] = React.useState(initialValues && initialValues.pricing);
   const [isPriceEditModalOpen, setIsPriceEditModalOpen] = React.useState(false);
@@ -78,7 +78,7 @@ const EditVanForm = ({
     };
 
     setPricinglist([...pricingList, newItem]);
-    setInitialEditFormValues({...initialEditFormValues, pricing: [...pricingList, newItem]})
+    // setInitialEditFormValues({...initialEditFormValues, pricing: [...pricingList, newItem]})
     setIsAddPriceModalOpen(false);
   }
 
@@ -103,13 +103,13 @@ const EditVanForm = ({
         : item
       ))
       setPricinglist(updatePriceItemFromAPI);
-      setInitialEditFormValues({...initialEditFormValues, pricing: updatePriceItemFromAPI() })
+      // setInitialEditFormValues({...initialEditFormValues, pricing: updatePriceItemFromAPI() })
       setIsPriceEditModalOpen(false);
 
     } else {
       const updatePriceItemFromStore = () => pricingList.map(item => (item.id === priceItem.id ? {...priceItem} : item))
       setPricinglist(updatePriceItemFromStore);
-      setInitialEditFormValues({...initialEditFormValues, pricing: updatePriceItemFromStore() })
+      // setInitialEditFormValues({...initialEditFormValues, pricing: updatePriceItemFromStore() })
       setIsPriceEditModalOpen(false);
     }
   }
@@ -429,7 +429,7 @@ const EditVanForm = ({
                     </div>
                   </div>
                 </Col>
-                {initialValues.cover && initialValues.cover.length > 0 && (
+                {coverPicsList && coverPicsList.length > 0 && (
                 <>
                   <div className="container">
                     <h5 className="bold-text header_label">Uploaded pictures</h5>
@@ -584,4 +584,4 @@ EditVanForm.propTypes = {
   coverDeleteHandler: PropTypes.func,
 }
 
-export default EditVanForm;
+export default React.memo(EditVanForm);
