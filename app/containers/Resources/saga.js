@@ -164,48 +164,61 @@ export function* vanInfoUpdateWatcher(action) {
     const vanList = yield call(api.updateResource,  resourcePayload, id);
 
     if (vanList) {
+      console.log("vanList", vanList)
+      if (newPriceList && newPriceList.length) {
 
-      // insert price to pricing table
-      const priceInsertReponse = yield all(newPriceList.map(priceItem => call(
-        api.postPricing,
-        {
-          price: priceItem.price,
-          unit: priceItem.unit,
-          resource: id
-        }
-      )));
-      //
-      // update price record
-      const priceUpdateReponse = yield all(oldPriceList.map(priceItem => {
-        const priceId = priceItem.id;
-        return call(
-          api.updatePricingRecord,
+        // insert price to pricing table
+        const priceInsertReponse = yield all(newPriceList.map(priceItem => call(
+          api.postPricing,
           {
             price: priceItem.price,
             unit: priceItem.unit,
-            ...priceItem
-          },
-          priceId
-        )
-      }));
-      // // upload resource images
-      const coverUploadResponse = yield all(vanInfo.files.map(avatarItem => {
-        const data = new FormData();
-        data.append('files', avatarItem);
-        data.append('refId', id);
-        data.append('ref', 'resource');
-        data.append('field', 'cover');
+            resource: id
+          }
+        )));
+        console.log("priceInsertReponse", priceInsertReponse)
+      }
+      if (oldPriceList && oldPriceList.length) {
+        // update price record
+        const priceUpdateReponse = yield all(oldPriceList.map(priceItem => {
+          const priceId = priceItem.id;
+          return call(
+            api.updatePricingRecord,
+            {
+              price: priceItem.price,
+              unit: priceItem.unit,
+              ...priceItem
+            },
+            priceId
+          )
+        }));
+        console.log("priceUpdateReponse", priceUpdateReponse);
+      }
 
-        return call(
-          api.uploadResourceImages,
-          data
-        );
-      }));
+      const isFileUploaded = action.vanInfo && action.vanInfo.files;
+      if (isFileUploaded) {
+        console.log("isFileUploaded", isFileUploaded)
+        // upload resource images
+        const coverUploadResponse = yield all(vanInfo.files.map(avatarItem => {
+          const data = new FormData();
+          data.append('files', avatarItem);
+          data.append('refId', id);
+          data.append('ref', 'resource');
+          data.append('field', 'cover');
+
+          return call(
+            api.uploadResourceImages,
+            data
+          );
+        }));
+        console.log("coverUploadResponse", coverUploadResponse)
+      }
 
       const getUpadtedResource = yield call(api.getResource, id);
-      if (priceUpdateReponse && priceInsertReponse &&  coverUploadResponse && getUpadtedResource) {
+      if (getUpadtedResource) {
 
-        console.log("getNewResource", getUpadtedResource)
+        console.log("getUpadtedResource", getUpadtedResource)
+        console.log("getUpadtedResource", getUpadtedResource)
         toast.success("Van info updated successfully!")
         yield put(onVanInfoUpdateSuccess(getUpadtedResource, id));
       }
