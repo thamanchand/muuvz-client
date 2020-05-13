@@ -5,12 +5,19 @@ import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 const { uuid } = require('uuidv4');
 
 class Slideshow extends React.Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if(nextProps.input !== prevState.input) {
+      return { currentImageId: nextProps && nextProps.input[0] && nextProps.input[0].id};
+    }
+    return null;
+  }
+
   constructor(props) {
     super(props);
     this.containerWrapperRef = React.createRef()
     this.state = {
       slideIndex: 0,
-      currentImageId: this.props && this.props.input[0] && this.props.input[0].id,
+      currentImageId: null
     };
 
     const { ratio } = this.props;
