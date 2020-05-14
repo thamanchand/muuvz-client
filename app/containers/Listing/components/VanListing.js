@@ -22,7 +22,7 @@ const iconStyles = {
   color: '#70C1B3'
 };
 
-const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked }) => (
+const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked, selectedResourceId }) => (
   <div className="listing__wrapper">
     <Container>
       <Row>
@@ -127,8 +127,15 @@ const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked }) => (
                               type="button"
                               className="rounded btn btn-danger book__van"
                               onClick={() => bookingHandler(item.id, item.profile.address)}
-                              disabled={isBooked}
+                              disabled={selectedResourceId === item.id && isBooked}
                             >BOOK VAN
+                              <span className="btn__loader">
+                                <ClipLoader
+                                  size={15}
+                                  color="#70C1B3"
+                                  loading={selectedResourceId === item.id && isBooked}
+                                />
+                              </span>
                             </button>
                           </div>
                           <div className="resource_favourite">
@@ -179,6 +186,7 @@ VanListing.propTypes = {
       })
     }).isRequired,
   ),
+  selectedResourceId: PropTypes.number,
 }
 
 export default VanListing;
