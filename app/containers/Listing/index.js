@@ -21,6 +21,7 @@ import {
   selectResourcesSelector,
   isSearchLoadingSelector,
   isBookedSelector,
+  selectedResourceIdSelector,
 } from './selectors';
 
 import Footer from '../HomePage/components/Footer';
@@ -88,9 +89,8 @@ class VanListPage extends PureComponent {
     const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
 
     if (userId && searchQuery) {
-      const combinedStartDateTime = `${searchQuery.pickupDate}${'T'}${searchQuery.pickupTime}`;
-      const combinedEndDateTime = `${searchQuery.dropOffDate}${'T'}${searchQuery.dropOffTime}`;
-
+      const combinedStartDateTime = moment(`${searchQuery.pickupDate}${'T'}${searchQuery.pickupTime}${':00Z]'}`, 'YYYY-MM-DDTHH:mm:ssZ');
+      const combinedEndDateTime = moment(`${searchQuery.dropOffDate}${'T'}${searchQuery.dropOffTime}${':00Z]'}`, 'YYYY-MM-DDTHH:mm:ssZ');
       const payload = {
         resource: resourceId,
         user: userId,
@@ -99,7 +99,7 @@ class VanListPage extends PureComponent {
         address: resourceAddress,
         status: 'Requested',
       }
-      this.props.onBooking(payload);
+      this.props.onBooking(payload, resourceId);
     } else {
       this.setState({showLoginPage: true})
     }
@@ -170,7 +170,8 @@ class VanListPage extends PureComponent {
   }
 
   render() {
-    const { resourceList, isSearchLoading, isBooked } = this.props;
+    const { resourceList, isSearchLoading, isBooked, selectedResourceId } = this.props;
+
     const { isEdit } = this.state;
     const storedValues = JSON.parse(window.localStorage.getItem('searchQuery'));
     const availableResources = filterAvailableResources(resourceList);
@@ -362,6 +363,7 @@ class VanListPage extends PureComponent {
                   bookingHandler={this.bookingHandler}
                   isSearchLoading={isSearchLoading}
                   isBooked={isBooked}
+                  selectedResourceId={selectedResourceId}
                 />
               </div>
               <Footer />
@@ -381,7 +383,8 @@ VanListPage.propTypes = {
   isBooked: PropTypes.bool,
   history: PropTypes.shape({
     push: PropTypes.func,
-  })
+  }),
+  selectedResourceId: PropTypes.number,
   // vanList: PropTypes.arrayOf(PropTypes.shape({
   //   _id: PropTypes.string,
   //   createdAt: PropTypes.string,
@@ -408,6 +411,7 @@ const mapStateToProps = createStructuredSelector({
   resourceList: selectResourcesSelector(),
   isSearchLoading: isSearchLoadingSelector(),
   isBooked: isBookedSelector(),
+  selectedResourceId: selectedResourceIdSelector(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
