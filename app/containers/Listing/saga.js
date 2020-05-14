@@ -6,7 +6,6 @@ import {
 import { push } from 'react-router-redux';
 
 // Utils
-import request from 'utils/request';
 import  history from '../../utils/history';
 
 // constants
@@ -30,13 +29,11 @@ import {
   ON_BOOKING,
 } from './constants';
 
-const baseURL = "http://localhost:1337/";
 
 export function* searchResourceWatcher(action) {
-  console.log("action", action);
+  console.log("Available Booking action", action);
   try {
-    const requestURL = `${baseURL}${'resources'}`;
-    const searchResult = yield call(request, requestURL, { method: 'GET' });
+    const searchResult = yield call(api.getAvailableBookings);
     if (searchResult) {
       yield put(onSearchSuccess(searchResult));
       yield call(forwardTo('/listing'))
