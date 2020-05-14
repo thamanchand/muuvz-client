@@ -20,6 +20,7 @@ export const initialState = fromJS({
   searchResult: [],
   searchLoading: false,
   isBooked: false,
+  selectedResourceId: null,
 });
 
 function searchItemReducer(state = initialState, action) {
@@ -41,16 +42,19 @@ function searchItemReducer(state = initialState, action) {
 
     case ON_BOOKING:
       return state
-        .set('isBooked', true);
+        .set('isBooked', true)
+        .set('selectedResourceId', fromJS(action.resourceId));
 
     case ON_BOOKING_SUCCESS:
       return state
-        .set('isBooked', false);
+        .set('isBooked', false)
+        .set('selectedResourceId', null);
 
     case ON_BOOKING_FAILED:
       return state
         .set('error', fromJS(action.error))
         .set('isBooked', false)
+        .set('selectedResourceId', null);
 
     default:
       return state;
