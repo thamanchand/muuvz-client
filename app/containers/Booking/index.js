@@ -8,7 +8,12 @@ import { bindActionCreators, compose } from 'redux';
 
 
 import { onBookingLoad, onResourceLoad, onBookingAccept, onBookingCancel } from './action';
-import { selectBookingSelector, resourceListSelector } from './selector';
+import {
+  selectBookingSelector,
+  resourceListSelector,
+  isAcceptBookingLoadingSelector,
+  selectedBookingIdSelector,
+} from './selector';
 
 import saga from './saga';
 import reducer from './reducer';
@@ -48,7 +53,7 @@ class BookingDashboard extends React.Component {
 
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
-    const { bookingList, resourceList } = this.props;
+    const { bookingList, resourceList, isBookingAccepted, selectedBookingId } = this.props;
     const userId = auth.get('userInfo') && auth.get('userInfo').id;
     const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
 
@@ -89,6 +94,8 @@ class BookingDashboard extends React.Component {
                       currentBookings={getUserCurrentBookings}
                       acceptBookingHandler={this.acceptBookingHandler}
                       cancelBookingHandler={this.cancelBookingHandler}
+                      selectedBookingId={selectedBookingId}
+                      isBookingAccepted={isBookingAccepted}
                     />
                   </Row>
                 </div>
@@ -110,11 +117,15 @@ BookingDashboard.propTypes = {
   resourceList: PropTypes.array,
   onBookingAccept: PropTypes.func,
   onBookingCancel: PropTypes.func,
+  isBookingAccepted: PropTypes.bool,
+  selectedBookingId: PropTypes.number,
 }
 
 const mapStateToProps = createStructuredSelector({
   bookingList: selectBookingSelector(),
   resourceList: resourceListSelector(),
+  isBookingAccepted: isAcceptBookingLoadingSelector(),
+  selectedBookingId: selectedBookingIdSelector(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
