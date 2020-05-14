@@ -25,3 +25,9 @@ export const isBookedSelector = () =>
     selectResourceDomain,
     subState => subState.get('isBooked')
   );
+
+export const selectedResourceIdSelector = () =>
+  createSelector(
+    selectResourceDomain,
+    subState => subState.get('selectedResourceId')
+  );
