@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
 import moment from 'moment';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const { uuid } = require('uuidv4');
 
@@ -25,7 +26,14 @@ export function useMedia(query) {
   return matches;
 }
 
-const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, cancelBookingHandler }) => {
+const EventLabels = ({
+  resourceList,
+  currentBookings,
+  acceptBookingHandler,
+  cancelBookingHandler,
+  isBookingAccepted,
+  selectedBookingId
+}) => {
 
   // for small devices
   const isMaxWidth = useMedia("(max-width: 1386px)");
@@ -55,47 +63,19 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                           <div className="booking__label_status-break">
                             <span
                               role="presentation"
-                              className="booking__action"
+                              className={selectedBookingId === currentBookingItem.id && isBookingAccepted
+                                ? "booking__action-disabled"
+                                : "booking__action"
+                              }
                               onClick={() => acceptBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
                             > ACCEPT
                             </span>
                             <span
                               role="presentation"
-                              className="booking__action"
-                              onClick={() => cancelBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
-                            > CANCEL
-                            </span>
-                            <div className="booking__user_info">
-                              <div className="resources__icon_list">
-                                <img
-                                  className="topbar__avatar-img booking_user_avatar"
-                                  alt="profileImage"
-                                  src={currentBookingItem.profile.avatar ? `${'http://localhost:1337'}${currentBookingItem.profile.avatar.url}` : null }
-                                />
-                                <span className="booking_list">
-                                  <span className="booking__user_name">
-                                    {currentBookingItem.profile && currentBookingItem.profile.businessName}
-                                  </span>
-                                  <span className="booking_user_contact">
-                                    {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
-                                  </span>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-
-                        ) : (
-                          <>
-
-                            <span
-                              role="presentation"
-                              className="booking__action"
-                              onClick={() => acceptBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
-                            > ACCEPT
-                            </span>
-                            <span
-                              role="presentation"
-                              className="booking__action"
+                              className={selectedBookingId === currentBookingItem.id && isBookingAccepted
+                                ? "booking__action-disabled"
+                                : "booking__action"
+                              }
                               onClick={() => cancelBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
                             > CANCEL
                             </span>
@@ -114,6 +94,60 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                                     {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
                                   </span>
                                 </div>
+                                <span className="booking__action_loader">
+                                  <ClipLoader
+                                    size={20}
+                                    color="#70C1B3"
+                                    loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                                  />
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                        ) : (
+                          <>
+
+                            <span
+                              role="presentation"
+                              className={selectedBookingId === currentBookingItem.id && isBookingAccepted
+                                ? "booking__action-disabled"
+                                : "booking__action"
+                              }
+                              onClick={() => acceptBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
+                            > ACCEPT
+                            </span>
+                            <span
+                              role="presentation"
+                              className={selectedBookingId === currentBookingItem.id && isBookingAccepted
+                                ? "booking__action-disabled"
+                                : "booking__action"
+                              }
+                              onClick={() => cancelBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
+                            > CANCEL
+                            </span>
+                            <div className="booking__user_info">
+                              <div className="resources__icon_list">
+                                <img
+                                  className="topbar__avatar-img booking_user_avatar"
+                                  alt="profileImage"
+                                  src={currentBookingItem.profile.avatar ? `${'http://localhost:1337'}${currentBookingItem.profile.avatar.url}` : null }
+                                />
+                                <div className="booking_list">
+                                  <span className="booking__user_name">
+                                    {currentBookingItem.profile && currentBookingItem.profile.businessName}
+                                  </span>
+                                  <span className="booking_user_contact">
+                                    {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
+                                  </span>
+                                </div>
+                                <span className="booking__action_loader">
+                                  <ClipLoader
+                                    size={20}
+                                    color="#70C1B3"
+                                    loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                                  />
+                                </span>
                               </div>
                             </div>
                           </>
@@ -139,6 +173,13 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                               {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
                             </span>
                           </div>
+                          <span className="booking__action_loader">
+                            <ClipLoader
+                              size={20}
+                              color="#70C1B3"
+                              loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                            />
+                          </span>
                         </div>
                       </div>
                     </>
@@ -161,6 +202,13 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                               {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
                             </span>
                           </div>
+                          <span className="booking__action_loader">
+                            <ClipLoader
+                              size={20}
+                              color="#70C1B3"
+                              loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                            />
+                          </span>
                         </div>
                       </div>
                     </>
@@ -184,6 +232,13 @@ const EventLabels = ({ resourceList, currentBookings, acceptBookingHandler, canc
                               {currentBookingItem.profile && currentBookingItem.profile.phoneNumber}
                             </span>
                           </div>
+                          <span className="booking__action_loader">
+                            <ClipLoader
+                              size={20}
+                              color="#70C1B3"
+                              loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                            />
+                          </span>
                         </div>
                       </div>
                     </>
@@ -219,5 +274,7 @@ EventLabels.propTypes = {
   currentBookings: PropTypes.array,
   acceptBookingHandler: PropTypes.func,
   cancelBookingHandler: PropTypes.func,
+  isBookingAccepted: PropTypes.bool,
+  selectedBookingId: PropTypes.number,
 }
 export default EventLabels;
