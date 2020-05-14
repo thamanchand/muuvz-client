@@ -13,6 +13,7 @@ import {
   resourceListSelector,
   isAcceptBookingLoadingSelector,
   selectedBookingIdSelector,
+  isBookingCancelloadingSelector,
 } from './selector';
 
 import saga from './saga';
@@ -53,7 +54,7 @@ class BookingDashboard extends React.Component {
 
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
-    const { bookingList, resourceList, isBookingAccepted, selectedBookingId } = this.props;
+    const { bookingList, resourceList, isBookingAccepted, selectedBookingId, isBookingCancelLoading } = this.props;
     const userId = auth.get('userInfo') && auth.get('userInfo').id;
     const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
 
@@ -96,6 +97,7 @@ class BookingDashboard extends React.Component {
                       cancelBookingHandler={this.cancelBookingHandler}
                       selectedBookingId={selectedBookingId}
                       isBookingAccepted={isBookingAccepted}
+                      isBookingCancelLoading={isBookingCancelLoading}
                     />
                   </Row>
                 </div>
@@ -119,6 +121,7 @@ BookingDashboard.propTypes = {
   onBookingCancel: PropTypes.func,
   isBookingAccepted: PropTypes.bool,
   selectedBookingId: PropTypes.number,
+  isBookingCancelLoading: PropTypes.bool,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -126,6 +129,7 @@ const mapStateToProps = createStructuredSelector({
   resourceList: resourceListSelector(),
   isBookingAccepted: isAcceptBookingLoadingSelector(),
   selectedBookingId: selectedBookingIdSelector(),
+  isBookingCancelLoading: isBookingCancelloadingSelector(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
