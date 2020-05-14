@@ -83,6 +83,19 @@
   }
 }
 
+.booking__action-disabled {
+  font-weight: 600;
+  color: #dedede;
+  font-size: 12px;
+  margin: -1px 14px 10px -6px;
+  margin-left: 0px;
+  text-transform: uppercase;
+  cursor: not-allowed;
+
+  @media screen and (min-width: 1200px) and (max-width: 1386px) {
+    margin: 0px 15px 8px 0px;;
+  }
+}
 .booking__label_status {
   width: 100px;
   margin-right: 12px;
