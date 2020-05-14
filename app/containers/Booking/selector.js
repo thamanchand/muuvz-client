@@ -19,3 +19,15 @@ export const resourceListSelector = () =>
     selectBookingDomain,
     subState => subState.get('resourceList').toJS()
   );
+
+export const isAcceptBookingLoadingSelector = () =>
+  createSelector(
+    selectBookingDomain,
+    subState => subState.get('isBookingAcceptloading')
+  );
+
+export const selectedBookingIdSelector = () =>
+  createSelector(
+    selectBookingDomain,
+    subState => subState.get('selectedBookingId')
+  );
