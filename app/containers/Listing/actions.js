@@ -26,9 +26,10 @@ export const onSearchFailed = (error) => ({
   error
 });
 
-export const onBooking = (bookingPayload) => ({
+export const onBooking = (bookingPayload, resourceId) => ({
   type: ON_BOOKING,
   bookingPayload,
+  resourceId,
 });
 
 export const onBookingSuccess = (bookingResult) => ({
