@@ -32,7 +32,8 @@ const EventLabels = ({
   acceptBookingHandler,
   cancelBookingHandler,
   isBookingAccepted,
-  selectedBookingId
+  selectedBookingId,
+  isBookingCancelLoading,
 }) => {
 
   // for small devices
@@ -63,7 +64,7 @@ const EventLabels = ({
                           <div className="booking__label_status-break">
                             <span
                               role="presentation"
-                              className={selectedBookingId === currentBookingItem.id && isBookingAccepted
+                              className={(selectedBookingId === currentBookingItem.id && isBookingAccepted) || (selectedBookingId === currentBookingItem.id && isBookingCancelLoading)
                                 ? "booking__action-disabled"
                                 : "booking__action"
                               }
@@ -72,7 +73,7 @@ const EventLabels = ({
                             </span>
                             <span
                               role="presentation"
-                              className={selectedBookingId === currentBookingItem.id && isBookingAccepted
+                              className={(selectedBookingId === currentBookingItem.id && isBookingAccepted) || (selectedBookingId === currentBookingItem.id && isBookingCancelLoading)
                                 ? "booking__action-disabled"
                                 : "booking__action"
                               }
@@ -98,7 +99,7 @@ const EventLabels = ({
                                   <ClipLoader
                                     size={20}
                                     color="#70C1B3"
-                                    loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                                    loading={selectedBookingId === currentBookingItem.id && (isBookingAccepted || isBookingCancelLoading)}
                                   />
                                 </span>
                               </div>
@@ -110,7 +111,7 @@ const EventLabels = ({
 
                             <span
                               role="presentation"
-                              className={selectedBookingId === currentBookingItem.id && isBookingAccepted
+                              className={(selectedBookingId === currentBookingItem.id && isBookingAccepted) || (selectedBookingId === currentBookingItem.id && isBookingCancelLoading)
                                 ? "booking__action-disabled"
                                 : "booking__action"
                               }
@@ -119,7 +120,7 @@ const EventLabels = ({
                             </span>
                             <span
                               role="presentation"
-                              className={selectedBookingId === currentBookingItem.id && isBookingAccepted
+                              className={(selectedBookingId === currentBookingItem.id && isBookingAccepted) || (selectedBookingId === currentBookingItem.id && isBookingCancelLoading)
                                 ? "booking__action-disabled"
                                 : "booking__action"
                               }
@@ -145,7 +146,7 @@ const EventLabels = ({
                                   <ClipLoader
                                     size={20}
                                     color="#70C1B3"
-                                    loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                                    loading={selectedBookingId === currentBookingItem.id && (isBookingAccepted || isBookingCancelLoading)}
                                   />
                                 </span>
                               </div>
@@ -177,7 +178,7 @@ const EventLabels = ({
                             <ClipLoader
                               size={20}
                               color="#70C1B3"
-                              loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                              loading={selectedBookingId === currentBookingItem.id && (isBookingAccepted || isBookingCancelLoading)}
                             />
                           </span>
                         </div>
@@ -206,7 +207,7 @@ const EventLabels = ({
                             <ClipLoader
                               size={20}
                               color="#70C1B3"
-                              loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                              loading={selectedBookingId === currentBookingItem.id && (isBookingAccepted || isBookingCancelLoading)}
                             />
                           </span>
                         </div>
@@ -236,7 +237,7 @@ const EventLabels = ({
                             <ClipLoader
                               size={20}
                               color="#70C1B3"
-                              loading={selectedBookingId === currentBookingItem.id && isBookingAccepted}
+                              loading={selectedBookingId === currentBookingItem.id && (isBookingAccepted || isBookingCancelLoading)}
                             />
                           </span>
                         </div>
@@ -276,5 +277,6 @@ EventLabels.propTypes = {
   cancelBookingHandler: PropTypes.func,
   isBookingAccepted: PropTypes.bool,
   selectedBookingId: PropTypes.number,
+  isBookingCancelLoading: PropTypes.bool,
 }
 export default EventLabels;
