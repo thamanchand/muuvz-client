@@ -6,7 +6,17 @@ const token = auth.getToken();
 
 const BASE_URL = 'http://localhost:1337/';
 
-// post user profile
+// get available bookings
+export const getAvailableBookings = () => axios
+  .get(`${BASE_URL}${'resources'}`, {
+    headers: {
+      'Accept': 'application/json',
+    }
+  }).then(response => response.data).catch(err => {
+    throw err;
+  });
+
+// post resource
 export const postResourceBooking = payload => axios
   .post(
     `${BASE_URL}${'bookings'}`,
