@@ -31,3 +31,9 @@ export const selectedBookingIdSelector = () =>
     selectBookingDomain,
     subState => subState.get('selectedBookingId')
   );
+
+export const isBookingCancelloadingSelector = () =>
+  createSelector(
+    selectBookingDomain,
+    subState => subState.get('isBookingCancelloading')
+  );
