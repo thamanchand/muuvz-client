@@ -391,25 +391,11 @@ const AddVanForm = ({
 
               </div>
               <div className="container">
-                {showPriceWarning &&
-                  <div className="alert--bordered alert alert-warning fade show" role="alert">
-                    <button className="close" type="button" onClick={() => closeNotificationWarning()}>
-                      <span className="lnr lnr-cross"></span>
-                    </button>
-                    <div className="alert__content">
-                      <p>
-                        <span className="bold-text">Attention! </span>
-                          Atleast one price schema needs to be define
-                      </p>
-                      <p className="page-subhead subhead">E.g: 1hr van booking will cost €20 </p>
-                    </div>
-                  </div>
-                }
+
                 {priceList && !priceList.length > 0
                   ?
                   ( <>
                       <h5 className="page-subhead subhead">No data </h5>
-                      <p className="validation__error">Please add van pricing options </p>
                     </>
                   )
                   : (
@@ -451,6 +437,22 @@ const AddVanForm = ({
                   )
                 }
               </div>
+              <Col md={12} sm={12}>
+                {showPriceWarning &&
+                  <div className="alert--bordered alert alert-warning fade show" role="alert">
+                    <button className="close" type="button" onClick={() => closeNotificationWarning()}>
+                      <span className="lnr lnr-cross"></span>
+                    </button>
+                    <div className="alert__content">
+                      <p>
+                        <span className="bold-text">Attention! </span>
+                          Atleast one price schema needs to be define
+                      </p>
+                      <p className="page-subhead subhead">E.g: 1hr van booking will cost €20 </p>
+                    </div>
+                  </div>
+                }
+              </Col>
               <Row>
                 <div className="addEditModal__footer">
                   <ButtonToolbar className="form__button-toolbar">
