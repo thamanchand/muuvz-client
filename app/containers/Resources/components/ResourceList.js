@@ -44,7 +44,7 @@ const ResourceList = ({
   // for small devices
   const isDeviceSize900px = useMedia("(min-width: 900px)");
   const isDeviceSize750px = useMedia("(min-width: 750px)");
-
+  const isDeviceSize610px = useMedia("(max-width: 610px)");
   return (
     <Col md={12} lg={12} xl={12}>
       <Card>
@@ -135,13 +135,14 @@ const ResourceList = ({
                     <td>
                       <span style={iconStyles}>
                         <DeleteForeverIcon
-                          size="22" color="#ff4861"
+                          size={isDeviceSize610px ? "20" : "22"}
+                          color="#ff4861"
                           onClick={() => deleteResourceHandler(item.id)}
                         />
                       </span>
                       <span style={iconStyles}>
                         <SquareEditOutlineIcon
-                          size="22"
+                          size={isDeviceSize610px ? "20" : "22"}
                           color="#555555"
                           onClick={() => editResourceHandler(item.id)}
                         />
