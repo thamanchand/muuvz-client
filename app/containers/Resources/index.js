@@ -104,12 +104,13 @@ class ResourcesPage extends React.PureComponent {
     }))
   };
 
-  priceInfoSaveHandler = (e) => {
+  priceInfoSaveHandler = (price) => {
     // create a new item
     const newItem = {
       id: uuid(),
-      unit: e.unit,
-      price: e.price,
+      perhrdayweek: price.perhrdayweek.value,
+      unit: price.unit,
+      price: price.price,
     };
 
     this.setState((prevState) => ({
