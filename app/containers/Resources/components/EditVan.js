@@ -152,16 +152,34 @@ const EditVanForm = ({
             validate={values => { // validate both passowrds are same
               const errors = {};
               if (!values.brand) {
-                errors.unit = 'Required';
+                errors.brand = 'This field is required';
               }
               if (!values.model) {
-                errors.model = 'Required';
+                errors.model = 'This field is required';
               }
               if (!values.platenum) {
-                errors.platenum = 'Required';
+                errors.platenum = 'This field is required';
               }
               if (!values.passengernum) {
-                errors.passengernum = 'Required';
+                errors.passengernum = 'This field is required';
+              }
+              if (!values.mileage) {
+                errors.mileage = 'This field is required';
+              }
+              if (!values.enginesize) {
+                errors.enginesize = 'This field is required';
+              }
+              if (!values.fueltype) {
+                errors.fueltype = 'This field is required';
+              }
+              if (!values.power) {
+                errors.power = 'This field is required';
+              }
+              if (!values.transmission) {
+                errors.transmission = 'This field is required';
+              }
+              if (!values.loadcapacity) {
+                errors.loadcapacity = 'This field is required';
               }
               return errors
             }}
