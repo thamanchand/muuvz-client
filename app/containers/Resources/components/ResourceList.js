@@ -39,6 +39,7 @@ const ResourceList = ({
   onUpdateVanRecord,
   editModalPriceDelete,
   coverDeleteHandler,
+  showCoverPicWarning,
 }) => (
   <Col md={12} lg={12} xl={12}>
     <Card>
@@ -66,6 +67,7 @@ const ResourceList = ({
                 closeNotificationWarning={closeNotificationWarning}
                 editPriceItem={editPriceItem}
                 deletePriceItem={deletePriceItem}
+                showCoverPicWarning={showCoverPicWarning}
               />
             </Modal>
 
@@ -194,6 +196,7 @@ ResourceList.propTypes = {
   onUpdateVanRecord: PropTypes.func,
   editModalPriceDelete: PropTypes.func,
   coverDeleteHandler: PropTypes.func,
+  showCoverPicWarning: PropTypes.bool,
 };
 
 export default ResourceList;

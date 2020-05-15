@@ -45,6 +45,7 @@ class ResourcesPage extends React.PureComponent {
       priceList: [],
       confirmModal: false,
       showPriceWarning: false,
+      showCoverPicWarning: false,
       isDeleteModalShow: false,
       deleteResourceId: null,
       currentEditItem: null,
@@ -64,7 +65,9 @@ class ResourcesPage extends React.PureComponent {
       this.setState({
         showPriceWarning: true,
       })
-
+    }
+    if (vanInfo && !vanInfo.files) {
+      this.setState({ showCoverPicWarning: true});
     } else {
       const { priceList } = this.state;
       // Dispatch action
@@ -214,8 +217,6 @@ class ResourcesPage extends React.PureComponent {
   updateVanRecordHandler = (vanInfo, priceList) => {
     const newPriceList = priceList.filter(item => !item.resource)
     const oldPriceList = priceList.filter(item => item.resource);
-    console.log("newPriceList", newPriceList);
-    console.log("oldPriceList", oldPriceList)
     this.props.onVanInfoUpdate(vanInfo, oldPriceList, newPriceList)
     this.setState({openEditModal: false});
   }
@@ -237,10 +238,10 @@ class ResourcesPage extends React.PureComponent {
       openEditModal,
       editPriceItem,
       isEditPriceModalOpen,
+      showCoverPicWarning,
     } = this.state;
     const resourceList = filterResourcesBelongsToUser(vanList, auth.get('userInfo').id)
-    console.log("resourceList", resourceList);
-    console.log("currentEditItem", currentEditItem)
+
     return (
       <div>
         <Layout />
@@ -297,6 +298,7 @@ class ResourcesPage extends React.PureComponent {
                 onUpdateVanRecord={this.updateVanRecordHandler}
                 editModalPriceDelete={this.editModalPriceDelete}
                 coverDeleteHandler={this.coverDeleteHandler}
+                showCoverPicWarning={showCoverPicWarning}
               />
             </Row>
           </Container>
