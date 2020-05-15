@@ -411,6 +411,7 @@ const AddVanForm = ({
                         <tbody>
                           {priceList && priceList.map(item => (
                             <tr key={item.id}>
+                              <td>{item.perhrdayweek}</td>
                               <td>{item.unit}</td>
                               <td>{item.price}</td>
                               <td>
