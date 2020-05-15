@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -8,26 +8,7 @@ import CloseIcon from 'mdi-react/CloseIcon';
 import auth from 'utils/auth';
 
 import logo from '../../assets/images/muuvz.svg';
-
-export function useMedia(query) {
-  const [matches, setMatches] = useState(
-    window.matchMedia(query).matches
-  );
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-
-    const listener = () => setMatches(media.matches);
-    media.addListener(listener);
-
-    return () => media.removeListener(listener);
-  }, [query]);
-
-  return matches;
-}
+import { useMedia } from '../../containers/utils';
 
 const HeaderNav = ({ source }) => {
   const [isLoggedIn, setisLoggedIn] = React.useState(auth.getToken());
