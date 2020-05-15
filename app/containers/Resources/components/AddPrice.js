@@ -25,11 +25,20 @@ const AddPrice = ({ onPriceInfoSave, currentlyEditedPriceItem }) => (
         <Form
           validate={values => { // validate both passowrds are same
             const errors = {};
+            if (!values.perhrdayweek) {
+              errors.perhrdayweek = 'This field is required!';
+            }
+            if (!values.unit) {
+              errors.unit = 'This field is required!';
+            }
             if (isNumber(values.unit)) {
               errors.unit = 'Must be a number';
             }
             if (isNumber(values.price)) {
               errors.price = 'Must be a number';
+            }
+            if (!values.price) {
+              errors.price = 'This field is required';
             }
             return errors
           }}
@@ -42,7 +51,7 @@ const AddPrice = ({ onPriceInfoSave, currentlyEditedPriceItem }) => (
                   <span className="form__form-group-label">Select an option</span>
                   <div className="form__form-group-field">
                     <Field
-                      name='hrweekeday'
+                      name='perhrdayweek'
                       component={renderSelectField}
                       options={[
                         {value: 'hour', label: 'Hour'},
@@ -52,7 +61,7 @@ const AddPrice = ({ onPriceInfoSave, currentlyEditedPriceItem }) => (
                       defaultValue={{value: 'hour', label: 'Hour'}}
                     />
                   </div>
-                  <Error name="hrweekeday" />
+                  <Error name="perhrdayweek" />
                 </div>
               </Col>
               <Col md={4} sm={6}>
