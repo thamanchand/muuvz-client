@@ -7,7 +7,7 @@ import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 import PlusCircleIcon from 'mdi-react/PlusCircleIcon';
 
 import Modal from '../../../shared/Modal';
-import { formatDate } from '../../utils';
+import { formatDate, useMedia } from '../../utils';
 import AddVan from './AddVan';
 import EditVanForm from './EditVan';
 
@@ -40,118 +40,124 @@ const ResourceList = ({
   editModalPriceDelete,
   coverDeleteHandler,
   showCoverPicWarning,
-}) => (
-  <Col md={12} lg={12} xl={12}>
-    <Card>
-      <CardBody>
-        <div className="header__section container">
-          <div className="col-md-2 header__button">
+}) => {
+  // for small devices
+  const isDeviceSize900px = useMedia("(min-width: 900px)");
+  const isDeviceSize750px = useMedia("(min-width: 750px)");
+
+  return (
+    <Col md={12} lg={12} xl={12}>
+      <Card>
+        <CardBody>
+          <div className="header__section container">
+            <div className="col-md-2 header__button">
 
 
-            <Modal
-              color="primary"
-              title="Add new van"
-              header
-              md
-              openModel={openModel}
-              modelToggle={() => modelToggle()}
-            >
-              <AddVan
-                onSaveVan={onSaveVan}
-                onPriceInfoSave={priceInfoSaveHandler}
-                openPriceModalHandler={priceModalHandler}
-                showPriceModal={showPriceModal}
-                closePriceModal={() => closePriceModal()}
-                priceList={priceList}
-                showPriceWarning={showPriceWarning}
-                closeNotificationWarning={closeNotificationWarning}
-                editPriceItem={editPriceItem}
-                deletePriceItem={deletePriceItem}
-                showCoverPicWarning={showCoverPicWarning}
-              />
-            </Modal>
+              <Modal
+                color="primary"
+                title="Add new van"
+                header
+                md
+                openModel={openModel}
+                modelToggle={() => modelToggle()}
+              >
+                <AddVan
+                  onSaveVan={onSaveVan}
+                  onPriceInfoSave={priceInfoSaveHandler}
+                  openPriceModalHandler={priceModalHandler}
+                  showPriceModal={showPriceModal}
+                  closePriceModal={() => closePriceModal()}
+                  priceList={priceList}
+                  showPriceWarning={showPriceWarning}
+                  closeNotificationWarning={closeNotificationWarning}
+                  editPriceItem={editPriceItem}
+                  deletePriceItem={deletePriceItem}
+                  showCoverPicWarning={showCoverPicWarning}
+                />
+              </Modal>
 
-            <Modal
-              color="primary"
-              title="Edit van info"
-              header
-              md
-              openModel={openEditModal}
-              modelToggle={() => editModalToggle()}
-            >
-              <EditVanForm
-                onUpdateVanRecord={onUpdateVanRecord}
-                initialValues={editItem}
-                editModalPriceDelete={editModalPriceDelete}
-                coverDeleteHandler={coverDeleteHandler}
-              />
-            </Modal>
+              <Modal
+                color="primary"
+                title="Edit van info"
+                header
+                md
+                openModel={openEditModal}
+                modelToggle={() => editModalToggle()}
+              >
+                <EditVanForm
+                  onUpdateVanRecord={onUpdateVanRecord}
+                  initialValues={editItem}
+                  editModalPriceDelete={editModalPriceDelete}
+                  coverDeleteHandler={coverDeleteHandler}
+                />
+              </Modal>
 
+            </div>
+            <div className="col-md-4 header__filter">
+              {/* <span className="filter__wrapper">Filter</span> */}
+              <button
+                className="icon icon--right btn rounded btn-success btn-sm add__resource"
+                onClick={showVanModelHandler}
+                type="button"
+              >
+                <p className="add__resource_label">
+                  Add van
+                  <PlusCircleIcon className="resource__add_icon" size="30" color="#555555"/>
+                </p>
+              </button>
+            </div>
           </div>
-          <div className="col-md-4 header__filter">
-            {/* <span className="filter__wrapper">Filter</span> */}
-            <button
-              className="icon icon--right btn rounded btn-success btn-sm add__resource"
-              onClick={showVanModelHandler}
-              type="button"
-            >
-              <p className="add__resource_label">
-                Add van
-                <PlusCircleIcon className="resource__add_icon" size="30" color="#555555"/>
-              </p>
-            </button>
-          </div>
-        </div>
-        <div className="table-responsive">
-          <Table striped responsive>
-            <thead>
-              <tr>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Year</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {vanList && vanList.map(item => (
-                <tr key={item.id}>
-                  <td>{item.brand}</td>
-                  <td>{item.model}</td>
-                  <td>{formatDate(item.year)}</td>
-                  <td>
-                    {item.status ==='Available' && <Badge color="success">AVAILABLE</Badge>}
-                    {item.status ==='Booked' && <Badge color="badge badge-primary">BOOKED</Badge>}
-                    {item.status ==='Inuse' && <Badge color="badge badge-warning">IN USE</Badge>}
-                    {item.status ==='Waiting' && <Badge color="badge badge-danger">WAITING</Badge>}
-                    {item.status ==='Cancelled' && <Badge color="badge badge-info">CANCELLED</Badge>}
-                    {item.status ==='Requested' && <Badge color="badge badge-info">WAITING</Badge>}
-                  </td>
-                  <td>
-                    <span style={iconStyles}>
-                      <DeleteForeverIcon
-                        size="22" color="#ff4861"
-                        onClick={() => deleteResourceHandler(item.id)}
-                      />
-                    </span>
-                    <span style={iconStyles}>
-                      <SquareEditOutlineIcon
-                        size="22"
-                        color="#555555"
-                        onClick={() => editResourceHandler(item.id)}
-                      />
-                    </span>
-                  </td>
+          <div className="table-responsive">
+            <Table striped responsive>
+              <thead>
+                <tr>
+                  <th>Brand</th>
+                  {isDeviceSize750px && <th>Model</th>}
+                  {isDeviceSize900px && <th>Year</th>}
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
-      </CardBody>
-    </Card>
+              </thead>
+              <tbody>
+                {vanList && vanList.map(item => (
+                  <tr key={item.id}>
+                    <td>{item.brand}</td>
+                    {isDeviceSize750px && <td>{item.model}</td>}
+                    {isDeviceSize900px && <td>{formatDate(item.year)}</td>}
+                    <td>
+                      {item.status ==='Available' && <Badge color="success">AVAILABLE</Badge>}
+                      {item.status ==='Booked' && <Badge color="badge badge-primary">BOOKED</Badge>}
+                      {item.status ==='Inuse' && <Badge color="badge badge-warning">IN USE</Badge>}
+                      {item.status ==='Waiting' && <Badge color="badge badge-danger">WAITING</Badge>}
+                      {item.status ==='Cancelled' && <Badge color="badge badge-info">CANCELLED</Badge>}
+                      {item.status ==='Requested' && <Badge color="badge badge-info">WAITING</Badge>}
+                    </td>
+                    <td>
+                      <span style={iconStyles}>
+                        <DeleteForeverIcon
+                          size="22" color="#ff4861"
+                          onClick={() => deleteResourceHandler(item.id)}
+                        />
+                      </span>
+                      <span style={iconStyles}>
+                        <SquareEditOutlineIcon
+                          size="22"
+                          color="#555555"
+                          onClick={() => editResourceHandler(item.id)}
+                        />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
 
-  </Col>
-);
+    </Col>
+  )
+};
 
 
 ResourceList.propTypes = {
