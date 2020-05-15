@@ -69,7 +69,8 @@ export function* vanInfoSaveWatcher(action) {
         {
           price: priceItem.price,
           unit: priceItem.unit,
-          resource: id
+          resource: id,
+          perhrdayweek: priceItem.perhrdayweek,
         }
       )));
 
@@ -173,7 +174,8 @@ export function* vanInfoUpdateWatcher(action) {
           {
             price: priceItem.price,
             unit: priceItem.unit,
-            resource: id
+            resource: id,
+            priceItem: priceItem.perhrdayweek
           }
         )));
         console.log("priceInsertReponse", priceInsertReponse)
@@ -187,6 +189,7 @@ export function* vanInfoUpdateWatcher(action) {
             {
               price: priceItem.price,
               unit: priceItem.unit,
+              priceItem: priceItem.perhrdayweek,
               ...priceItem
             },
             priceId
