@@ -119,7 +119,7 @@ const AddVanForm = ({
 
               <Col md={3} sm={6}>
                 <div className="form__form-group">
-                  <span className="form__form-group-label">License-plate <span> (IKS-314)</span></span>
+                  <span className="form__form-group-label">License-plate</span>
                   <div className="form__form-group-field">
                     <Field
                       placeholder="IKS-314"
