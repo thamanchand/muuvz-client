@@ -1,30 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
 import moment from 'moment';
 import ClipLoader from "react-spinners/ClipLoader";
+import { useMedia } from '../../utils';
 
 const { uuid } = require('uuidv4');
-
-export function useMedia(query) {
-  const [matches, setMatches] = useState(
-    window.matchMedia(query).matches
-  );
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-
-    const listener = () => setMatches(media.matches);
-    media.addListener(listener);
-
-    return () => media.removeListener(listener);
-  }, [query]);
-
-  return matches;
-}
 
 const EventLabels = ({
   resourceList,
