@@ -6,6 +6,7 @@ import { Field } from 'react-final-form-html5-validation';
 
 import Error from '../../../shared/ErrorField';
 import Modal from '../../../shared/Modal'
+import renderSelectField from '../../../shared/SelectField';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
@@ -33,11 +34,20 @@ const EditPriceModal = ({ show, onClose, currentlyEditedPriceItem, onPriceUpdate
           <Form
             validate={values => { // validate both passowrds are same
               const errors = {};
+              if (!values.perhrdayweek) {
+                errors.perhrdayweek = 'This field is required!';
+              }
+              if (!values.unit) {
+                errors.unit = 'This field is required!';
+              }
               if (isNumber(values.unit)) {
                 errors.unit = 'Must be a number';
               }
               if (isNumber(values.price)) {
                 errors.price = 'Must be a number';
+              }
+              if (!values.price) {
+                errors.price = 'This field is required';
               }
               return errors
             }}
@@ -45,9 +55,27 @@ const EditPriceModal = ({ show, onClose, currentlyEditedPriceItem, onPriceUpdate
             onSubmit={onSubmit}
             render={({ handleSubmit, pristine, values, submitting, invalid}) => (
               <form className="form form--vertical" onSubmit={handleSubmit}>
+                <Col md={4} sm={6}>
+                  <div className="form__form-group">
+                    <span className="form__form-group-label">Select an option</span>
+                    <div className="form__form-group-field">
+                      <Field
+                        name='perhrdayweek'
+                        component={renderSelectField}
+                        options={[
+                          {value: 'Hour', label: 'Hour'},
+                          {value: 'Day', label: 'Day'},
+                          {value: 'Weekend', label: 'Weekend'},
+                        ]}
+                        defaultValue={{value: 'hour', label: 'Hour'}}
+                      />
+                    </div>
+                    <Error name="perhrdayweek" />
+                  </div>
+                </Col>
                 <Col md={6} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Unit</span>
+                    <span className="form__form-group-label">Number</span>
                     <div className="form__form-group-field">
                       <Field
                         name="unit"
