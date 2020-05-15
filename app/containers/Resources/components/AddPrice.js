@@ -5,6 +5,7 @@ import { Form } from 'react-final-form';
 import { Field } from 'react-final-form-html5-validation';
 
 import Error from '../../../shared/ErrorField';
+import renderSelectField from '../../../shared/SelectField';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
@@ -36,15 +37,33 @@ const AddPrice = ({ onPriceInfoSave, currentlyEditedPriceItem }) => (
           onSubmit={onSubmit}
           render={({ handleSubmit, pristine, values, submitting, invalid}) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
-              <Col md={6} sm={6}>
+              <Col md={4} sm={6}>
                 <div className="form__form-group">
-                  <span className="form__form-group-label">Unit</span>
+                  <span className="form__form-group-label">Select an option</span>
+                  <div className="form__form-group-field">
+                    <Field
+                      name='hrweekeday'
+                      component={renderSelectField}
+                      options={[
+                        {value: 'hour', label: 'Hour'},
+                        {value: 'day', label: 'Day'},
+                        {value: 'weekend', label: 'Weekend'},
+                      ]}
+                      defaultValue={{value: 'hour', label: 'Hour'}}
+                    />
+                  </div>
+                  <Error name="hrweekeday" />
+                </div>
+              </Col>
+              <Col md={4} sm={6}>
+                <div className="form__form-group">
+                  <span className="form__form-group-label">Number</span>
                   <div className="form__form-group-field">
                     <Field
                       name="unit"
                       component="input"
                       type="text"
-                      placeholder="2"
+                      placeholder="1"
                       parse={parse}
                     />
                   </div>
@@ -52,7 +71,7 @@ const AddPrice = ({ onPriceInfoSave, currentlyEditedPriceItem }) => (
                 </div>
               </Col>
 
-              <Col md={6} sm={6}>
+              <Col md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Price</span>
                   <div className="form__form-group-field">
@@ -60,7 +79,7 @@ const AddPrice = ({ onPriceInfoSave, currentlyEditedPriceItem }) => (
                       name="price"
                       component="input"
                       type="text"
-                      placeholder="v3"
+                      placeholder="€15"
                       parse={parse}
                     />
                   </div>
