@@ -41,6 +41,7 @@ const AddVanForm = ({
   closeNotificationWarning,
   editPriceItem,
   deletePriceItem,
+  showCoverPicWarning,
 }) => (
   <Col md={12} lg={12}>
     <Card>
@@ -49,21 +50,39 @@ const AddVanForm = ({
           validate={values => { // validate both passowrds are same
             const errors = {};
             if (!values.brand) {
-              errors.unit = 'Required';
+              errors.brand = 'This field is required';
             }
             if (!values.model) {
-              errors.model = 'Required';
+              errors.model = 'This field is required';
             }
             if (!values.platenum) {
-              errors.platenum = 'Required';
+              errors.platenum = 'This field is required';
             }
             if (!values.passengernum) {
-              errors.passengernum = 'Required';
+              errors.passengernum = 'This field is required';
+            }
+            if (!values.mileage) {
+              errors.mileage = 'This field is required';
+            }
+            if (!values.enginesize) {
+              errors.enginesize = 'This field is required';
+            }
+            if (!values.fueltype) {
+              errors.fueltype = 'This field is required';
+            }
+            if (!values.power) {
+              errors.power = 'This field is required';
+            }
+            if (!values.transmission) {
+              errors.transmission = 'This field is required';
+            }
+            if (!values.loadcapacity) {
+              errors.loadcapacity = 'This field is required';
             }
             return errors
           }}
           onSubmit={onSubmit}
-          render={({ handleSubmit, pristine, values, submitting, invalid }) => (
+          render={({ handleSubmit, pristine, values, submitting }) => (
             <form className="form form--vertical" onSubmit={handleSubmit}>
               <div className="container">
                 <h5 className="bold-text header_label">Resource</h5>
@@ -77,7 +96,6 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="Renault"
-                      required
                     />
                   </div>
                   <Error name="brand" />
@@ -93,7 +111,6 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="v3"
-                      required
                     />
                   </div>
                   <Error name="model" />
@@ -109,7 +126,6 @@ const AddVanForm = ({
                       name="platenum"
                       component={renderMaskInput}
                       type="text"
-                      required
                       mask={[all, all, all, '-', all, all, all]}
                     />
                   </div>
@@ -126,9 +142,9 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="10000"
-                      required
                     />
                   </div>
+                  <Error name="mileage" />
                 </div>
               </Col>
 
@@ -145,9 +161,9 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="4"
-                      required
                     />
                   </div>
+                  <Error name="passengernum" />
                 </div>
               </Col>
 
@@ -160,9 +176,9 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="1.8"
-                      required
                     />
                   </div>
+                  <Error name="enginesize" />
                 </div>
               </Col>
 
@@ -181,6 +197,7 @@ const AddVanForm = ({
                       ]}
                     />
                   </div>
+                  <Error name="fueltype" />
                 </div>
               </Col>
 
@@ -193,9 +210,9 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="100kw"
-                      required
                     />
                   </div>
+                  <Error name="power" />
                 </div>
               </Col>
 
@@ -222,9 +239,9 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="E.g: Automatic/Manual"
-                      required
                     />
                   </div>
+                  <Error name="transmission" />
                 </div>
               </Col>
 
@@ -237,7 +254,6 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="210 x 280 x 620"
-                      required
                     />
                   </div>
                 </div>
@@ -252,7 +268,6 @@ const AddVanForm = ({
                       component="input"
                       type="text"
                       placeholder="200 x 290 x 610"
-                      required
                     />
                   </div>
                 </div>
@@ -269,6 +284,7 @@ const AddVanForm = ({
                       placeholder="3500kg"
                     />
                   </div>
+                  <Error name="loadcapacity" />
                 </div>
               </Col>
 
@@ -337,6 +353,16 @@ const AddVanForm = ({
                     />
                   </div>
                 </div>
+                {showCoverPicWarning && (
+                  <div className="alert--bordered alert alert-warning fade show" role="alert">
+                    <div className="alert__content">
+                      <p>
+                        <span className="bold-text">Attention! </span>
+                          You need to upload cover picture of your van
+                      </p>
+                    </div>
+                  </div>
+                )}
               </Col>
 
               <div className="container">
@@ -432,7 +458,7 @@ const AddVanForm = ({
                       className="rounded btn btn-danger"
                       type="submit"
                       onClick={() => onSaveVan(values)}
-                      disabled={submitting || pristine || invalid}
+                      disabled={submitting || pristine }
                     >
                       Save van
                     </button>
@@ -461,5 +487,6 @@ AddVanForm.propTypes = {
   closeNotificationWarning: PropTypes.func,
   deletePriceItem: PropTypes.func,
   editPriceItem: PropTypes.func,
+  showCoverPicWarning: PropTypes.bool,
 }
 export default AddVanForm;
