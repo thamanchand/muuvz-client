@@ -54,9 +54,9 @@ const AddPrice = ({ onPriceInfoSave, currentlyEditedPriceItem }) => (
                       name='perhrdayweek'
                       component={renderSelectField}
                       options={[
-                        {value: 'hour', label: 'Hour'},
-                        {value: 'day', label: 'Day'},
-                        {value: 'weekend', label: 'Weekend'},
+                        {value: 'Hour', label: 'Hour'},
+                        {value: 'Day', label: 'Day'},
+                        {value: 'Weekend', label: 'Weekend'},
                       ]}
                       defaultValue={{value: 'hour', label: 'Hour'}}
                     />
