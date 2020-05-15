@@ -87,7 +87,7 @@ const AddVanForm = ({
               <div className="container">
                 <h5 className="bold-text header_label">Resource</h5>
               </div>
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Brand</span>
                   <div className="form__form-group-field">
@@ -102,7 +102,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Model</span>
                   <div className="form__form-group-field">
@@ -117,7 +117,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">License-plate</span>
                   <div className="form__form-group-field">
@@ -133,7 +133,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Mileage</span>
                   <div className="form__form-group-field">
@@ -152,7 +152,7 @@ const AddVanForm = ({
                 <h5 className="bold-text header_label">Features</h5>
               </div>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Number of Seats</span>
                   <div className="form__form-group-field">
@@ -167,7 +167,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Engine size</span>
                   <div className="form__form-group-field">
@@ -182,7 +182,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Fuel Type</span>
                   <div className="form__form-group-field">
@@ -201,7 +201,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Power</span>
                   <div className="form__form-group-field">
@@ -216,7 +216,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Consumption</span>
                   <div className="form__form-group-field">
@@ -230,7 +230,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Gear</span>
                   <div className="form__form-group-field">
@@ -245,7 +245,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Width x Height x Length (cm)</span>
                   <div className="form__form-group-field">
@@ -259,7 +259,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Width x Height x Length (cm)</span>
                   <div className="form__form-group-field">
@@ -273,7 +273,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Load capacity</span>
                   <div className="form__form-group-field">
@@ -288,7 +288,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Air bag</span>
                   <div className="form__form-group-field">
@@ -300,7 +300,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Air conditioning</span>
                   <div className="form__form-group-field">
@@ -312,7 +312,7 @@ const AddVanForm = ({
                 </div>
               </Col>
 
-              <Col md={3} sm={6}>
+              <Col lg={3} md={4} sm={6}>
                 <div className="form__form-group">
                   <span className="form__form-group-label">Cruise control</span>
                   <div className="form__form-group-field">
