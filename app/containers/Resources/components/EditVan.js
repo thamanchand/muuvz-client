@@ -75,6 +75,7 @@ const EditVanForm = ({
       id: uuid(),
       unit: newPrice.unit,
       price: newPrice.price,
+      perhrdayweek: newPrice.perhrdayweek,
     };
 
     setPricinglist([...pricingList, newItem]);
@@ -535,7 +536,8 @@ const EditVanForm = ({
                         <Table striped responsive>
                           <thead>
                             <tr>
-                              <th>Qty</th>
+                              <th>Unit</th>
+                              <th>Quantity</th>
                               <th>Price</th>
                               <th>Actions</th>
                             </tr>
@@ -543,6 +545,7 @@ const EditVanForm = ({
                           <tbody>
                             {pricingList && pricingList.map(item => (
                               <tr key={item.id}>
+                                <td>{item.perhrdayweek}</td>
                                 <td>{item.unit}</td>
                                 <td>{item.price}</td>
                                 <td>
