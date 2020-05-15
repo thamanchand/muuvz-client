@@ -199,7 +199,6 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="Renault"
-                        required
                       />
                     </div>
                     <Error name="brand" />
@@ -215,7 +214,6 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="v3"
-                        required
                       />
                     </div>
                     <Error name="model" />
@@ -231,7 +229,6 @@ const EditVanForm = ({
                         name="platenum"
                         component={renderMaskInput}
                         type="text"
-                        required
                         mask={[all, all, all, '-', all, all, all]}
                       />
                     </div>
@@ -248,10 +245,10 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="10000"
-                        required
                       />
                     </div>
                   </div>
+                  <Error name="mileage" />
                 </Col>
 
                 <div className="container">
@@ -267,9 +264,9 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="4"
-                        required
                       />
                     </div>
+                    <Error name="passengernum" />
                   </div>
                 </Col>
 
@@ -282,9 +279,9 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="1.8"
-                        required
                       />
                     </div>
+                    <Error name="enginesize" />
                   </div>
                 </Col>
 
@@ -304,6 +301,7 @@ const EditVanForm = ({
                         defaultValue={{ value: initialValues.fueltype, label: initialValues.fueltype}}
                       />
                     </div>
+                    <Error name="fueltype" />
                   </div>
                 </Col>
 
@@ -316,9 +314,9 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="100kw"
-                        required
                       />
                     </div>
+                    <Error name="power" />
                   </div>
                 </Col>
 
@@ -345,9 +343,9 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="E.g: Automatic/Manual"
-                        required
                       />
                     </div>
+                    <Error name="transmission" />
                   </div>
                 </Col>
 
@@ -360,7 +358,6 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="210 x 280 x 620"
-                        required
                       />
                     </div>
                   </div>
@@ -375,7 +372,6 @@ const EditVanForm = ({
                         component="input"
                         type="text"
                         placeholder="200 x 290 x 610"
-                        required
                       />
                     </div>
                   </div>
@@ -392,6 +388,7 @@ const EditVanForm = ({
                         placeholder="3500kg"
                       />
                     </div>
+                    <Error name="loadcapacity" />
                   </div>
                 </Col>
 
