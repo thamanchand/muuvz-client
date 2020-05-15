@@ -48,11 +48,11 @@ const customStyles = {
   option: (styles, state) => ({
     ...styles,
     color: state.isSelected ? "#FFF" : styles.color,
-    backgroundColor: state.isSelected ? "#007bff" : styles.color,
+    backgroundColor: state.isSelected ? "#646777" : styles.color,
     borderBottom: "1px solid rgba(0, 0, 0, 0.125)",
     "&:hover": {
-      color: "#FFF",
-      backgroundColor: "#007bff"
+      color: "#646777",
+      backgroundColor: "#f2f4f7"
     }
   }),
   dropdownIndicator: (base, state) => ({
