@@ -403,7 +403,8 @@ const AddVanForm = ({
                       <Table striped responsive>
                         <thead>
                           <tr>
-                            <th>Qty</th>
+                            <th>Unit</th>
+                            <th>Quantity</th>
                             <th>Price</th>
                             <th>Actions</th>
                           </tr>
