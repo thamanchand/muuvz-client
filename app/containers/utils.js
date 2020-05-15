@@ -1,3 +1,4 @@
+import React from 'react';
 import moment from 'moment';
 
 export function formatNumber(num) {
@@ -57,3 +58,24 @@ export const filterResourcesBelongsToUser = (resourceList, userId) =>
 // filter only available resources
 export const filterAvailableResources = (resourceList) =>
   resourceList.filter((item) => item.status === 'Available')
+
+
+export function useMedia(query) {
+  const [matches, setMatches] = React.useState(
+    window.matchMedia(query).matches
+  );
+
+  React.useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+
+    const listener = () => setMatches(media.matches);
+    media.addListener(listener);
+
+    return () => media.removeListener(listener);
+  }, [query]);
+
+  return matches;
+}
