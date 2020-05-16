@@ -18,12 +18,11 @@ const onSubmit = async values => {
 
 const ProfileForm = ({
   onProfileFormSave,
-  reset,
   initialValues,
   onProfileFormEdit,
   onAvatarDelete,
 }) => {
-  
+
   useEffect(() => console.log('profile props changed!'), [initialValues]);
 
   const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
@@ -81,7 +80,7 @@ const ProfileForm = ({
               }
               return errors
             }}
-            render={({ handleSubmit, values,  submitting, pristine }) => (
+            render={({ handleSubmit, values,  submitting }) => (
               <form className="form form--vertical" onSubmit={handleSubmit}>
                 <div className="form__half">
                   <div className="form__form-group">
@@ -158,35 +157,32 @@ const ProfileForm = ({
                       </>
                     )}
                   </Col>
-                </div>
-                <div className="profile__btns">
-                  <button className="square btn btn-success" type="button" onClick={reset}>
-                    Cancel
-                  </button>
-                  {isProfileCompleted && (
-                    <button
-                      className="square btn btn-primary"
-                      type="submit"
-                      onClick={() => onProfileFormEdit(values, initialValues.id)}
-                      disabled={submitting || pristine}
-                    >Update profile</button>
-                  )}
-                  {!(isProfileCompleted && initialValues.id) && (
-                    <button
-                      className="square btn btn-primary"
-                      type="submit"
-                      onClick={() => onProfileFormSave(values)}
-                      disabled={submitting || pristine}
-                    >Save profile</button>
-                  )}
-                  {!isProfileCompleted && initialValues.id && (
-                    <button
-                      className="square btn btn-primary"
-                      type="submit"
-                      onClick={() => onProfileFormEdit(values, initialValues.id)}
-                      disabled={submitting || pristine}
-                    >Update profile</button>
-                  )}
+                  <Col>
+                    <div className="profile__btns">
+                      {isProfileCompleted && (
+                        <button
+                          className="btn btn-success btn-sm rounded"
+                          type="submit"
+                          onClick={() => onProfileFormEdit(values, initialValues.id)}
+                          disabled={submitting }
+                        >Update profile</button>
+                      )}
+                      {!(isProfileCompleted && initialValues.id) && (
+                        <button
+                          className="btn btn-success btn-sm rounded"
+                          type="submit"
+                          onClick={() => onProfileFormSave(values)}
+                        >Save profile</button>
+                      )}
+                      {!isProfileCompleted && initialValues.id && (
+                        <button
+                          className="btn btn-success btn-sm rounded"
+                          type="submit"
+                          onClick={() => onProfileFormEdit(values, initialValues.id)}
+                        >Update profile</button>
+                      )}
+                    </div>
+                  </Col>
                 </div>
               </form>
             )}
@@ -199,7 +195,6 @@ const ProfileForm = ({
 
 ProfileForm.propTypes = {
   onProfileFormSave: PropTypes.func,
-  reset: PropTypes.func,
   initialValues: PropTypes.object,
   onProfileFormEdit: PropTypes.func,
   onAvatarDelete: PropTypes.func,
