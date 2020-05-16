@@ -348,10 +348,13 @@ const EditVanForm = ({
                     <span className="form__form-group-label">Gear</span>
                     <div className="form__form-group-field">
                       <Field
-                        name="transmission"
-                        component="input"
-                        type="text"
-                        placeholder="E.g: Automatic/Manual"
+                        name='transmission'
+                        component={renderSelectField}
+                        options={[
+                          {value: 'Automatic', label: 'Automatic'},
+                          {value: 'Manual', label: 'Manual'},
+                        ]}
+                        defaultValue={{ value: initialValues.transmission, label: initialValues.transmission}}
                       />
                     </div>
                     <Error name="transmission" />
