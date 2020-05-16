@@ -120,15 +120,15 @@ const EditVanForm = ({
   }
 
   const updateVanInfoHandler = (values) => {
-    // if(!pricingList.length > 0) {
-    //   setShowPriceWarning(true);
-    // }
-    if(values && !values.cover.length > 0 && !values.files) {
+    if (!pricingList.length > 0) {
+      setShowPriceWarning(true);
+    }
+    if(!coverPicsList.length) {
       setCoverPicMissingWarning(true);
     }
-    // if(values && values.files && !values.files.length > 0) {
-    //   setCoverPicMissingWarning(true);
-    // }
+    if (!coverPicsList.length && !values.files) {
+      setCoverPicMissingWarning(true);
+    }
     else {
       onUpdateVanRecord(values, pricingList);
       setPricinglist([]);
