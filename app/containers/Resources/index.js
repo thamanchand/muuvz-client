@@ -61,19 +61,21 @@ class ResourcesPage extends React.PureComponent {
   }
 
   vanInfoSaveHandler = (vanInfo) => {
-    if (!this.state.priceList.length > 0 ) {
+    if (!this.state.priceList.length > 0) {
       this.setState({
         showPriceWarning: true,
       })
     }
-    if(this.state.priceList.length > 0 ) {
+    else if (!this.state.priceList.length) {
       this.setState({
-        showPriceWarning: false,
+        showPriceWarning: true,
       })
     }
-    if (vanInfo && !vanInfo.files) {
+    else if (vanInfo && !vanInfo.files) {
       this.setState({ showCoverPicWarning: true});
-    } else {
+    }
+
+    else {
       const { priceList } = this.state;
       // Dispatch action
       this.props.onVanInfoSave(vanInfo, priceList);
