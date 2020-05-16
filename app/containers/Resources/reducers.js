@@ -95,19 +95,10 @@ function vanListReducer(state = initialState, action) {
     case ON_VAN_INFO_UPDATE:
       return state;
 
-    case ON_VAN_INFO_UPDATE_SUCCESS:
-      return state.updateIn(
-        [
-          'vanList',
-          state
-            .get('vanList')
-            .findIndex(
-              vanInfo => vanInfo.get('id') === fromJS(action.resourceId)),
-        ],
-        route => route
-          .set('vanList', fromJS(action.vanList)),
-      );
-
+    case ON_VAN_INFO_UPDATE_SUCCESS: {
+      const indexOfListingToUpdate = state.get('vanList').findIndex(item => item.get('id') === action.resourceId);
+      return state.updateIn(["vanList", indexOfListingToUpdate], () => fromJS(action.vanList));
+    }
 
     case ON_VAN_INFO_UPDATE_FAILED:
       return state
