@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import moment from 'moment';
 
-export function formatNumber(num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-}
+export const formatNumber = (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 
 // date formatter 2019.01.23
 export function formatDate(date) {
@@ -78,4 +76,22 @@ export function useMedia(query) {
   }, [query]);
 
   return matches;
+}
+
+// compare difference between two array objects
+export const compareObjectDiff = (currentList, previousList) => previousList && previousList.filter(prev => !currentList.some(current => prev.perhrdayweek === current.perhrdayweek && prev.unit === current.unit && prev.price === current.price))
+
+// Hook
+export const usePrevious = (value) => {
+  // The ref object is a generic container whose current property is mutable ...
+  // ... and can hold any value, similar to an instance property on a class
+  const ref = useRef();
+
+  // Store current value in ref
+  useEffect(() => {
+    ref.current = value;
+  }, [value]); // Only re-run if value changes
+
+  // Return previous value (happens before update in useEffect above)
+  return ref.current;
 }
