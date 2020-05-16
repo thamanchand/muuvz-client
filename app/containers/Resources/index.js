@@ -66,6 +66,11 @@ class ResourcesPage extends React.PureComponent {
         showPriceWarning: true,
       })
     }
+    if(this.state.priceList.length > 0 ) {
+      this.setState({
+        showPriceWarning: false,
+      })
+    }
     if (vanInfo && !vanInfo.files) {
       this.setState({ showCoverPicWarning: true});
     } else {
@@ -117,6 +122,12 @@ class ResourcesPage extends React.PureComponent {
       priceList: [...prevState.priceList, newItem],
       showPriceModal: !prevState.showPriceModal
     }))
+
+    if(this.state.priceList.length > 0) {
+      this.setState({
+        showPriceWarning: false,
+      })
+    }
   };
 
   toggleConfirm = () => {
@@ -309,7 +320,6 @@ class ResourcesPage extends React.PureComponent {
   }
 
 }
-
 
 ResourcesPage.propTypes = {
   onVanListLoad: PropTypes.func,
