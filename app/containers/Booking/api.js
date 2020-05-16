@@ -4,25 +4,26 @@ import auth from '../../utils/auth';
 
 const token = auth.getToken();
 
+
 const BASE_URL = 'http://localhost:1337/';
 
 // get Bookings
-export const getBookings = () => axios
+export const getBookings = (jwtToken) => axios
   .get(`${BASE_URL}${'bookings'}`, {
     headers: {
       'Accept': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${jwtToken}`,
     }
   }).then(response => response.data).catch(err => {
     throw err;
   });
 
 // get Resources
-export const getResources = () => axios
+export const getResources = (jwtToken) => axios
   .get(`${BASE_URL}${'resources'}`, {
     headers: {
       'Accept': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${jwtToken}`,
     }
   }).then(response => response.data).catch(err => {
     throw err;
