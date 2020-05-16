@@ -47,8 +47,8 @@ const EditVanForm = ({
   const [selectedPriceItem, setSelectedPriceItem] = React.useState();
   const [showPriceWarning, setShowPriceWarning] = React.useState(false);
   const [coverPicsList, setCoverPicsList] = React.useState(initialValues.cover);
+  const [coverPicMissingWarning, setCoverPicMissingWarning] = React.useState(false);
   // const [isDeleteConfirm, setIsDeleteConfirm] = React.useState(false);
-  console.log("coverPicsList", coverPicsList);
 
   const deletePriceHandler = (priceId) => {
     // check if delete price is from api fetch. If it is then delete it by calling
@@ -75,7 +75,7 @@ const EditVanForm = ({
       id: uuid(),
       unit: newPrice.unit,
       price: newPrice.price,
-      perhrdayweek: newPrice.perhrdayweek,
+      perhrdayweek: newPrice.perhrdayweek.value,
     };
 
     setPricinglist([...pricingList, newItem]);
@@ -100,7 +100,7 @@ const EditVanForm = ({
 
     if (doesPriceIdExistInAPI) {
       const updatePriceItemFromAPI = () => pricingList.map(item => (item.id === priceItem.id
-        ? {...priceItem, unit: priceItem.unit, price: priceItem.price}
+        ? {...priceItem, unit: priceItem.unit, price: priceItem.price, perhrdayweek: priceItem.perhrdayweek.value}
         : item
       ))
       setPricinglist(updatePriceItemFromAPI);
@@ -120,13 +120,21 @@ const EditVanForm = ({
   }
 
   const updateVanInfoHandler = (values) => {
-    if(!pricingList.length > 0) {
-      setShowPriceWarning(true);
-    } else {
+    // if(!pricingList.length > 0) {
+    //   setShowPriceWarning(true);
+    // }
+    if(values && !values.cover.length > 0 && !values.files) {
+      setCoverPicMissingWarning(true);
+    }
+    // if(values && values.files && !values.files.length > 0) {
+    //   setCoverPicMissingWarning(true);
+    // }
+    else {
       onUpdateVanRecord(values, pricingList);
       setPricinglist([]);
       setIsPriceEditModalOpen()
       setShowPriceWarning(false);
+      setCoverPicMissingWarning(false);
     }
   }
 
@@ -186,7 +194,7 @@ const EditVanForm = ({
             }}
             initialValues={initialEditFormValues}
             onSubmit={onSubmit}
-            render={({ handleSubmit, pristine, values, submitting, invalid }) => (
+            render={({ handleSubmit, pristine, values, submitting }) => (
               <form className="form form--vertical" onSubmit={handleSubmit}>
                 <div className="container">
                   <h5 className="bold-text header_label">Business</h5>
@@ -483,6 +491,16 @@ const EditVanForm = ({
                       />
                     </div>
                   </div>
+                  {coverPicMissingWarning && coverPicsList.length === 0 && (
+                    <div className="alert--bordered alert alert-warning fade show" role="alert">
+                      <div className="alert__content">
+                        <p>
+                          <span className="bold-text">Attention! </span>
+                            You need to upload cover picture of your van
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </Col>
 
                 <div className="container">
@@ -579,7 +597,7 @@ const EditVanForm = ({
                         className="rounded btn btn-danger"
                         type="submit"
                         onClick={() => updateVanInfoHandler(values)}
-                        disabled={submitting || pristine || invalid}
+                        disabled={submitting || pristine }
                       >
                         Update record
                       </button>
