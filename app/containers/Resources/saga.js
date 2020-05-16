@@ -58,7 +58,7 @@ export function* vanInfoSaveWatcher(action) {
 
   try {
     // Prepare resource post payload
-    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, user: loggedUserId, status: 'Available', color: randomHsl() };
+    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, transmission: vanInfo.transmission.label, user: loggedUserId, status: 'Available', color: randomHsl() };
 
     const vanList = yield call(api.postResource,  resourcePayload);
     if (vanList) {
@@ -165,7 +165,7 @@ export function* vanInfoUpdateWatcher(action) {
 
   try {
     // Prepare resource post payload
-    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label };
+    const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, transmission: vanInfo.transmission.label, };
     const vanList = yield call(api.updateResource,  resourcePayload, id);
 
     if (vanList) {
