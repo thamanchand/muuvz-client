@@ -123,6 +123,7 @@ export function* onPriceDeleteWatcher(action) {
 
   try {
     const deleteResponse = yield call(api.deletePricing, action.priceId);
+    console.log("deleteResponse", deleteResponse)
     if (deleteResponse) {
       yield put(onPriceDeleteSuccess());
     }
@@ -135,19 +136,22 @@ export function* resourceCoverDeleteWatcher(action) {
   console.log("Resource delete action", action);
   const { resourcePayload, coverId } = action;
   const resourceId = action.resourcePayload.id;
-
   try {
-    const updateResource = yield call(api.updateResource, resourcePayload, resourceId);
-
+    const newResourcePayload = {...resourcePayload, cover: [...resourcePayload.cover]};
+    const updateResource = yield call(api.updateResource, newResourcePayload, resourceId);
     if (updateResource) {
       const deleteResponse = yield call(api.deleteResourceCoverPicture, coverId);
-      const vanList = yield call(api.getResources);
-      if (vanList && deleteResponse) {
-        yield put(onResourceCoverDeleteSuccess());
-        yield put(onVanListLoadSuccess(vanList));
-        toast.success('Cover picture delete successfully!');
+      if (deleteResponse) {
+        const vanList = yield call(api.getResources);
+
+        if(vanList && updateResource) {
+          yield put(onResourceCoverDeleteSuccess());
+          yield put(onVanListLoadSuccess(vanList));
+          toast.success('Cover picture delete successfully!');
+        }
       }
     }
+
   } catch(error) {
     yield put(onResourceCoverDeleteFailed(error));
     toast.error('Failed to delete cover picture!');
@@ -165,8 +169,7 @@ export function* vanInfoUpdateWatcher(action) {
     const vanList = yield call(api.updateResource,  resourcePayload, id);
 
     if (vanList) {
-      console.log("vanList", vanList)
-      if (newPriceList && newPriceList.length) {
+      if (newPriceList && newPriceList.length > 0) {
 
         // insert price to pricing table
         const priceInsertReponse = yield all(newPriceList.map(priceItem => call(
@@ -180,7 +183,7 @@ export function* vanInfoUpdateWatcher(action) {
         )));
         console.log("priceInsertReponse", priceInsertReponse)
       }
-      if (oldPriceList && oldPriceList.length) {
+      if (oldPriceList && oldPriceList.length > 0) {
         // update price record
         const priceUpdateReponse = yield all(oldPriceList.map(priceItem => {
           const priceId = priceItem.id;
@@ -195,12 +198,11 @@ export function* vanInfoUpdateWatcher(action) {
             priceId
           )
         }));
-        console.log("priceUpdateReponse", priceUpdateReponse);
+        console.log("priceUpdateReponse", priceUpdateReponse)
       }
 
       const isFileUploaded = action.vanInfo && action.vanInfo.files;
       if (isFileUploaded) {
-        console.log("isFileUploaded", isFileUploaded)
         // upload resource images
         const coverUploadResponse = yield all(vanInfo.files.map(avatarItem => {
           const data = new FormData();
@@ -214,14 +216,11 @@ export function* vanInfoUpdateWatcher(action) {
             data
           );
         }));
-        console.log("coverUploadResponse", coverUploadResponse)
+        console.log("coverUploadResponse", coverUploadResponse);
       }
 
       const getUpadtedResource = yield call(api.getResource, id);
       if (getUpadtedResource) {
-
-        console.log("getUpadtedResource", getUpadtedResource)
-        console.log("getUpadtedResource", getUpadtedResource)
         toast.success("Van info updated successfully!")
         yield put(onVanInfoUpdateSuccess(getUpadtedResource, id));
       }
