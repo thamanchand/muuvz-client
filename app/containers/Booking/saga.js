@@ -21,6 +21,8 @@ import {
 
 import * as api from './api';
 
+import auth from '../../utils/auth';
+
 import {
   ON_BOOKING_LOAD,
   ON_RESOURCE_LOAD,
@@ -32,9 +34,11 @@ export function* onBookingLoadWatcher(action) {
   console.log("Booking load action", action);
 
   try {
-    const bookingResult = yield call(api.getBookings);
-    if (bookingResult) {
-      yield put(onBookingLoadSuccess(bookingResult));
+    if (auth.getToken()) {
+      const bookingResult = yield call(api.getBookings, auth.getToken());
+      if (bookingResult) {
+        yield put(onBookingLoadSuccess(bookingResult));
+      }
     }
   } catch(error) {
     yield put(onBookingLoadFailed(error));
@@ -45,9 +49,11 @@ export function* onResourceLoadWatcher(action) {
   console.log("Resource load action", action);
 
   try {
-    const resourceList = yield call(api.getResources);
-    if (resourceList) {
-      yield put(onResourceLoadSuccess(resourceList));
+    if (auth.getToken()) {
+      const resourceList = yield call(api.getResources, auth.getToken());
+      if (resourceList) {
+        yield put(onResourceLoadSuccess(resourceList));
+      }
     }
   } catch(error) {
     yield put(onResourceLoadFailed(error));
