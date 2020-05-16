@@ -10,7 +10,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 // Utils
 import auth from 'utils/auth';
 import request from 'utils/request';
-import history from '../../utils/history';
+import { history } from '../../utils/history';
 
 // Constants
 import { LOG_USER } from './constants';

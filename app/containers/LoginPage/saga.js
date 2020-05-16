@@ -11,7 +11,7 @@ import {
 
 // Utils
 import auth from 'utils/auth';
-import  history from '../../utils/history';
+import  { historyBooking } from '../../utils/history';
 import toast from '../../shared/ToastNotify';
 
 import * as api from './api';
@@ -92,5 +92,5 @@ export default function* defaultSaga() {
  * @param  {String} location The path to navigate
  */
 function forwardTo(location) {
-  history.push(location);
+  historyBooking.push(location);
 }

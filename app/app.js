@@ -24,7 +24,7 @@ import App from 'containers/App';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
-import history from './utils/history';
+import { history } from './utils/history';
 
 // Load the favicon and the .htaccess file
 import '!file-loader?name=[name].[ext]!./assets/images/favicon/favicon.ico';

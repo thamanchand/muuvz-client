@@ -6,7 +6,7 @@ import {
 import { push } from 'react-router-redux';
 
 // Utils
-import  history from '../../utils/history';
+import { history } from '../../utils/history';
 
 // constants
 import {

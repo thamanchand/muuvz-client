@@ -6,7 +6,7 @@ import {
 
 // Utils
 import request from 'utils/request';
-import  history from '../../utils/history';
+import  { history } from '../../utils/history';
 
 // constants
 import {
