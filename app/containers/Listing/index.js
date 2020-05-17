@@ -7,9 +7,8 @@ import { bindActionCreators, compose } from 'redux';
 import { Form, Field } from 'react-final-form';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import EventIcon from 'mdi-react/EventIcon';
-import CityIcon from 'mdi-react/CityIcon';
-
 import moment from 'moment';
+import { SegmentedControl } from 'segmented-control-react';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
@@ -40,10 +39,17 @@ import Modal from '../../shared/Modal'
 import LoginPage from '../LoginPage';
 
 import { filterAvailableResources } from '../utils';
+import '../../assets/styles/scss/component/segmentedcontrol.scss';
 
 const humanizeDuration = require('humanize-duration');
 
 const key = 'listingPage';
+
+const cities = [
+  { name: 'Helsinki' },
+  { name: 'Espoo' },
+  { name: 'Vantaa' }
+];
 
 class VanListPage extends PureComponent {
   static getDerivedStateFromProps(nextProps) {
@@ -210,9 +216,6 @@ class VanListPage extends PureComponent {
               <Form
                 validate={values => { // validate both passowrds are same
                   const errors = {};
-                  if (!values.location) {
-                    errors.location = 'Location is required';
-                  }
                   if (!values.pickupDate) {
                     errors.pickupDate = 'Pick up date is required';
                   }
@@ -231,27 +234,27 @@ class VanListPage extends PureComponent {
                 initialValues={storedValues}
                 render={({ handleSubmit, values }) => (
                   <form className="form" onSubmit={handleSubmit} style={{backgroundColor: '#FFF'}}>
-                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12 resource__searchbar">
+                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12 resource__searchbar">
                       <div className="form__form-group">
                         <span className="form__form-group-label">City</span>
                         <div className="form__form-group-field">
-                          <Field
-                            name="location"
-                            component="input"
-                            type="text"
-                            placeholder="Helsinki"
-                            required
-                            disabled={!isEdit}
-                          />
-                          <div className="form__form-group-icon">
-                            <CityIcon />
-                          </div>
+                          <Field name="location">
+                            {({ input }) => (
+                              <SegmentedControl
+                                name={input && input.name}
+                                segments={cities}
+                                selected={storedValues.location}
+                                variant="base"
+                                onChangeSegment={city => input.onChange(city)}
+                                disabled={!isEdit}
+                              />
+                            )}
+                          </Field>
                         </div>
-                        <Error name="location" />
                       </div>
                     </Col>
 
-                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12">
+                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12">
                       <div className="form__form-group">
                         <span className="form__form-group-label">Pickup date</span>
                         <div className="form__form-group-field">
@@ -269,7 +272,7 @@ class VanListPage extends PureComponent {
                         <Error name="pickupDate" />
                       </div>
                     </Col>
-                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12">
+                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12">
                       <div className="form__form-group form-pickuptime">
                         <span className="form__form-group-label">Pickup time</span>
                         <div className="form__form-group-field">
@@ -287,7 +290,7 @@ class VanListPage extends PureComponent {
                         <Error name="pickupTime" />
                       </div>
                     </Col>
-                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12">
+                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12">
                       <div className="form__form-group">
                         <span className="form__form-group-label">Drop-off date</span>
                         <div className="form__form-group-field">
@@ -304,7 +307,7 @@ class VanListPage extends PureComponent {
                         <Error name="dropOffDate" />
                       </div>
                     </Col>
-                    <Col className="col-lg-2 col-md-6 col-sm-6 col-12">
+                    <Col className="col-lg-4 col-md-4 col-sm-6 col-12">
                       <div className="form__form-group form-pickuptime">
                         <span className="form__form-group-label">Drop-off time</span>
                         <div className="form__form-group-field">
@@ -322,7 +325,7 @@ class VanListPage extends PureComponent {
                         <Error name="dropOffTime" />
                       </div>
                     </Col>
-                    <Col className="col-lg-2 col-md-6  col-sm-6 col-12" >
+                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12" >
                       <button
                         className="rounded btn btn-success search-btn"
                         type="button"
