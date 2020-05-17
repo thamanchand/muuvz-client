@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import EventIcon from 'mdi-react/EventIcon';
-import CityIcon from 'mdi-react/CityIcon';
 
 import moment from 'moment';
 import { Col } from 'reactstrap';
+
+import { SegmentedControl } from 'segmented-control-react';
 
 import Error from '../ErrorField';
 // import renderDateTimePickerField from '../DateTimePicker/index';
@@ -14,8 +15,16 @@ import renderDatePickerField from '../Datepicker';
 // import renderTimePickerFied from '../TimePicker';
 import renderTimePickerFied from '../TimePicker';
 
+import '../../assets/styles/scss/component/segmentedcontrol.scss';
+
 const humanizeDuration = require('humanize-duration')
 
+
+const cities = [
+  { name: 'Helsinki' },
+  { name: 'Espoo' },
+  { name: 'Vantaa' }
+];
 
 // import renderCheckBoxField from '../Checkbox/index';
 
@@ -101,9 +110,6 @@ const Search = ({ onSearch, disabled, storedValues }) => {
     <Form
       validate={values => { // validate both passowrds are same
         const errors = {};
-        if (!values.location) {
-          errors.location = 'Location is required';
-        }
         if (!values.pickupDate) {
           errors.pickupDate = 'Pick up date is required';
         }
@@ -119,26 +125,26 @@ const Search = ({ onSearch, disabled, storedValues }) => {
         return errors
       }}
       onSubmit={(values) => onSearch(values)}
-      initialValues={storedValues}
+      initialValues={{ location: '0'}}
       render={({ handleSubmit, values }) => (
         <form className="form" onSubmit={handleSubmit}>
           <Col className="col-lg-12 col-md-12 col-sm-12 col-12 startdatepicker__col">
             <div className="form__form-group">
               <span className="form__form-group-label">City</span>
               <div className="form__form-group-field">
-                <Field
-                  name="location"
-                  component="input"
-                  type="text"
-                  placeholder="Helsinki"
-                  required
-                  disabled={!disabled}
-                />
-                <div className="form__form-group-icon">
-                  <CityIcon />
-                </div>
+                <Field name="location">
+                  {({ input }) => (
+                    <SegmentedControl
+                      name={input && input.name}
+                      segments={cities}
+                      selected={0}
+                      variant="base"
+                      onChangeSegment={city => input.onChange(city)}
+                      clasName="segementedController"
+                    />
+                  )}
+                </Field>
               </div>
-              <Error name="location" />
             </div>
           </Col>
           {/* <div className="form__form-group">
