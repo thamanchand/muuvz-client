@@ -7,14 +7,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Header from './components/Header';
-import Features from './components/Features';
+// import Features from './components/Features';
 
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import Testimonials from './components/Testimonials';
 import CustomerBenefits from './components/CustomerBenefits';
 import BusinessBenefits from './components/BusinessBenefits';
-
-
+import AddYourBussiness from './components/AddYourBusiness';
+import Footer from '../../shared/Footer';
 import HeaderNav from '../../shared/Header';
 
 const cities = [
@@ -44,7 +44,7 @@ class HomePage extends React.Component {
         />
         <CustomerBenefits />
         <BusinessBenefits />
-        <Features />
+        <AddYourBussiness />
         <Testimonials />
         <Footer />
       </div>
