@@ -38,7 +38,7 @@ class CusotmerBenefits extends React.Component {
       <section className="section bg-light">
         <div className="container">
           <div className="section-heading text-center">
-            <h3 className="landing__header-title">For van seeker</h3>
+            <h3 className="landing__header-title benefits__header_margin">For van seeker</h3>
             <span className="header__border" />
           </div>
           <div className="row align-items-center">
