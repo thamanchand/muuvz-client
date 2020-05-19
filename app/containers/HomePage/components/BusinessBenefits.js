@@ -18,14 +18,14 @@ class BusinessBenefits extends React.Component {
       duration : 2000
     });
   }
-  
+
   render() {
 
     return (
       <section className="section bg-gray">
         <div className="container">
           <div className="section-heading text-center">
-            <h3 className="landing__header-title">For Van owner</h3>
+            <h3 className="landing__header-title benefits__header_margin">For Van owner</h3>
           </div>
           <nav className="slide nav nav-tabs nav-outlined nav-rounded justify-content-around justify-content-md-center mb-5">
             <a className="nav-item nav-link active" data-toggle="tab" href="#dashboard-tab">
