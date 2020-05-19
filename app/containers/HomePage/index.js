@@ -11,6 +11,9 @@ import Features from './components/Features';
 
 import Footer from './components/Footer';
 import Testimonials from './components/Testimonials';
+import CustomerBenefits from './components/CustomerBenefits';
+import BusinessBenefits from './components/BusinessBenefits';
+
 
 import HeaderNav from '../../shared/Header';
 
@@ -39,6 +42,8 @@ class HomePage extends React.Component {
         <Header
           onSearch={this.onSearch}
         />
+        <CustomerBenefits />
+        <BusinessBenefits />
         <Features />
         <Testimonials />
         <Footer />
