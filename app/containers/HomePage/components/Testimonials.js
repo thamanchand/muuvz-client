@@ -4,7 +4,7 @@ import { Col, Row, Container, Card, CardBody } from 'reactstrap';
 import StarIcon from 'mdi-react/StarIcon';
 
 const Testimonials = () => (
-  <section className="landing__section">
+  <section className="landing__section bg-gray">
     <Container>
       <Row>
         <Col md={12}>
