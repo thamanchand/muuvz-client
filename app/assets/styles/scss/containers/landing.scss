@@ -660,3 +660,58 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   color: #646777;
   cursor: pointer;
 }
+
+.slider-wrapper {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #646777;
+  font-size: 24px;
+}
+
+.city__animate {
+  height: 40px;
+  overflow: hidden;
+  margin-left: 9px;
+  width: 150px;
+  display: inline-block;
+  position: relative;
+  color: #FFF;
+  margin-right: 5px;
+  border-radius: 25px;
+}
+
+.city__animate > div {
+  box-sizing: border-box;
+  height: 50px;
+  margin-bottom: 50px;
+  padding: 0px 10px;
+  text-align: center;
+  color: #FFF;
+  font-size: 24px;
+  line-height: 1.8;
+}
+
+.city1 {
+  animation: slide 5s linear infinite;
+  background-color: #4ce1b6;
+}
+
+.city2 {
+  background-color: #4ce1b6;
+}
+
+.city3 {
+  background-color: #4ce1b6;
+}
+
+@keyframes slide {
+  0% { margin-top: -300px; }
+  5% { margin-top: -200px; }
+  33% { margin-top: -200px; }
+  38% { margin-top: -100px; }
+  66% { margin-top: -100px; }
+  72% { margin-top: -0; }
+  100% { margin-top: 0; }
+}

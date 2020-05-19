@@ -5,7 +5,7 @@ import { Col, Row, Container } from 'reactstrap';
 import Search from '../../../shared/SearchForm';
 
 import bgImage from '../../../assets/images/landing/header_bg.png';
-import move from '../../../assets/images/landing/move.svg';
+import move from '../../../assets/images/landing/landing_page.svg';
 
 const Header = ({ onSearch }) => (
   <div
@@ -23,7 +23,14 @@ const Header = ({ onSearch }) => (
             BOOK<span className="landing__header-dot"></span>
               </b>
             </h1>
-            <p className="landing__header-subhead">MOVING VAN IN <span className="city_highlight">HESLINKI</span></p>
+            <div className="slider-wrapper">
+              MOVING VAN IN
+              <div className="city__animate">
+                <div className="city1">Helsinki</div>
+                <div className="city2">ESPOO</div>
+                <div className="city3">VANTAA</div>
+              </div>
+            </div>
           </div>
         </Col>
         <Col md={6}>
