@@ -45,12 +45,6 @@ const humanizeDuration = require('humanize-duration');
 
 const key = 'listingPage';
 
-const cities = [
-  { name: 'Helsinki' },
-  { name: 'Espoo' },
-  { name: 'Vantaa' }
-];
-
 class VanListPage extends PureComponent {
   static getDerivedStateFromProps(nextProps) {
     if (nextProps.location.search === "?loginSuccess") {
@@ -66,16 +60,35 @@ class VanListPage extends PureComponent {
     bookingStartDateTime: null,
     bookingEndDateTime: null,
     isStartDateTimeGreater: null,
+    cities: [
+      { name: 'Helsinki' },
+      { name: 'Espoo' },
+      { name: 'Vantaa' }
+    ]
   }
 
   componentDidMount() {
     const searchQuery = JSON.parse(window.localStorage.getItem('searchQuery'));
     this.props.onSearch(searchQuery);
+    this.setState({
+      cities: [
+        { name: 'Helsinki', disabled: true },
+        { name: 'Espoo', disabled: true },
+        { name: 'Vantaa', disabled: true }
+      ]
+    })
   }
 
   onSearchEditToggle = () => {
-    const { isEdit } = this.state;
-    this.setState({ isEdit: !isEdit})
+    const { isEdit, cities } = this.state;
+    const toggledCities = cities.map(item => ({
+      name: item.name,
+      disabled: !item.disabled
+    }))
+    this.setState({
+      isEdit: !isEdit,
+      cities: toggledCities
+    })
   }
 
   LoginModalToggle = () => {
@@ -177,10 +190,12 @@ class VanListPage extends PureComponent {
 
   render() {
     const { resourceList, isSearchLoading, isBooked, selectedResourceId } = this.props;
-
-    const { isEdit } = this.state;
+    const { isEdit, cities } = this.state;
     const storedValues = JSON.parse(window.localStorage.getItem('searchQuery'));
     const availableResources = filterAvailableResources(resourceList);
+
+    const selectedCity = cities.findIndex(item => item.name === storedValues.location);
+
     return (
       <>
         <Modal
@@ -242,8 +257,8 @@ class VanListPage extends PureComponent {
                             {({ input }) => (
                               <SegmentedControl
                                 name={input && input.name}
-                                segments={cities}
-                                selected={storedValues.location}
+                                segments={this.state.cities}
+                                selected={selectedCity}
                                 variant="base"
                                 onChangeSegment={city => input.onChange(city)}
                                 disabled={!isEdit}
@@ -254,7 +269,7 @@ class VanListPage extends PureComponent {
                       </div>
                     </Col>
 
-                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12">
+                    <Col className="col-lg-4 col-md-4  col-sm-3 col-12">
                       <div className="form__form-group">
                         <span className="form__form-group-label">Pickup date</span>
                         <div className="form__form-group-field">
@@ -272,7 +287,7 @@ class VanListPage extends PureComponent {
                         <Error name="pickupDate" />
                       </div>
                     </Col>
-                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12">
+                    <Col className="col-lg-4 col-md-4  col-sm-3 col-12">
                       <div className="form__form-group form-pickuptime">
                         <span className="form__form-group-label">Pickup time</span>
                         <div className="form__form-group-field">
@@ -290,7 +305,7 @@ class VanListPage extends PureComponent {
                         <Error name="pickupTime" />
                       </div>
                     </Col>
-                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12">
+                    <Col className="col-lg-4 col-md-4  col-sm-3 col-12">
                       <div className="form__form-group">
                         <span className="form__form-group-label">Drop-off date</span>
                         <div className="form__form-group-field">
@@ -307,8 +322,8 @@ class VanListPage extends PureComponent {
                         <Error name="dropOffDate" />
                       </div>
                     </Col>
-                    <Col className="col-lg-4 col-md-4 col-sm-6 col-12">
-                      <div className="form__form-group form-pickuptime">
+                    <Col className="col-lg-4 col-md-4 col-sm-3 col-12">
+                      <div className="form__form-group">
                         <span className="form__form-group-label">Drop-off time</span>
                         <div className="form__form-group-field">
                           <Field
@@ -325,7 +340,7 @@ class VanListPage extends PureComponent {
                         <Error name="dropOffTime" />
                       </div>
                     </Col>
-                    <Col className="col-lg-4 col-md-4  col-sm-6 col-12" >
+                    <Col className="col-lg-4 col-md-4  col-sm-3 col-12" >
                       <button
                         className="rounded btn btn-success search-btn"
                         type="button"
