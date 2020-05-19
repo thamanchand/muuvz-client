@@ -4,9 +4,9 @@
     <title>Artboard</title>
     <desc>Created with Sketch.</desc>
     <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <text id="muuvz" font-family="Montserrat-Bold, Montserrat" font-size="50" font-weight="bold" letter-spacing="2.08333333" fill="#05668D">
+        <text id="muuvz" font-family="Montserrat-Bold, Montserrat" font-size="50" font-weight="bold" letter-spacing="2.08333333" fill="#247BA0">
             <tspan x="0" y="33">muuvz</tspan>
         </text>
-        <polygon id="Triangle" fill="#05668D" transform="translate(187.000000, 30.000000) rotate(-270.000000) translate(-187.000000, -30.000000) " points="187 23 194 37 180 37"></polygon>
+        <polygon id="Triangle" fill="#247BA0" transform="translate(187.000000, 30.000000) rotate(-270.000000) translate(-187.000000, -30.000000) " points="187 23 194 37 180 37"></polygon>
     </g>
 </svg>

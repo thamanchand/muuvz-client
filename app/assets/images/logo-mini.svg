@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="73px" viewBox="0 0 72 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#247BA0" cx="35.5" cy="36.5" r="35.5"></circle>
+        <text id="m" font-family="Montserrat-Bold, Montserrat" font-size="33" font-weight="bold" letter-spacing="1.375" fill="#FFFFFF">
+            <tspan x="5" y="45">m</tspan>
+        </text>
+        <text id="z" font-family="Montserrat-Bold, Montserrat" font-size="33" font-weight="bold" letter-spacing="1.375" fill="#FFFFFF">
+            <tspan x="42" y="46">z</tspan>
+        </text>
+        <polygon id="Triangle" fill="#FFFFFF" transform="translate(63.000000, 44.000000) rotate(-270.000000) translate(-63.000000, -44.000000) " points="63 39 68 49 58 49"></polygon>
+    </g>
+</svg>
