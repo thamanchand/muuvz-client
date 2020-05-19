@@ -14,12 +14,19 @@ import Testimonials from './components/Testimonials';
 
 import HeaderNav from '../../shared/Header';
 
+const cities = [
+  { name: 'Helsinki' },
+  { name: 'Espoo' },
+  { name: 'Vantaa' }
+];
+
 class HomePage extends React.Component {
 
   onSearch = (seachParams) => {
+    const modifiySearchParams = { ...seachParams, location: cities[seachParams && seachParams.location].name}
     const { history } = this.props;
     history.push('/listing');
-    window.localStorage.setItem('searchQuery', JSON.stringify(seachParams));
+    window.localStorage.setItem('searchQuery', JSON.stringify(modifiySearchParams));
 
   }
 
