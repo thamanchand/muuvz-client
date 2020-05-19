@@ -14,7 +14,6 @@ class CusotmerBenefits extends React.Component {
   	this.state = {
       swipeActiveIndex: 0,
     };
-
   }
 
   componentDidMount(){
