@@ -9,6 +9,8 @@ import TwitterIcon from 'mdi-react/TwitterIcon';
 
 import logoMini from '../../assets/images/logo-mini.svg';
 
+const currentDate = new Date();
+
 const Footer = () => (
   <footer className="site-footer section block bg-contrast">
     <div className="container py-4">
@@ -26,7 +28,7 @@ const Footer = () => (
               <a className="nav-link primary" href="/auth/register">Blog</a>
             </li>
           </ul>
-          <p className="header_item">2020 MUUVZ</p>
+          <p className="header_item">{currentDate.getFullYear()} MUUVZ</p>
         </div>
         <div className="col-md-4">
           <h6 className="footer__link_header">Company</h6>
