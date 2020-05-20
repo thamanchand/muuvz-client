@@ -2,6 +2,7 @@ import {
   call,
   takeLatest,
   put,
+  delay,
 } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 
@@ -35,6 +36,7 @@ export function* searchResourceWatcher(action) {
   try {
     const searchResult = yield call(api.getAvailableBookings);
     if (searchResult) {
+      yield delay(1000);
       yield put(onSearchSuccess(searchResult));
       yield call(forwardTo('/listing'))
     }
