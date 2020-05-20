@@ -164,3 +164,35 @@
   color: #999999 !important;
   margin: 0;
 }
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.browser img {
+  max-width: 100%;
+}
+
+.tab-content > .tab-pane {
+  @media (max-width: 768px) {
+    display: inline;
+  }
+}
+
+.img-responsive.business__value__image {
+  margin: 29px 0px 45px 0px;
+}
+
+
+.tab-content {
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+}
+
+.landing .landing__header-title {
+  @media (max-width: 768px) {
+    margin-bottom: 0px;
+  }
+}
