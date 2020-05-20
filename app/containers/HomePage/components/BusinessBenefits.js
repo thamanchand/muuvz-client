@@ -41,7 +41,7 @@ class BusinessBenefits extends React.Component {
             <span
               type="button"
               role="presentation"
-              className="nav-item nav-link active"
+              className={swipeActiveIndex === 0 ? "nav-item nav-link active" : "nav-item nav-link"}
               onClick={() => this.changeSlide(0)}
             >
               Booking
@@ -50,7 +50,7 @@ class BusinessBenefits extends React.Component {
             <span
               type="button"
               role="presentation"
-              className="nav-item nav-link"
+              className={swipeActiveIndex === 1 ? "nav-item nav-link active" : "nav-item nav-link"}
               onClick={() => this.changeSlide(1)}
             >
               Calendar
@@ -58,7 +58,7 @@ class BusinessBenefits extends React.Component {
             <span
               type="button"
               role="presentation"
-              className="nav-item nav-link"
+              className={swipeActiveIndex === 2 ? "nav-item nav-link active" : "nav-item nav-link"}
               onClick={() => this.changeSlide(2)}
             >
               Vans
@@ -74,7 +74,7 @@ class BusinessBenefits extends React.Component {
                 </div>
                 <div className="col-md-5">
                   <h3 className="landing__header-title">Booking</h3>
-                  <p className="landing__feature-value">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
+                  <p className="header_item">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@ class BusinessBenefits extends React.Component {
                 </div>
                 <div className="col-md-5">
                   <h3 className="landing__header-title">Calendar</h3>
-                  <p className="landing__feature-value">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
+                  <p className="header_item">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
                 </div>
               </div>
             </div>
@@ -100,8 +100,7 @@ class BusinessBenefits extends React.Component {
                 </div>
                 <div className="col-md-5">
                   <h3 className="landing__header-title">Resources</h3>
-                  <p className="landing__feature-caption">Calendar plugin included and beautified</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias atque cum, delectus dicta doloribus enim fuga hic itaque modi nobis pariatur porro quasi ratione repellat sint veniam veritatis voluptas voluptates.</p>
+                  <p className="header_item">Calendar plugin included and beautified</p>
                 </div>
               </div>
             </div>
