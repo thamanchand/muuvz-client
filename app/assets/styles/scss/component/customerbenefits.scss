@@ -149,3 +149,22 @@ small, .small {
 .nav-process.nav-circle .nav-link:hover {
   cursor: pointer;
 }
+
+.customer_value_title {
+  @media (max-width: 992px) {
+    text-align: center;
+  }
+}
+
+.customer_benefits_nav {
+  @media (max-width: 992px) {
+    margin-left: 86px;
+    width: 100%;
+    margin-bottom: 41px;
+  }
+  @media (max-width: 768px) {
+    margin-left: 56px;
+    width: 100%;
+    margin-bottom: 41px;
+  }
+}
