@@ -10,6 +10,7 @@ import StarOutlineIcon from 'mdi-react/StarOutlineIcon';
 import MapMarkerIcon from 'mdi-react/MapMarkerIcon';
 import HeartOutlineIcon from 'mdi-react/HeartOutlineIcon';
 import CheckCircleOutlineIcon from 'mdi-react/CheckCircleOutlineIcon';
+import VanListingContentLoader from '../../../shared/ContentLoader';
 
 // import { formatNumber } from '../../utils';
 import GalleySlideshow from '../../../shared/GalleySlideshow';
@@ -22,19 +23,21 @@ const iconStyles = {
   color: '#70C1B3'
 };
 
+
+
 const VanListing = ({ vanList, bookingHandler, isSearchLoading, isBooked, selectedResourceId }) => (
   <div className="listing__wrapper">
     <Container>
       <Row>
         <section className="vanlist">
-          <div className="van__content">
-            <div className="van__loading">
-              <ClipLoader
-                size={120}
-                color="#70C1B3"
-                loading={isSearchLoading}
-              />
-            </div>
+          <div className="van__content" style={isSearchLoading ? {background: '#fff'} : {background: '#f1f1f1'}}>
+            {isSearchLoading && (
+              [1,2,3].map(() => (
+                <VanListingContentLoader />
+              )
+              ))
+            }
+
             {vanList && vanList.map(item => (
               <div className="row mb-3">
                 <div className="col-md-12">
