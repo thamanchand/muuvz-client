@@ -132,7 +132,7 @@ class BusinessBenefits extends React.Component {
                 <div className="row gap-y align-items-center">
                   <div className="col-md-12 col-sm-12 mb-8">
                     <h3 className="landing__header-title">Booking</h3>
-                    <p className="header_item">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
+                    <p className="business_benefits_content">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
                   </div>
                   <div className="col-md-12 mt-8 mb-8">
                     <div className="browser shadow aos-init aos-animate" data-aos="fade-right">
@@ -145,7 +145,7 @@ class BusinessBenefits extends React.Component {
                 <div className="row gap-y align-items-center">
                   <div className="col-md-12 col-sm-12 mt-8 mb-8">
                     <h3 className="landing__header-title">Calendar</h3>
-                    <p className="header_item">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
+                    <p className="business_benefits_content">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
                   </div>
                   <div className="col-md-12 mt-8 mb-8">
                     <div className="browser shadow" data-aos="fade-right">
@@ -159,7 +159,7 @@ class BusinessBenefits extends React.Component {
 
                   <div className="col-md-12 col-sm-12 mt-8 mb-8">
                     <h3 className="landing__header-title">Resources</h3>
-                    <p className="header_item">Calendar plugin included and beautified</p>
+                    <p className="business_benefits_content">Calendar plugin included and beautified</p>
                   </div>
                   <div className="col-md-12 col-sm-12 mt-8 mb-8">
                     <div className="browser shadow mt-8 mb-8 aos-init aos-animate" data-aos="fade-right">
