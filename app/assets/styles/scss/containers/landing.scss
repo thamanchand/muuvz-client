@@ -96,6 +96,7 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   position: absolute;
   right: 0px;
   list-style: none;
+  top: 25px;
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -165,10 +166,24 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   margin: 0px 10px;
   list-style: none;
   margin-top: -12px;
+  padding: 5px;
 }
 
 .login_register {
-    margin-top: 17px;
+  margin-top: 17px;
+  background-color: #247BA0;
+  border-color: #247BA0;
+  border-radius: 30px !important;
+  color: #FFF;
+  letter-spacing: 1.6px;
+  padding: 10px 22px;
+  width: 225px;
+  font-weight: bold;
+  &:hover {
+    font-weight: bold;
+    color: #FFF;
+    background-color: #646777;
+  }
 }
 //Header
 
@@ -673,6 +688,22 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   margin: 0;
 }
 
+.nav__list {
+  font-weight: bold;
+  font-size: 14px;
+  color: #247BA0;
+  letter-spacing: 1.6px;
+  padding: 0px !important;
+  &:hover {
+    font-weight: bold;
+    color: #646777;
+  }
+}
+
+.lang__label {
+  cursor: pointer;
+}
+
 .hamburger__menu {
   float: right;
   margin-top: 16px;
@@ -849,4 +880,66 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   @media screen and (min-width: 992px) {
     font-size: 30px;
   }
+}
+
+
+/* Slide In, Slide Off */
+.underline__sliding {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 14px;
+}
+.underline__sliding:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    top: 27px;
+    transition: width 0s ease, background .5s ease;
+}
+.underline__sliding:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background: #ff4861;
+    transition: width .5s ease;
+    top: 27px;
+}
+.underline__sliding:hover:before {
+    width: 100%;
+    background: #ff4861;
+    transition: width .5s ease;
+}
+.underline__sliding:hover:after {
+    width: 100%;
+    background: transparent;
+    transition: all 0s ease;
+}
+
+/* Left to Right */
+.sliding-u-l-r {
+  display: inline-block;
+	position: relative;
+  text-decoration: none;
+}
+.sliding-u-l-r:after {
+  content: '';
+  position: absolute;
+  margin-bottom: -10px;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  border-bottom: 3px solid #ff4861;
+  transition: 0.4s;
+  top: 27px;
+}
+.sliding-u-l-r:hover:after {
+  width: 100%;
 }
