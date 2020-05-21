@@ -72,15 +72,19 @@ const HeaderNav = ({ source }) => {
                           </Link>
                         }
                         {!isBusiness &&
-                          <Link className="nav-link nav__list" to="/dashboard/booking" >
+                          <Link className="nav-link nav__list underline__sliding" to="/dashboard/booking" >
                             DASHBOARD
                           </Link>
                         }
                       </li>
+
                       <li className="nav-item landing__navbar-item">
-                        <button className="btn rounded btn-outline-danger btn-sm login_register" type="button" onClick={() => logout()}>
+                        <span
+                          role="presentation"
+                          className="login_register" onClick={() => logout()}
+                        >
                           LOGOUT
-                        </button>
+                        </span>
                       </li>
                     </React.Fragment>
                     ) : (
