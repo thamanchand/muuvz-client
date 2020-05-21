@@ -54,7 +54,7 @@ const Footer = () => {
             <form className="form">
               <div className="form__form-group">
                 <div className="form__form-group-field">
-                  <input name="subscribename" type="text" placeholder="hello@gmail.com" className="input_subscribe" />
+                  <input name="input_subscribe" type="text" placeholder="hello@gmail.com" className="input_subscribe" />
                   <button type="button" className="square btn btn-success subscribe">Subscribe</button>
                 </div>
               </div>
