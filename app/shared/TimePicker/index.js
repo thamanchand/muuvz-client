@@ -46,6 +46,7 @@ class TimePickerField extends PureComponent {
   render() {
     const { startTime } = this.state;
     const { disabled, input } = this.props;
+
     const initialDate = input.value ? moment(input.value, 'HH:mm').toDate() : startTime;
     return (
       <div className="form__form-group-field timepicker">
@@ -60,8 +61,8 @@ class TimePickerField extends PureComponent {
           onChange={this.onTimeChange}
           disabled={disabled}
           minDate={new Date()}
-          minTime={this.state.minTime}
-          maxTime={moment().endOf('day').toDate()} // set to 23:59 pm today
+          minTime={input.name === 'pickupTime' ? this.state.minTime : null}
+          maxTime={input.name === 'pickupTime' ? moment().endOf('day').toDate() : null} // set to 23:59 pm today
         />
       </div>
     );
