@@ -23,6 +23,10 @@ module.exports = {
     },
   },
   rules: {
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "components": [ "Link" ],
+      "specialLink": [ "to" ]
+    }],
     "no-param-reassign": 0,
     'arrow-body-style': [2, 'as-needed'],
     'class-methods-use-this': 0,
