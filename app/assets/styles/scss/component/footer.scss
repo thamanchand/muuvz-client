@@ -31,6 +31,7 @@
     font-size: 14px;
     color: #247BA0;
     transition: all 0.3s;
+    text-transform: uppercase;
     &:hover {
       font-weight: bold;
     }
@@ -74,7 +75,7 @@
 }
 .header_item {
   color: #999999 !important;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.54;
   margin: 0;
   padding: 10px 0px;
@@ -88,6 +89,7 @@
 
 .input_subscribe {
   height: 33px;
+  margin-top: 10px;
 }
 .contact_info {
   padding-left: 10px;
@@ -95,6 +97,7 @@
 .subscribe {
   padding: 5px 0px;
   width: 150px;
+  margin-top: 10px;
 }
 
 .input_subscribe {
