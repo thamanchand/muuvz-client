@@ -95,7 +95,12 @@ class BusinessBenefits extends React.Component {
                   </div>
                   <div className="col-md-5">
                     <h3 className="landing__header-title">Booking</h3>
-                    <p className="header_item">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
+                    <p className="header_item">
+                      With Muuvz bookings, there are no third parties and no delays
+                      — just straightforward bookings that seamlessly integrates with your business.
+                      Muuvz booking application makes it simple for you and your customers to cancel or accept <b>van booking</b> .
+                      Get notified via <b>SMS</b> or <b>email</b> as soon as a customer make booking.
+                    </p>
                   </div>
                 </div>
               </div>
