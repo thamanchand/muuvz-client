@@ -62,17 +62,17 @@ const HeaderNav = ({ source }) => {
                     (<React.Fragment>
                       <li className="nav-item landing__navbar-item">
                         {isBusiness && isProfileCompleted &&
-                          <Link className="nav-link" to="/dashboard/booking">
+                          <Link className="nav-link nav__list underline__sliding" to="/dashboard/booking">
                             DASHBOARD
                           </Link>
                         }
                         {isBusiness && !isProfileCompleted &&
-                          <Link className="nav-link" to="/dashboard/profile" >
+                          <Link className="nav-link nav__list underline__sliding" to="/dashboard/profile" >
                             DASHBOARD
                           </Link>
                         }
                         {!isBusiness &&
-                          <Link className="nav-link" to="/dashboard/booking" >
+                          <Link className="nav-link nav__list" to="/dashboard/booking" >
                             DASHBOARD
                           </Link>
                         }
@@ -86,12 +86,12 @@ const HeaderNav = ({ source }) => {
                     ) : (
                       <React.Fragment>
                         <li className="nav-item landing__navbar-item">
-                          <Link className="nav-link primary" to="/auth/login">
+                          <Link className="nav-link nav__list underline__sliding" to="/auth/login">
                             LOGIN
                           </Link>
                         </li>
                         <li className="nav-item landing__navbar-item">
-                          <Link className="btn btn-success btn-sm rounded login_register" to="/auth/register">
+                          <Link className="login_register" to="/auth/register">
                             REGISTER
                           </Link>
                         </li>
@@ -99,7 +99,7 @@ const HeaderNav = ({ source }) => {
                     )
                   }
                   <li className="nav-item landing__navbar-item">
-                    <span className="nav-link lang__label">EN</span>
+                    <span className="nav-link  nav__list lang__label underline__sliding">EN</span>
                   </li>
                 </ul>
               ) : (
@@ -141,20 +141,20 @@ const HeaderNav = ({ source }) => {
                             }
                           </li>
                           <li className="nav-item landing__navbar-item">
-                            <button className="btn rounded btn-outline-success btn-sm login_register" type="button" onClick={() => logout()}>
+                            <button className="login_register" type="button" onClick={() => logout()}>
                               Logout
                             </button>
                           </li>
                         </React.Fragment>
                         ) : (
                           <React.Fragment>
-                            <li className="nav-item landing__navbar-item">
+                            <li className="nav-item landing__navbar-item underline__sliding">
                               <Link className="nav-link" to="/auth/login">
                                 Login
                               </Link>
                             </li>
                             <li className="nav-item landing__navbar-item">
-                              <Link className="btn btn-success btn-sm rounded login_register" to="/register">
+                              <Link className="login_register" to="/register">
                                 Register
                               </Link>
                             </li>
