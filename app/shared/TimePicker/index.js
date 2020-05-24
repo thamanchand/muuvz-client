@@ -62,7 +62,7 @@ class TimePickerField extends PureComponent {
           disabled={disabled}
           minDate={new Date()}
           minTime={input.name === 'pickupTime' ? this.state.minTime : null}
-          maxTime={input.name === 'pickupTime' ? moment().endOf('day').toDate() : null} // set to 23:59 pm today
+          maxTime={input.name === 'pickupTime' ? moment().endOf('day').toDate() : null}
         />
       </div>
     );
