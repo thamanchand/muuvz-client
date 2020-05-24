@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import CheckboxMarkedCircleIcon from 'mdi-react/CheckboxMarkedCircleIcon';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
@@ -41,6 +42,7 @@ class RegisterPage extends React.PureComponent {
   }
 
   onRegisterHandler = (payload) => {
+    console.log("payload", payload);
     if(payload.email && payload.password) {
       const registerPayload = { ...payload, username: payload.email}
       this.props.onRegisterSubmit(registerPayload);
@@ -69,7 +71,11 @@ class RegisterPage extends React.PureComponent {
             </Link>
             {isEmailRegistered ? (
               <div className="confirmation__container">
-                <p>Please confirm your email</p>
+                <div className="registration_confirmation">
+                  <CheckboxMarkedCircleIcon className="email-confirmation__check" />
+                </div>
+                <p className="email-confirmation__sub">Your have registered in Muuvz</p>
+                <p className="email-confirmation__sub">Please confirm your email!</p>
               </div>
             ) : (
               <div>
