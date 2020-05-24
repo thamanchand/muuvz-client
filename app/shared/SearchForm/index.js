@@ -26,86 +26,80 @@ const cities = [
   { name: 'Vantaa' }
 ];
 
-// import renderCheckBoxField from '../Checkbox/index';
-
-// custom hook for getting previous value
-// function usePrevious(value) {
-//   const ref = useRef();
-//   useEffect(() => {
-//     ref.current = value;
-//   });
-//   return ref.current;
-// }
 
 const Search = ({ onSearch, disabled, storedValues }) => {
-  const [duration, setDuration] = React.useState();
-  const [bookingStartDateTime, setBookingStartDateTime] = React.useState();
-  const [bookingEndDateTime, setBookingEndDateTime] = React.useState();
-  const [isStartDateTimeGreater, setIsStartDateTimeGreater] = React.useState(false);
+  const [dateTimeDuration, setDateTimeDuration] = React.useState(() => ({
+    bookingStartDateTime: null,
+    bookingEndDateTime: null,
+    startTime: null,
+    endTime: null,
+  }));
 
-  // const prevBookingStartDateTime = usePrevious(bookingStartDateTime);
-  // const prevBookingEndDateTime = usePrevious(bookingEndDateTime);
-  //
+  React.useEffect(() => {
 
-  // const endDateChange = (endDateTime) => {
-  //   setBookingEndDateTime(moment(moment(endDateTime)).format('YYYY-MM-DDTHH:mm:ss'));
-  //   setIsStartDateTimeGreater(moment(bookingStartDateTime).isAfter(bookingEndDateTime));
-  //
-  //   // calculate number of hours
-  //   const bookingHours = moment
-  //     .duration(moment(endDateTime, 'YYYY-MM-DDTHH:mm:ss')
-  //       .diff(moment(prevBookingStartDateTime, 'YYYY-MM-DDTHH:mm:ss.SSS'))
-  //     ).asHours();
-  //   setDuration(bookingHours);
-  // }
-  // const startDateChange = (startDateTime) => {
-  //   setBookingStartDateTime(moment(moment(startDateTime)).format('YYYY-MM-DDTHH:mm:ss'));
-  //   setIsStartDateTimeGreater(moment(bookingStartDateTime).isAfter(bookingEndDateTime));
-  //   // calculate number of hours
-  //   const bookingHours = moment
-  //     .duration(moment(moment, 'YYYY-MM-DDTHH:mm:ss')
-  //       .diff(moment(prevBookingEndDateTime, 'YYYY-MM-DDTHH:mm:ss'))
-  //     ).asHours();
-  //   setDuration(bookingHours);
-  // }
-  //
+  }, [dateTimeDuration]);
+
   const startDateChanged = (startDate) => {
-    setBookingStartDateTime(moment(moment(startDate)).format('YYYY-MM-DD'));
+    if(dateTimeDuration.startTime) {
+      setDateTimeDuration(prevState => ({
+        ...prevState,
+        bookingStartDateTime: `${moment(moment(startDate)).format('YYYY-MM-DD')}${'T'}${dateTimeDuration.startTime}`,
+      }))
+    } else {
+      setDateTimeDuration(prevState => ({
+        ...prevState,
+        bookingStartDateTime: moment(moment(startDate)).format('YYYY-MM-DD'),
+      }));
+    }
   }
 
   const endDateChanged = (endDate) => {
-    setBookingEndDateTime(moment(moment(endDate)).format('YYYY-MM-DD'));
+    if(dateTimeDuration.endTime) {
+      setDateTimeDuration(prevState => ({
+        ...prevState,
+        bookingStartDateTime: `${moment(moment(endDate)).format('YYYY-MM-DD')}${'T'}${dateTimeDuration.endTime}`,
+      }))
+    } else {
+      setDateTimeDuration(prevState => ({
+        ...prevState,
+        bookingEndDateTime: moment(moment(endDate)).format('YYYY-MM-DD'),
+      }));
+    }
   }
 
   const endTimeChanged = (endTime) => {
     // format End Time
     const formatEndTime = moment(endTime).format('HH:mm');
     // combined EndDate with endTime
-    const combinedWithEndDate = moment(`${moment(bookingEndDateTime).format('YYYY-MM-DD')}${formatEndTime}`, 'YYYY-MM-DDTHH:mm:ss');
-    setBookingEndDateTime(moment(combinedWithEndDate).format('YYYY-MM-DDTHH:mm'));
-    // check if startDateTime is greater than endDateTime
-    setIsStartDateTimeGreater(moment(bookingStartDateTime).isAfter(bookingEndDateTime));
+    const combinedWithEndDate = moment(`${moment(dateTimeDuration.bookingEndDateTime).format('YYYY-MM-DD')}${formatEndTime}`, 'YYYY-MM-DDTHH:mm:ss');
 
-    // calculate number of hours
-    const bookingHours = moment(bookingEndDateTime)
-      .diff(moment(bookingStartDateTime, 'YYYY-MM-DDTHH:mm'));
-    setDuration(bookingHours);
+    setTimeout(() => {
+      setDateTimeDuration(prevState => ({
+        ...prevState,
+        endTime: formatEndTime,
+        bookingEndDateTime: moment(combinedWithEndDate).format('YYYY-MM-DDTHH:mm'),
+        setIsStartDateTimeGreater: moment(dateTimeDuration.bookingStartDateTime).isAfter(dateTimeDuration.bookingEndDateTime)
+      }))
+    }, 500);
   }
 
   const startTimeChanged = (startTime) => {
     // format startTime HH:mm
     const formatStartTime = moment(startTime).format('HH:mm');
     // combined startDate with startTime
-    const combinedWithStartDate = moment(`${moment(bookingStartDateTime).format('YYYY-MM-DD')}${formatStartTime}`, 'YYYY-MM-DDTHH:mm');
-    setBookingStartDateTime(moment(combinedWithStartDate).format('YYYY-MM-DDTHH:mm'));
-    setIsStartDateTimeGreater(moment(bookingStartDateTime).isAfter(bookingEndDateTime));
+    const combinedWithStartDate = moment(`${moment(dateTimeDuration.bookingStartDateTime).format('YYYY-MM-DD')}${formatStartTime}`, 'YYYY-MM-DDTHH:mm');
 
-    // calculate number of hours
-    const bookingHours = moment(bookingEndDateTime)
-      .diff(moment(bookingStartDateTime, 'YYYY-MM-DDTHH:mm'));
-    setDuration(bookingHours);
+    setTimeout(() => {
+      setDateTimeDuration(prevState => ({
+        ...prevState,
+        startTime: formatStartTime,
+        bookingStartDateTime: moment(combinedWithStartDate).format('YYYY-MM-DDTHH:mm'),
+        setIsStartDateTimeGreater: moment(dateTimeDuration.bookingStartDateTime).isAfter(dateTimeDuration.bookingEndDateTime)
+      }))
+    }, 500);
   }
 
+  console.log("dateTimeDuration", dateTimeDuration)
   return (
     <Form
       validate={values => { // validate both passowrds are same
@@ -233,20 +227,24 @@ const Search = ({ onSearch, disabled, storedValues }) => {
             </div>
           </Col>
           <div className="form__form-group">
-            {isStartDateTimeGreater && (
+            {dateTimeDuration.isStartDateTimeGreater && (
               <div className="search__error">
                 Please select both date and time
               </div>
             )
             }
-            {duration < '7200000' && (
+            {moment(dateTimeDuration.bookingEndDateTime)
+              .diff(moment(dateTimeDuration.bookingStartDateTime, 'YYYY-MM-DDTHH:mm')) < '7200000' &&
+              moment(dateTimeDuration.bookingEndDateTime)
+                .diff(moment(dateTimeDuration.bookingStartDateTime, 'YYYY-MM-DDTHH:mm')) < '7200000' && (
               <div className="search__error">
                 You can not book less than 2 hrs
               </div>
             )}
             <p className="booking__duration">
               {values.dropOffTime && values.pickupTime && (
-                humanizeDuration(duration,  { language: 'fi' })
+                humanizeDuration(moment(dateTimeDuration.bookingEndDateTime)
+                  .diff(moment(dateTimeDuration.bookingStartDateTime, 'YYYY-MM-DDTHH:mm')),  { language: 'fi' })
               )}
             </p>
             <div className="form__form-group-field">
