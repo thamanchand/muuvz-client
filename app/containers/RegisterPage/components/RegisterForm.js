@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
+import ClipLoader from "react-spinners/ClipLoader";
 
 import renderCheckBoxField from '../../../shared/Checkbox/index';
 
@@ -29,7 +30,7 @@ Error.propTypes = {
 };
 
 
-const RegisterForm = ({ onRegisterHandler }) => (
+const RegisterForm = ({ onRegisterHandler, isEmailRegistered }) => (
   <Form
     onSubmit={onSubmit}
     validate={values => { // validate both passowrds are same
@@ -99,7 +100,20 @@ const RegisterForm = ({ onRegisterHandler }) => (
           </div>
         </div>
         <div className="account__btns">
-          <button className="rounded btn btn-success" type="submit" onClick={() => onRegisterHandler(values)}>Register</button>
+          <button
+            className="rounded btn btn-success"
+            type="submit" onClick={() => onRegisterHandler(values)}
+            disabled={!!isEmailRegistered}
+          >
+            Register
+            <span className="btn__loader">
+              <ClipLoader
+                size={15}
+                color="#70C1B3"
+                loading={!!isEmailRegistered}
+              />
+            </span>
+          </button>
         </div>
 
       </form>
@@ -109,6 +123,7 @@ const RegisterForm = ({ onRegisterHandler }) => (
 
 RegisterForm.propTypes = {
   onRegisterHandler: PropTypes.func,
+  isEmailRegistered: PropTypes.func,
 };
 
 export default RegisterForm;
