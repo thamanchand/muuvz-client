@@ -8,13 +8,12 @@ import {
   cancel,
   fork,
 } from 'redux-saga/effects';
+import request from 'utils/request';
 
 // Utils
 import auth from 'utils/auth';
 import  { historyBooking } from '../../utils/history';
 import toast from '../../shared/ToastNotify';
-
-import * as api from './api';
 
 // constants
 import { ON_LOGIN_SUBMIT } from './constants';
@@ -27,8 +26,8 @@ export function* submitForm(action) {
     const body = action.payload;
     // find out if login source is from listing page
     const isLoggedFromListingPage = action.loginSource === 'listingPage';
-
-    const response = yield call(api.loginUser, body);
+    const loginURL = `${'http://localhost:1337/'}${'auth/local'}`;
+    const response = yield call(request, loginURL, { method: 'POST', body });
     if (response.jwt) {
       auth.clearToken();
       const { email, confirmed, profileCompleted, isbusiness, id } = response.user;
@@ -76,9 +75,8 @@ export function* submitForm(action) {
 
     }
   } catch(error) {
+    console.log("saga login error", JSON.stringify(error.response, null,2))
     yield put(onLoginSubmitFailed(error));
-    toast.error("Failed to login!");
-    console.log("error", error.response.payload.message);
   }
 }
 
