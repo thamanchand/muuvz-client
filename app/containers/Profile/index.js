@@ -20,6 +20,8 @@ import injectReducer from '../../utils/injectReducer';
 import saga from './saga';
 import reducer from './reducer';
 
+import toast from '../../shared/ToastNotify';
+
 import {
   onProfileSave,
   onProfileLoad,
@@ -43,7 +45,15 @@ class Profile extends React.PureComponent {
   profileSaveHandler = async profilePayload => {
     const results = await geocodeByAddress(profilePayload.address);
     const latLong = await getLatLng(results[0]);
-    this.props.onProfileSave({...profilePayload, latLong });
+    if(!profilePayload.address
+      || !profilePayload.businessName
+      || !profilePayload.phoneNumber
+      || !profilePayload.files
+    ) {
+      toast.error("Please fill missing information!")
+    } else {
+      this.props.onProfileSave({...profilePayload, latLong });
+    }
   }
 
   profileEditHandler = async (profilePayload, profileId) => {
