@@ -37,7 +37,7 @@ const EventLabels = ({
                   {currentBookingItem.resource.brand} ( {moment(currentBookingItem.bookedStartDateTime).format('HH:mm')} - {moment(currentBookingItem.bookedEndDateTime).format('HH:mm')})
                 </p>
                 <div className="booking__label" style={{borderLeft: `${'2px solid'} ${currentBookingItem.resource.color}`}} >
-                  {currentBookingItem.resource.status ==='Requested' && (
+                  {currentBookingItem.status ==='Requested' && (
                     <>
                       <span className="booking__label_status waiting">REQUESTED</span>
                       {(isMaxWidth || isMinWidth) && isMinWidthLess ?
