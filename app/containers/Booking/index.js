@@ -39,7 +39,6 @@ class BookingDashboard extends React.Component {
   componentDidMount() {
     const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
     if (auth.getToken() && isProfileCompleted) {
-      console.log("auth.getToken", auth.getToken());
       this.props.onBookingLoad();
       this.props.onResourceLoad();
     }
