@@ -64,7 +64,7 @@ export default function App() {
           <PrivateRoute exact path="/dashboard/resources" component={Resources} />
           <PrivateRoute exact path="/dashboard/profile" component={ProfilePage} />
           <PrivateRoute exact path="/dashboard/account" component={AccountPage} />
-          <Route exact path="/connect/:provider" component={ConnectPage} />
+          <Route exact path="/auth/:provider/callback" component={ConnectPage} />
           <Route exact path="/auth/reset-password" component={PasswordReset} />
 
           <Route exact path="/auth/forgot-password" component={ForgotPassword} />
