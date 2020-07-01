@@ -13,7 +13,7 @@ import FacebookIcon from 'mdi-react/FacebookIcon';
 import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
 import LogInForm from './components/LogInForm';
 import Footer from '../HomePage/components/Footer';
-import logo from '../../assets/images/muuvz.svg';
+import logo from '../../assets/images/logo-mini.svg';
 
 import { loginErrorSelector, loginStateSelector } from './selectors';
 

@@ -15,7 +15,7 @@ import FacebookIcon from 'mdi-react/FacebookIcon';
 import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
 import RegisterForm from './components/RegisterForm';
 import Footer from '../HomePage/components/Footer';
-import logo from '../../assets/images/muuvz.svg';
+import logo from '../../assets/images/logo-mini.svg';
 
 import { onRegisterSubmit, onRegisterPageLoad } from './actions';
 import { emailRegisteredSelector, registerErrorSelector } from './selectors';
