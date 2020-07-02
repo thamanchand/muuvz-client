@@ -20,14 +20,15 @@ import { ON_LOGIN_SUBMIT } from './constants';
 
 import { onLoginSubmitSuccess, onLoginSubmitFailed } from './actions';
 
+const LOGIN_URL = `${'http://localhost:1337/'}${'auth/local'}`;
+
 export function* submitForm(action) {
   console.log("Login action");
   try {
     const body = action.payload;
     // find out if login source is from listing page
     const isLoggedFromListingPage = action.loginSource === 'listingPage';
-    const loginURL = `${'http://localhost:1337/'}${'auth/local'}`;
-    const response = yield call(request, loginURL, { method: 'POST', body });
+    const response = yield call(request, LOGIN_URL, { method: 'POST', body });
     if (response.jwt) {
       auth.clearToken();
       const { email, confirmed, profileCompleted, isbusiness, id } = response.user;
