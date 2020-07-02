@@ -80,8 +80,7 @@ class RegisterPage extends React.PureComponent {
             ) : (
               <div>
                 <div className="account__head">
-                  <h3 className="account__title">Join now</h3>
-                  <h4 className="account__subhead subhead">Start your business easily</h4>
+                  <h3 className="account__title">Register</h3>
                 </div>
                 <RegisterForm
                   showPasswordHandler={this.showPasswordHandler}
@@ -89,6 +88,9 @@ class RegisterPage extends React.PureComponent {
                   showPassword={this.state.showPassword}
                   isEmailRegistered={isEmailRegistered}
                 />
+                <div className="create__account_label">
+                  <p>Already got muuvz account? <Link to="/auth/login">Login </Link></p>
+                </div>
                 <div className="account__or">
                   <p>Or Sign up</p>
                 </div>
@@ -105,6 +107,9 @@ class RegisterPage extends React.PureComponent {
                   >
                     <GooglePlusIcon />
                   </a>
+                </div>
+                <div className="create__account_label">
+                  <p>By signing up, I agree to the Terms of Service</p>
                 </div>
               </div>
             )}

@@ -69,8 +69,7 @@ class LoginPage extends React.PureComponent {
                 </Link>
               )}
               <div className="account__head">
-                <h3 className="account__title">Join now</h3>
-                <h4 className="account__subhead subhead">Start your business easily</h4>
+                <h3 className="account__title">Login</h3>
               </div>
               <LogInForm
                 showPasswordHandler={this.showPasswordHandler}
