@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
 import { Form, Field } from 'react-final-form';
-import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
+// import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 
 import auth from '../../../utils/auth';
 import Error from '../../../shared/ErrorField';
@@ -20,7 +20,7 @@ const ProfileForm = ({
   onProfileFormSave,
   initialValues,
   onProfileFormEdit,
-  onAvatarDelete,
+  // onAvatarDelete,
 }) => {
 
   // make sure component re-render when initialValues changed
@@ -52,13 +52,14 @@ const ProfileForm = ({
                     alt="profileImage"
                     src={initialValues.avatar ? `${'http://localhost:1337'}${initialValues.avatar.url}` : null }
                   />
-                  <span className="avatar__delete">
+                  {/* <span className="avatar__delete">
                     <DeleteForeverIcon
                       size="25" color="#ff4861"
                       onClick={() => onAvatarDelete(initialValues.avatar.id, initialValues.id)}
                       className="avatar__delete__icon"
                     />
                   </span>
+                  */}
                 </div>
               </div>
             )}
@@ -176,7 +177,6 @@ const ProfileForm = ({
                     </div>
                   </div>
                   <Col md={12} sm={12}>
-                    {initialValues && !(initialValues.avatar && initialValues.avatar.id)  && (
                       <>
                       <span className="form__form-group-label">Company logo</span>
                       <span className="form__form-group-label_right">Required</span>
@@ -190,7 +190,6 @@ const ProfileForm = ({
                       </div>
                       <Error name="files" />
                       </>
-                    )}
                   </Col>
                   <Col>
                     <div className="profile__btns">
@@ -213,7 +212,7 @@ const ProfileForm = ({
                         <button
                           className="btn btn-success btn-sm rounded"
                           type="submit"
-                          onClick={() => onProfileFormEdit(values, initialValues.id)}
+                          onClick={() => onProfileFormEdit(values, initialValues.id, {isSubmittedBusinessForm: true })}
                         >Update profile</button>
                       )}
                     </div>
@@ -233,7 +232,7 @@ ProfileForm.propTypes = {
   onProfileFormSave: PropTypes.func,
   initialValues: PropTypes.object,
   onProfileFormEdit: PropTypes.func,
-  onAvatarDelete: PropTypes.func,
+  // onAvatarDelete: PropTypes.func,
 }
 
 export default ProfileForm;
