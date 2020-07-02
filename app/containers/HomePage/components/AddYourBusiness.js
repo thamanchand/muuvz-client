@@ -8,9 +8,9 @@ const AddYourBussiness = () => (
         <p className="addbusiness_text">Spend less time managing booking and more time growing your business.</p>
         <div className="scroll-down-link scroll-down-arrow" />
         <div>
-          <button type="button" className="addyourbusiness__btn rounded">
+          <span type="button" className="addyourbusiness__btn rounded">
             ADD YOUR BUSINESS
-          </button>
+          </span>
         </div>
       </div>
     </div>
