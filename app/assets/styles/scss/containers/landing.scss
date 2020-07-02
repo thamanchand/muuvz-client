@@ -179,6 +179,7 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   padding: 10px 22px;
   width: 225px;
   font-weight: bold;
+  cursor: pointer;
   &:hover {
     font-weight: bold;
     color: #FFF;
