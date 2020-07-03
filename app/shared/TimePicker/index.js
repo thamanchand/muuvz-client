@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import TimePicker from 'react-datepicker';
 import moment from 'moment';
+
+import { makeSelectLocale } from '../../containers/LanguageProvider/selectors';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -45,7 +49,7 @@ class TimePickerField extends PureComponent {
 
   render() {
     const { startTime } = this.state;
-    const { disabled, input } = this.props;
+    const { disabled, input, locale } = this.props;
 
     const initialDate = input.value ? moment(input.value, 'HH:mm').toDate() : startTime;
     return (
@@ -61,6 +65,7 @@ class TimePickerField extends PureComponent {
           onChange={this.onTimeChange}
           disabled={disabled}
           minDate={new Date()}
+          timeCaption={locale === 'fi' ? 'Kello' : 'Time'}
           minTime={input.name === 'pickupTime' ? this.state.minTime : null}
           maxTime={input.name === 'pickupTime' ? moment().endOf('day').toDate() : null}
         />
@@ -77,6 +82,7 @@ TimePickerField.propTypes = {
   disabled: PropTypes.bool,
   endTimeChanged: PropTypes.func,
   startTimeChanged: PropTypes.func,
+  locale: PropTypes.string,
 };
 
 const renderTimePickerField = (props) => {
@@ -87,6 +93,7 @@ const renderTimePickerField = (props) => {
     meta,
     endTimeChanged,
     startTimeChanged,
+    locale,
   } = props;
 
   return (
@@ -96,6 +103,7 @@ const renderTimePickerField = (props) => {
       meta={meta}
       endTimeChanged={endTimeChanged}
       startTimeChanged={startTimeChanged}
+      locale={locale}
     />
   );
 };
@@ -109,6 +117,13 @@ renderTimePickerField.propTypes = {
   endTimeChanged: PropTypes.func,
   startTimeChanged: PropTypes.func,
   meta: PropTypes.object,
+  locale: PropTypes.string,
 };
 
-export default renderTimePickerField;
+const mapStateToProps = createStructuredSelector({
+  locale: makeSelectLocale(),
+});
+
+export default connect(
+  mapStateToProps,
+)(renderTimePickerField);
