@@ -20,4 +20,20 @@ export default defineMessages({
     id: `${scope}.headerBookLabel`,
     defaultMessage: 'BOOK',
   },
+  headerMovingVan: {
+    id: `${scope}.headerMovingVan`,
+    defaultMessage: 'MOVING VAN IN',
+  },
+  cityHelsinki: {
+    id: `${scope}.cityHelsinki`,
+    defaultMessage: 'HELSINKI',
+  },
+  cityEspoo: {
+    id: `${scope}.cityEspoo`,
+    defaultMessage: 'ESPOO',
+  },
+  cityVantaa: {
+    id: `${scope}.cityVantaa`,
+    defaultMessage: 'VANTAA',
+  },
 });

@@ -26,11 +26,11 @@ const Header = ({ onSearch }) => (
               </b>
             </h1>
             <div className="slider-wrapper">
-              MOVING VAN IN
+              <FormattedMessage {...messages.headerMovingVan} />
               <div className="city__animate">
-                <div className="city1">Helsinki</div>
-                <div className="city2">ESPOO</div>
-                <div className="city3">VANTAA</div>
+                <div className="city1"><FormattedMessage {...messages.cityHelsinki} /></div>
+                <div className="city2"><FormattedMessage {...messages.cityEspoo} /></div>
+                <div className="city3"><FormattedMessage {...messages.cityVantaa} /></div>
               </div>
             </div>
           </div>
