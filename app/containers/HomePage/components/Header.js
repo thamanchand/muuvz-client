@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Container } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 
 import Search from '../../../shared/SearchForm';
 
 import bgImage from '../../../assets/images/landing/header_bg.png';
 import move from '../../../assets/images/landing/landing_page.svg';
+import messages from '../messages';
 
 const Header = ({ onSearch }) => (
   <div
@@ -18,9 +20,9 @@ const Header = ({ onSearch }) => (
           <div className="landing__intro">
             <h1 className="landing__header-title">
               <b>
-                SEARCH<span className="landing__header-dot"></span>
-              COMPARE<span className="landing__header-dot"></span>
-            BOOK<span className="landing__header-dot"></span>
+                <FormattedMessage {...messages.headerSearchLabel} /><span className="landing__header-dot"></span>
+                <FormattedMessage {...messages.headerCompareLabel} /><span className="landing__header-dot"></span>
+                <FormattedMessage {...messages.headerBookLabel} /><span className="landing__header-dot"></span>
               </b>
             </h1>
             <div className="slider-wrapper">
