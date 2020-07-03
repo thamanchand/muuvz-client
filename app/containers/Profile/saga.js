@@ -40,44 +40,53 @@ export function* profileSaveWatcher(action) {
     const profilePostResponse = yield call(api.postUserProfile,  userProfilePayload);
 
     if (profilePostResponse) {
+      console.log("profilePostResponse", profilePostResponse)
       const profileCompletePayload = {profileCompleted: true };
 
       // update user profileCompleted: true once profile is created
       const profileUpdateResponse = yield call(api.updateUserProfile, userId, profileCompletePayload);
+      if (profileUpdateResponse) {
+        console.log("profileUpdateResponse", profileUpdateResponse)
+        const { email, confirmed, profileCompleted, isbusiness, id } = profileUpdateResponse;
+        const userFieldsLocallyStored = { email, confirmed, profileCompleted, isbusiness, id}
+        // prepare upload formData
+        const data = new FormData();
+        data.append('files', action.profilePayload.files[0]);
+        data.append('refId', profilePostResponse.id);
+        data.append('ref', 'profile');
+        data.append('field', 'avatar');
 
-      const { email, confirmed, profileCompleted, isbusiness, id } = profileUpdateResponse;
-      const userFieldsLocallyStored = { email, confirmed, profileCompleted, isbusiness, id}
-      // prepare upload formData
-      const data = new FormData();
-      data.append('files', action.profilePayload.files[0]);
-      data.append('refId', profilePostResponse.id);
-      data.append('ref', 'profile');
-      data.append('field', 'avatar');
+        // upload profile avatar
+        const avatarUploadResponse = yield call(api.uploadProfileAvatar, data);
+        // call get profile data
+        const profileApiResponse = yield call(api.getUserProfile, profilePostResponse.id);
 
-      // upload profile avatar
-      const avatarUploadResponse = yield call(api.uploadProfileAvatar, data);
-      // call get profile data
-      const profileApiResponse = yield call(api.getUserProfile, profilePostResponse.id);
+        if (avatarUploadResponse && profileUpdateResponse ) {
+          console.log("profileApiResponse", profileApiResponse);
+          console.log("avatarUploadResponse", avatarUploadResponse)
+          const userProfile = {
+            id: profileApiResponse.id,
+            businessName: profilePostResponse.businessName,
+            businessId: profileApiResponse.businessId,
+            website: profileApiResponse.website,
+            description: profileApiResponse.description,
+            phoneNumber: profileApiResponse.phoneNumber,
+            facebookLink: profileApiResponse.facebookLink,
+            twitterLink: profileApiResponse.twitterLink,
+            linkedinLink: profileApiResponse.linkedinLink,
+            address: profileApiResponse.address,
+            avatar: {...avatarUploadResponse[0]},
+          }
+          // update userInfo cookie
+          console.log("userFieldsLocallyStored", userFieldsLocallyStored)
+          console.log("userProfile", userProfile)
+          yield call(auth.setUserInfo, userFieldsLocallyStored);
 
-      const userProfile = {
-        id: profileApiResponse.id,
-        businessName: profilePostResponse.businessName,
-        businessId: profileApiResponse.businessId,
-        website: profileApiResponse.website,
-        description: profileApiResponse.description,
-        phoneNumber: profileApiResponse.phoneNumber,
-        facebookLink: profileApiResponse.facebookLink,
-        twitterLink: profileApiResponse.twitterLink,
-        linkedinLink: profileApiResponse.linkedinLink,
-        address: profileApiResponse.address,
-        avatar: profileApiResponse.avatar,
+          toast.successfully("Your profile was created!");
+          yield put(onProfileSaveSuccess(userProfile));
+        }
       }
-      if (avatarUploadResponse && profileUpdateResponse ) {
-        // update userInfo cookie
-        yield call(auth.setUserInfo, userFieldsLocallyStored);
-        toast.successfully("Your profile was created!");
-        yield put(onProfileSaveSuccess(userProfile));
-      }
+
     }
   } catch(error) {
     toast.error("Failed to create profile info!");
