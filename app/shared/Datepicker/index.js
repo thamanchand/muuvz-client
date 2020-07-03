@@ -1,8 +1,14 @@
 import React, { PureComponent } from 'react';
 import DatePicker from 'react-datepicker';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { isMobileOnly } from 'react-device-detect';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import fi from 'date-fns/locale/fi';
+import en from 'date-fns/locale/en-GB';
+
+import { makeSelectLocale } from '../../containers/LanguageProvider/selectors';
 
 class DatePickerField extends PureComponent {
 
@@ -32,9 +38,8 @@ class DatePickerField extends PureComponent {
 
   render() {
     const { startDate } = this.state;
-    const { disabled, input } = this.props;
+    const { disabled, input, locale } = this.props;
     const initialDate = input.value ? Date.parse(input.value) : startDate;
-
     return (
       <div className="date-picker">
         <DatePicker
@@ -48,6 +53,7 @@ class DatePickerField extends PureComponent {
           disabled={disabled}
           minDate={new Date()}
           required
+          locale={locale === 'fi' ? fi : en }
         >
           <div className="select__time">Please select date, hrs and mins</div>
         </DatePicker>
@@ -64,16 +70,18 @@ DatePickerField.propTypes = {
   disabled: PropTypes.bool,
   startDateChanged: PropTypes.func,
   endDateChanged: PropTypes.func,
+  locale: PropTypes.string,
 }
 
 const renderDatePickerField = (props) => {
-  const { input, disabled, meta, endDateChanged, startDateChanged } = props;
+  const { input, disabled, meta, endDateChanged, startDateChanged, locale } = props;
   return <DatePickerField
     input={input}
     disabled={disabled}
     meta={meta}
     endDateChanged={endDateChanged}
     startDateChanged={startDateChanged}
+    locale={locale}
   />;
 };
 
@@ -86,6 +94,13 @@ renderDatePickerField.propTypes = {
   meta: PropTypes.object,
   startDateChanged: PropTypes.func,
   endDateChanged: PropTypes.func,
+  locale: PropTypes.string,
 };
 
-export default renderDatePickerField;
+const mapStateToProps = createStructuredSelector({
+  locale: makeSelectLocale(),
+});
+
+export default connect(
+  mapStateToProps,
+)(renderDatePickerField);
