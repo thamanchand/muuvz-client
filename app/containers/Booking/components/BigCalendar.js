@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
 import Calendar from './Calendar';
 
-const BigCalendar = ({ bookingList }) => {
+const BigCalendar = ({ bookingList, locale }) => {
   const events = bookingList.map(event => {
     const mapEvents = {
       id: event.id,
@@ -19,7 +19,10 @@ const BigCalendar = ({ bookingList }) => {
     <Col md={12} lg={12} xl={8}>
       <Card>
         <CardBody>
-          <Calendar events={events} />
+          <Calendar
+            events={events}
+            locale={locale}
+          />
         </CardBody>
       </Card>
     </Col>
@@ -33,8 +36,9 @@ BigCalendar.propTypes = {
     start: PropTypes.obj,
     end: PropTypes.obj,
     color: PropTypes.string
-  }).isRequired
-  )
+  }).isRequired,
+  ),
+  locale: PropTypes.string,
 };
 
 export default BigCalendar;
