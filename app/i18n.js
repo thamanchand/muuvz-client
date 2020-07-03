@@ -7,23 +7,24 @@
  *   script `extract-intl`, and must use CommonJS module syntax
  *   You CANNOT use import/export in this file.
  */
-const addLocaleData = require('react-intl').addLocaleData; //eslint-disable-line
-const enLocaleData = require('react-intl/locale-data/en');
-const fiLocaleData = require('react-intl/locale-data/fi');
+import { addLocaleData } from 'react-intl';
+import enLocaleData from 'react-intl/locale-data/en';
+import fiLocaleData from 'react-intl/locale-data/fi';
+import moment from 'moment';
 
-const enTranslationMessages = require('./translations/en.json');
-const fiTranslationMessages = require('./translations/fi.json');
+import enTranslationMessages from './translations/en';
+import fiTranslationMessages from './translations/fi';
 
-addLocaleData(enLocaleData);
-addLocaleData(fiLocaleData);
+export const DEFAULT_LOCALE = 'fi';
 
-const DEFAULT_LOCALE = 'fi';
-
-// prettier-ignore
-const appLocales = [
+export const appLocales = [
   'en',
   'fi',
 ];
+
+addLocaleData(enLocaleData);
+addLocaleData(fiLocaleData);
+moment.locale(DEFAULT_LOCALE);
 
 const formatTranslationMessages = (locale, messages) => {
   const defaultFormattedMessages =
@@ -40,12 +41,7 @@ const formatTranslationMessages = (locale, messages) => {
   return Object.keys(messages).reduce(flattenFormattedMessages, {});
 };
 
-const translationMessages = {
+export const translationMessages = {
   en: formatTranslationMessages('en', enTranslationMessages),
   fi: formatTranslationMessages('fi', fiTranslationMessages),
 };
-
-exports.appLocales = appLocales;
-exports.formatTranslationMessages = formatTranslationMessages;
-exports.translationMessages = translationMessages;
-exports.DEFAULT_LOCALE = DEFAULT_LOCALE;
