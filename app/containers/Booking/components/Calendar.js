@@ -23,6 +23,7 @@ export default class CalendarComponent extends PureComponent {
       }),
     ).isRequired,
     small: PropTypes.bool,
+    locale: PropTypes.string,
   };
 
   static defaultProps = {
@@ -63,11 +64,12 @@ export default class CalendarComponent extends PureComponent {
   };
 
   render() {
-    const { small, events } = this.props;
+    const { small, events, locale } = this.props;
 
     return (
       <div className={`calendar${small ? ' calendar--small' : ''}`}>
         <DragAndDropCalendar
+          culture={locale === 'fi' ? 'fi-FI' : 'en-GB'}
           localizer={localizer}
           events={events}
           views={['month', 'week', 'day']}
