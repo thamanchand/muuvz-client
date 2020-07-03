@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
 
-
-
 import { onBookingLoad, onResourceLoad, onBookingAccept, onBookingCancel } from './action';
 import {
   selectBookingSelector,
@@ -26,6 +24,8 @@ import EventLabels from './components/VanLabels';
 import UserBooking from './components/UserBooking';
 
 import { filterCustomerCurrentBookings, filterBusinessCurrentBookings, filterResourcesBelongsToUser } from '../utils';
+
+import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 // Utils
 import auth from '../../utils/auth';
@@ -54,7 +54,14 @@ class BookingDashboard extends React.Component {
 
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
-    const { bookingList, resourceList, isBookingAccepted, selectedBookingId, isBookingCancelLoading } = this.props;
+    const {
+      bookingList,
+      resourceList,
+      isBookingAccepted,
+      selectedBookingId,
+      isBookingCancelLoading,
+      locale,
+    } = this.props;
     const userId = auth.get('userInfo') && auth.get('userInfo').id;
     const isBusiness = auth.get('userInfo') && auth.get('userInfo').isbusiness;
 
@@ -89,7 +96,10 @@ class BookingDashboard extends React.Component {
               <Row>
                 <div className="container dashboard">
                   <Row>
-                    <BigCalendar bookingList={getUserCurrentBookings} />
+                    <BigCalendar
+                      bookingList={getUserCurrentBookings}
+                      locale={locale}
+                    />
                     <EventLabels
                       resourceList={getUserResources}
                       currentBookings={getUserCurrentBookings}
@@ -122,6 +132,7 @@ BookingDashboard.propTypes = {
   isBookingAccepted: PropTypes.bool,
   selectedBookingId: PropTypes.number,
   isBookingCancelLoading: PropTypes.bool,
+  locale: PropTypes.string
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -130,6 +141,7 @@ const mapStateToProps = createStructuredSelector({
   isBookingAccepted: isAcceptBookingLoadingSelector(),
   selectedBookingId: selectedBookingIdSelector(),
   isBookingCancelLoading: isBookingCancelloadingSelector(),
+  locale: makeSelectLocale(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
