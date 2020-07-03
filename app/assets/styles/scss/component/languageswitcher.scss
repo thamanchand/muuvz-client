@@ -1,0 +1,43 @@
+.lang__select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.lang__select select {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 17px;
+  border: 0;
+  background: transparent;
+  color: #247BA0;
+  font-weight: bold;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+}
+.lang__select select::-ms-expand {
+  display: none;
+}
+.lang__select select:hover,
+.lang__select select:focus {
+  color: #646777;
+  background: transparent;
+}
+
+.lang__select__arrow {
+  position: absolute;
+  top: 12px;
+  right: 3px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 7px 5px 0 5px;
+  border-color: #247BA0 transparent transparent transparent;
+}
+.lang__select select:hover ~ .lang__select__arrow,
+.lang__select select:focus ~ .lang__select__arrow {
+  border-top-color: #646777;
+}
