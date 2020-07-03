@@ -9,6 +9,7 @@ import auth from 'utils/auth';
 
 import logo from '../../assets/images/muuvz.svg';
 import { useMedia } from '../../containers/utils';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 const HeaderNav = ({ source }) => {
   const [isLoggedIn, setisLoggedIn] = React.useState(auth.getToken());
@@ -103,7 +104,7 @@ const HeaderNav = ({ source }) => {
                     )
                   }
                   <li className="nav-item landing__navbar-item">
-                    <span className="nav-link  nav__list lang__label underline__sliding">EN</span>
+                    <LanguageSwitcher />
                   </li>
                 </ul>
               ) : (
@@ -166,7 +167,8 @@ const HeaderNav = ({ source }) => {
                         )
                       }
                       <li className="nav-item landing__navbar-item">
-                        <span className="nav-link lang__label">EN</span>
+                        <LanguageSwitcher />
+
                       </li>
                     </ul>
                   </div>
