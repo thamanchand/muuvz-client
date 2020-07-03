@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TopbarSidebarButton from './TopbarSidebarButton';
 import TopbarProfile from './TopbarProfile';
-import TopbarLanguage from './TopbarLanguage';
+import LanguageSwitcher from '../../../shared/LanguageSwitcher';
 
 const Topbar = ({ changeMobileSidebarVisibility, changeSidebarVisibility, userProfile }) => (
   <div className="topbar">
@@ -17,7 +17,9 @@ const Topbar = ({ changeMobileSidebarVisibility, changeSidebarVisibility, userPr
       </div>
       <div className="topbar__right">
         <TopbarProfile userAvatar={userProfile}/>
-        <TopbarLanguage />
+        <span className="dashboard_lang">
+          <LanguageSwitcher />
+        </span>
       </div>
     </div>
   </div>
