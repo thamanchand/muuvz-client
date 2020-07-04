@@ -302,9 +302,10 @@ img .feature__icon {
 }
 
 .search-btn {
-  width: 130px;
+  width: 175px;
   left: 15px;
   top: 15px;
+  font-weight: bold;
   @media screen and (minwidth: 1050px) {
     width: 130px;
     padding: 10px;
