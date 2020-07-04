@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import EventIcon from 'mdi-react/EventIcon';
+import { FormattedMessage } from 'react-intl';
 
 import moment from 'moment';
 import { Col } from 'reactstrap';
@@ -14,6 +15,7 @@ import Error from '../ErrorField';
 import renderDatePickerField from '../Datepicker';
 // import renderTimePickerFied from '../TimePicker';
 import renderTimePickerFied from '../TimePicker';
+import messages from './messages';
 
 import '../../assets/styles/scss/component/segmentedcontrol.scss';
 
@@ -124,7 +126,9 @@ const Search = ({ onSearch, disabled, storedValues }) => {
         <form className="form" onSubmit={handleSubmit}>
           <Col className="col-lg-12 col-md-12 col-sm-12 col-12 startdatepicker__col">
             <div className="form__form-group">
-              <span className="form__form-group-label">City</span>
+              <span className="form__form-group-label">
+                <FormattedMessage {...messages.searchPlace} />
+              </span>
               <div className="form__form-group-field">
                 <Field name="location">
                   {({ input }) => (
@@ -155,7 +159,9 @@ const Search = ({ onSearch, disabled, storedValues }) => {
           </div> */}
           <Col className="col-lg-6 col-md-12 col-sm-12 col-12 startdatepicker__col">
             <div className="form__form-group">
-              <span className="form__form-group-label">Pickup date</span>
+              <span className="form__form-group-label">
+                <FormattedMessage {...messages.searchPickupDate} />
+              </span>
               <div className="form__form-group-field">
                 <Field
                   name="pickupDate"
@@ -173,7 +179,9 @@ const Search = ({ onSearch, disabled, storedValues }) => {
           </Col>
           <Col className="col-lg-6 col-md-12  col-sm-12 col-12 startdatepicker__col startimepicker__col">
             <div className="form__form-group form-pickuptime">
-              <span className="form__form-group-label">Pickup time</span>
+              <span className="form__form-group-label">
+                <FormattedMessage {...messages.searchPickupTime} />
+              </span>
               <div className="form__form-group-field">
                 <Field
                   name="pickupTime"
@@ -192,7 +200,9 @@ const Search = ({ onSearch, disabled, storedValues }) => {
           </Col>
           <Col className="col-lg-6 col-md-12  col-sm-12 col-12 startdatepicker__col">
             <div className="form__form-group">
-              <span className="form__form-group-label">Drop-off date</span>
+              <span className="form__form-group-label">
+                <FormattedMessage {...messages.searchDropOffDate} />
+              </span>
               <div className="form__form-group-field">
                 <Field
                   name="dropOffDate"
@@ -209,7 +219,9 @@ const Search = ({ onSearch, disabled, storedValues }) => {
           </Col>
           <Col className="col-lg-6 col-md-12  col-sm-12 col-12 startdatepicker__col startimepicker__col">
             <div className="form__form-group form-pickuptime">
-              <span className="form__form-group-label">Drop-off time</span>
+              <span className="form__form-group-label">
+                <FormattedMessage {...messages.searchDropOffTime} />
+              </span>
               <div className="form__form-group-field">
                 <Field
                   name="dropOffTime"
@@ -229,7 +241,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
           <div className="form__form-group">
             {dateTimeDuration.isStartDateTimeGreater && (
               <div className="search__error">
-                Please select both date and time
+                <FormattedMessage {...messages.selectDateTimeNotify} />
               </div>
             )
             }
@@ -238,7 +250,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
               moment(dateTimeDuration.bookingEndDateTime)
                 .diff(moment(dateTimeDuration.bookingStartDateTime, 'YYYY-MM-DDTHH:mm')) < '7200000' && (
               <div className="search__error">
-                You can not book less than 2 hrs
+                <FormattedMessage {...messages.lessThan2HrsNotify} />
               </div>
             )}
             <p className="booking__duration">
@@ -255,7 +267,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
                 disabled={!disabled}
                 storedValues={storedValues}
               >
-                SEARCH VANS
+                <FormattedMessage {...messages.searchVansBtn} />
               </button>
             </div>
           </div>
