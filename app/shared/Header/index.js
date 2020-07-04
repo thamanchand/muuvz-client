@@ -63,17 +63,17 @@ const HeaderNav = ({ source }) => {
                     (<React.Fragment>
                       <li className="nav-item landing__navbar-item">
                         {isBusiness && isProfileCompleted &&
-                          <Link className="nav-link nav__list underline__sliding" to="/dashboard/booking">
+                          <Link className="nav-link nav__list underline__sliding hamburger_item" to="/dashboard/booking">
                             DASHBOARD
                           </Link>
                         }
                         {isBusiness && !isProfileCompleted &&
-                          <Link className="nav-link nav__list underline__sliding" to="/dashboard/profile" >
+                          <Link className="nav-link nav__list underline__sliding hamburger_item" to="/dashboard/profile" >
                             DASHBOARD
                           </Link>
                         }
                         {!isBusiness &&
-                          <Link className="nav-link nav__list underline__sliding" to="/dashboard/booking" >
+                          <Link className="nav-link nav__list underline__sliding hamburger_item" to="/dashboard/booking" >
                             DASHBOARD
                           </Link>
                         }
@@ -130,25 +130,29 @@ const HeaderNav = ({ source }) => {
                         (<React.Fragment>
                           <li className="nav-item landing__navbar-item">
                             {isBusiness && isProfileCompleted &&
-                              <Link className="nav-link" to="/dashboard/booking">
+                              <Link className="nav-link hamburger_item" to="/dashboard/booking">
                                 Dashboard
                               </Link>
                             }
                             {isBusiness && !isProfileCompleted &&
-                              <Link className="nav-link" to="/dashboard/profile" >
+                              <Link className="nav-link hamburger_item" to="/dashboard/profile" >
                                 Dashboard
                               </Link>
                             }
                             {!isBusiness &&
-                              <Link className="nav-link" to="/dashboard/booking" >
+                              <Link className="nav-link hamburger_item" to="/dashboard/booking" >
                                 Dashboard
                               </Link>
                             }
                           </li>
                           <li className="nav-item landing__navbar-item">
-                            <button className="login_register" type="button" onClick={() => logout()}>
+                            <span
+                              role="presentation"
+                              className="login_register"
+                              type="button" onClick={() => logout()}
+                            >
                               Logout
-                            </button>
+                            </span>
                           </li>
                         </React.Fragment>
                         ) : (

@@ -96,7 +96,7 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   position: absolute;
   right: 0px;
   list-style: none;
-  top: 25px;
+  top: 10px;
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -165,21 +165,21 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
 .landing__navbar-item {
   margin: 0px 10px;
   list-style: none;
-  margin-top: -12px;
-  padding: 5px;
+  margin-top: -9px;
 }
 
 .login_register {
-  margin-top: 17px;
+  margin-top: 6px;
   background-color: #247BA0;
   border-color: #247BA0;
   border-radius: 30px !important;
   color: #FFF;
   letter-spacing: 1.6px;
-  padding: 10px 22px;
-  width: 225px;
+  padding: 7px 22px;
+  /* width: 225px; */
   font-weight: bold;
   cursor: pointer;
+  text-transform: uppercase;
   &:hover {
     font-weight: bold;
     color: #FFF;
@@ -715,12 +715,19 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   padding: -5px;
   border-radius: 12px solid #dedede;
   width: 100%;
+  padding: 5px;
 }
+.hamburger_item {
+  color: #247BA0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .mdi-icon__close, .mdi-icon__open {
   right: 10px;
   float: right;
   margin-right: 16px;
-  margin-top: -25px;
+  margin-top: -39px;
   color: #646777;
   cursor: pointer;
 }
