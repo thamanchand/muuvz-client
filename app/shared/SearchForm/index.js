@@ -261,7 +261,7 @@ const Search = ({ onSearch, disabled, storedValues }) => {
             </p>
             <div className="form__form-group-field">
               <button
-                className="rounded btn btn-success"
+                className="rounded btn btn-success search__van_btn"
                 type="button"
                 onClick={() => handleSubmit(values)}
                 disabled={!disabled}
