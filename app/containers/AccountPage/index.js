@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { Col, Container, Row } from 'reactstrap';
 import { createStructuredSelector } from 'reselect';
+import { FormattedMessage } from 'react-intl';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
@@ -20,6 +21,7 @@ import toast from '../../shared/ToastNotify';
 import auth from '../../utils/auth';
 
 import { onPasswordChange } from './action';
+import messages from './messages';
 
 import { isPasswordChangedSelector, isPasswordChangeLoadingSelector } from './selector'
 // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
@@ -59,7 +61,9 @@ class AccountPage extends React.PureComponent {
           <Container className="dashboard container">
             <Row>
               <Col md={12}>
-                <h3 className="page-title">Account</h3>
+                <h3 className="page-title">
+                  <FormattedMessage {...messages.account} />
+                </h3>
               </Col>
             </Row>
             {/* isProfileCompleted && (

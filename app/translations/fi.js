@@ -5,6 +5,7 @@ import Sidebar from './Sidebar/fi.json';
 import Booking from './Booking/fi.json';
 import Resources from './Resources/fi.json';
 import Profile from './Profile/fi.json';
+import Account from './Account/fi.json';
 
 const fiLocale = {
   ...Homepage,
@@ -13,7 +14,8 @@ const fiLocale = {
   ...Sidebar,
   ...Booking,
   ...Resources,
-  ...Profile
+  ...Profile,
+  ...Account
 };
 
 export default fiLocale;
