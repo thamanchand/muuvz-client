@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
+import { FormattedMessage } from 'react-intl';
 
 import { onBookingLoad, onResourceLoad, onBookingAccept, onBookingCancel } from './action';
 import {
@@ -31,6 +32,7 @@ import { makeSelectLocale } from '../LanguageProvider/selectors';
 import auth from '../../utils/auth';
 import injectSaga from '../../utils/injectSaga';
 import injectReducer from '../../utils/injectReducer';
+import messages from './messages';
 
 const key = 'bookingPage';
 
@@ -84,7 +86,9 @@ class BookingDashboard extends React.Component {
           <Container className="dashboard container">
             <Row>
               <Col md={12}>
-                <h3 className="page-title">Booking</h3>
+                <h3 className="page-title">
+                  <FormattedMessage {...messages.booking} />
+                </h3>
               </Col>
             </Row>
             {/* isProfileCompleted && (
