@@ -9,11 +9,13 @@ import ClockOutlineIcon from 'mdi-react/ClockOutlineIcon';
 import EventIcon from 'mdi-react/EventIcon';
 import moment from 'moment';
 import { SegmentedControl } from 'segmented-control-react';
+import { FormattedMessage } from 'react-intl';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import auth from '../../utils/auth';
+import messages from './messages';
 
 import { onSearch, onBooking } from './actions';
 import {
@@ -251,7 +253,11 @@ class VanListPage extends PureComponent {
                   <form className="form" onSubmit={handleSubmit} style={{backgroundColor: '#FFF'}}>
                     <Col className="col-lg-4 col-md-4  col-sm-6 col-12 resource__searchbar">
                       <div className="form__form-group">
-                        <span className="form__form-group-label">City</span>
+                        <span className="form__form-group-label">
+                          <span className="form__form-group-label">
+                            <FormattedMessage {...messages.searchPlace} />
+                          </span>
+                        </span>
                         <div className="form__form-group-field">
                           <Field name="location">
                             {({ input }) => (
@@ -271,7 +277,9 @@ class VanListPage extends PureComponent {
 
                     <Col className="col-lg-4 col-md-4  col-sm-3 col-12">
                       <div className="form__form-group">
-                        <span className="form__form-group-label">Pickup date</span>
+                        <span className="form__form-group-label">
+                          <FormattedMessage {...messages.searchPickupDate} />
+                        </span>
                         <div className="form__form-group-field">
                           <Field
                             name="pickupDate"
@@ -289,7 +297,9 @@ class VanListPage extends PureComponent {
                     </Col>
                     <Col className="col-lg-4 col-md-4  col-sm-3 col-12">
                       <div className="form__form-group form-pickuptime">
-                        <span className="form__form-group-label">Pickup time</span>
+                        <span className="form__form-group-label">
+                          <FormattedMessage {...messages.searchPickupTime} />
+                        </span>
                         <div className="form__form-group-field">
                           <Field
                             name="pickupTime"
@@ -307,7 +317,9 @@ class VanListPage extends PureComponent {
                     </Col>
                     <Col className="col-lg-4 col-md-4  col-sm-3 col-12">
                       <div className="form__form-group">
-                        <span className="form__form-group-label">Drop-off date</span>
+                        <span className="form__form-group-label">
+                          <FormattedMessage {...messages.searchDropOffDate} />
+                        </span>
                         <div className="form__form-group-field">
                           <Field
                             name="dropOffDate"
@@ -324,7 +336,9 @@ class VanListPage extends PureComponent {
                     </Col>
                     <Col className="col-lg-4 col-md-4 col-sm-3 col-12">
                       <div className="form__form-group">
-                        <span className="form__form-group-label">Drop-off time</span>
+                        <span className="form__form-group-label">
+                          <FormattedMessage {...messages.searchDropOffTime} />
+                        </span>
                         <div className="form__form-group-field">
                           <Field
                             name="dropOffTime"
@@ -346,7 +360,7 @@ class VanListPage extends PureComponent {
                         type="button"
                         onClick={() => handleSubmit(values)}
                       >
-                      Search van
+                        <FormattedMessage {...messages.searchVansBtn} />
                       </button>
                     </Col>
                     <Col className="col-md-12 col-sm-12">

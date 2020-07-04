@@ -1,0 +1,10 @@
+{
+  "muuvz.component.VanListing.searchPlace": "Kaupunki",
+  "muuvz.component.VanListing.searchPickupDate": "Noutopäivä",
+  "muuvz.component.VanListing.searchPickupTime": "Aika",
+  "muuvz.component.VanListing.searchDropOffDate": "Poistumispäivämäärä",
+  "muuvz.component.VanListing.searchDropOffTime": "Aika",
+  "muuvz.component.VanListing.selectDateTimeNotify": "Valitse sekä päivämäärä että aika",
+  "muuvz.component.VanListing.lessThan2HrsNotify": "Et voi varata alle 2 tuntia",
+  "muuvz.component.VanListing.searchVansBtn": "Hae pakettiautoja"
+}
