@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Col, Container, Row } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 
 // Utils
 import injectSaga from 'utils/injectSaga';
@@ -30,6 +31,7 @@ import reducer from './reducers';
 
 import auth from '../../utils/auth';
 import { filterResourcesBelongsToUser } from '../utils';
+import messages from './messages';
 
 const { uuid } = require('uuidv4');
 
@@ -280,7 +282,9 @@ class ResourcesPage extends React.PureComponent {
           <Container className="dashboard container">
             <Row>
               <Col md={12}>
-                <h3 className="page-title">Resources</h3>
+                <h3 className="page-title">
+                  <FormattedMessage {...messages.vans} />
+                </h3>
               </Col>
             </Row>
             {/* isProfileCompleted && (
