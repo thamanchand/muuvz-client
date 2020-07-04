@@ -227,7 +227,7 @@ class VanListPage extends PureComponent {
                   onKeyDown={this.onSearchEditToggle}
                   className="edit-btn"
                 >
-                  Edit search
+                  <FormattedMessage {...messages.editSearch} />
                 </span>
               </div>
               <Form

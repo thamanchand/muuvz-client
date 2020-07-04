@@ -40,4 +40,8 @@ export default defineMessages({
     id: `${scope}.searchVansBtn`,
     defaultMessage: 'Search vans',
   },
+  editSearch: {
+    id: `${scope}.editSearch`,
+    defaultMessage: 'Edit search',
+  },
 });

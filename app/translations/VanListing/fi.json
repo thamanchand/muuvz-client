@@ -6,5 +6,6 @@
   "muuvz.component.VanListing.searchDropOffTime": "Aika",
   "muuvz.component.VanListing.selectDateTimeNotify": "Valitse sekä päivämäärä että aika",
   "muuvz.component.VanListing.lessThan2HrsNotify": "Et voi varata alle 2 tuntia",
-  "muuvz.component.VanListing.searchVansBtn": "Hae pakettiautoja"
+  "muuvz.component.VanListing.searchVansBtn": "Hae pakettiautoja",
+  "muuvz.component.VanListing.editSearch": "Muokkaa hakua"
 }
