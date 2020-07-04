@@ -4,6 +4,7 @@ import VanListing from './VanListing/fi.json';
 import Sidebar from './Sidebar/fi.json';
 import Booking from './Booking/fi.json';
 import Resources from './Resources/fi.json';
+import Profile from './Profile/fi.json';
 
 const fiLocale = {
   ...Homepage,
@@ -11,7 +12,8 @@ const fiLocale = {
   ...VanListing,
   ...Sidebar,
   ...Booking,
-  ...Resources
+  ...Resources,
+  ...Profile
 };
 
 export default fiLocale;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-
+import { FormattedMessage } from 'react-intl';
 import { Col, Container, Row } from 'reactstrap';
 // import Statistics from '../Booking/components/Statistics';
 import Layout from '../Layout';
@@ -30,6 +30,7 @@ import {
 } from './action';
 
 import { userProfileSelector } from './selector';
+import messages from './messages';
 
 const key = 'profilePage';
 
@@ -78,7 +79,9 @@ class Profile extends React.PureComponent {
           <Container className="dashboard container">
             <Row>
               <Col md={12}>
-                <h3 className="page-title">Profile</h3>
+                <h3 className="page-title">
+                  <FormattedMessage {...messages.profile} />
+                </h3>
               </Col>
             </Row>
             {/* isProfileCompleted && (
