@@ -5,11 +5,13 @@ import { Card, CardBody, Col, Badge, Table } from 'reactstrap';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
 import PlusCircleIcon from 'mdi-react/PlusCircleIcon';
+import { FormattedMessage } from 'react-intl';
 
 import Modal from '../../../shared/Modal';
 import { formatDate, useMedia } from '../../utils';
 import AddVan from './AddVan';
 import EditVanForm from './EditVan';
+import messages from '../messages';
 
 const iconStyles = {
   marginRight: '10px',
@@ -96,14 +98,14 @@ const ResourceList = ({
             <div className="col-md-4 header__filter">
               {/* <span className="filter__wrapper">Filter</span> */}
               <button
-                className="icon icon--right btn rounded btn-success btn-sm add__resource"
+                className="icon icon--right btn rounded btn-success add__resource"
                 onClick={showVanModelHandler}
                 type="button"
               >
-                <p className="add__resource_label">
-                  Add van
-                  <PlusCircleIcon className="resource__add_icon" size="30" color="#555555"/>
-                </p>
+
+                <FormattedMessage {...messages.addVan} />
+                <PlusCircleIcon className="resource__add_icon" size="30" color="#555555"/>
+
               </button>
             </div>
           </div>
@@ -111,11 +113,11 @@ const ResourceList = ({
             <Table striped responsive>
               <thead>
                 <tr>
-                  <th>Brand</th>
-                  {isDeviceSize750px && <th>Model</th>}
-                  {isDeviceSize900px && <th>Year</th>}
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th><FormattedMessage {...messages.brand} /></th>
+                  {isDeviceSize750px && <th><FormattedMessage {...messages.model} /></th>}
+                  {isDeviceSize900px && <th><FormattedMessage {...messages.year} /></th>}
+                  <th><FormattedMessage {...messages.status} /></th>
+                  <th><FormattedMessage {...messages.action} /></th>
                 </tr>
               </thead>
               <tbody>

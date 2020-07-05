@@ -1,3 +1,9 @@
 {
-  "muuvz.component.Resources.vans": "Muottoauto"
+  "muuvz.component.Resources.vans": "Muottoauto",
+  "muuvz.component.Resources.model": "Merkki",
+  "muuvz.component.Resources.brand": "Malli",
+  "muuvz.component.Resources.year": "Vuosimalli",
+  "muuvz.component.Resources.status": "Tila",
+  "muuvz.component.Resources.action": "Toiminta",
+  "muuvz.component.Resources.addVan": "Lisää pakettiauto"
 }
