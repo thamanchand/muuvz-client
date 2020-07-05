@@ -7,6 +7,7 @@ import Resources from './Resources/fi.json';
 import Profile from './Profile/fi.json';
 import Account from './Account/fi.json';
 import Dropzone from './Dropzone/fi.json';
+import Form from './Form/fi.json';
 
 const fiLocale = {
   ...Homepage,
@@ -17,7 +18,8 @@ const fiLocale = {
   ...Resources,
   ...Profile,
   ...Account,
-  ...Dropzone
+  ...Dropzone,
+  ...Form
 };
 
 export default fiLocale;
