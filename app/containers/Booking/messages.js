@@ -12,4 +12,17 @@ export default defineMessages({
     id: `${scope}.booking`,
     defaultMessage: 'Booking',
   },
+  currentBookings: {
+    id: `${scope}.currentBookings`,
+    defaultMessage: 'Current bookings',
+  },
+  noBookingYet: {
+    id: `${scope}.noBookingYet`,
+    defaultMessage: 'No booking yet!',
+  },
+  vans: {
+    id: `${scope}.vans`,
+    defaultMessage: 'Vans',
+  },
+
 });

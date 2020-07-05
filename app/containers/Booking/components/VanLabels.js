@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
 import moment from 'moment';
 import ClipLoader from "react-spinners/ClipLoader";
+import { FormattedMessage } from 'react-intl';
+
 import { useMedia } from '../../utils';
+import messages from '../messages';
 
 const { uuid } = require('uuidv4');
 
@@ -27,7 +30,9 @@ const EventLabels = ({
       <Card className="card--not-full-height">
         <CardBody className="currentbooking__label">
           <div className="card__title">
-            <h5 className="bold-text">Current booking</h5>
+            <h5 className="bold-text">
+              <FormattedMessage {...messages.currentBookings} />
+            </h5>
           </div>
           {currentBookings && currentBookings.length ? (
             currentBookings && currentBookings.map(currentBookingItem => (
@@ -229,14 +234,16 @@ const EventLabels = ({
               </>
             ))
           ) : (
-            <p>No booking yet!</p>
+            <p><FormattedMessage {...messages.noBookingYet} /></p>
           )}
         </CardBody>
       </Card>
       <Card className="card--not-full-height">
         <CardBody>
           <div className="card__title">
-            <h5 className="bold-text">Your vans</h5>
+            <h5 className="bold-text">
+              <FormattedMessage {...messages.vans} />
+            </h5>
           </div>
           {resourceList && resourceList.map(resource => (
             <p key={uuid()}>

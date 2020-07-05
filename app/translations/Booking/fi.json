@@ -1,3 +1,6 @@
 {
-  "muuvz.component.Booking.booking": "Varattu"
+  "muuvz.component.Booking.booking": "Varattu",
+  "muuvz.component.Booking.currentBookings": "Nykyiset varaukset",
+  "muuvz.component.Booking.noBookingYet": "Varaus ei vielä",
+  "muuvz.component.Booking.vans": "Pakettiautoja"
 }
