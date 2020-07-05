@@ -24,5 +24,21 @@ export default defineMessages({
     id: `${scope}.vans`,
     defaultMessage: 'Vans',
   },
+  month: {
+    id: `${scope}.month`,
+    defaultMessage: 'Month',
+  },
+  week: {
+    id: `${scope}.week`,
+    defaultMessage: 'Week',
+  },
+  day: {
+    id: `${scope}.day`,
+    defaultMessage: 'Day',
+  },
+  today: {
+    id: `${scope}.today`,
+    defaultMessage: 'Today',
+  },
 
 });

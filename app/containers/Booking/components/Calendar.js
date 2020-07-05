@@ -2,13 +2,28 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import BigCalendar from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-
 import moment from 'moment';
+import 'moment/locale/fi';   // new
+import { FormattedMessage } from 'react-intl';
+
+import messages from '../messages';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
+
+const allMessages = { // new
+  previous: <span className="lnr lnr-chevron-left" />,
+  next: <span className="lnr lnr-chevron-right" />,
+  today: <FormattedMessage {...messages.today} />,
+  month: <FormattedMessage {...messages.month} />,
+  week: <FormattedMessage {...messages.week} />,
+  day: <FormattedMessage {...messages.day} />,
+};
+
+const allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
+console.log("allview", allViews)
 
 export default class CalendarComponent extends PureComponent {
   static propTypes = {
@@ -69,20 +84,17 @@ export default class CalendarComponent extends PureComponent {
     return (
       <div className={`calendar${small ? ' calendar--small' : ''}`}>
         <DragAndDropCalendar
-          culture={locale === 'fi' ? 'fi-FI' : 'en-GB'}
+          culture={locale}
           localizer={localizer}
           events={events}
-          views={['month', 'week', 'day']}
+          views={[allViews[0], allViews[1], allViews[3]]}
           popup={false}
           step={60}
           timeslots={1}
           showMultiDayTimes
           onEventDrop={this.moveEvent}
           eventPropGetter={this.eventStyleGetter}
-          messages={{
-            previous: <span className="lnr lnr-chevron-left" />,
-            next: <span className="lnr lnr-chevron-right" />,
-          }}
+          messages={allMessages}
         />
       </div>
     );

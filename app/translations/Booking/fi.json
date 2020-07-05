@@ -2,5 +2,9 @@
   "muuvz.component.Booking.booking": "Varattu",
   "muuvz.component.Booking.currentBookings": "Nykyiset varaukset",
   "muuvz.component.Booking.noBookingYet": "Varaus ei vielä",
-  "muuvz.component.Booking.vans": "Pakettiautoja"
+  "muuvz.component.Booking.vans": "Pakettiautoja",
+  "muuvz.component.Booking.month": "Kuukausi",
+  "muuvz.component.Booking.week": "Viikko",
+  "muuvz.component.Booking.day": "Päivä",
+  "muuvz.component.Booking.today": "Tänään"
 }
