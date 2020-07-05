@@ -164,4 +164,8 @@ export default defineMessages({
     id: `${scope}.priceDefinitionAlert`,
     defaultMessage: 'Mininum one price option is required',
   },
+  requiredField: {
+    id: 'muuvz.component.Form.requiredField',
+    defaultMessage: 'This is required field ',
+  },
 });

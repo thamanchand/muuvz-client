@@ -52,34 +52,34 @@ const AddVanForm = ({
           validate={values => { // validate both passowrds are same
             const errors = {};
             if (!values.brand) {
-              errors.brand = 'This field is required';
+              errors.brand = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.model) {
-              errors.model = 'This field is required';
+              errors.model = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.platenum) {
-              errors.platenum = 'This field is required';
+              errors.platenum = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.passengernum) {
-              errors.passengernum = 'This field is required';
+              errors.passengernum = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.mileage) {
-              errors.mileage = 'This field is required';
+              errors.mileage = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.enginesize) {
-              errors.enginesize = 'This field is required';
+              errors.enginesize = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.fueltype) {
-              errors.fueltype = 'This field is required';
+              errors.fueltype = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.power) {
-              errors.power = 'This field is required';
+              errors.power = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.transmission) {
-              errors.transmission = 'This field is required';
+              errors.transmission = <FormattedMessage {...messages.requiredField} />;
             }
             if (!values.loadcapacity) {
-              errors.loadcapacity = 'This field is required';
+              errors.loadcapacity = <FormattedMessage {...messages.requiredField} />;
             }
             return errors
           }}
