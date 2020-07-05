@@ -497,10 +497,12 @@ const AddVanForm = ({
                     </button>
                     <div className="alert__content">
                       <p>
-                        <span className="bold-text">Attention! </span>
-                          Atleast one price schema needs to be define
+                        <span className="bold-text"><FormattedMessage {...messages.attentionInfo} /> </span>
+                        <FormattedMessage {...messages.priceDefinitionAlert} />
                       </p>
-                      <p className="page-subhead subhead">E.g: 1hr van booking will cost €20 </p>
+                      <p className="page-subhead subhead">
+                        <FormattedMessage {...messages.priceInfo} />
+                      </p>
                     </div>
                   </div>
                 }
@@ -514,7 +516,7 @@ const AddVanForm = ({
                       onClick={() => onSaveVan(values)}
                       disabled={submitting || pristine }
                     >
-                      Save van
+                      <FormattedMessage {...messages.saveVan} />
                     </button>
                   </ButtonToolbar>
                 </div>

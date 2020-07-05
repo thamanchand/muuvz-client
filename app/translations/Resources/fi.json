@@ -33,5 +33,8 @@
   "muuvz.component.Resources.addPrice": "Lisää hinnat",
   "muuvz.component.Resources.noInfo": "Ei tietoa",
   "muuvz.component.Resources.attentionInfo": "Huomio!",
-  "muuvz.component.Resources.multipleFiles": "Voit lähettää suuria tiedostoja tiedostojen jakamisen"
+  "muuvz.component.Resources.multipleFiles": "Voit lähettää suuria tiedostoja tiedostojen jakamisen",
+  "muuvz.component.Resources.saveVan": "Tallenna pakettiautotiedot",
+  "muuvz.component.Resources.priceInfo": "Esim: Yhden tunnin varaus maksoi €20",
+  "muuvz.component.Resources.priceDefinitionAlert": "Vähintään yksi hintavaihtoehto vaaditaan"
 }

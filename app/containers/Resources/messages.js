@@ -152,4 +152,16 @@ export default defineMessages({
     id: `${scope}.multipleFiles`,
     defaultMessage: 'You can upload multiple files',
   },
+  saveVan: {
+    id: `${scope}.saveVan`,
+    defaultMessage: 'Save van info',
+  },
+  priceInfo: {
+    id: `${scope}.priceInfo`,
+    defaultMessage: 'E.g: 1 hour booking cost €20',
+  },
+  priceDefinitionAlert: {
+    id: `${scope}.priceDefinitionAlert`,
+    defaultMessage: 'Mininum one price option is required',
+  },
 });
