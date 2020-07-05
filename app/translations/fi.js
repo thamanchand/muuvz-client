@@ -6,6 +6,7 @@ import Booking from './Booking/fi.json';
 import Resources from './Resources/fi.json';
 import Profile from './Profile/fi.json';
 import Account from './Account/fi.json';
+import Dropzone from './Dropzone/fi.json';
 
 const fiLocale = {
   ...Homepage,
@@ -15,7 +16,8 @@ const fiLocale = {
   ...Booking,
   ...Resources,
   ...Profile,
-  ...Account
+  ...Account,
+  ...Dropzone
 };
 
 export default fiLocale;

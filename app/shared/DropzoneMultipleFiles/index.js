@@ -2,6 +2,9 @@
 import React, { PureComponent } from 'react';
 import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 
 const MAX_SIZE = 1048576;
 
@@ -59,7 +62,8 @@ class DropZoneMultipleField extends PureComponent {
                 {(!files || files.length === 0)
                 && (
                   <div className="dropzone__drop-here">
-                    <span className="lnr lnr-upload" /> Drop file here to upload
+                    <span className="lnr lnr-upload" />
+                    <FormattedMessage {...messages.dropFile} /> 
                   </div>
                 )}
                 {isFileTooLarge && (
