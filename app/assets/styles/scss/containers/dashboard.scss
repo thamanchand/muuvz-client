@@ -1416,12 +1416,14 @@
 .add__resource {
   cursor: pointer;
   outline: none;
-  width: 150px;
+  width: 187px;
+  padding: 8px 10px 8px 20px !important;
+  font-weight: bold;
 }
 
 .resource__add_icon {
-  height: 18px;
-  width: 18px;
+  height: 18px !important;
+  width: 18px !important;
 }
 .add__resource_label {
   display: flex;
