@@ -68,4 +68,36 @@ export default defineMessages({
     id: `${scope}.inuse`,
     defaultMessage: 'IN-USE',
   },
+  status: {
+    id: `${scope}.status`,
+    defaultMessage: 'Status',
+  },
+  brand: {
+    id: `${scope}.brand`,
+    defaultMessage: 'Brand',
+  },
+  model: {
+    id: `${scope}.model`,
+    defaultMessage: 'Model',
+  },
+  year: {
+    id: `${scope}.year`,
+    defaultMessage: 'Year',
+  },
+  action: {
+    id: `${scope}.action`,
+    defaultMessage: 'Action',
+  },
+  plateNumber: {
+    id: `${scope}.plateNumber`,
+    defaultMessage: 'Plate number',
+  },
+  bookingDateTime: {
+    id: `${scope}.bookingDateTime`,
+    defaultMessage: 'Booking Date & Time',
+  },
+  pickupDropoffLocation: {
+    id: `${scope}.pickupDropoffLocation`,
+    defaultMessage: 'Pickup & Drop-off location',
+  },
 });

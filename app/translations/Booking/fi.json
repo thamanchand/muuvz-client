@@ -13,5 +13,14 @@
   "muuvz.component.Booking.cancel": "PERUUTTA",
   "muuvz.component.Booking.cancelled": "PERUTTU",
   "muuvz.component.Booking.waiting": "ODOTUS",
-  "muuvz.component.Booking.inuse": "KÄYTÖSSÄ"
+  "muuvz.component.Booking.inuse": "KÄYTÖSSÄ",
+  "muuvz.component.Booking.vans": "Pakettiauto",
+  "muuvz.component.Booking.model": "Merkki",
+  "muuvz.component.Booking.brand": "Malli",
+  "muuvz.component.Booking.year": "Vuosimalli",
+  "muuvz.component.Booking.status": "Tila",
+  "muuvz.component.Booking.action": "Toiminta",
+  "muuvz.component.Booking.plateNumber": "Rek.nro",
+  "muuvz.component.Booking.bookingDateTime": "Varauspäivämäärä aika",
+  "muuvz.component.Booking.pickupDropoffLocation": "Pudota pois ja nouto sijainti"
 }

@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Card, CardBody, Col, Table, Badge } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+
+import messages from '../messages';
 
 const UserBooking = ({ currentBookings }) => (
   <Col md={12} lg={12} xl={12}>
@@ -19,11 +22,11 @@ const UserBooking = ({ currentBookings }) => (
             <Table striped responsive>
               <thead>
                 <tr>
-                  <th>Van Name</th>
-                  <th>Licence plate</th>
-                  <th>Date & time</th>
-                  <th>Pick up & Drop off location</th>
-                  <th>Status</th>
+                  <th><FormattedMessage {...messages.brand} /></th>
+                  <th><FormattedMessage {...messages.plateNumber} /></th>
+                  <th><FormattedMessage {...messages.bookingDateTime} /></th>
+                  <th><FormattedMessage {...messages.pickupDropoffLocation} /></th>
+                  <th><FormattedMessage {...messages.status} /></th>
                 </tr>
               </thead>
               <tbody>
@@ -36,9 +39,15 @@ const UserBooking = ({ currentBookings }) => (
                       {item.address}
                     </td>
                     <td>
-                      {item.status ==='Booked' && <Badge color="badge badge-danger">BOOKED</Badge>}
-                      {item.status ==='Cancelled' && <Badge color="badge badge-info">CANCELLED</Badge>}
-                      {item.status ==='Requested' && <Badge color="badge badge-info">WAITING..</Badge>}
+                      {item.status ==='Booked' && <Badge color="badge badge-danger">
+                        <FormattedMessage {...messages.booked} />
+                      </Badge>}
+                      {item.status ==='Cancelled' && <Badge color="badge badge-info">
+                        <FormattedMessage {...messages.cancelled} />
+                      </Badge>}
+                      {item.status ==='Requested' && <Badge color="badge badge-info">
+                        <FormattedMessage {...messages.waiting} />
+                      </Badge>}
                     </td>
                   </tr>
                 ))}
