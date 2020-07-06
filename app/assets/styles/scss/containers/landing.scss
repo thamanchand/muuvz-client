@@ -916,13 +916,13 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
     bottom: 0;
     height: 3px;
     width: 0;
-    background: #ff4861;
+    background: #247BA0;
     transition: width .5s ease;
     top: 27px;
 }
 .underline__sliding:hover:before {
     width: 100%;
-    background: #ff4861;
+    background: #247BA0;
     transition: width .5s ease;
 }
 .underline__sliding:hover:after {
@@ -944,7 +944,7 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
   bottom: 0;
   left: 0;
   width: 0%;
-  border-bottom: 3px solid #ff4861;
+  border-bottom: 3px solid #247BA0;
   transition: 0.4s;
   top: 27px;
 }
