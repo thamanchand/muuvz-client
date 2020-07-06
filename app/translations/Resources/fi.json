@@ -36,5 +36,9 @@
   "muuvz.component.Resources.multipleFiles": "Voit lähettää suuria tiedostoja tiedostojen jakamisen",
   "muuvz.component.Resources.saveVan": "Tallenna pakettiautotiedot",
   "muuvz.component.Resources.priceInfo": "Esim: Yhden tunnin varaus maksoi €20",
-  "muuvz.component.Resources.priceDefinitionAlert": "Vähintään yksi hintavaihtoehto vaaditaan"
+  "muuvz.component.Resources.priceDefinitionAlert": "Vähintään yksi hintavaihtoehto vaaditaan",
+  "muuvz.component.Resources.updateVanBtn": "Päivitä pakettiauto tiedot",
+  "muuvz.component.Resources.uploadedPictures": "Ladatut kuvat",
+  "muuvz.component.Resources.addModalHeader": "Lisää uusi pakettiauto",
+  "muuvz.component.Resources.editModalHeader": "Päivitä pakettiautotiedot"
 }

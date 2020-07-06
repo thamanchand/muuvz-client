@@ -57,7 +57,7 @@ const ResourceList = ({
 
               <Modal
                 color="primary"
-                title="Add new van"
+                title=<FormattedMessage {...messages.addModalHeader} />
                 header
                 md
                 openModel={openModel}
@@ -80,7 +80,7 @@ const ResourceList = ({
 
               <Modal
                 color="primary"
-                title="Edit van info"
+                title=<FormattedMessage {...messages.editModalHeader} />
                 header
                 md
                 openModel={openEditModal}

@@ -168,4 +168,20 @@ export default defineMessages({
     id: 'muuvz.component.Form.requiredField',
     defaultMessage: 'This is required field ',
   },
+  updateVanBtn: {
+    id: `${scope}.updateVanBtn`,
+    defaultMessage: 'Update van info',
+  },
+  uploadedPictures: {
+    id: `${scope}.uploadedPictures`,
+    defaultMessage: 'Uploaded pictures',
+  },
+  addModalHeader: {
+    id: `${scope}.addModalHeader`,
+    defaultMessage: 'Add new van',
+  },
+  editModalHeader: {
+    id: `${scope}.editModalHeader`,
+    defaultMessage: 'Update van info',
+  },
 });

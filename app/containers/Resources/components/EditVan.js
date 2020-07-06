@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Row, Card, CardBody, Col, ButtonToolbar, Table } from 'reactstrap';
 import { Form } from 'react-final-form';
 import { Field } from 'react-final-form-html5-validation'
+import { FormattedMessage } from 'react-intl';
 
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import SquareEditOutlineIcon from 'mdi-react/SquareEditOutlineIcon';
@@ -17,6 +18,7 @@ import AddPrice from './AddPrice';
 import Modal from '../../../shared/Modal';
 import EditPriceModal from './EditPrice';
 import GallerySlideShow from '../../../shared/GalleySlideshow';
+import messages from '../messages';
 
 const { uuid } = require('uuidv4');
 
@@ -161,34 +163,34 @@ const EditVanForm = ({
             validate={values => { // validate both passowrds are same
               const errors = {};
               if (!values.brand) {
-                errors.brand = 'This field is required';
+                errors.brand = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.model) {
-                errors.model = 'This field is required';
+                errors.model = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.platenum) {
-                errors.platenum = 'This field is required';
+                errors.platenum = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.passengernum) {
-                errors.passengernum = 'This field is required';
+                errors.passengernum = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.mileage) {
-                errors.mileage = 'This field is required';
+                errors.mileage = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.enginesize) {
-                errors.enginesize = 'This field is required';
+                errors.enginesize = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.fueltype) {
-                errors.fueltype = 'This field is required';
+                errors.fueltype = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.power) {
-                errors.power = 'This field is required';
+                errors.power = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.transmission) {
-                errors.transmission = 'This field is required';
+                errors.transmission = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.loadcapacity) {
-                errors.loadcapacity = 'This field is required';
+                errors.loadcapacity = <FormattedMessage {...messages.requiredField} />;
               }
               return errors
             }}
@@ -201,7 +203,9 @@ const EditVanForm = ({
                 </div>
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Brand</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.brand} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="brand"
@@ -216,7 +220,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Model</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.model} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="model"
@@ -231,7 +237,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">License-plate</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.plateNumber} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         placeholder="IKS-314"
@@ -247,7 +255,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Mileage</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.mileage} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="mileage"
@@ -261,12 +271,16 @@ const EditVanForm = ({
                 </Col>
 
                 <div className="container">
-                  <h5 className="bold-text header_label">Features</h5>
+                  <h5 className="bold-text header_label">
+                    <FormattedMessage {...messages.features} />
+                  </h5>
                 </div>
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Number of Seats</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.numberOfSeats} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="passengernum"
@@ -281,7 +295,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Engine size</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.engineSize} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="enginesize"
@@ -296,16 +312,18 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Fuel Type</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.fuelType} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name='fueltype'
                         component={renderSelectField}
                         options={[
-                          {value: 'Diesel', label: 'Diesel'},
-                          {value: 'Petrol', label: 'Petrol'},
-                          {value: 'Hybrid', label: 'Hybrid'},
-                          {value: 'Electric', label: 'Electric'},
+                          {value: 'Diesel', label: <FormattedMessage {...messages.diesel} />},
+                          {value: 'Petrol', label: <FormattedMessage {...messages.petrol} />},
+                          {value: 'Hybrid', label: <FormattedMessage {...messages.hybrid} />},
+                          {value: 'Electric', label: <FormattedMessage {...messages.electric} />},
                         ]}
                         defaultValue={{ value: initialValues.fueltype, label: initialValues.fueltype}}
                       />
@@ -316,7 +334,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Power</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.power} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="power"
@@ -331,7 +351,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Consumption</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.consumption} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="consumption"
@@ -345,14 +367,16 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Gear</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.gear} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name='transmission'
                         component={renderSelectField}
                         options={[
-                          {value: 'Automatic', label: 'Automatic'},
-                          {value: 'Manual', label: 'Manual'},
+                          {value: 'Automatic', label: <FormattedMessage {...messages.automatic} />},
+                          {value: 'Manual', label: <FormattedMessage {...messages.manual} />},
                         ]}
                         defaultValue={{ value: initialValues.transmission, label: initialValues.transmission}}
                       />
@@ -363,7 +387,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Width x Height x Length (cm)</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.exterirorsize} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="exteriordimensions"
@@ -377,7 +403,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Width x Height x Length (cm)</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.interiorsize} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="interiordimensions"
@@ -391,7 +419,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Load capacity</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.loadcapacity} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="loadcapacity"
@@ -406,7 +436,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Air bag</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.airbag} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="airbag"
@@ -419,7 +451,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Air conditioning</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.airconditioning} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="airconditioning"
@@ -432,7 +466,9 @@ const EditVanForm = ({
 
                 <Col lg={3} md={4} sm={6}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Cruise control</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.cruisecontrol} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="cruisecontrol"
@@ -445,7 +481,9 @@ const EditVanForm = ({
 
                 <Col md={12} sm={12}>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Other features</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.otherFeatures} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="features"
@@ -459,7 +497,9 @@ const EditVanForm = ({
                 {coverPicsList && coverPicsList.length > 0 && (
                 <>
                   <div className="container">
-                    <h5 className="bold-text header_label">Uploaded pictures</h5>
+                    <h5 className="bold-text header_label">
+                      <FormattedMessage {...messages.uploadedPictures} />
+                    </h5>
                   </div>
                   <div className="container">
                     <div className="row justify-content-center">
@@ -483,8 +523,12 @@ const EditVanForm = ({
                 </>
                 )}
                 <Col md={12} sm={12} >
-                  <h3 className="header_label pricing">Upload new pictures</h3>
-                  <h5 className="subhead">You can upload multiple files</h5>
+                  <h3 className="header_label pricing">
+                    <FormattedMessage {...messages.uploadPictures} />
+                  </h3>
+                  <h5 className="subhead">
+                    <FormattedMessage {...messages.multipleFiles} />
+                  </h5>
                   <div className="form__form-group">
                     <div className="form__form-group-field">
                       <Field
@@ -498,7 +542,7 @@ const EditVanForm = ({
                     <div className="alert--bordered alert alert-warning fade show" role="alert">
                       <div className="alert__content">
                         <p>
-                          <span className="bold-text">Attention! </span>
+                          <span className="bold-text"><FormattedMessage {...messages.attentionInfo} /> </span>
                             You need to upload cover picture of your van
                         </p>
                       </div>
@@ -507,13 +551,15 @@ const EditVanForm = ({
                 </Col>
 
                 <div className="container">
-                  <h5 className="bold-text header_label pricing">Pricing</h5>
+                  <h5 className="bold-text header_label pricing">
+                    <FormattedMessage {...messages.prices} />
+                  </h5>
                   <Button
                     color='success'
                     onClick={addNePriceHandler}
                     className="btn rounded btn-success add__pricing-btn"
                   >
-                    Add pricing option
+                    <FormattedMessage {...messages.addPrice} />
                   </Button>
                   <Modal
                     color="primary"
@@ -538,17 +584,21 @@ const EditVanForm = ({
                       </button>
                       <div className="alert__content">
                         <p>
-                          <span className="bold-text">Attention! </span>
-                            Atleast one price schema needs to be define
+                          <span className="bold-text"><FormattedMessage {...messages.attentionInfo} /> </span>
+                          <FormattedMessage {...messages.priceDefinitionAlert} />
                         </p>
-                        <p className="page-subhead subhead">E.g: 1hr van booking will cost €20 </p>
+                        <p className="page-subhead subhead">
+                          <FormattedMessage {...messages.priceInfo} />
+                        </p>
                       </div>
                     </div>
                   }
                   {pricingList && !pricingList.length > 0
                     ?
                     ( <>
-                        <h5 className="page-subhead subhead">No data </h5>
+                        <h5 className="page-subhead subhead">
+                          <FormattedMessage {...messages.noInfo} />
+                        </h5>
                         <p className="validation__error">Please add van pricing options </p>
                       </>
                     )
@@ -602,7 +652,7 @@ const EditVanForm = ({
                         onClick={() => updateVanInfoHandler(values)}
                         disabled={submitting || pristine }
                       >
-                        Update record
+                        <FormattedMessage {...messages.updateVanBtn} />
                       </button>
                     </ButtonToolbar>
                   </div>
