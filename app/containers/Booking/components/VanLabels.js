@@ -44,7 +44,9 @@ const EventLabels = ({
                 <div className="booking__label" style={{borderLeft: `${'2px solid'} ${currentBookingItem.resource.color}`}} >
                   {currentBookingItem.status ==='Requested' && (
                     <>
-                      <span className="booking__label_status waiting">REQUESTED</span>
+                      <span className="booking__label_status waiting">
+                        <FormattedMessage {...messages.requested} />
+                      </span>
                       {(isMaxWidth || isMinWidth) && isMinWidthLess ?
                         (
                           <div className="booking__label_status-break">
@@ -55,7 +57,8 @@ const EventLabels = ({
                                 : "booking__action"
                               }
                               onClick={() => acceptBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
-                            > ACCEPT
+                            >
+                              <FormattedMessage {...messages.accept} />
                             </span>
                             <span
                               role="presentation"
@@ -64,7 +67,8 @@ const EventLabels = ({
                                 : "booking__action"
                               }
                               onClick={() => cancelBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
-                            > CANCEL
+                            >
+                              <FormattedMessage {...messages.cancel} />
                             </span>
                             <div className="booking__user_info">
                               <div className="resources__icon_list">
@@ -102,7 +106,8 @@ const EventLabels = ({
                                 : "booking__action"
                               }
                               onClick={() => acceptBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
-                            > ACCEPT
+                            >
+                              <FormattedMessage {...messages.accept} />
                             </span>
                             <span
                               role="presentation"
@@ -111,7 +116,8 @@ const EventLabels = ({
                                 : "booking__action"
                               }
                               onClick={() => cancelBookingHandler(currentBookingItem.id, currentBookingItem.resource.id)}
-                            > CANCEL
+                            >
+                              <FormattedMessage {...messages.cancel} />
                             </span>
                             <div className="booking__user_info">
                               <div className="resources__icon_list">
@@ -144,7 +150,9 @@ const EventLabels = ({
                   )}
                   {currentBookingItem.resource.status ==='Booked' && (
                     <>
-                      <span className="booking__label_status booked">BOOKED</span>
+                      <span className="booking__label_status booked">
+                        <FormattedMessage {...messages.booked} />
+                      </span>
                       <div className="booking__user_info">
                         <div className="resources__icon_list">
                           <img
@@ -173,7 +181,9 @@ const EventLabels = ({
                   )}
                   {currentBookingItem.resource.status ==='Inuse' && (
                     <>
-                      <span className="booking__label_status inuse">IN USE</span>
+                      <span className="booking__label_status inuse">
+                        <FormattedMessage {...messages.inuse} />
+                      </span>
                       <div className="booking__user_info">
                         <div className="resources__icon_list">
                           <img
@@ -203,7 +213,9 @@ const EventLabels = ({
 
                   {currentBookingItem.resource.status ==='Cancelled' && (
                     <>
-                      <span className="booking__label_status cancelled">CANCELLED</span>
+                      <span className="booking__label_status cancelled">
+                        <FormattedMessage {...messages.cancelled} />
+                      </span>
                       <div className="booking__user_info">
                         <div className="resources__icon_list">
                           <img

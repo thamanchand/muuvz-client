@@ -6,5 +6,12 @@
   "muuvz.component.Booking.month": "Kuukausi",
   "muuvz.component.Booking.week": "Viikko",
   "muuvz.component.Booking.day": "Päivä",
-  "muuvz.component.Booking.today": "Tänään"
+  "muuvz.component.Booking.today": "Tänään",
+  "muuvz.component.Booking.booked": "VARATTU",
+  "muuvz.component.Booking.requested": "PYYDETYT",
+  "muuvz.component.Booking.requested": "PYYDETYT",
+  "muuvz.component.Booking.cancel": "PERUUTTA",
+  "muuvz.component.Booking.cancelled": "PERUTTU",
+  "muuvz.component.Booking.waiting": "ODOTUS",
+  "muuvz.component.Booking.inuse": "KÄYTÖSSÄ"
 }

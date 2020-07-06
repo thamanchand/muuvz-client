@@ -40,5 +40,32 @@ export default defineMessages({
     id: `${scope}.today`,
     defaultMessage: 'Today',
   },
-
+  booked: {
+    id: `${scope}.booked`,
+    defaultMessage: 'BOOKED',
+  },
+  requested: {
+    id: `${scope}.requested`,
+    defaultMessage: 'REQUESTED',
+  },
+  cancel: {
+    id: `${scope}.cancel`,
+    defaultMessage: 'CANCEL',
+  },
+  accept: {
+    id: `${scope}.accept`,
+    defaultMessage: 'ACCEPT',
+  },
+  cancelled: {
+    id: `${scope}.cancelled`,
+    defaultMessage: 'CANCELLED',
+  },
+  waiting: {
+    id: `${scope}.waiting`,
+    defaultMessage: 'WAITING',
+  },
+  inuse: {
+    id: `${scope}.inuse`,
+    defaultMessage: 'IN-USE',
+  },
 });
