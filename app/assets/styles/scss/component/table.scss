@@ -106,6 +106,9 @@
   }
 }
 
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #FAFAFA !important;
+}
 .delete__icon {
   margin-left: 5px;
 }
