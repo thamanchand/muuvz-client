@@ -1,3 +1,13 @@
 {
-  "muuvz.component.Profile.profile": "Profiili"
+  "muuvz.component.Profile.profile": "Profiili",
+  "muuvz.component.Profile.thankYouHeader": "Kiitos, että valitsit MUUVZ",
+  "muuvz.component.Profile.thankYouMessage": "Täytä nyt profiili, jotta voit aloittaa MUUVZ-palveluiden käytön",
+  "muuvz.component.Profile.profileHeader": "Tiedot",
+  "muuvz.component.Profile.fullName": "Koko nimi",
+  "muuvz.component.Profile.phoneNumber": "Puhelinnumero",
+  "muuvz.component.Profile.address": "Osoite",
+  "muuvz.component.Profile.licenseType": "Lisenssi-tyyppi",
+  "muuvz.component.Profile.profilePicture": "Profiilikuva",
+  "muuvz.component.Profile.saveProfile": "Tallenna profiili",
+  "muuvz.component.Profile.updateProfile": "Päivitä profiili"
 }

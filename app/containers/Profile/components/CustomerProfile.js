@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Card, CardBody, Col } from 'reactstrap';
 import { Form, Field } from 'react-final-form';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
+import { FormattedMessage } from 'react-intl';
 
 import auth from '../../../utils/auth';
 import Error from '../../../shared/ErrorField';
 import renderFileInputField from '../../../shared/FileDropZone';
 import GooglePlaceAutocomplete from '../../../shared/GooglePlaceAutocomplete';
+import messages from '../messages';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -33,15 +35,21 @@ const ProfileForm = ({
           <div>
             {!isProfileCompleted && (
               <>
-                <h3 className="profile__header_label">Thank you for choosing MUUVZ</h3>
+                <h3 className="profile__header_label">
+                  <FormattedMessage {...messages.thankYouHeader} />
+                </h3>
                 <hr />
-                <h4 className="profile__header_label">Now complete your profile to start using MUUVZ services</h4>
+                <h4 className="profile__header_label">
+                  <FormattedMessage {...messages.thankYouMessage} />
+                </h4>
               </>
             )}
           </div>
           <div className="card__title">
-            <h5 className="bold-text">Your Info</h5>
-            <h5 className="subhead">Fill all required fields</h5>
+            <h5 className="bold-text">
+              <FormattedMessage {...messages.profileHeader} />
+            </h5>
+            {/* <h5 className="subhead">Fill all required fields</h5> */}
             {initialValues && initialValues.avatar && initialValues.avatar.id && (
               <div className="profile__information">
                 <div className="profile__avatar">
@@ -67,16 +75,16 @@ const ProfileForm = ({
             validate={values => { // validate both passowrds are same
               const errors = {};
               if (!values.businessName) {
-                errors.businessName = 'Your fullname is required';
+                errors.businessName = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.phoneNumber) {
-                errors.phoneNumber = 'Phone number is required';
+                errors.phoneNumber = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.address) {
-                errors.address = 'Address is required';
+                errors.address = <FormattedMessage {...messages.requiredField} />;
               }
               if (!values.licenseTypes) {
-                errors.licenseTypes = 'License type is required';
+                errors.licenseTypes = <FormattedMessage {...messages.requiredField} />;
               }
               return errors
             }}
@@ -84,8 +92,12 @@ const ProfileForm = ({
               <form className="form form--vertical" onSubmit={handleSubmit}>
                 <div className="form__half">
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Full name</span>
-                    <span className="form__form-group-label_right">Required</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.fullName} />
+                    </span>
+                    <span className="form__form-group-label_right">
+                      <FormattedMessage {...messages.required} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="businessName"
@@ -97,8 +109,12 @@ const ProfileForm = ({
                     <Error name="businessName" />
                   </div>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Phone number</span>
-                    <span className="form__form-group-label_right">Required</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.phoneNumber} />
+                    </span>
+                    <span className="form__form-group-label_right">
+                      <FormattedMessage {...messages.required} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="phoneNumber"
@@ -112,8 +128,12 @@ const ProfileForm = ({
                 </div>
                 <div className="form__half">
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Address </span>
-                    <span className="form__form-group-label_right">Required</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.phoneNumber} />
+                    </span>
+                    <span className="form__form-group-label_right">
+                      <FormattedMessage {...messages.required} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="address"
@@ -126,8 +146,12 @@ const ProfileForm = ({
                     <Error name="address" />
                   </div>
                   <div className="form__form-group">
-                    <span className="form__form-group-label">Licence </span>
-                    <span className="form__form-group-label_right">Required</span>
+                    <span className="form__form-group-label">
+                      <FormattedMessage {...messages.licenseType} />
+                    </span>
+                    <span className="form__form-group-label_right">
+                      <FormattedMessage {...messages.required} />
+                    </span>
                     <div className="form__form-group-field">
                       <Field
                         name="licenseTypes"
@@ -144,8 +168,12 @@ const ProfileForm = ({
                   <Col md={12} sm={12}>
                     {initialValues && !(initialValues.avatar && initialValues.avatar.id)  && (
                       <>
-                      <span className="form__form-group-label">Profile picture</span>
-                      <span className="form__form-group-label_right">Optional</span>
+                      <span className="form__form-group-label">
+                        <FormattedMessage {...messages.profilePicture} />
+                      </span>
+                      <span className="form__form-group-label_right">
+                        <FormattedMessage {...messages.optional} />
+                      </span>
                       <div className="form__form-group">
                         <div className="form__form-group-field">
                           <Field
@@ -165,21 +193,27 @@ const ProfileForm = ({
                           type="submit"
                           onClick={() => onProfileFormEdit(values, initialValues.id)}
                           disabled={submitting }
-                        >Update profile</button>
+                        >
+                          <FormattedMessage {...messages.updateProfile} />
+                        </button>
                       )}
                       {!(isProfileCompleted && initialValues.id) && (
                         <button
                           className="btn btn-success btn-sm rounded"
                           type="submit"
                           onClick={() => onProfileFormSave(values)}
-                        >Save profile</button>
+                        >
+                          <FormattedMessage {...messages.saveProfile} />
+                        </button>
                       )}
                       {!isProfileCompleted && initialValues.id && (
                         <button
                           className="btn btn-success btn-sm rounded"
                           type="submit"
                           onClick={() => onProfileFormEdit(values, initialValues.id)}
-                        >Update profile</button>
+                        >
+                          <FormattedMessage {...messages.updateProfile} />
+                        </button>
                       )}
                     </div>
                   </Col>

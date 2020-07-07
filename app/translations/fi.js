@@ -8,6 +8,7 @@ import Profile from './Profile/fi.json';
 import Account from './Account/fi.json';
 import Dropzone from './Dropzone/fi.json';
 import Form from './Form/fi.json';
+import App from './App/fi.json';
 
 const fiLocale = {
   ...Homepage,
@@ -19,7 +20,8 @@ const fiLocale = {
   ...Profile,
   ...Account,
   ...Dropzone,
-  ...Form
+  ...Form,
+  ...App
 };
 
 export default fiLocale;

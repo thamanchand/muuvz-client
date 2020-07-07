@@ -1,3 +1,5 @@
 {
-  "muuvz.component.Form.requiredField": "Tämä kenttä pitää täyttää"
+  "muuvz.component.Form.requiredField": "Tämä kenttä pitää täyttää",
+  "muuvz.component.Form.required": "Pakollinen",
+  "muuvz.component.Form.optional": "Ei pakollinen"
 }
