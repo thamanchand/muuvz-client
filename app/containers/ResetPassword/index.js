@@ -11,7 +11,7 @@ import injectReducer from 'utils/injectReducer';
 
 import PasswordResetForm from './components/PasswordResetForm';
 import Footer from '../HomePage/components/Footer';
-import logo from '../../assets/images/muuvz.svg';
+import logo from '../../assets/images/logo-mini.svg';
 
 import { onPasswordReset } from './actions';
 import { isPasswordResetSelector, isPasswordResttingSelector } from './selectors';

@@ -11,7 +11,7 @@ import injectReducer from 'utils/injectReducer';
 
 import ForgotPasswordForm from './components/ForgotPaswordForm';
 import Footer from '../HomePage/components/Footer';
-import logo from '../../assets/images/muuvz.svg';
+import logo from '../../assets/images/logo-mini.svg';
 
 import { onPasswordForgot, clearForgotPasswordState } from './actions';
 import { isPasswordSendSelector, isLoadingSelector } from './selectors';
