@@ -113,7 +113,7 @@ class BusinessBenefits extends React.Component {
                   </div>
                   <div className="col-md-5">
                     <h3 className="landing__header-title">Calendar</h3>
-                    <p className="header_item">When buying Dashcore you will get right in your hand a powerful tool to boost your design. You will get not just a template but a complete ready-to-use HTML code snippets to start right away with your project.</p>
+                    <p className="header_item">See all bookings in a calendar. Add more text later.</p>
                   </div>
                 </div>
               </div>
@@ -126,7 +126,7 @@ class BusinessBenefits extends React.Component {
                   </div>
                   <div className="col-md-5">
                     <h3 className="landing__header-title">Resources</h3>
-                    <p className="header_item">Calendar plugin included and beautified</p>
+                    <p className="header_item">Get to know in details about status of all your resources (vans). Add more text later.</p>
                   </div>
                 </div>
               </div>
