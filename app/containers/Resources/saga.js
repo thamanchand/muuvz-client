@@ -125,9 +125,11 @@ export function* onPriceDeleteWatcher(action) {
     const deleteResponse = yield call(api.deletePricing, action.priceId);
     console.log("deleteResponse", deleteResponse)
     if (deleteResponse) {
+      toast.success("Price info deleted!")
       yield put(onPriceDeleteSuccess());
     }
   } catch(error) {
+    toast.error("Failed to delete price info!")
     yield put(onPriceDeleteFailed(error));
   }
 }
@@ -137,14 +139,20 @@ export function* resourceCoverDeleteWatcher(action) {
   const { resourcePayload, coverId } = action;
   const resourceId = action.resourcePayload.id;
   try {
+    console.log("resourcePayload", resourcePayload);
+    console.log("resourceId", resourceId);
     const newResourcePayload = {...resourcePayload, cover: [...resourcePayload.cover]};
+    console.log("newResourcePayload", newResourcePayload)
     const updateResource = yield call(api.updateResource, newResourcePayload, resourceId);
     if (updateResource) {
+      console.log("updateResource", updateResource);
       const deleteResponse = yield call(api.deleteResourceCoverPicture, coverId);
       if (deleteResponse) {
+        console.log("deleteResponse", deleteResponse)
         const vanList = yield call(api.getResources);
 
         if(vanList && updateResource) {
+          console.log("vanList", vanList);
           yield put(onResourceCoverDeleteSuccess());
           yield put(onVanListLoadSuccess(vanList));
           toast.success('Cover picture delete successfully!');
@@ -163,11 +171,12 @@ export function* vanInfoUpdateWatcher(action) {
   const { vanInfo, oldPriceList, newPriceList } = action;
   const { id } = vanInfo;
 
+  console.log("update Resource", vanInfo);
   try {
     // Prepare resource post payload
     const resourcePayload = { ...vanInfo, fueltype: vanInfo.fueltype.label, transmission: vanInfo.transmission.label, };
     const vanList = yield call(api.updateResource,  resourcePayload, id);
-
+    console.log("updated resource", vanList)
     if (vanList) {
       if (newPriceList && newPriceList.length > 0) {
 
@@ -221,6 +230,7 @@ export function* vanInfoUpdateWatcher(action) {
 
       const getUpadtedResource = yield call(api.getResource, id);
       if (getUpadtedResource) {
+        console.log("----getUpadtedResource----", getUpadtedResource);
         toast.success("Van info updated successfully!")
         yield put(onVanInfoUpdateSuccess(getUpadtedResource, id));
       }
