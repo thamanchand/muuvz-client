@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
+import socketio from "socket.io-client";
 
 import { onBookingLoad, onResourceLoad, onBookingAccept, onBookingCancel } from './action';
 import {
@@ -43,16 +44,25 @@ class BookingDashboard extends React.Component {
     if (auth.getToken() && isProfileCompleted) {
       this.props.onBookingLoad();
       this.props.onResourceLoad();
+      this.connectSocket();
     }
   }
 
   acceptBookingHandler = (bookingId, resourceId) => {
+    // socket.on("get_data", "getuserId");
     this.props.onBookingAccept(bookingId, resourceId);
   }
 
   cancelBookingHandler = (bookingId, resourceId) => {
     this.props.onBookingCancel(bookingId, resourceId);
   }
+
+  connectSocket = () => {
+    const email = auth && auth.get('userInfo').email;
+    socketio("http://localhost:1337", {
+      query: { email }
+    })
+  };
 
   render() {
     // const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
