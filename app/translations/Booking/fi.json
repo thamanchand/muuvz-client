@@ -6,6 +6,7 @@
   "muuvz.component.Booking.month": "Kuukausi",
   "muuvz.component.Booking.week": "Viikko",
   "muuvz.component.Booking.day": "Päivä",
+  "muuvz.component.Booking.agenda": "Agenda",
   "muuvz.component.Booking.today": "Tänään",
   "muuvz.component.Booking.booked": "VARATTU",
   "muuvz.component.Booking.requested": "PYYDETYT",

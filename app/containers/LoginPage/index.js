@@ -38,34 +38,46 @@ class LoginPage extends React.PureComponent {
 
   showPasswordHandler = () => {
     this.setState(prevState => ({ showPassword: !prevState.showPassword }));
-  }
+  };
 
-  onLoginSubmitHandler = (loginPayload) => {
+  onLoginSubmitHandler = loginPayload => {
     const loginSource = this.props.source;
     if (loginPayload.identifier && loginPayload.password) {
       this.props.onLoginSubmit(loginPayload, loginSource);
     }
-  }
+  };
 
   render() {
-    const { isLoginSuccess, loginError, source} = this.props;
+    const { isLoginSuccess, loginError, source } = this.props;
 
     return (
       <div>
-        <div className="account account--photo" style={source === 'listingPage' ? {height: '0px, minHeight: 0px'} : null}>
+        <div
+          className="account account--photo"
+          style={
+            source === 'listingPage' ? { height: '0px, minHeight: 0px' } : null
+          }
+        >
           <div className="account__wrapper">
-            <div className="account__card" style={source === 'listingPage' ? {padding: '19px 60px'} : null}>
-              {loginError
+            <div
+              className="account__card"
+              style={source === 'listingPage' ? { padding: '19px 60px' } : null}
+            >
+              {/* {loginError
                 && loginError.response
                 && loginError.response.payload
                 && loginError.response.payload.message
                 && loginError.response.payload.message[0].messages[0]
                 && loginError.response.payload.message[0].messages[0].message && (
                 <div className="error">{loginError.response.payload.message[0].messages[0].message}</div>
-              )}
+              )} */}
               {source !== 'listingPage' && (
                 <Link to="/">
-                  <img src={logo} alt="muuvz" className="account__register-logo" />
+                  <img
+                    src={logo}
+                    alt="muuvz"
+                    className="account__register-logo"
+                  />
                 </Link>
               )}
               <div className="account__head">
@@ -79,7 +91,10 @@ class LoginPage extends React.PureComponent {
                 loginError={loginError}
               />
               <div className="create__account_label">
-                <p>Need a Muverz account? <Link to="/auth/register">Create an account </Link></p>
+                <p>
+                  Need a Muverz account?{' '}
+                  <Link to="/auth/register">Create an account </Link>
+                </p>
               </div>
               <div className="account__or">
                 <p>Or Login using</p>
@@ -103,7 +118,7 @@ class LoginPage extends React.PureComponent {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -115,7 +130,7 @@ LoginPage.propTypes = {
   source: PropTypes.string,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onLoginSubmit: bindActionCreators(onLoginSubmit, dispatch),
   onLoginPageLoad: bindActionCreators(onLoginPageLoad, dispatch),
 });
@@ -125,10 +140,9 @@ const mapStateToProps = createStructuredSelector({
   isLoginSuccess: loginStateSelector(),
 });
 
-
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 
 const withReducer = injectReducer({ key, reducer });

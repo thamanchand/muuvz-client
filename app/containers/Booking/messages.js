@@ -28,6 +28,10 @@ export default defineMessages({
     id: `${scope}.month`,
     defaultMessage: 'Month',
   },
+  agenda: {
+    id: `${scope}.agenda`,
+    defaultMessage: 'Agenda',
+  },
   week: {
     id: `${scope}.week`,
     defaultMessage: 'Week',

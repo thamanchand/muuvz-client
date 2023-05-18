@@ -11,32 +11,30 @@ const BigCalendar = ({ bookingList, locale }) => {
       start: new Date(event.bookedStartDateTime),
       end: new Date(event.bookedEndDateTime),
       color: event.resource.color,
-    }
+    };
     return mapEvents;
-  })
+  });
 
   return (
     <Col md={12} lg={12} xl={8}>
       <Card>
         <CardBody>
-          <Calendar
-            events={events}
-            locale={locale}
-          />
+          <Calendar events={events} locale={locale} />
         </CardBody>
       </Card>
     </Col>
-  )
+  );
 };
 
 BigCalendar.propTypes = {
-  bookingList: PropTypes.arrayOf(PropTypes.shape({
-    event: PropTypes.id,
-    title: PropTypes.string,
-    start: PropTypes.obj,
-    end: PropTypes.obj,
-    color: PropTypes.string
-  }).isRequired,
+  bookingList: PropTypes.arrayOf(
+    PropTypes.shape({
+      event: PropTypes.id,
+      title: PropTypes.string,
+      start: PropTypes.obj,
+      end: PropTypes.obj,
+      color: PropTypes.string,
+    }).isRequired,
   ),
   locale: PropTypes.string,
 };

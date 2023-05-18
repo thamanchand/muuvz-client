@@ -15,7 +15,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const onSubmit = async values => {
   await sleep(300);
-  console.log("values", values);
+  console.log('values', values);
 };
 
 const ProfileForm = ({
@@ -24,10 +24,10 @@ const ProfileForm = ({
   onProfileFormEdit,
   onAvatarDelete,
 }) => {
-
   useEffect(() => console.log('profile props changed!'), [initialValues]);
 
-  const isProfileCompleted = auth.get('userInfo') && auth.get('userInfo').profileCompleted;
+  const isProfileCompleted =
+    auth.get('userInfo') && auth.get('userInfo').profileCompleted;
   return (
     <Col md={12} lg={12}>
       <Card>
@@ -56,12 +56,24 @@ const ProfileForm = ({
                   <img
                     className="avatar"
                     alt="profileImage"
-                    src={initialValues.avatar ? `${'http://localhost:1337'}${initialValues.avatar.url}` : null }
+                    src={
+                      initialValues.avatar
+                        ? `${'http://localhost:1337'}${
+                          initialValues.avatar.url
+                        }`
+                        : null
+                    }
                   />
                   <span className="avatar__delete">
                     <DeleteForeverIcon
-                      size="25" color="#ff4861"
-                      onClick={() => onAvatarDelete(initialValues.avatar.id, initialValues.id)}
+                      size="25"
+                      color="#ff4861"
+                      onClick={() =>
+                        onAvatarDelete(
+                          initialValues.avatar.id,
+                          initialValues.id,
+                        )
+                      }
                       className="avatar__delete__icon"
                     />
                   </span>
@@ -72,23 +84,32 @@ const ProfileForm = ({
           <Form
             onSubmit={onSubmit}
             initialValues={initialValues}
-            validate={values => { // validate both passowrds are same
+            validate={values => {
+              // validate both passowrds are same
               const errors = {};
               if (!values.businessName) {
-                errors.businessName = <FormattedMessage {...messages.requiredField} />;
+                errors.businessName = (
+                  <FormattedMessage {...messages.requiredField} />
+                );
               }
               if (!values.phoneNumber) {
-                errors.phoneNumber = <FormattedMessage {...messages.requiredField} />;
+                errors.phoneNumber = (
+                  <FormattedMessage {...messages.requiredField} />
+                );
               }
               if (!values.address) {
-                errors.address = <FormattedMessage {...messages.requiredField} />;
+                errors.address = (
+                  <FormattedMessage {...messages.requiredField} />
+                );
               }
               if (!values.licenseTypes) {
-                errors.licenseTypes = <FormattedMessage {...messages.requiredField} />;
+                errors.licenseTypes = (
+                  <FormattedMessage {...messages.requiredField} />
+                );
               }
-              return errors
+              return errors;
             }}
-            render={({ handleSubmit, values,  submitting }) => (
+            render={({ handleSubmit, values, submitting }) => (
               <form className="form form--vertical" onSubmit={handleSubmit}>
                 <div className="form__half">
                   <div className="form__form-group">
@@ -129,7 +150,7 @@ const ProfileForm = ({
                 <div className="form__half">
                   <div className="form__form-group">
                     <span className="form__form-group-label">
-                      <FormattedMessage {...messages.phoneNumber} />
+                      <FormattedMessage {...messages.address} />
                     </span>
                     <span className="form__form-group-label_right">
                       <FormattedMessage {...messages.required} />
@@ -141,7 +162,6 @@ const ProfileForm = ({
                         type="text"
                         placeholder="Kuusitie 5 Helsinki"
                       />
-
                     </div>
                     <Error name="address" />
                   </div>
@@ -159,30 +179,29 @@ const ProfileForm = ({
                         type="text"
                         placeholder="A, B"
                       />
-
                     </div>
                     <Error name="licenseTypes" />
                   </div>
 
-
                   <Col md={12} sm={12}>
-                    {initialValues && !(initialValues.avatar && initialValues.avatar.id)  && (
-                      <>
-                      <span className="form__form-group-label">
-                        <FormattedMessage {...messages.profilePicture} />
-                      </span>
-                      <span className="form__form-group-label_right">
-                        <FormattedMessage {...messages.optional} />
-                      </span>
-                      <div className="form__form-group">
-                        <div className="form__form-group-field">
-                          <Field
-                            name='files'
-                            component={renderFileInputField}
-                          />
-                        </div>
-                      </div>
-                      </>
+                    {initialValues &&
+                      !(initialValues.avatar && initialValues.avatar.id) && (
+                        <>
+                          <span className="form__form-group-label">
+                            <FormattedMessage {...messages.profilePicture} />
+                          </span>
+                          <span className="form__form-group-label_right">
+                            <FormattedMessage {...messages.optional} />
+                          </span>
+                          <div className="form__form-group">
+                            <div className="form__form-group-field">
+                              <Field
+                                name="files"
+                                component={renderFileInputField}
+                              />
+                            </div>
+                          </div>
+                        </>
                     )}
                   </Col>
                   <Col>
@@ -191,8 +210,10 @@ const ProfileForm = ({
                         <button
                           className="btn btn-success btn-sm rounded"
                           type="submit"
-                          onClick={() => onProfileFormEdit(values, initialValues.id)}
-                          disabled={submitting }
+                          onClick={() =>
+                            onProfileFormEdit(values, initialValues.id)
+                          }
+                          disabled={submitting}
                         >
                           <FormattedMessage {...messages.updateProfile} />
                         </button>
@@ -210,7 +231,9 @@ const ProfileForm = ({
                         <button
                           className="btn btn-success btn-sm rounded"
                           type="submit"
-                          onClick={() => onProfileFormEdit(values, initialValues.id)}
+                          onClick={() =>
+                            onProfileFormEdit(values, initialValues.id)
+                          }
                         >
                           <FormattedMessage {...messages.updateProfile} />
                         </button>
@@ -224,7 +247,7 @@ const ProfileForm = ({
         </CardBody>
       </Card>
     </Col>
-  )
+  );
 };
 
 ProfileForm.propTypes = {
@@ -232,6 +255,6 @@ ProfileForm.propTypes = {
   initialValues: PropTypes.object,
   onProfileFormEdit: PropTypes.func,
   onAvatarDelete: PropTypes.func,
-}
+};
 
 export default ProfileForm;

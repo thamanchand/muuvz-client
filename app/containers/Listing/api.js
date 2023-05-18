@@ -8,7 +8,7 @@ const BASE_URL = 'http://localhost:1337/';
 
 // get available bookings
 export const getAvailableBookings = () => axios
-  .get(`${BASE_URL}${'resources'}`, {
+  .get(`${BASE_URL}${'resources/?status=Available'}`, {
     headers: {
       'Accept': 'application/json',
     }

@@ -1,9 +1,4 @@
-import {
-  call,
-  takeLatest,
-  put,
-  delay,
-} from 'redux-saga/effects';
+import { call, takeLatest, put, delay } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 
 // Utils
@@ -25,28 +20,32 @@ import { getUserInfo } from '../Profile/api';
 
 import toast from '../../shared/ToastNotify';
 
-import {
-  ON_SEARCH,
-  ON_BOOKING,
-} from './constants';
-
+import { ON_SEARCH, ON_BOOKING } from './constants';
 
 export function* searchResourceWatcher(action) {
-  console.log("Available Booking action", action);
+  console.log('Available Booking action', action.searchQuery);
+  const {
+    location,
+    pickupDate,
+    pickupTime,
+    dropOffDate,
+    dropOffTime,
+  } = action.searchQuery;
+  console.log(pickupDate, pickupTime, dropOffDate, dropOffTime);
   try {
-    const searchResult = yield call(api.getAvailableBookings);
+    const searchResult = yield call(api.getAvailableBookings, location);
     if (searchResult) {
       yield delay(1000);
       yield put(onSearchSuccess(searchResult));
-      yield call(forwardTo('/listing'))
+      yield call(forwardTo('/listing'));
     }
-  } catch(error) {
+  } catch (error) {
     yield put(onSearchFailed(error));
   }
 }
 
 export function* onBookingWatcher(action) {
-  console.log("Booking action", action);
+  console.log('Booking booking action', action);
 
   try {
     // generate random booking number
@@ -62,7 +61,7 @@ export function* onBookingWatcher(action) {
       const payload = {
         ...action.bookingPayload,
         bookingId: getUniqueBookingId,
-        profile: userApiResponse.profile.id
+        profile: userApiResponse.profile.id,
       };
       // prepare payload to update resource
       const updateResourceResp = { status: 'Requested' };
@@ -70,17 +69,24 @@ export function* onBookingWatcher(action) {
       // call booking POST api
       const bookingResponse = yield call(api.postResourceBooking, payload);
       // call update resource api
-      const updateResourceResponse = yield call(api.editResource, updateResourceResp, resourceId);
+      const updateResourceResponse = yield call(
+        api.editResource,
+        updateResourceResp,
+        resourceId,
+      );
       if (bookingResponse && updateResourceResponse) {
-        yield put(push(`${'/listing/bookingconfirmation?'}${'bookingId='}${getUniqueBookingId}`));
+        yield put(
+          push(
+            `${'/listing/bookingconfirmation?'}${'bookingId='}${getUniqueBookingId}`,
+          ),
+        );
         yield put(onBookingSuccess(bookingResponse));
-        toast.success("Your booking was made successfully!")
+        toast.success('Your booking was made successfully!');
       }
     }
-
-  } catch(error) {
+  } catch (error) {
     yield put(onBookingFailed(error));
-    toast.error("Failed to make reservation!")
+    toast.error('Failed to make reservation!');
   }
 }
 

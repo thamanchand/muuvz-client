@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
-import ClipLoader from "react-spinners/ClipLoader";
+import ClipLoader from 'react-spinners/ClipLoader';
 
 import renderCheckBoxField from '../../../shared/Checkbox/index';
 
-const onSubmit = () => new Promise(resolve => {
-  setTimeout(resolve, 200);
-})
+const onSubmit = () =>
+  new Promise(resolve => {
+    setTimeout(resolve, 200);
+  });
 
 // Reusable Error component
 const Error = ({ name }) => (
@@ -15,12 +16,7 @@ const Error = ({ name }) => (
     name={name}
     subscription={{ touched: true, error: true }}
     render={({ meta: { touched, error } }) =>
-      touched && error
-        ?
-        <div className="validation__error">
-          {error}
-        </div>
-        : null
+      touched && error ? <div className="validation__error">{error}</div> : null
     }
   />
 );
@@ -29,11 +25,11 @@ Error.propTypes = {
   name: PropTypes.string,
 };
 
-
 const RegisterForm = ({ onRegisterHandler, isEmailRegistered }) => (
   <Form
     onSubmit={onSubmit}
-    validate={values => { // validate both passowrds are same
+    validate={values => {
+      // validate both passowrds are same
       const errors = {};
       if (values.password !== values.confirmPassword) {
         errors.confirmPassword = 'Password didnt matched';
@@ -47,7 +43,7 @@ const RegisterForm = ({ onRegisterHandler, isEmailRegistered }) => (
       if (!values.confirmPassword) {
         errors.confirmPassword = 'confirm password cant be blank';
       }
-      return errors
+      return errors;
     }}
     render={({ handleSubmit, form, values }) => (
       <form className="form" onSubmit={handleSubmit}>
@@ -69,7 +65,7 @@ const RegisterForm = ({ onRegisterHandler, isEmailRegistered }) => (
             <Field
               name="password"
               component="input"
-              type='password'
+              type="password"
               placeholder="Password"
             />
           </div>
@@ -82,10 +78,9 @@ const RegisterForm = ({ onRegisterHandler, isEmailRegistered }) => (
             <Field
               name="confirmPassword"
               component="input"
-              type='password'
+              type="password"
               placeholder="Password"
             />
-
           </div>
           <Error name="confirmPassword" />
         </div>
@@ -95,14 +90,15 @@ const RegisterForm = ({ onRegisterHandler, isEmailRegistered }) => (
               name="isbusiness"
               component={renderCheckBoxField}
               label="I am business"
-              color="red"
+              color="green"
             />
           </div>
         </div>
         <div className="account__btns">
           <button
             className="rounded btn btn-success"
-            type="submit" onClick={() => onRegisterHandler(values)}
+            type="submit"
+            onClick={() => onRegisterHandler(values)}
             disabled={!!isEmailRegistered}
           >
             Register
@@ -115,7 +111,6 @@ const RegisterForm = ({ onRegisterHandler, isEmailRegistered }) => (
             </span>
           </button>
         </div>
-
       </form>
     )}
   />

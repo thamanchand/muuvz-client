@@ -35,7 +35,7 @@ export function* onBookingLoadWatcher(action) {
 
   try {
     if (auth.getToken()) {
-      const bookingResult = yield call(api.getBookings, auth.getToken());
+      const bookingResult = yield call(api.getBookings);
       if (bookingResult) {
         yield put(onBookingLoadSuccess(bookingResult));
       }

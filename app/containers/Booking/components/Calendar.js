@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BigCalendar from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import moment from 'moment';
-import 'moment/locale/fi';   // new
+import 'moment/locale/fi'; // new
 import { FormattedMessage } from 'react-intl';
 
 import messages from '../messages';
@@ -12,18 +12,18 @@ const localizer = BigCalendar.momentLocalizer(moment);
 
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
-
-const allMessages = { // new
+const allMessages = {
+  // new
   previous: <span className="lnr lnr-chevron-left" />,
   next: <span className="lnr lnr-chevron-right" />,
   today: <FormattedMessage {...messages.today} />,
   month: <FormattedMessage {...messages.month} />,
   week: <FormattedMessage {...messages.week} />,
   day: <FormattedMessage {...messages.day} />,
+  agenda: <FormattedMessage {...messages.agenda} />,
 };
 
-const allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
-console.log("allview", allViews)
+const allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 
 export default class CalendarComponent extends PureComponent {
   static propTypes = {
@@ -66,16 +66,29 @@ export default class CalendarComponent extends PureComponent {
     });
   };
 
-
   eventStyleGetter = event => {
     const style = {
       backgroundColor: event.color,
-      border: 'none',
+      border: '1',
     };
 
     return {
       style,
     };
+  };
+
+  resizeEvent = (resizeType, { event, start, end }) => {
+    const { events } = this.state;
+
+    const nextEvents = events.map(existingEvent =>
+      existingEvent.id === event.id
+        ? { ...existingEvent, start, end }
+        : existingEvent,
+    );
+
+    this.setState({
+      events: nextEvents,
+    });
   };
 
   render() {
@@ -87,7 +100,7 @@ export default class CalendarComponent extends PureComponent {
           culture={locale}
           localizer={localizer}
           events={events}
-          views={[allViews[0], allViews[1], allViews[3]]}
+          views={[allViews[0], allViews[1], allViews[3], allViews[4]]}
           popup={false}
           step={60}
           timeslots={1}

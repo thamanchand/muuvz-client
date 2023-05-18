@@ -28,6 +28,7 @@ class DropZoneMultipleField extends PureComponent {
 
   onDrop(files) {
     const { onChange } = this.props;
+    console.log("files", files);
     onChange(files.map(fl => Object.assign(fl, {
       preview: URL.createObjectURL(fl),
     })));
@@ -63,7 +64,7 @@ class DropZoneMultipleField extends PureComponent {
                 && (
                   <div className="dropzone__drop-here">
                     <span className="lnr lnr-upload" />
-                    <FormattedMessage {...messages.dropFile} /> 
+                    <FormattedMessage {...messages.dropFile} />
                   </div>
                 )}
                 {isFileTooLarge && (
